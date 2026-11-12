@@ -17,7 +17,7 @@ const active = dist.members.filter((m) => m.lines > 0);
 
   <!-- Thanh stacked (horizontal) — không dùng pie chart trên mobile -->
   <div
-    class="mt-4 flex h-5 w-full overflow-hidden rounded-full bg-white/10 ring-1 ring-white/10"
+    class="mt-4 flex h-5 w-full overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10 ring-1 ring-black/10 dark:ring-white/10"
     role="img"
     aria-label={`Tỷ lệ dòng theo thành viên: ${active.map((m) => `${m.name} ${m.percent}%`).join(', ') || 'chưa có dữ liệu'}`}
   >
@@ -37,13 +37,13 @@ const active = dist.members.filter((m) => m.lines > 0);
       dist.members.map((m) => (
         <li class="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-1 sm:grid-cols-[minmax(7rem,10rem)_1fr_auto]">
           <span
-            class="chip max-w-full truncate text-xs"
-            style={`border-color: ${m.color}55; background: ${m.color}18; color: ${m.color}`}
+            class="chip member-chip max-w-full truncate text-xs"
+            style={`--mc: ${m.color}; background: ${m.color}1f`}
           >
             <span class="h-2 w-2 shrink-0 rounded-full" style={`background: ${m.color}`} aria-hidden="true" />
             <span class="truncate">{m.name}</span>
           </span>
-          <span class="h-2.5 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+          <span class="h-2.5 w-full overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10" aria-hidden="true">
             <span
               class="block h-full rounded-full"
               style={`width: ${m.percent}%; background: ${m.color}`}
@@ -59,7 +59,7 @@ const active = dist.members.filter((m) => m.lines > 0);
     }
   </ul>
 
-  <dl class="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 text-xs sm:grid-cols-4">
+  <dl class="mt-5 grid grid-cols-2 gap-3 border-t border-black/10 dark:border-white/10 pt-4 text-xs sm:grid-cols-4">
     <div>
       <dt class="text-ink-faint">Tổng dòng (không adlib)</dt>
       <dd class="mt-0.5 text-sm font-bold tabular-nums">{dist.totalLines}</dd>

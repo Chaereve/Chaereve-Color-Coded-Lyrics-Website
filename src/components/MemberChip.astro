@@ -12,8 +12,8 @@ const sizeCls = size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-2.5 py-1';
   href ? (
     <a href={href} class="rounded-full hover:opacity-80">
       <span
-        class={`chip ${sizeCls}`}
-        style={`border-color: ${color}55; background: ${color}14; color: ${color}`}
+        class={`chip member-chip ${sizeCls}`}
+        style={`--mc: ${color}; background: ${color}1a`}
       >
         <span class="h-2 w-2 shrink-0 rounded-full" style={`background: ${color}`} aria-hidden="true" />
         {name}
@@ -21,8 +21,8 @@ const sizeCls = size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-2.5 py-1';
     </a>
   ) : (
     <span
-      class={`chip ${sizeCls}`}
-      style={`border-color: ${color}55; background: ${color}14; color: ${color}`}
+      class={`chip member-chip ${sizeCls}`}
+      style={`--mc: ${color}; background: ${color}1a`}
     >
       <span class="h-2 w-2 shrink-0 rounded-full" style={`background: ${color}`} aria-hidden="true" />
       {name}

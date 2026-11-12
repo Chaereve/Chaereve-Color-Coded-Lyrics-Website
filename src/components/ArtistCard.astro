@@ -20,7 +20,7 @@ const { artist, songCount } = Astro.props;
       class="h-16 w-16 shrink-0 rounded-xl object-cover"
     />
     <div class="min-w-0">
-      <h3 class="truncate text-base font-bold group-hover:text-accent-soft">{artist.name}</h3>
+      <h3 class="truncate text-base font-bold group-hover:text-link">{artist.name}</h3>
       <p class="text-xs text-ink-muted">
         {artist.type === 'group' ? 'Nhóm' : 'Nghệ sĩ solo'}
         {typeof songCount === 'number' && ` · ${songCount} bài`}

@@ -10,7 +10,7 @@ import { defineConfig } from 'astro/config';
  */
 const site = process.env.PUBLIC_SITE_URL || 'https://example.pages.dev';
 
-export default defineConfig({
+const config = {
   site,
   output: 'static',
   trailingSlash: 'ignore',
@@ -29,4 +29,7 @@ export default defineConfig({
       theme: 'github-dark-dimmed',
     },
   },
-});
+};
+
+// Ép kiểu: `preview.allow` là option host-check của preview server (dùng cho live preview).
+export default defineConfig(/** @type {Parameters<typeof defineConfig>[0]} */ (config));

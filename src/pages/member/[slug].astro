@@ -64,37 +64,37 @@ const jsonLd = [
 
     <header class="card mt-2 flex flex-col gap-5 p-6 sm:flex-row sm:items-center">
       <span
-        class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full text-2xl font-black text-white shadow-lg ring-4 ring-white/10"
+        class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full text-2xl font-black text-black ring-2 ring-black/10 dark:ring-white/10"
         style={`background: ${member.color}`}
         aria-hidden="true">{member.name.charAt(0).toUpperCase()}</span
       >
       <div class="min-w-0 flex-1">
-        <p class="text-xs font-bold uppercase tracking-wider text-accent-soft">Thành viên</p>
+        <p class="text-xs font-bold uppercase tracking-wider text-link">Thành viên</p>
         <h1 class="mt-1 text-3xl font-black tracking-tight">{member.name}</h1>
         <p class="mt-1 text-sm text-ink-muted">
-          <a href={`/artist/${artist.slug}/`} class="font-semibold hover:text-accent-soft">{artist.name}</a>
+          <a href={`/artist/${artist.slug}/`} class="font-semibold hover:text-link">{artist.name}</a>
           {member.role && ` · ${member.role}`}
           {member.romanized && member.romanized !== member.name && ` · ${member.romanized}`}
         </p>
         <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
-          <span class="chip" style={`border-color: ${member.color}55; background: ${member.color}18; color: ${member.color}`}>
+          <span class="chip member-chip" style={`--mc: ${member.color}; background: ${member.color}1f`}>
             <span class="h-2.5 w-2.5 rounded-full" style={`background: ${member.color}`} aria-hidden="true"></span>
             Màu: {member.color}
           </span>
           {
             member.officialColor && (
-              <span class="chip border-white/15 bg-white/5 text-ink-muted">Official: {member.officialColor}</span>
+              <span class="chip border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/5 text-ink-muted">Official: {member.officialColor}</span>
             )
           }
           {member.colorSource && <span class="text-ink-faint">Nguồn màu: {member.colorSource}</span>}
         </div>
       </div>
       <dl class="grid grid-cols-2 gap-4 text-center sm:w-56">
-        <div class="rounded-xl bg-white/5 p-3">
+        <div class="rounded-xl bg-black/[0.04] dark:bg-white/5 p-3">
           <dt class="text-[11px] text-ink-faint">Dòng (nghệ sĩ)</dt>
           <dd class="text-xl font-black tabular-nums">{artistTotal}</dd>
         </div>
-        <div class="rounded-xl bg-white/5 p-3">
+        <div class="rounded-xl bg-black/[0.04] dark:bg-white/5 p-3">
           <dt class="text-[11px] text-ink-faint">Dòng toàn site</dt>
           <dd class="text-xl font-black tabular-nums">{siteTotal}</dd>
         </div>
@@ -106,7 +106,7 @@ const jsonLd = [
       <p class="mb-4 text-xs text-ink-faint">Số dòng = số lần thành viên xuất hiện trong các dòng (adlib không tính).</p>
       {
         perSong.length > 0 ? (
-          <ul class="card divide-y divide-white/10">
+          <ul class="card divide-y divide-black/[0.07] dark:divide-white/[0.07]">
             {perSong.map(({ song, lines }) => (
               <li class="flex items-center gap-3 px-4 py-3">
                 <img
@@ -119,12 +119,12 @@ const jsonLd = [
                   class="h-12 w-12 shrink-0 rounded-lg object-cover"
                 />
                 <a href={`/lyrics/${song.slug}/`} class="min-w-0 flex-1">
-                  <span class="block truncate text-sm font-bold hover:text-accent-soft">{song.title}</span>
+                  <span class="block truncate text-sm font-bold hover:text-link">{song.title}</span>
                   <span class="block truncate text-xs text-ink-muted">
                     {song.album || song.released || ''}
                   </span>
                 </a>
-                <div class="hidden h-2 w-32 overflow-hidden rounded-full bg-white/10 sm:block" aria-hidden="true">
+                <div class="hidden h-2 w-32 overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10 sm:block" aria-hidden="true">
                   <span
                     class="block h-full rounded-full"
                     style={`width: ${perSong[0] && perSong[0].lines > 0 ? Math.round((lines / perSong[0].lines) * 100) : 0}%; background: ${member.color}`}

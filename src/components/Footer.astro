@@ -4,7 +4,7 @@ import { SITE_NAME, SITE_TAGLINE, getGithubRepo } from '../lib/config';
 const repo = getGithubRepo();
 const year = new Date().getFullYear();
 ---
-<footer class="mt-16 border-t border-white/10 bg-surface-raised">
+<footer class="mt-16 border-t border-black/10 dark:border-white/10 bg-surface-raised">
   <div class="container-page grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-3">
     <div>
       <p class="text-base font-bold">{SITE_NAME}</p>
@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
       </ul>
     </div>
   </div>
-  <div class="border-t border-white/10 py-4">
+  <div class="border-t border-black/10 dark:border-white/10 py-4">
     <p class="container-page text-xs text-ink-faint">
       © {year} {SITE_NAME}. Dữ liệu nội dung lưu trong Git (JSON) — không dùng database.
     </p>

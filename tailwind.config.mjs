@@ -15,10 +15,9 @@ export default {
           muted: 'rgb(var(--ink-muted) / <alpha-value>)',
           faint: 'rgb(var(--ink-faint) / <alpha-value>)',
         },
-        accent: {
-          DEFAULT: '#7c6cff',
-          soft: '#a78bfa',
-        },
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        'accent-soft': 'rgb(var(--accent-soft) / <alpha-value>)',
+        link: 'rgb(var(--link) / <alpha-value>)',
       },
       fontFamily: {
         sans: [
@@ -36,9 +35,6 @@ export default {
           'Malgun Gothic',
           'sans-serif',
         ],
-      },
-      maxWidth: {
-        'prose-lyrics': '48rem',
       },
       minHeight: {
         touch: '44px',

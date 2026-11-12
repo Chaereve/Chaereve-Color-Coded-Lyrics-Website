@@ -3,27 +3,35 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------
-   Theme tokens — dark là mặc định (html.dark), light qua class.
-   Giá trị RGB dùng chung cho Tailwind (rgb(var(--x) / alpha)).
+   Design tokens — dark là mặc định (html.dark), light qua class.
+   Phong cách: neutral near-black (Spotify) + accent vàng (Genius),
+   phẳng, không gradient trang trí, không bóng kính.
 ---------------------------------------------------------------- */
 :root {
-  --surface: 3 7 18;
-  --surface-raised: 11 18 32;
-  --surface-muted: 15 23 42;
-  --ink: 241 245 249;
-  --ink-muted: 148 163 184;
-  --ink-faint: 100 116 139;
+  --surface: 11 11 13; /* #0b0b0d */
+  --surface-raised: 26 26 30; /* #1a1a1e */
+  --surface-muted: 37 37 42; /* #25252a */
+  --ink: 244 244 245; /* zinc-100 */
+  --ink-muted: 161 161 170; /* zinc-400 */
+  --ink-faint: 113 113 122; /* zinc-500 */
+  --accent: 245 197 24; /* vàng Genius/IMDb */
+  --accent-soft: 255 216 74;
+  --link: 245 197 24;
+  --ring: 245 197 24;
   --lyrics-font-size: 1.125rem;
-  --ring: 124 108 255;
 }
 
 html:not(.dark) {
-  --surface: 255 255 255;
-  --surface-raised: 248 250 252;
-  --surface-muted: 241 245 249;
-  --ink: 15 23 42;
-  --ink-muted: 71 85 105;
-  --ink-faint: 100 116 139;
+  --surface: 244 244 245; /* zinc-100 */
+  --surface-raised: 255 255 255;
+  --surface-muted: 232 232 235; /* zinc-200 */
+  --ink: 24 24 27; /* zinc-900 */
+  --ink-muted: 82 82 91; /* zinc-600 */
+  --ink-faint: 113 113 122; /* zinc-500 */
+  --accent: 245 197 24;
+  --accent-soft: 222 168 10;
+  --link: 138 88 0; /* amber đậm — tương phản trên nền trắng */
+  --ring: 245 197 24;
 }
 
 @layer base {
@@ -37,7 +45,6 @@ html:not(.dark) {
     text-rendering: optimizeLegibility;
   }
 
-  /* Focus visible cho điều hướng bàn phím */
   :focus-visible {
     outline: 2px solid rgb(var(--ring));
     outline-offset: 2px;
@@ -50,41 +57,61 @@ html:not(.dark) {
 }
 
 @layer components {
-  /* Container chính */
   .container-page {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
   }
 
-  /* Nút chạm tối thiểu 44x44 */
+  /* Nút — primary = vàng đặc / chữ đen (Genius); ghost = viền trung tính */
   .btn {
-    @apply inline-flex min-h-touch min-w-touch items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors;
+    @apply inline-flex min-h-touch min-w-touch items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold transition-colors;
   }
   .btn-primary {
-    @apply btn bg-accent text-white hover:bg-accent-soft;
+    @apply btn bg-accent text-black hover:bg-accent-soft;
   }
   .btn-ghost {
-    @apply btn border border-white/10 bg-white/5 text-ink hover:bg-white/10;
+    @apply btn border border-black/10 bg-transparent text-ink hover:bg-black/[0.05];
+  }
+  html.dark .btn-ghost {
+    @apply border-black/10 dark:border-white/10 bg-transparent hover:bg-black/[0.05] dark:hover:bg-white/[0.06];
   }
 
-  /* Thẻ (card) */
+  /* Thẻ — phẳng, dùng nền thay vì viền/bóng */
   .card {
-    @apply rounded-2xl border border-white/10 bg-surface-raised shadow-sm;
+    @apply rounded-xl bg-surface-raised;
   }
-  html:not(.dark) .card {
-    @apply border-slate-200 bg-white;
+  html.dark .card {
+    @apply bg-surface-raised;
   }
 
-  /* Chip thành viên */
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium;
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold;
   }
 
-  /* Skeleton loading */
-  .skeleton {
-    @apply animate-pulse rounded-lg bg-white/10;
+  /* Chip màu thành viên: nền tint theo màu, chữ theo màu trên dark;
+     trên light mode chữ trung tính để đảm bảo tương phản (màu thể hiện qua dot + nền) */
+  .member-chip {
+    color: var(--mc);
   }
-  html:not(.dark) .skeleton {
-    @apply bg-slate-200;
+  html:not(.dark) .member-chip {
+    color: rgb(var(--ink));
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded-lg bg-black/[0.06];
+  }
+  html.dark .skeleton {
+    @apply bg-white/[0.08];
+  }
+
+  /* Nhãn section kiểu editorial: chữ nhỏ, hoa, giãn chữ */
+  .kicker {
+    @apply text-[11px] font-bold uppercase tracking-[0.18em] text-ink-faint;
+  }
+  .section-title {
+    @apply text-lg font-bold tracking-tight sm:text-xl;
+  }
+  .see-all {
+    @apply text-xs font-bold uppercase tracking-wider text-ink-faint hover:text-link;
   }
 }
 
@@ -114,7 +141,6 @@ html:not(.dark) {
   display: block;
 }
 
-/* Thanh scroll ngang gọn cho tabs */
 .scroll-x {
   scrollbar-width: thin;
   -ms-overflow-style: none;
@@ -123,7 +149,6 @@ html:not(.dark) {
   display: none;
 }
 
-/* Line distribution: thanh stacked bar */
 .stacked-segment {
   min-width: 2px;
   transition: width 0.4s ease;

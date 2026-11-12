@@ -27,7 +27,7 @@ const initialSuggestions = index.filter((e) => e.type === 'song').slice(0, 6);
       <Skeleton count={6} />
     </div>
     <noscript>
-      <p class="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-ink-muted">
+      <p class="mt-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.04] dark:bg-white/5 px-4 py-3 text-sm text-ink-muted">
         Tìm kiếm cần JavaScript. Bạn vẫn có thể vào trực tiếp trang chủ hoặc trang bài hát từ menu.
       </p>
     </noscript>
@@ -47,7 +47,7 @@ const initialSuggestions = index.filter((e) => e.type === 'song').slice(0, 6);
         {
           initialSuggestions.map((e) => (
             <li>
-              <a href={e.url} class="chip min-h-touch items-center border-white/15 bg-white/5 px-3 text-ink-muted hover:text-ink">
+              <a href={e.url} class="chip min-h-touch items-center border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/5 px-3 text-ink-muted hover:text-ink">
                 {e.title}
               </a>
             </li>
@@ -132,7 +132,7 @@ const initialSuggestions = index.filter((e) => e.type === 'song').slice(0, 6);
         (e) => `
       <li>
         <a href="${e.url}" class="card flex items-center gap-3 px-4 py-3 transition-transform hover:-translate-y-0.5">
-          <span class="chip shrink-0 border-white/15 bg-white/5 text-[11px] text-ink-faint">${TYPE_LABEL[e.type] ?? e.type}</span>
+          <span class="chip shrink-0 border-black/10 dark:border-white/15 bg-black/[0.04] dark:bg-white/5 text-[11px] text-ink-faint">${TYPE_LABEL[e.type] ?? e.type}</span>
           <span class="min-w-0 flex-1">
             <span class="block truncate text-sm font-bold">${e.title}</span>
             ${e.subtitle ? `<span class="block truncate text-xs text-ink-muted">${e.subtitle}</span>` : ''}

@@ -59,10 +59,10 @@ const jsonLd = [
         width="400"
         height="400"
         decoding="async"
-        class="aspect-square w-full max-w-[14rem] rounded-2xl object-cover shadow-lg ring-1 ring-white/10"
+        class="aspect-square w-full max-w-[14rem] rounded-lg object-cover ring-1 ring-black/10 dark:ring-white/10"
       />
       <div>
-        <p class="text-xs font-bold uppercase tracking-wider text-accent-soft">
+        <p class="text-xs font-bold uppercase tracking-wider text-link">
           {artist.type === 'group' ? 'Nhóm' : 'Nghệ sĩ solo'}
         </p>
         <h1 class="mt-1 text-3xl font-black tracking-tight sm:text-4xl">{artist.name}</h1>
@@ -110,7 +110,7 @@ const jsonLd = [
                   </span>
                 </span>
                 <span
-                  class="h-6 w-6 shrink-0 rounded-full ring-2 ring-white/20"
+                  class="h-6 w-6 shrink-0 rounded-full ring-2 ring-black/10 dark:ring-white/20"
                   style={`background: ${m.color}`}
                   title={`Màu: ${m.color}`}
                   aria-label={`Màu ${m.color}`}
@@ -128,14 +128,14 @@ const jsonLd = [
         <section aria-labelledby="top-members-heading" class="mt-10">
           <h2 id="top-members-heading" class="mb-1 text-lg font-bold">Tổng số dòng trong các bài của nghệ sĩ</h2>
           <p class="mb-4 text-xs text-ink-faint">Sắp xếp giảm dần — dùng để tra cứu, không so sánh cạnh tranh.</p>
-          <ul class="card divide-y divide-white/10">
+          <ul class="card divide-y divide-black/[0.07] dark:divide-white/[0.07]">
             {memberStats.map(({ member, lines }) => (
               <li class="flex items-center gap-3 px-4 py-3">
                 <span class="h-3 w-3 shrink-0 rounded-full" style={`background: ${member.color}`} aria-hidden="true" />
-                <a href={`/member/${member.id}/`} class="min-w-0 flex-1 truncate text-sm font-semibold hover:text-accent-soft">
+                <a href={`/member/${member.id}/`} class="min-w-0 flex-1 truncate text-sm font-semibold hover:text-link">
                   {member.name}
                 </a>
-                <div class="hidden h-2 w-40 overflow-hidden rounded-full bg-white/10 sm:block" aria-hidden="true">
+                <div class="hidden h-2 w-40 overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10 sm:block" aria-hidden="true">
                   <span
                     class="block h-full rounded-full"
                     style={`width: ${memberStats[0] && memberStats[0].lines > 0 ? Math.round((lines / memberStats[0].lines) * 100) : 0}%; background: ${member.color}`}
@@ -167,7 +167,7 @@ const jsonLd = [
                 Album
                 <select
                   name="album"
-                  class="min-h-touch w-full rounded-xl border border-white/10 bg-surface-muted px-3 text-sm text-ink"
+                  class="min-h-touch w-full rounded-xl border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm text-ink"
                 >
                   <option value="">Tất cả</option>
                   {albums.map((a) => (
@@ -181,7 +181,7 @@ const jsonLd = [
                 Năm
                 <select
                   name="year"
-                  class="min-h-touch w-full rounded-xl border border-white/10 bg-surface-muted px-3 text-sm text-ink"
+                  class="min-h-touch w-full rounded-xl border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm text-ink"
                 >
                   <option value="">Tất cả</option>
                   {years.map((y) => (
@@ -195,7 +195,7 @@ const jsonLd = [
                 Ngôn ngữ
                 <select
                   name="language"
-                  class="min-h-touch w-full rounded-xl border border-white/10 bg-surface-muted px-3 text-sm text-ink"
+                  class="min-h-touch w-full rounded-xl border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm text-ink"
                 >
                   <option value="">Tất cả</option>
                   {languages.map((l) => (

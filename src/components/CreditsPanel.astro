@@ -23,7 +23,7 @@ const sources = nonEmpty(song.sources);
 <div class="flex flex-col gap-4">
   <section aria-labelledby="credits-heading" class="card p-4 sm:p-6">
     <h2 id="credits-heading" class="text-base font-bold">Credits</h2>
-    <dl class="mt-4 flex flex-col divide-y divide-white/10">
+    <dl class="mt-4 flex flex-col divide-y divide-black/[0.07] dark:divide-white/[0.07]">
       {
         rows.map((row) => (
           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[10rem_1fr] sm:gap-4">
@@ -66,7 +66,7 @@ const sources = nonEmpty(song.sources);
           </ul>
         )}
         {sources.length > 0 && (
-          <div class="mt-4 border-t border-white/10 pt-3">
+          <div class="mt-4 border-t border-black/10 dark:border-white/10 pt-3">
             <p class="text-xs font-semibold uppercase tracking-wide text-ink-faint">Nguồn đối chiếu</p>
             <ul class="mt-2 flex flex-col gap-1.5 text-sm text-ink-muted">
               {sources.map((s) => (

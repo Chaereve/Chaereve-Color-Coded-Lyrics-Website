@@ -20,10 +20,10 @@ function memberOf(line: SongLine) {
 
 function lineStyle(line: SongLine): string {
   const members = memberOf(line);
-  if (members.length === 0) return 'border-left-color: rgb(148 163 184 / 0.6);';
+  if (members.length === 0) return 'border-left-color: rgba(113,113,122,0.55);';
   if (members.length === 1) {
     const c = members[0]!.color;
-    return `border-left-color: ${c}; background: ${c}12;`;
+    return `border-left-color: ${c}; background: ${c}14;`;
   }
   const [a, b] = [members[0]!.color, members[members.length - 1]!.color];
   return `border-left-image: linear-gradient(180deg, ${a}, ${b}); border-left-style: solid; border-left-width: 4px; background: linear-gradient(90deg, ${a}16, ${b}10);`;
@@ -50,15 +50,15 @@ const copyData = (song.sections ?? []).map((sec) => ({
 ---
 <section aria-labelledby="lyrics-heading" class="card overflow-hidden">
   <div class="flex items-center justify-between gap-3 px-4 pt-4 sm:px-6">
-    <h2 id="lyrics-heading" class="text-base font-bold">Lyrics</h2>
+    <h2 id="lyrics-heading" class="text-base font-bold tracking-tight">Lyrics</h2>
     <div class="flex items-center gap-1.5">
-      <button type="button" id="font-dec" class="btn-ghost h-11 w-11 !min-w-11 rounded-xl !px-0" aria-label="Giảm cỡ chữ" title="Giảm cỡ chữ">
-        <span aria-hidden="true" class="text-base font-bold leading-none">A−</span>
+      <button type="button" id="font-dec" class="btn-ghost h-11 w-11 !min-w-11 rounded-lg !px-0" aria-label="Giảm cỡ chữ" title="Giảm cỡ chữ">
+        <span aria-hidden="true" class="text-sm font-black leading-none">A−</span>
       </button>
-      <button type="button" id="font-inc" class="btn-ghost h-11 w-11 !min-w-11 rounded-xl !px-0" aria-label="Tăng cỡ chữ" title="Tăng cỡ chữ">
-        <span aria-hidden="true" class="text-base font-bold leading-none">A+</span>
+      <button type="button" id="font-inc" class="btn-ghost h-11 w-11 !min-w-11 rounded-lg !px-0" aria-label="Tăng cỡ chữ" title="Tăng cỡ chữ">
+        <span aria-hidden="true" class="text-sm font-black leading-none">A+</span>
       </button>
-      <button type="button" id="copy-lyrics" class="btn-ghost h-11 rounded-xl px-3" title="Sao chép lyrics theo tab đang chọn">
+      <button type="button" id="copy-lyrics" class="btn-ghost h-11 rounded-lg px-3" title="Sao chép lyrics theo tab đang chọn">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 012-2h10" /></svg>
         <span class="hidden sm:inline">Copy</span>
       </button>
@@ -66,7 +66,7 @@ const copyData = (song.sections ?? []).map((sec) => ({
   </div>
 
   <!-- Tabs ngôn ngữ + controls: sticky ngay dưới header -->
-  <div class="sticky top-14 z-30 mt-3 -mx-4 border-b border-white/10 bg-surface/95 px-4 backdrop-blur sm:-mx-6 sm:px-6">
+  <div class="sticky top-14 z-30 mt-3 -mx-4 border-b border-black/10 bg-surface/95 px-4 backdrop-blur sm:-mx-6 sm:px-6 dark:border-white/10">
     <div class="flex flex-col gap-2 py-2 sm:flex-row sm:items-center sm:justify-between">
       <div class="-mx-1 flex gap-1 overflow-x-auto scroll-x px-1" role="tablist" aria-label="Ngôn ngữ hiển thị">
         {
@@ -78,7 +78,7 @@ const copyData = (song.sections ?? []).map((sec) => ({
               data-tab={lang.id}
               aria-selected={i === 0 ? 'true' : 'false'}
               aria-controls="lyrics-lines"
-              class="min-h-touch shrink-0 rounded-lg px-3 text-sm font-semibold transition-colors aria-selected:bg-accent aria-selected:text-white text-ink-muted hover:text-ink"
+              class="min-h-touch shrink-0 rounded-md px-3 text-xs font-bold uppercase tracking-wide transition-colors aria-selected:bg-accent aria-selected:text-black text-ink-muted hover:text-ink"
             >
               {lang.label}
             </button>
@@ -98,7 +98,7 @@ const copyData = (song.sections ?? []).map((sec) => ({
 
   <div
     id="lyrics-lines"
-    class="lang-panel flex flex-col gap-6 px-4 py-5 sm:px-6"
+    class="lang-panel flex flex-col gap-7 px-4 py-6 sm:px-6"
     data-lang="text"
     data-show-adlib="off"
     role="tabpanel"
@@ -108,11 +108,11 @@ const copyData = (song.sections ?? []).map((sec) => ({
     {
       (song.sections ?? []).map((section) => (
         <section aria-label={section.label}>
-          <h3 class="mb-3 flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-ink-faint">
-            <span>{section.label}</span>
-            <span class="h-px flex-1 bg-white/10" aria-hidden="true" />
+          <h3 class="mb-3 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+            <span>[{section.label}]</span>
+            <span class="h-px flex-1 bg-black/[0.07] dark:bg-white/10" aria-hidden="true" />
           </h3>
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-2.5">
             {(section.lines ?? []).map((line) => {
               const members = memberOf(line);
               const typeLabel = TYPE_LABEL[line.type] ?? '';
@@ -121,10 +121,9 @@ const copyData = (song.sections ?? []).map((sec) => ({
                 <article
                   id={line.id}
                   class:list={[
-                    'rounded-r-xl rounded-l-md border-l-4 px-4 py-3',
+                    'rounded-lg border-l-4 px-4 py-3',
                     adlib && 'adlib-line border-dashed',
                     !adlib && 'border-solid',
-                    line.type === 'instrumental' && 'bg-white/[0.03]',
                   ]}
                   style={lineStyle(line)}
                   data-type={line.type}
@@ -133,8 +132,8 @@ const copyData = (song.sections ?? []).map((sec) => ({
                     {members.length > 0 ? (
                       members.map((m) => (
                         <span
-                          class="chip text-xs"
-                          style={`border-color: ${m.color}55; background: ${m.color}18; color: ${m.color}`}
+                          class="chip member-chip text-[11px]"
+                          style={`--mc: ${m.color}; background: ${m.color}1f`}
                         >
                           <span class="h-1.5 w-1.5 rounded-full" style={`background: ${m.color}`} aria-hidden="true" />
                           {m.name}
@@ -142,11 +141,11 @@ const copyData = (song.sections ?? []).map((sec) => ({
                       ))
                     ) : (
                       line.type === 'all' && (
-                        <span class="chip border-white/20 bg-white/10 text-ink-muted">All / Ensemble</span>
+                        <span class="chip bg-black/[0.06] text-ink-muted dark:bg-white/10">All / Ensemble</span>
                       )
                     )}
                     {typeLabel && line.type !== 'all' && (
-                      <span class="chip border-white/15 bg-white/5 text-ink-faint">{typeLabel}</span>
+                      <span class="chip bg-black/[0.04] text-ink-faint dark:bg-white/[0.06]">{typeLabel}</span>
                     )}
                   </div>
                   <p class="lyric-text text-ink" data-lang="text">
@@ -241,7 +240,7 @@ const copyData = (song.sections ?? []).map((sec) => ({
         el.id = 'copy-toast';
         el.setAttribute('role', 'status');
         el.className =
-          'fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-accent px-4 py-3 text-sm font-semibold text-white shadow-lg';
+          'fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-lg bg-accent px-4 py-3 text-sm font-bold text-black shadow-lg';
         document.body.appendChild(el);
       }
       el.textContent = msg;

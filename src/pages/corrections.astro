@@ -46,7 +46,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           <select
             name="type"
             id="corr-type"
-            class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+            class="min-h-touch rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
           >
             <option value="lyric" selected={presetType === 'lyric'}>Sửa lyrics</option>
             <option value="color" selected={presetType === 'color'}>Sửa color coding</option>
@@ -61,7 +61,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           <select
             name="song"
             id="corr-song"
-            class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+            class="min-h-touch rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
           >
             <option value="">— Chọn bài hát —</option>
             {
@@ -84,7 +84,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           type="text"
           name="location"
           placeholder="Ví dụ: Chorus, line-013"
-          class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+          class="min-h-touch rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
         />
       </label>
 
@@ -95,7 +95,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           required
           rows="3"
           placeholder="Dán nguyên văn đoạn đang sai trên website…"
-          class="rounded-xl border border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
+          class="rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
       </label>
 
       <label class="flex flex-col gap-1.5 text-sm font-semibold">
@@ -104,7 +104,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           name="proposed"
           rows="3"
           placeholder="Nếu biết chính xác nội dung đúng, điền vào đây…"
-          class="rounded-xl border border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
+          class="rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
       </label>
 
       <label class="flex flex-col gap-1.5 text-sm font-semibold">
@@ -114,7 +114,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           required
           rows="3"
           placeholder="Giải thích vì sao đoạn này sai, bạn nghe/đọc thấy ở đâu…"
-          class="rounded-xl border border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
+          class="rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
       </label>
 
       <label class="flex flex-col gap-1.5 text-sm font-semibold">
@@ -124,7 +124,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           name="source"
           required
           placeholder="https://… (official audio, official MV, lyric video, interview…)"
-          class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+          class="min-h-touch rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
         />
         <span class="text-xs font-normal text-ink-faint">
           Correction không có nguồn đối chiếu sẽ khó được duyệt.
@@ -137,7 +137,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
           type="text"
           name="contact"
           placeholder="để maintainer liên hệ khi cần trao đổi thêm"
-          class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+          class="min-h-touch rounded-lg border border-black/10 dark:border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
         />
       </label>
 
@@ -155,7 +155,7 @@ const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
             </>
           ) : (
             <>
-              Chưa cấu hình <code class="rounded bg-white/10 px-1">PUBLIC_GITHUB_REPO</code> — nút sẽ sao
+              Chưa cấu hình <code class="rounded bg-black/[0.06] dark:bg-white/10 px-1">PUBLIC_GITHUB_REPO</code> — nút sẽ sao
               chép nội dung để bạn tự tạo Issue trên GitHub. Xem README để cấu hình.
             </>
           )
