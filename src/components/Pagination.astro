@@ -1,9 +1,10 @@
 ---
+/** WordPress-style pagination: "‹ Newer posts" / "Older posts ›". */
 import type { Page } from '../lib/paginate';
 
 interface Props {
   page: Page<unknown>;
-  /** Accessible label, e.g. "Lyrics pages". */
+  /** Accessible label, e.g. "lyrics pages". */
   label?: string;
 }
 
@@ -11,24 +12,16 @@ const { page, label = 'pages' } = Astro.props;
 if (page.totalPages <= 1) return;
 ---
 
-<nav class="mt-8 flex items-center justify-between gap-4" aria-label={`Pagination (${label})`}>
+<nav class="post-nav" aria-label={`Pagination (${label})`}>
   {page.prevUrl ? (
-    <a class="btn btn-sm" href={page.prevUrl}>
-      <span aria-hidden="true">←</span> Newer
-    </a>
+    <a href={page.prevUrl} rel="prev"><span aria-hidden="true">‹</span> Newer posts</a>
   ) : (
-    <span class="btn btn-sm" aria-disabled="true">
-      <span aria-hidden="true">←</span> Newer
-    </span>
+    <span aria-hidden="true"><span aria-hidden="true">‹</span> Newer posts</span>
   )}
-  <span class="meta text-center">Page {page.page} of {page.totalPages} · {page.totalItems} songs</span>
+  <span class="post-nav-mid">Page {page.page} of {page.totalPages}</span>
   {page.nextUrl ? (
-    <a class="btn btn-sm" href={page.nextUrl}>
-      Older <span aria-hidden="true">→</span>
-    </a>
+    <a href={page.nextUrl} rel="next">Older posts <span aria-hidden="true">›</span></a>
   ) : (
-    <span class="btn btn-sm" aria-disabled="true">
-      Older <span aria-hidden="true">→</span>
-    </span>
+    <span>Older posts <span aria-hidden="true">›</span></span>
   )}
 </nav>

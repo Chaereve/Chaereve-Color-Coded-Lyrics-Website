@@ -11,31 +11,24 @@ const { artist } = Astro.props;
 const songs = getSongsByArtist(artist.id);
 ---
 
-<a class="card group block overflow-hidden" href={artistUrl(artist)}>
-  <div class="relative aspect-square w-full overflow-hidden bg-surface">
-    {artist.cover ? (
-      <img
-        src={artist.cover}
-        alt={`Cover of ${artist.name}`}
-        loading="lazy"
-        width="900"
-        height="900"
-        class="h-full w-full object-cover transition-transform duration-180 group-hover:scale-[1.02]"
-      />
-    ) : (
-      <div class="flex h-full w-full items-center justify-center text-4xl font-bold text-muted" aria-hidden="true">
-        {artist.name.charAt(0)}
-      </div>
-    )}
-  </div>
-  <div class="p-3.5">
-    <h3 class="truncate font-semibold text-[0.9375rem]">{artist.name}</h3>
-    <p class="mt-0.5 text-[0.8125rem] capitalize text-muted">
-      {artist.type}
-      <span aria-hidden="true" class="mx-1.5 text-line">·</span>
-      {pluralize(artist.members.length, 'member')}
-      <span aria-hidden="true" class="mx-1.5 text-line">·</span>
-      {pluralize(songs.length, 'song')}
-    </p>
-  </div>
+<a class="artist-card" href={artistUrl(artist)}>
+  {artist.cover ? (
+    <img
+      src={artist.cover}
+      alt={`Cover of ${artist.name}`}
+      loading="lazy"
+      width="300"
+      height="300"
+    />
+  ) : (
+    <span class="artist-card-fallback flex aspect-square items-center justify-center text-3xl font-bold" style="color:var(--muted)" aria-hidden="true">
+      {artist.name.charAt(0)}
+    </span>
+  )}
+  <h3>
+    <a href={artistUrl(artist)}>{artist.name}{artist.nativeName ? ` (${artist.nativeName})` : ''}</a>
+  </h3>
+  <p class="meta capitalize">
+    {artist.type} · {pluralize(artist.members.length, 'member')} · {pluralize(songs.length, 'song')}
+  </p>
 </a>

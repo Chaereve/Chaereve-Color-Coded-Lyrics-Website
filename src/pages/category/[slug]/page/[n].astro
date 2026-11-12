@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Seo from '../../../../components/Seo.astro';
+import SongArchive from '../../../../components/SongArchive.astro';
+import { getSite, getSongsByCategory } from '../../../../lib/content';
+import { paginateItems } from '../../../../lib/paginate';
+import type { GetStaticPaths } from 'astro';
+import type { Song } from '../../../../lib/types';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { categories, settings } = getSite();
+  const perPage = settings.songsPerPage;
+  const out: { params: { slug: string; n: string }; props: { slug: string; title: string; page: ReturnType<typeof paginateItems<Song>>[number]; all: Song[]; perPage: number } }[] = [];
+  for (const category of categories) {
+    const songs = getSongsByCategory(category.id);
+    const pages = paginateItems(songs, perPage, `/category/${category.slug}/`);
+    for (const p of pages) {
+      if (p.page <= 1) continue;
+      out.push({
+        params: { slug: category.slug, n: String(p.page) },
+        props: { slug: category.slug, title: category.name, page: p, all: songs, perPage },
+      });
+    }
+  }
+  return out;
+};
+
+const { slug, title, page, all, perPage } = Astro.props as {
+  slug: string;
+  title: string;
+  page: ReturnType<typeof paginateItems<Song>>[number];
+  all: Song[];
+  perPage: number;
+};
+---
+
+<BaseLayout>
+  <Seo
+    title={`${title} Archives — page ${page.page}`}
+    description={`Page ${page.page} of ${page.totalPages} of the ${title} archive.`}
+    path={`/category/${slug}/page/${page.page}/`}
+    noIndex
+  />
+  <div class="container-site">
+    <div class="page-head">
+      <h1>{title} Archives</h1>
+      <span class="meta">page {page.page} of {page.totalPages}</span>
+    </div>
+    <SongArchive all={all} page={page} perPage={perPage} firstUrl={`/category/${slug}`} />
+  </div>
+</BaseLayout>

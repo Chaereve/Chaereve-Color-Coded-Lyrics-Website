@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Seo from '../../components/Seo.astro';
 
 const initialQ = Astro.url.searchParams.get('q') ?? '';
@@ -13,10 +12,9 @@ const initialQ = Astro.url.searchParams.get('q') ?? '';
     path="/search/"
     noIndex={Boolean(initialQ)}
   />
-  <div class="container-site py-6" data-search-root>
-    <Breadcrumbs items={[{ name: 'Search', url: '/search/' }]} />
-    <div class="section-title">
-      <h1 class="m-0">Search</h1>
+  <div class="container-site" data-search-root>
+    <div class="page-head">
+      <h1>Search</h1>
     </div>
 
     <form action="/search/" method="get" class="flex max-w-2xl gap-2" role="search" aria-label="Search">

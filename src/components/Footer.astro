@@ -1,64 +1,62 @@
 ---
-import { categoryUrl, getSite, pageUrl } from '../lib/content';
+import { artistUrl, categoryUrl, getSite, pageUrl } from '../lib/content';
 
-const { settings, categories, pages } = getSite();
+const { settings, categories, artists, pages } = getSite();
 const footerPages = pages.filter((p) => p.inFooter);
+const topArtists = [...artists].slice(0, 6);
 ---
 
-<footer class="mt-16 border-t border-line bg-surface">
-  <div class="container-site grid grid-cols-1 gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
-    <div>
-      <p class="flex items-center gap-2 font-bold tracking-tight">
-        <span class="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-[0.7rem] font-extrabold text-page" aria-hidden="true">C</span>
-        {settings.name}
-      </p>
-      <p class="mt-3 max-w-xs text-[0.8125rem] text-muted">{settings.tagline}.</p>
-      {settings.socials.length > 0 && (
-        <ul class="mt-4 flex flex-wrap gap-3">
-          {settings.socials.map((s) => (
-            <li>
-              <a class="link text-[0.8125rem]" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
-            </li>
+<footer class="site-footer">
+  <div class="container-site">
+    <div class="footer-cols">
+      <nav aria-label="Browse">
+        <h2>Browse</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/lyrics/">All lyrics</a></li>
+          <li><a href="/artists/">Artists (A–Z)</a></li>
+          <li><a href="/members/">Members</a></li>
+          <li><a href="/search/">Search</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Categories">
+        <h2>Categories</h2>
+        <ul>
+          {categories.map((c) => (
+            <li><a href={categoryUrl(c)}>{c.name}</a></li>
           ))}
         </ul>
-      )}
+      </nav>
+
+      <nav aria-label="Popular artists">
+        <h2>Popular artists</h2>
+        <ul>
+          {topArtists.map((a) => (
+            <li><a href={artistUrl(a)}>{a.name}{a.nativeName ? ` (${a.nativeName})` : ''}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav aria-label="Site">
+        <h2>Site</h2>
+        <ul>
+          <li><a href="/translations/">Translations</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
+          <li><a href="/authors/">Contributors</a></li>
+          {footerPages.map((p) => (
+            <li><a href={pageUrl(p)}>{p.title}</a></li>
+          ))}
+        </ul>
+      </nav>
     </div>
 
-    <nav aria-label="Browse">
-      <h2 class="mb-3 text-[0.8125rem] font-bold uppercase tracking-wider text-muted">Browse</h2>
-      <ul class="space-y-2 text-[0.9375rem]">
-        <li><a class="hover:text-accent" href="/lyrics/">All lyrics</a></li>
-        <li><a class="hover:text-accent" href="/artists/">Artists (A–Z)</a></li>
-        <li><a class="hover:text-accent" href="/members/">Members</a></li>
-        <li><a class="hover:text-accent" href="/search/">Search</a></li>
-      </ul>
-    </nav>
-
-    <nav aria-label="Categories">
-      <h2 class="mb-3 text-[0.8125rem] font-bold uppercase tracking-wider text-muted">Categories</h2>
-      <ul class="space-y-2 text-[0.9375rem]">
-        {categories.map((c) => (
-          <li><a class="hover:text-accent" href={categoryUrl(c)}>{c.name}</a></li>
-        ))}
-      </ul>
-    </nav>
-
-    <nav aria-label="Site">
-      <h2 class="mb-3 text-[0.8125rem] font-bold uppercase tracking-wider text-muted">Site</h2>
-      <ul class="space-y-2 text-[0.9375rem]">
-        {footerPages.map((p) => (
-          <li><a class="hover:text-accent" href={pageUrl(p)}>{p.title}</a></li>
-        ))}
-        <li><a class="hover:text-accent" href="/authors/">Contributors</a></li>
-        <li><a class="hover:text-accent" href="/admin/">CMS</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="border-t border-line">
-    <div class="container-site flex flex-col gap-1 py-4 text-[0.75rem] text-muted sm:flex-row sm:items-center sm:justify-between">
+    <div class="footer-bottom">
       <p>
-        <time datetime={new Date().toISOString().slice(0, 4)}>{new Date().getFullYear()}</time> {settings.name}. Fan project — no affiliation with artists or labels.
+        <time datetime={new Date().toISOString().slice(0, 4)}>{new Date().getFullYear()}</time> {settings.name} — fan project, no affiliation with any artist, group or label.
+      </p>
+      <p>
+        {settings.name} does not authorize any usage of our work (including, but not limited to: transliterations, translations, codings, etc.) in monetized media.
       </p>
       {settings.footerNote && <p>{settings.footerNote}</p>}
     </div>

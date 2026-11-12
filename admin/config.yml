@@ -128,12 +128,16 @@ collections:
           name: value
           widget: select
           options:
-            - label: Ballads
-              value: ballad
-            - label: Indie Pop
-              value: indie-pop
-            - label: K-Pop
-              value: kpop
+            - label: CHINESE
+              value: chinese
+            - label: ENGLISH
+              value: english
+            - label: JAPANESE
+              value: japanese
+            - label: KOREAN
+              value: korean
+            - label: OST
+              value: ost
         required: false
       - label: Tags (IDs)
         name: tags

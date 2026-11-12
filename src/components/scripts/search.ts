@@ -78,17 +78,17 @@ export function initSearch(): void {
       lyrics: 'lyrics', romanization: 'romanization', translation: 'translation', filter: 'filters',
     };
     return `<li>
-      <a class="card flex items-center gap-3 p-3" href="${escapeHtml(r.song.url)}">
+      <a class="search-row" href="${escapeHtml(r.song.url)}">
         ${r.song.cover
-          ? `<img src="${escapeHtml(r.song.cover)}" alt="" loading="lazy" width="64" height="64" class="h-14 w-14 shrink-0 rounded-lg object-cover" />`
-          : `<span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-surface font-bold text-muted" aria-hidden="true">${escapeHtml(r.song.title.charAt(0))}</span>`}
-        <span class="min-w-0 flex-1">
-          <span class="block truncate font-semibold">${escapeHtml(r.song.title)}</span>
+          ? `<img src="${escapeHtml(r.song.cover)}" alt="" loading="lazy" width="84" height="55" />`
+          : `<span class="search-row-fallback flex items-center justify-center text-xl font-bold" style="color:var(--muted)" aria-hidden="true">${escapeHtml(r.song.title.charAt(0))}</span>`}
+        <span class="min-w-0">
+          <span class="search-row-title">${escapeHtml(r.song.title)}</span>
           <span class="meta block truncate">
             ${escapeHtml(r.song.artist)}${r.song.album ? ` · ${escapeHtml(r.song.album)}` : ''}${r.song.year ? ` · ${escapeHtml(r.song.year)}` : ''}
           </span>
           <span class="meta block">
-            ${state.q ? `Matched in: <strong class="text-fg">${matchedLabel[r.matchedIn] ?? r.matchedIn}</strong>` : 'Newest first'}
+            ${state.q ? `Matched in: <strong>${matchedLabel[r.matchedIn] ?? r.matchedIn}</strong>` : 'Newest first'}
           </span>
         </span>
       </a>

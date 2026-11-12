@@ -1,51 +1,95 @@
 ---
 /**
- * A full set of lyrics for one song version.
+ * Lyrics for one song version, CCL-style: stacked blocks — **Romanization**,
+ * **Hangul/Original**, **Translation** — separated by `<hr>` on the page.
+ * No tabs; every rendered block shows the full lyrics.
  *
- * Emits the contrast-adjusted member color variables (one set per theme) as
- * a small scoped <style is:global>, then renders the sections/lines.
- * The `data-view` / `data-names` / `data-adlibs` attributes are driven by the
- * sticky toolbar client script on the song page.
+ * `block="all"` renders all three blocks (default); the song page passes a
+ * single block per `<hr>`-separated section.
+ *
+ * Member color variables live in src/styles/member-colors.generated.css
+ * (regenerated at build setup): `:root` carries the canonical colors,
+ * `.vcss-<versionId>` carries per-version overrides.
  */
 import type { Song, SongVersion } from '../lib/types';
 import LyricLine from './LyricLine.astro';
+
+export type LyricsBlock = 'romanization' | 'original' | 'translation';
 
 interface Props {
   song: Song;
   /** Undefined = main version (song.sections / song.members). */
   version?: SongVersion;
-  /** Initial state (the client script keeps them in localStorage). */
-  view?: 'original' | 'romanization' | 'translation' | 'stacked';
-  showNames?: boolean;
-  showAdlibs?: boolean;
+  /** Which block to render. Default: all three. */
+  block?: 'all' | LyricsBlock;
 }
 
-const { song, version, view = 'original', showNames = true, showAdlibs = true } = Astro.props;
+const { song, version, block = 'all' } = Astro.props;
 const members = version?.members ?? song.members;
 const sections = version ? version.sections : song.sections;
 const scopeClass = `vcss-${version ? version.id : 'main'}`;
+const lang = version?.language ?? song.language;
+const originalLabel = lang === 'ko' ? 'Hangul' : lang === 'ja' ? '日本語' : lang === 'zh' ? '中文' : 'Original';
+const hasTranslation = sections.some((s) => s.lines.some((l) => (l.translation ?? '').trim() !== ''));
+const hasRomanization = sections.some((s) => s.lines.some((l) => (l.romanization ?? '').trim() !== ''));
+
+const showRomanization = block === 'all' || block === 'romanization';
+const showOriginal = block === 'all' || block === 'original';
+const showTranslation = block === 'all' || block === 'translation';
 ---
 
-<!--
-  Member color variables live in src/styles/member-colors.generated.css
-  (regenerated at build setup): `:root`/`[data-theme="dark"]` carry the
-  canonical colors, `.vcss-<versionId>` carries per-version overrides.
--->
 <div
   class:list={['lyrics', scopeClass]}
-  data-view={view}
-  data-names={showNames ? 'on' : 'off'}
-  data-adlibs={showAdlibs ? 'on' : 'off'}
+  data-names="on"
+  data-adlibs="off"
+  data-song-lyrics={version ? version.id : 'main'}
 >
   {sections.length === 0 && (
     <p class="lyric-text line-missing">No lyrics for this version yet.</p>
   )}
-  {sections.map((section) => (
-    <section class="lyrics-section">
-      <h3 class="lyrics-section-label">{section.label}</h3>
-      {section.lines.map((line) => (
-        <LyricLine line={line} members={members} lang={version?.language ?? song.language} />
+
+  {showRomanization && hasRomanization && (
+    <section class="lyrics-block" data-block="romanization" aria-label="Romanization">
+      <h3 class="lyrics-block-label">Romanization</h3>
+      {sections.map((section) => (
+        <div class="lyrics-section">
+          {section.lines.map((line) => (
+            <LyricLine line={line} members={members} lang={lang} view="romanization" />
+          ))}
+        </div>
       ))}
     </section>
-  ))}
+  )}
+
+  {showOriginal && (
+    <section class="lyrics-block" data-block="original" aria-label={originalLabel}>
+      <h3 class="lyrics-block-label">{originalLabel}</h3>
+      {sections.map((section) => (
+        <div class="lyrics-section">
+          {section.lines.map((line) => (
+            <LyricLine line={line} members={members} lang={lang} view="original" />
+          ))}
+        </div>
+      ))}
+    </section>
+  )}
+
+  {showTranslation && (
+    <section class="lyrics-block" data-block="translation" aria-label="Translation">
+      <h3 class="lyrics-block-label">Translation</h3>
+      {hasTranslation ? (
+        sections.map((section) => (
+          <div class="lyrics-section">
+            {section.lines.map((line) => (
+              <LyricLine line={line} members={members} lang={lang} view="translation" />
+            ))}
+          </div>
+        ))
+      ) : (
+        <p class="lyric-text line-missing">
+          No translation yet — <a class="cl" href="/translations/">submit one</a>.
+        </p>
+      )}
+    </section>
+  )}
 </div>

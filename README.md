@@ -1,6 +1,8 @@
 # Chaereve Lyrics — Website lời bài hát màu hóa + thống kê số dòng
 
 > Website **thông tin cộng đồng, chạy hoàn toàn static** (Astro + Tailwind), hiển thị **lời bài hát màu hóa** (mỗi dòng được tô màu theo thành viên hát), kèm **romanization**, **bản dịch**, **credits** và **thanh phân bố số dòng (line distribution)** theo từng thành viên.
+>
+> **Giao diện (bố cục + kiểu dáng) được dựng theo đúng reference [colorcodedlyrics.com](https://colorcodedlyrics.com/)**: theme sáng, brand + tagline giữa header, menu ngôn ngữ (KOREAN ENGLISH JAPANESE CHINESE OST), trang chủ "Trending Songs" + lưới bài mới, trang bài hát 1 cột giữa (chủ thể → tiêu đề → album/ngày → credits → ảnh vuông + tên TV màu → 3 khối lời Romanization/Hangul/Translation chia bằng gạch ngang → Credits nguồn → More songs by X → Similar Posts → bình luận).
 
 ⚠️ **Bản checkout này chứa DỮ LIỆU MẪU (sample data).** Một số bài mẫu dùng tên bài thật để giữ nguyên URL theo spec, nhưng **từng dòng lời trong repo là văn bản giả lập tự viết** (không phải lời bài hát thật). Các nghệ sĩ **LUMI** và **Juna** là hư cấu. Trước khi chạy thật, bạn phải thay bằng nội dung đã được cấp phép — xem [Content Policy](content/pages/content-policy.md).
 
@@ -10,13 +12,13 @@
 
 | Khu vực | Đường dẫn | Mô tả |
 | --- | --- | --- |
-| Trang chủ | `/` | Trending, Latest, Popular Artists, Latest Translations, Latest Corrections, Featured + ô tìm kiếm nổi bật + nút dark/light |
-| Kho lời | `/lyrics/` | Lưu trữ, sắp xếp mới → cũ, phân trang (`/page/N/`) |
-| Trang bài hát | `/lyrics/[nghệ-sĩ]/[bài-hát]/` | Lời màu hóa + tabs **Original / Romanization / Translation / Stacked** (dính khi cuộn) + credits + sources + notes + liên quan + trước/sau + bình luận + báo sửa |
-| Phân bố dòng | (trong trang bài) | **Thanh ngang** theo thành viên (không dùng pie chart), công tắc hiện/ẩn **tên thành viên** và **adlibs**, nút chỉnh cỡ chữ |
-| Nghệ sĩ (A–Z) | `/artists/`, `/artist/[slug]/` | Hồ sơ, thành viên, danh sách bài |
+| Trang chủ | `/` | H1 **"Trending Songs"** (ô vuông cover + "ARTIST – Title" + "By author / date / n Comments") + lưới **"Latest Songs"** (cover 400×260 + tiêu đề + danh mục) — đúng bố cục reference |
+| Kho lời | `/lyrics/` | Danh sách card ngang (ảnh 400×260 + link danh mục + tiêu đề + excerpt kiểu CCL: tiêu đề/tên gốc/album/đầy đủ ngày YYYY.MM.DD/Lyrics·Composer·Arranger), mới → cũ, phân trang "‹ Newer posts / Older posts ›" (`/page/N/`) |
+| Trang bài hát | `/lyrics/[nghệ-sĩ]/[bài-hát]/` | 1 cột giữa, đúng trình tự reference: links danh mục → **tiêu đề lớn** → tên gốc italic → album → ngày `YYYY.MM.DD` → Lyrics/작사 · Composer/작곡 · Arranger/편곡 → **ảnh cover vuông + tên thành viên (màu, ngăn dấu phẩy)** → 3 khối lời **Romanization / Hangul / Translation** (toàn bộ lời, không tabs, chia bằng `<hr>`) → **Credits** (Korean/Rom/Eng/Info) → **Line distribution** (panel mở rộng) → thanh công cụ (Names/Adlibs/cỡ chữ/Copy/YouTube) → **More songs by X** → **Similar Posts** (2 card) → **Comments + Leave a Reply** |
+| Phân bố dòng | (trong trang bài) | **Thanh ngang** theo thành viên (không dùng pie chart), nằm trong panel "Line distribution" mở rộng; công tắc **Adlibs** (thống kê loại adlib mặc định), công tắc **Names**, nút cỡ chữ A−/A/A+ |
+| Nghệ sĩ (A–Z) | `/artists/`, `/artist/[slug]/` | Hồ sơ, thành viên, danh sách bài (card kiểu archive) |
 | Thành viên | `/members/`, `/member/[slug]/` | Tổng số dòng + phân bố theo từng bài |
-| Danh mục / thẻ | `/category/[slug]/`, `/tag/[slug]/` | Lọc bài hát |
+| Danh mục / thẻ | `/category/[slug]/`, `/tag/[slug]/` | Danh mục = **ngôn ngữ như reference: KOREAN (krn), ENGLISH (eng), JAPANESE (jpn), CHINESE (chn), OST (ost)** + thẻ phụ (girl-group, rap, ballad…) |
 | Bản dịch | `/translations/` | Trạng thái `submitted → reviewing → approved/rejected`, luôn có **tên người dịch**; kèm form nộp dịch |
 | Báo sửa | `/corrections/` | Trạng thái `open → reviewing → accepted/applied/rejected` — **chỉ sửa JSON sau khi được chấp nhận** |
 | Người đóng góp | `/authors/`, `/author/[slug]/` | Vai trò (admin/editor/translator/coder) + bài đã color-coding |
@@ -136,7 +138,7 @@ Tất cả quan hệ dùng **ID nội bộ** (không bao giờ dùng tên hiển
   "createdAt": "2026-09-02",        // date thêm vào site (mặc định = released)
   "language": "ko",
   "album": "…",
-  "categories": ["kpop"],           // category.id
+  "categories": ["korean"],         // ngôn ngữ/danh mục: korean|english|japanese|chinese|ost
   "tags": ["girl-group", "rap"],    // tag.id
   "authorId": "team-chaereve",      // người color-coding
   "featured": true,

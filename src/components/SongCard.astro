@@ -1,58 +1,101 @@
 ---
-import { artistUrl, getArtist, songUrl } from '../lib/content';
-import { countLines } from '../lib/lyrics';
-import { formatDate, languageBadge, pluralize } from '../lib/text';
+/**
+ * Song cards, CCL-style:
+ *  - `trend`   : home "Trending Songs" — square cover, "ARTIST – Title",
+ *                "By author / date / n Comments"
+ *  - `archive` : archive list — 400×260 cover on the left, category links,
+ *                title, CCL-style excerpt on the right
+ *  - `latest`  : home latest grid — 400×260 cover, title, category links
+ */
+import { categoryUrl, getArtist, getAuthor, getApprovedComments, getSite, songUrl, tagUrl } from '../lib/content';
+import { formatDate, songExcerpt } from '../lib/text';
 import StatusBadge from './StatusBadge.astro';
 import type { Song } from '../lib/types';
 
 interface Props {
   song: Song;
-  /** Compact card for grids. */
-  dense?: boolean;
+  variant?: 'trend' | 'archive' | 'latest';
 }
 
-const { song, dense = false } = Astro.props;
+const { song, variant = 'archive' } = Astro.props;
 const artist = getArtist(song.artistId);
-const lines = countLines(song.sections);
+const author = song.authorId ? getAuthor(song.authorId) : undefined;
+const comments = getApprovedComments(song.id);
+const { categories, tags } = getSite();
+const cats = song.categories
+  .map((id) => categories.find((c) => c.id === id))
+  .filter((c) => c !== undefined);
+const tagList = song.tags
+  .map((id) => tags.find((t) => t.id === id))
+  .filter((t) => t !== undefined)
+  .slice(0, 2);
+const url = songUrl(song, artist);
+const headTitle = artist ? `${artist.name} – ${song.title}` : song.title;
 const statusHidden = song.status !== 'published';
 ---
 
-<a
-  class="card group block overflow-hidden transition-transform duration-180 hover:-translate-y-0.5"
-  href={songUrl(song, artist)}
->
-  <div class="relative aspect-square w-full overflow-hidden bg-surface">
+{variant === 'trend' && (
+  <a class="trend-card" href={url}>
     {song.cover ? (
-      <img
-        src={song.cover}
-        alt={`Cover of ${song.title} by ${artist?.name ?? 'unknown artist'}`}
-        loading="lazy"
-        width="900"
-        height="900"
-        class="h-full w-full object-cover transition-transform duration-180 group-hover:scale-[1.02]"
-      />
+      <img src={song.cover} alt={headTitle} loading="lazy" width="500" height="500" />
     ) : (
-      <div class="flex h-full w-full items-center justify-center text-4xl font-bold text-muted" aria-hidden="true">
+      <span class="trend-card-fallback flex aspect-square items-center justify-center text-4xl font-bold" style="color:var(--muted)" aria-hidden="true">
         {song.title.charAt(0)}
-      </div>
+      </span>
     )}
-    {statusHidden && (
-      <span class="absolute left-2 top-2"><StatusBadge status={song.status} /></span>
-    )}
-  </div>
-  <div class="p-3.5">
-    <h3 class="truncate font-semibold text-[0.9375rem] leading-snug">{song.title}</h3>
-    <p class="mt-0.5 truncate text-[0.8125rem] text-muted">
-      {artist ? <a class="hover:text-accent" href={artistUrl(artist)}>{artist.name}</a> : 'Unknown artist'}
+    <h4>
+      <a href={url}>{headTitle}</a>
+    </h4>
+    <p class="meta">
+      By {author?.name ?? 'Chaereve'} / {formatDate(song.released)} / {comments.length} Comments
+      {statusHidden && <span class="ml-1 inline-block align-middle"><StatusBadge status={song.status} /></span>}
     </p>
-    {!dense && (
-      <p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.75rem] text-muted">
-        <time datetime={song.released}>{formatDate(song.released)}</time>
-        <span aria-hidden="true" class="text-line">·</span>
-        <span class="font-semibold tracking-wide">{languageBadge(song.language)}</span>
-        <span aria-hidden="true" class="text-line">·</span>
-        <span>{pluralize(lines, 'line')}</span>
+  </a>
+)}
+
+{variant === 'archive' && (
+  <article class="post-card">
+    <a class="post-card-thumb" href={url} tabindex="-1" aria-hidden="true">
+      {song.cover ? (
+        <img src={song.cover} alt={headTitle} loading="lazy" width="400" height="260" />
+      ) : (
+        <span class="post-card-thumb-fallback flex items-center justify-center text-3xl font-bold" style="color:var(--muted)">
+          {song.title.charAt(0)}
+        </span>
+      )}
+    </a>
+    <div class="min-w-0">
+      <p class="post-card-cats">
+        {cats.map((c) => (
+          <a href={categoryUrl(c)}>{c.name}</a>
+        ))}
+        {tagList.map((t) => (
+          <a href={tagUrl(t)}>#{t.name}</a>
+        ))}
+        {statusHidden && <StatusBadge status={song.status} />}
       </p>
+      <h3 class="post-card-title">
+        <a href={url}>{headTitle}</a>
+      </h3>
+      <p class="post-card-excerpt">{songExcerpt(song)}</p>
+    </div>
+  </article>
+)}
+
+{variant === 'latest' && (
+  <a class="latest-card" href={url}>
+    {song.cover ? (
+      <img src={song.cover} alt={headTitle} loading="lazy" width="400" height="260" />
+    ) : (
+      <span class="latest-card-fallback flex aspect-[400/260] items-center justify-center text-3xl font-bold" style="color:var(--muted)" aria-hidden="true">
+        {song.title.charAt(0)}
+      </span>
     )}
-  </div>
-</a>
+    <h4><a href={url}>{headTitle}</a></h4>
+    <p class="latest-card-cats">
+      {cats.map((c) => (
+        <a href={categoryUrl(c)}>{c.name}</a>
+      ))}
+    </p>
+  </a>
+)}

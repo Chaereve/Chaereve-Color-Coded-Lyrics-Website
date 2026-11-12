@@ -1,16 +1,10 @@
 ---
 import ArtistCard from '../../components/ArtistCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Seo from '../../components/Seo.astro';
 import SongCard from '../../components/SongCard.astro';
-import {
-  artistUrl,
-  getMember,
-  getSite,
-  getSongsByArtist,
-} from '../../lib/content';
-import { formatDate, languageName, pluralize, truncate } from '../../lib/text';
+import { artistUrl, getMember, getSite, getSongsByArtist } from '../../lib/content';
+import { languageName, pluralize, truncate } from '../../lib/text';
 import { musicGroupJsonLd } from '../../lib/seo';
 import type { GetStaticPaths } from 'astro';
 import type { Artist } from '../../lib/types';
@@ -37,42 +31,29 @@ const description = truncate(artist.description || `${artist.name} — ${artist.
     image={artist.cover || undefined}
     jsonLd={[musicGroupJsonLd(artist, artistUrl(artist), site)]}
   />
-  <div class="container-site py-6">
-    <Breadcrumbs items={[{ name: 'Artists', url: '/artists/' }, { name: artist.name, url: artistUrl(artist) }]} />
-
-    <header class="flex flex-col gap-6 sm:flex-row">
-      <div class="w-full max-w-[240px] shrink-0 overflow-hidden rounded-card border border-line sm:w-[240px]">
+  <div class="container-site">
+    <header class="mt-8 flex flex-col gap-6 sm:flex-row">
+      <div class="w-full max-w-[220px] shrink-0 sm:w-[220px]">
         {artist.cover ? (
-          <img src={artist.cover} alt={`Cover of ${artist.name}`} width="240" height="240" class="aspect-square w-full object-cover" />
+          <img src={artist.cover} alt={`Cover of ${artist.name}`} width="220" height="220" class="aspect-square w-full rounded-[3px] object-cover" />
         ) : (
-          <div class="flex aspect-square w-full items-center justify-center bg-surface text-5xl font-bold text-muted" aria-hidden="true">
+          <div class="flex aspect-square w-full items-center justify-center rounded-[3px]" style="background:var(--surface);color:var(--muted);font-size:3rem;font-weight:700">
             {artist.name.charAt(0)}
           </div>
         )}
       </div>
       <div class="min-w-0 flex-1">
-        <h1 class="m-0">{artist.name}</h1>
-        {artist.nativeName && <p class="mt-0.5 text-muted">{artist.nativeName}</p>}
-        <p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] text-muted">
+        <h1 class="!mt-0">{artist.name}{artist.nativeName ? <span class="font-medium" style="color:var(--muted)"> (${artist.nativeName})</span> : null}</h1>
+        <p class="meta mt-1">
           <span class="capitalize">{artist.type}</span>
-          {artist.debut && (
-            <>
-              <span aria-hidden="true" class="text-line">·</span>
-              <span>debut <time datetime={artist.debut}>{artist.debut.slice(0, 4)}</time></span>
-            </>
-          )}
-          {artist.label && (
-            <>
-              <span aria-hidden="true" class="text-line">·</span>
-              <span>{artist.label}</span>
-            </>
-          )}
+          {artist.debut && <> · debut <time datetime={artist.debut}>{artist.debut.slice(0, 4)}</time></>}
+          {artist.label && <> · {artist.label}</>}
         </p>
-        <p class="mt-3 max-w-prose text-[0.9375rem]">{artist.description}</p>
+        <p class="mt-3 max-w-prose text-[0.9375rem]" style="color:var(--soft)">{artist.description}</p>
         {artist.socials && artist.socials.length > 0 && (
           <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[0.9375rem]">
             {artist.socials.map((s) => (
-              <a class="link" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+              <a class="cl" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
             ))}
           </p>
         )}
@@ -80,28 +61,29 @@ const description = truncate(artist.description || `${artist.name} — ${artist.
     </header>
 
     <section class="mt-10" aria-labelledby="songs-title">
-      <div class="section-title">
-        <h2 id="songs-title" class="m-0 text-2xl">Songs ({songs.length})</h2>
-      </div>
-      <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {songs.map((song) => <SongCard song={song} />)}
-      </div>
+      <h2 id="songs-title" class="page-head"><span>All {artist.name} lyrics</span><span class="meta">{pluralize(songs.length, 'song')}</span></h2>
+      <ul class="post-list">
+        {songs.map((song) => (
+          <li><SongCard song={song} variant="archive" /></li>
+        ))}
+      </ul>
+      {songs.length === 0 && <p class="meta">No songs yet.</p>}
     </section>
 
     <section class="mt-10" aria-labelledby="members-title">
-      <div class="section-title">
-        <h2 id="members-title" class="m-0 text-2xl">Members ({artist.members.length})</h2>
-        <a class="link text-[0.875rem]" href="/members/">All members</a>
-      </div>
-      <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <h2 id="members-title" class="page-head">
+        <span>Members ({artist.members.length})</span>
+        <a class="cl text-[0.8125rem]" href="/members/">All members →</a>
+      </h2>
+      <ul class="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" style="list-style:none;margin:0.75rem 0 0;padding:0">
         {artist.members.map((member) => {
           const profile = getMember(member.id);
           return (
             <li class="surface flex items-center gap-3 p-3">
-              <span class="swatch h-4 w-4" style={`background:${member.color}`} aria-hidden="true"></span>
+              <span class="swatch" style={`background:${member.color}`} aria-hidden="true"></span>
               <span class="min-w-0 flex-1">
                 {profile ? (
-                  <a class="font-semibold hover:text-accent" href={profile.url}>{member.name}</a>
+                  <a class="cl font-semibold" href={profile.url}>{member.name}</a>
                 ) : (
                   <span class="font-semibold">{member.name}</span>
                 )}
@@ -123,9 +105,7 @@ const description = truncate(artist.description || `${artist.name} — ${artist.
 
     {related.length > 0 && (
       <section class="mt-10" aria-labelledby="related-artists-title">
-        <div class="section-title">
-          <h2 id="related-artists-title" class="m-0 text-2xl">Related artists</h2>
-        </div>
+        <h2 id="related-artists-title" class="page-head"><span>Related artists</span></h2>
         <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {related.map((a) => <ArtistCard artist={a} />)}
         </div>
@@ -133,11 +113,6 @@ const description = truncate(artist.description || `${artist.name} — ${artist.
     )}
 
     <p class="meta mt-8">
-      {songs.length > 0 && (
-        <>
-          Song span: {formatDate(songs.map((s) => s.released).sort()[0])} — {formatDate(songs.map((s) => s.released).sort().slice(-1)[0])} ·
-        </>
-      )}
       Main languages: {[...new Set(songs.map((s) => languageName(s.language)))].join(', ') || '—'}
     </p>
   </div>

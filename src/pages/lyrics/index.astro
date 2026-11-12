@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Seo from '../../components/Seo.astro';
 import SongArchive from '../../components/SongArchive.astro';
 import { getSite } from '../../lib/content';
@@ -19,12 +18,11 @@ const description = truncate(
 
 <BaseLayout>
   <Seo title="All lyrics" description={description} path="/lyrics/" />
-  <div class="container-site py-6">
-    <Breadcrumbs items={[{ name: 'Lyrics', url: '/lyrics/' }]} />
-    <div class="section-title">
-      <h1 class="m-0">Lyrics archive</h1>
+  <div class="container-site">
+    <div class="page-head">
+      <h1>All Lyrics</h1>
       <span class="meta">{pluralize(songs.length, 'song')} · newest first</span>
     </div>
-    <SongArchive all={songs} page={page} perPage={perPage} />
+    <SongArchive all={songs} page={page} perPage={perPage} firstUrl="/lyrics" />
   </div>
 </BaseLayout>

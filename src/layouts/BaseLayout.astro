@@ -21,23 +21,9 @@ const settings = getSite().settings;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
     />
-    <script is:inline>
-      // Set the theme before first paint to avoid a flash.
-      (function () {
-        try {
-          var stored = localStorage.getItem('chaereve-theme');
-          var dark =
-            stored === 'dark' ||
-            (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          if (dark) document.documentElement.setAttribute('data-theme', 'dark');
-        } catch (e) {
-          /* ignore */
-        }
-      })();
-    </script>
     <slot name="head" />
   </head>
-  <body class="flex min-h-dvh flex-col font-sans antialiased">
+  <body class="flex min-h-dvh flex-col">
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" class="flex-1">

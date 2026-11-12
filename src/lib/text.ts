@@ -63,6 +63,35 @@ export function yearOf(iso: string | undefined): string {
   return m?.[1] ?? '';
 }
 
+/** CCL-style date: "2026.10.26". */
+export function formatDateISO(iso: string | undefined): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso ?? '');
+  return m ? `${m[1]}.${m[2]}.${m[3]}` : (iso ?? '');
+}
+
+/**
+ * Archive-card excerpt, CCL-style:
+ * "Title  nativeTitle  [EP] Album  2026.10.26  Lyrics/작사: … Composer/작곡: … Arranger/편곡: …"
+ * Truncated with a trailing ellipsis.
+ */
+export function songExcerpt(song: {
+  title: string;
+  nativeTitle?: string;
+  album?: string;
+  released: string;
+  credits: { lyrics: string[]; composition: string[]; arrangement: string[] };
+}, max = 170): string {
+  const parts: string[] = [song.title];
+  if (song.nativeTitle && song.nativeTitle !== song.title) parts.push(song.nativeTitle);
+  if (song.album) parts.push(song.album);
+  parts.push(formatDateISO(song.released));
+  if (song.credits.lyrics.length) parts.push(`Lyrics/작사: ${song.credits.lyrics.join(', ')}`);
+  if (song.credits.composition.length) parts.push(`Composer/작곡: ${song.credits.composition.join(', ')}`);
+  if (song.credits.arrangement.length) parts.push(`Arranger/편곡: ${song.credits.arrangement.join(', ')}`);
+  const full = parts.join(' ');
+  return full.length > max ? `${full.slice(0, max).trimEnd()}…` : full;
+}
+
 const LANGUAGE_NAMES: Record<string, string> = {
   ko: 'Korean',
   ja: 'Japanese',

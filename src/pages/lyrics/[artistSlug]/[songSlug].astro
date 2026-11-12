@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import CommunityForm from '../../../components/CommunityForm.astro';
 import LineDistribution from '../../../components/LineDistribution.astro';
 import Lyrics from '../../../components/Lyrics.astro';
@@ -9,18 +8,18 @@ import SongCard from '../../../components/SongCard.astro';
 import StatusBadge from '../../../components/StatusBadge.astro';
 import {
   artistUrl,
+  categoryUrl,
   getAdjacentSongs,
   getApprovedComments,
-  getApprovedTranslations,
   getArtist,
-  getCorrectionsForSong,
-  getMember,
+  getCategory,
   getRelatedSongs,
   getSite,
+  getSongsByArtist,
   songUrl,
 } from '../../../lib/content';
-import { countLines } from '../../../lib/lyrics';
-import { formatDate, languageName, pluralize, truncate, yearOf } from '../../../lib/text';
+import { memberColorValue } from '../../../lib/lyrics';
+import { formatDate, formatDateISO, truncate, yearOf } from '../../../lib/text';
 import { musicRecordingJsonLd } from '../../../lib/seo';
 import type { GetStaticPaths } from 'astro';
 import type { Artist, Song } from '../../../lib/types';
@@ -37,340 +36,254 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const { song, artist } = Astro.props as { song: Song; artist: Artist };
 const site = new URL(Astro.site ?? 'http://localhost:4321');
-const related = getRelatedSongs(song);
+const cats = song.categories.map((id) => getCategory(id)).filter((c) => c !== undefined);
 const adjacent = getAdjacentSongs(song);
-const translations = getApprovedTranslations(song.id);
-const corrections = getCorrectionsForSong(song.id);
+const similar = getRelatedSongs(song, 2);
+const byArtist = getSongsByArtist(artist.id).filter((s) => s.id !== song.id).slice(0, 6);
 const comments = getApprovedComments(song.id);
-const lines = countLines(song.sections);
-const memberNames = song.members.map((m) => m.name).join(', ');
-const description = truncate(
-  `Color-coded lyrics and line distribution for “${song.title}” by ${artist.name}. ${languageName(song.language)}${song.album ? `, album: ${song.album}` : ''}, ${song.released}, ${pluralize(lines, 'line')}.`,
-  160,
-);
 const versions = [
   { id: 'main', name: 'Main version (studio coding)' },
   ...song.versions.map((v) => ({ id: v.id, name: `${v.name}${v.audioType !== 'studio' ? ` · ${v.audioType}` : ''}` })),
 ];
+const description = truncate(
+  `Color-coded lyrics for “${song.title}” by ${artist.name}. ${song.album ? `${song.album}, ` : ''}${formatDateISO(song.released)} — romanization, translation and line distribution.`,
+  160,
+);
+const artistHead = artist.nativeName ? `${artist.name} (${artist.nativeName})` : artist.name;
 ---
 
 <BaseLayout>
   <Seo
-    title={`${song.title} — ${artist.name}`}
+    title={`${artist.name} - ${song.title} Lyrics`}
     description={description}
     path={songUrl(song, artist)}
     image={song.cover}
     jsonLd={[musicRecordingJsonLd(song, artist, songUrl(song, artist), site)]}
   />
 
-  <div class="container-site py-6" data-song-root>
-    <Breadcrumbs items={[{ name: 'Lyrics', url: '/lyrics/' }, { name: artist.name, url: artistUrl(artist) }]} />
+  <article class="container-post post" data-song-root>
+    {/* ---------------- category links + title block (CCL header) ---------------- */}
+    <p class="post-cats">
+      {cats.map((c) => (
+        <a href={categoryUrl(c)}>{c.name}</a>
+      ))}
+      <a href={artistUrl(artist)}>{artistHead}</a>
+    </p>
 
-    {/* ---------------- header ---------------- */}
-    <header class="flex flex-col gap-5 sm:flex-row">
-      <a class="block w-full max-w-[220px] shrink-0 overflow-hidden rounded-card border border-line sm:w-[220px]" href={artistUrl(artist)}>
-        {song.cover ? (
-          <img src={song.cover} alt={`Cover of ${song.title}`} width="220" height="220" class="aspect-square w-full object-cover" />
-        ) : (
-          <div class="flex aspect-square w-full items-center justify-center bg-surface text-5xl font-bold text-muted" aria-hidden="true">
-            {song.title.charAt(0)}
-          </div>
-        )}
-      </a>
-      <div class="min-w-0 flex-1">
-        <div class="flex flex-wrap items-center gap-2">
-          <h1 class="m-0">{song.title}</h1>
-          {song.status !== 'published' && <StatusBadge status={song.status} />}
-        </div>
-        {song.nativeTitle && <p class="mt-0.5 text-muted">{song.nativeTitle}</p>}
-        <p class="mt-1 text-[1.0625rem]">
-          by <a class="link" href={artistUrl(artist)}>{artist.name}</a>
-        </p>
-        <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] text-muted">
-          {song.album && (
-            <>
-              <span>{song.album}</span>
-              <span aria-hidden="true" class="text-line">·</span>
-            </>
-          )}
-          <time datetime={song.released}>{formatDate(song.released)}</time>
-          <span aria-hidden="true" class="text-line">·</span>
-          <span class="font-semibold tracking-wide">{languageName(song.language)}</span>
-          <span aria-hidden="true" class="text-line">·</span>
-          <span>{pluralize(lines, 'line')}</span>
-          <span aria-hidden="true" class="text-line">·</span>
-          <span>{pluralize(song.members.length, 'member')}</span>
-        </p>
-        <p class="mt-2 flex flex-wrap gap-1.5">
-          {song.categories.map((id) => {
-            const cat = getSite().categories.find((c) => c.id === id);
-            return cat ? (
-              <a class="badge transition-colors hover:border-accent hover:text-accent" href={`/category/${cat.slug}/`}>{cat.name}</a>
-            ) : '';
-          })}
-          {song.tags.map((id) => {
-            const tag = getSite().tags.find((t) => t.id === id);
-            return tag ? (
-              <a class="badge transition-colors hover:border-accent hover:text-accent" href={`/tag/${tag.slug}/`}>#{tag.name}</a>
-            ) : '';
-          })}
-        </p>
-      </div>
-    </header>
-
-    {/* ---------------- sticky bar + tabs ---------------- */}
-    <div class="song-bar mt-6">
-      <div class="container-site flex h-full items-center gap-2">
-        <span class="truncate text-[0.875rem] font-semibold" aria-hidden="true">{song.title} — {artist.name}</span>
-        <span class="ml-auto flex items-center gap-1.5">
-          {versions.length > 1 && (
-            <label class="sr-only" for="version-select">Version</label>
-          )}
-          {versions.length > 1 && (
-            <select class="input w-auto min-h-[40px] py-1 text-[0.875rem]" id="version-select" data-version-select>
-              {versions.map((v) => (
-                <option value={v.id}>{v.name}</option>
-              ))}
-            </select>
-          )}
-          <a class="btn btn-sm" href={song.youtube ?? '#'} target="_blank" rel="noopener noreferrer"
-             aria-disabled={song.youtube ? undefined : true} tabindex={song.youtube ? undefined : -1}
-             title={song.youtube ? 'Watch on YouTube' : 'No video configured'}>
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.24 5 12 5 12 5s-6.24 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.76 1.77C5.76 19 12 19 12 19s6.24 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.2V8.8L15.5 12Z" /></svg>
-            YouTube
-          </a>
-          <button class="btn btn-sm" type="button" data-copy>Copy</button>
-          <button class="btn btn-sm" type="button" data-share>Share</button>
-        </span>
-      </div>
-    </div>
-
-    <div class="lyrics-tabs">
-      <div class="container-site scroll-x">
-        <div class="flex items-center gap-0.5">
-          <button class="tab" type="button" data-tab data-view="original" aria-selected="true">Original</button>
-          <button class="tab" type="button" data-tab data-view="romanization" aria-selected="false">Romanization</button>
-          <button class="tab" type="button" data-tab data-view="translation" aria-selected="false">Translation</button>
-          <button class="tab" type="button" data-tab data-view="stacked" aria-selected="false">Stacked</button>
-          <span class="ml-auto flex items-center gap-1.5 pl-3">
-            <button class="btn btn-sm" type="button" data-toggle="names" aria-pressed="true">Names</button>
-            <button class="btn btn-sm" type="button" data-toggle="adlibs" aria-pressed="true">Adlibs</button>
-            <span class="mx-1 h-5 w-px bg-line" aria-hidden="true"></span>
-            <button class="btn btn-sm" type="button" data-fontsize="sm" aria-pressed="false" aria-label="Small lyrics font">A−</button>
-            <button class="btn btn-sm" type="button" data-fontsize="md" aria-pressed="true" aria-label="Medium lyrics font">A</button>
-            <button class="btn btn-sm" type="button" data-fontsize="lg" aria-pressed="false" aria-label="Large lyrics font">A+</button>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    {/* ---------------- lyrics + distribution (per version) ---------------- */}
-    <div class="py-8">
-      <div data-version-block data-version-id="main">
-        <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
-          <Lyrics song={song} />
-          <aside class="lg:pt-1">
-            <h2 class="section-title !mb-4 text-xl">Line distribution</h2>
-            <LineDistribution members={song.members} sections={song.sections} />
-            <h3 class="mt-6 mb-2 text-[0.8125rem] font-bold uppercase tracking-wider text-muted">Singers</h3>
-            <ul class="space-y-1.5 text-[0.9375rem]">
-              {song.members.map((m) => {
-                const profile = getMember(m.id);
-                return (
-                  <li class="flex items-center gap-2">
-                    <span class="swatch" style={`background:${m.color}`} aria-hidden="true"></span>
-                    {profile ? (
-                      <a class="hover:text-accent" href={profile.url}>{m.name}</a>
-                    ) : (
-                      <span>{m.name}</span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-            <p class="hint mt-4">Color coding basis: studio audio. {memberNames}.</p>
-          </aside>
-        </div>
-      </div>
-
-      {song.versions.map((version) => {
-        const members = version.members ?? song.members;
-        return (
-          <div data-version-block data-version-id={version.id} hidden>
-            <div class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
-              <Lyrics song={song} version={version} />
-              <aside class="lg:pt-1">
-                <h2 class="section-title !mb-4 text-xl">Line distribution</h2>
-                <LineDistribution members={members} sections={version.sections} />
-                {(version.notes ?? []).length > 0 && (
-                  <>
-                    <h3 class="mt-6 mb-2 text-[0.8125rem] font-bold uppercase tracking-wider text-muted">Version notes</h3>
-                    <ul class="list-disc space-y-1 pl-5 text-[0.875rem] text-muted">
-                      {version.notes?.map((note) => <li>{note}</li>)}
-                    </ul>
-                  </>
-                )}
-              </aside>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-
-    {/* ---------------- credits / notes / sources ---------------- */}
-    {(song.notes.length > 0 || song.sources.length > 0 || Object.values(song.credits).some((v) => (Array.isArray(v) ? v.length : v))) && (
-      <section class="surface mt-4 p-5" aria-labelledby="credits-title">
-        <h2 id="credits-title" class="mb-3 text-xl">Credits &amp; notes</h2>
-        <dl class="grid grid-cols-1 gap-x-8 gap-y-2 text-[0.9375rem] sm:grid-cols-2">
-          {(
-            [
-              ['Lyrics', song.credits.lyrics],
-              ['Composition', song.credits.composition],
-              ['Arrangement', song.credits.arrangement],
-              ['Translation', song.credits.translation],
-              ['Romanization', song.credits.romanization],
-              ['Color coding', song.credits.colorCoding],
-            ] as [string, string[]][]
-          )
-            .filter(([, v]) => v.length > 0)
-            .map(([label, value]) => (
-              <div class="flex gap-2">
-                <dt class="shrink-0 font-semibold text-muted">{label}:</dt>
-                <dd class="m-0">{value.join(', ')}</dd>
-              </div>
-            ))}
-          {song.credits.source && (
-            <div class="flex gap-2 sm:col-span-2">
-              <dt class="shrink-0 font-semibold text-muted">Source:</dt>
-              <dd class="m-0">{song.credits.source}</dd>
-            </div>
-          )}
-        </dl>
-        {song.notes.length > 0 && (
-          <ul class="mt-4 list-disc space-y-1 pl-5 text-[0.875rem] text-muted">
-            {song.notes.map((note) => <li>{note}</li>)}
-          </ul>
-        )}
-        {song.sources.length > 0 && (
-          <ul class="mt-3 list-disc space-y-1 pl-5 text-[0.875rem] text-muted">
-            {song.sources.map((src) => <li>{src}</li>)}
-          </ul>
-        )}
-      </section>
+    <h1 class="post-title">
+      {song.title}
+      {song.status !== 'published' && <StatusBadge status={song.status} />}
+    </h1>
+    {song.nativeTitle && song.nativeTitle !== song.title && (
+      <p class="post-title-sub">{song.nativeTitle}</p>
     )}
+    {song.album && (
+      <p class="post-album">{song.album}</p>
+    )}
+    <p class="post-date">{formatDateISO(song.released)}</p>
 
-    {/* ---------------- approved translations ---------------- */}
-    {translations.length > 0 && (
-      <section class="mt-10" aria-labelledby="translations-title">
-        <div class="section-title">
-          <h2 id="translations-title" class="m-0 text-2xl">Translations</h2>
-          <a class="link text-[0.875rem]" href="/translations/">All translations</a>
-        </div>
-        <div class="mt-4 space-y-4">
-          {translations.map((t) => (
-            <article class="surface p-5">
-              <p class="flex flex-wrap items-center gap-2">
-                <span class="badge badge-accent">{(t.languageName ?? t.language).toUpperCase()}</span>
-                <span class="text-[0.9375rem] font-semibold">by {t.translator}</span>
-                {t.translatorUrl && (
-                  <a class="link text-[0.8125rem]" href={t.translatorUrl} target="_blank" rel="noopener noreferrer">profile</a>
-                )}
-              </p>
-              <pre class="mt-3 whitespace-pre-wrap font-sans text-[0.9375rem] leading-relaxed">{t.content}</pre>
-            </article>
+    <hr class="post-hr" />
+
+    {/* ---------------- songwriting credits ---------------- */}
+    <div class="credits-block">
+      {song.credits.lyrics.length > 0 && (
+        <p><span class="credits-label">Lyrics/작사</span>: {song.credits.lyrics.join(', ')}</p>
+      )}
+      {song.credits.composition.length > 0 && (
+        <p><span class="credits-label">Composer/작곡</span>: {song.credits.composition.join(', ')}</p>
+      )}
+      {song.credits.arrangement.length > 0 && (
+        <p><span class="credits-label">Arranger/편곡</span>: {song.credits.arrangement.join(', ')}</p>
+      )}
+    </div>
+
+    {versions.length > 1 && (
+      <p class="version-switch">
+        <label class="sr-only" for="version-select">Version</label>
+        <select id="version-select" data-version-select>
+          {versions.map((v) => (
+            <option value={v.id}>{v.name}</option>
           ))}
-        </div>
-      </section>
+        </select>
+      </p>
     )}
 
-    {/* ---------------- corrections for this song ---------------- */}
-    {corrections.length > 0 && (
-      <section class="mt-10" aria-labelledby="corrections-title">
-        <div class="section-title">
-          <h2 id="corrections-title" class="m-0 text-2xl">Corrections on this song</h2>
-          <a class="link text-[0.875rem]" href="/corrections/">All corrections</a>
+    {/* ---------------- cover + member names ---------------- */}
+    <figure class="cover-wrap">
+      {song.cover ? (
+        <img src={song.cover} alt={`Cover of ${song.title} by ${artist.name}`} width="320" height="320" />
+      ) : (
+        <span class="cover-fallback flex aspect-square items-center justify-center text-5xl font-bold" style="color:var(--muted)" aria-hidden="true">
+          {song.title.charAt(0)}
+        </span>
+      )}
+      <figcaption class="singer-names">
+        {song.members.map((m, i) => (
+          <>
+            <span style={`color:${memberColorValue(m.id)}`}>{m.name}</span>
+            {i < song.members.length - 1 ? ', ' : ''}
+          </>
+        ))}
+      </figcaption>
+    </figure>
+
+    <hr class="post-hr" />
+
+    {/* ---------------- lyrics: Romanization / Hangul / Translation ---------------- */}
+    <div data-version-block data-version-id="main">
+      <Lyrics song={song} block="romanization" />
+      <hr class="post-hr" />
+      <Lyrics song={song} block="original" />
+      <hr class="post-hr" />
+      <Lyrics song={song} block="translation" />
+    </div>
+
+    {song.versions.map((version) => (
+        <div data-version-block data-version-id={version.id} hidden>
+          <p class="meta mb-4 text-center">
+            {version.name}
+            {(version.notes ?? []).length > 0 && <span> — {version.notes?.join(' · ')}</span>}
+          </p>
+          <Lyrics song={song} version={version} block="romanization" />
+          <hr class="post-hr" />
+          <Lyrics song={song} version={version} block="original" />
+          <hr class="post-hr" />
+          <Lyrics song={song} version={version} block="translation" />
         </div>
-        <ul class="mt-4 space-y-2">
-          {corrections.map((cr) => (
-            <li class="surface flex flex-wrap items-center gap-2 p-3 text-[0.9375rem]">
-              <StatusBadge status={cr.status} />
-              <span class="min-w-0 flex-1 truncate">{cr.title}</span>
-              {cr.issueUrl && (
-                <a class="link text-[0.8125rem]" href={cr.issueUrl} target="_blank" rel="noopener noreferrer">issue</a>
-              )}
+    ))}
+
+    <hr class="post-hr" />
+
+    {/* ---------------- source credits (CCL "Credits") ---------------- */}
+    <div class="credits-block" style="margin-bottom:0">
+      <p><span class="credits-label">Credits</span></p>
+      {song.credits.source && <p>Korean: {song.credits.source}</p>}
+      {song.credits.romanization.length > 0 && <p>Rom: {song.credits.romanization.join(', ')}</p>}
+      {song.credits.translation.length > 0 && <p>Eng: {song.credits.translation.join(', ')}</p>}
+      {song.sources.length > 0 && (
+        <p>Info: {song.sources.join(' · ')}</p>
+      )}
+    </div>
+
+    {/* ---------------- line distribution (expandable) ---------------- */}
+    <details class="post-details">
+      <summary>Line distribution</summary>
+      <div class="post-details-body" data-version-distribution="main">
+        <LineDistribution members={song.members} sections={song.sections} />
+        <p class="hint">Color coding basis: studio audio. Adlibs are excluded by default — press “Adlibs” below to include them.</p>
+        {song.versions.map((version) => (
+          <div class="mt-4" data-version-distribution={version.id} hidden>
+            <LineDistribution members={version.members ?? song.members} sections={version.sections} />
+          </div>
+        ))}
+      </div>
+    </details>
+
+    {/* ---------------- controls ---------------- */}
+    <div class="lyrics-controls">
+      <button class="btn btn-sm" type="button" data-toggle="names" aria-pressed="true">Names</button>
+      <button class="btn btn-sm" type="button" data-toggle="adlibs" aria-pressed="false">Adlibs</button>
+      <span class="ctrl-sep" aria-hidden="true"></span>
+      <button class="btn btn-sm" type="button" data-fontsize="sm" aria-pressed="false" aria-label="Small lyrics font">A−</button>
+      <button class="btn btn-sm" type="button" data-fontsize="md" aria-pressed="true" aria-label="Medium lyrics font">A</button>
+      <button class="btn btn-sm" type="button" data-fontsize="lg" aria-pressed="false" aria-label="Large lyrics font">A+</button>
+      <span class="ctrl-sep" aria-hidden="true"></span>
+      <button class="btn btn-sm" type="button" data-copy>Copy lyrics</button>
+      {song.youtube && (
+        <a class="btn btn-sm" href={song.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+      )}
+    </div>
+
+    <hr class="post-hr" />
+
+    {/* ---------------- more songs by artist ---------------- */}
+    {byArtist.length > 0 && (
+      <section aria-labelledby="more-songs-title">
+        <h3 id="more-songs-title" class="post-subhead">More songs by {artistHead}</h3>
+        <ul class="more-songs">
+          {byArtist.map((s) => (
+            <li>
+              <a href={songUrl(s, artist)}>{artistHead} – {s.title}</a>
             </li>
           ))}
         </ul>
+        <p class="mt-2">
+          <a class="cl" href={artistUrl(artist)}>All {artist.name} lyrics →</a>
+        </p>
       </section>
     )}
 
-    {/* ---------------- related ---------------- */}
-    {related.length > 0 && (
-      <section class="mt-12" aria-labelledby="related-title">
-        <div class="section-title">
-          <h2 id="related-title" class="m-0 text-2xl">Related songs</h2>
-        </div>
-        <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {related.map((s) => <SongCard song={s} />)}
+    {/* ---------------- similar posts ---------------- */}
+    {similar.length > 0 && (
+      <section aria-labelledby="similar-title">
+        <h3 id="similar-title" class="post-subhead">Similar Posts</h3>
+        <div class="similar-grid">
+          {similar.map((s) => (
+            <SongCard song={s} variant="latest" />
+          ))}
         </div>
       </section>
     )}
+
+    <hr class="post-hr" />
+
+    {/* ---------------- comments (CCL "Leave a Reply") ---------------- */}
+    <section aria-labelledby="comments-title">
+      <h3 id="comments-title" class="post-subhead">Comments ({comments.length})</h3>
+      {comments.length > 0 ? (
+        <ul class="comments-list">
+          {comments.map((cm) => (
+            <li class="comment">
+              <p class="comment-head">
+                <span class="comment-name">{cm.name}</span>
+                <time class="meta" datetime={cm.createdAt}>{formatDate(cm.createdAt)}</time>
+              </p>
+              <p class="comment-body">{cm.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="meta mt-2">No comments yet.</p>
+      )}
+    </section>
+
+    <section class="mt-8" aria-labelledby="reply-title" id="respond">
+      <h3 id="reply-title" class="post-subhead">Leave a Reply</h3>
+      <CommunityForm kind="comment" song={song} heading="Leave a Reply" idSuffix="-reply" />
+    </section>
+
+    {/* ---------------- correction + report ---------------- */}
+    <section class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <CommunityForm kind="correction" song={song} idSuffix="-correction" />
+      <CommunityForm kind="report" song={song} idSuffix="-report" />
+    </section>
 
     {/* ---------------- prev / next ---------------- */}
     {(adjacent.newer || adjacent.older) && (
-      <nav class="mt-10 flex flex-col gap-3 sm:flex-row" aria-label="Previous and next song">
+      <nav class="post-pager" aria-label="Previous and next song">
         {adjacent.newer ? (
-          <a class="btn flex-1 justify-start" href={songUrl(adjacent.newer, getArtist(adjacent.newer.artistId))}>
-            ← {adjacent.newer.title}
+          <a href={songUrl(adjacent.newer, getArtist(adjacent.newer.artistId))}>
+            <span class="pager-label">← Newer</span>
+            {adjacent.newer.title}
           </a>
         ) : (
-          <span class="hidden flex-1 sm:block" aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         )}
         {adjacent.older ? (
-          <a class="btn flex-1 justify-end" href={songUrl(adjacent.older, getArtist(adjacent.older.artistId))}>
-            {adjacent.older.title} →
+          <a href={songUrl(adjacent.older, getArtist(adjacent.older.artistId))}>
+            <span class="pager-label">Older →</span>
+            {adjacent.older.title}
           </a>
         ) : null}
       </nav>
     )}
 
-    {/* ---------------- comments ---------------- */}
-    <section class="mt-12" aria-labelledby="comments-title">
-      <div class="section-title">
-        <h2 id="comments-title" class="m-0 text-2xl">Comments ({comments.length})</h2>
-      </div>
-      {comments.length > 0 ? (
-        <ul class="mt-4 space-y-3">
-          {comments.map((cm) => (
-            <li class="surface p-4">
-              <p class="flex flex-wrap items-baseline gap-2 text-[0.9375rem]">
-                <span class="font-semibold">{cm.name}</span>
-                <time class="meta" datetime={cm.createdAt}>{formatDate(cm.createdAt)}</time>
-              </p>
-              <p class="mt-1 whitespace-pre-wrap text-[0.9375rem]">{cm.content}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="mt-4 text-[0.9375rem] text-muted">No comments yet — be the first!</p>
-      )}
-      <div class="mt-6">
-        <CommunityForm kind="comment" song={song} />
-      </div>
-    </section>
-
-    {/* ---------------- correction + report ---------------- */}
-    <section class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <CommunityForm kind="correction" song={song} />
-      <CommunityForm kind="report" song={song} />
-    </section>
-
     <p class="meta mt-8">
       Added {formatDate(song.createdAt ?? song.released)}
       {yearOf(song.released) ? ` · released ${yearOf(song.released)}` : ''} ·
-      <a class="link" href="/pages/content-policy/">content policy</a>
+      <a class="cl" href="/pages/content-policy/">content policy</a>
     </p>
-  </div>
+  </article>
 
   <script>
     import { initSongPage } from '../../../components/scripts/song';
