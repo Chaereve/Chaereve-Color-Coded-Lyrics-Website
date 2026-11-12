@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import {
+  artistUrl,
+  getMemberSongStats,
+  getSite,
+  songUrl,
+} from '../../lib/content';
+import { formatDate, pluralize, truncate } from '../../lib/text';
+import { personJsonLd } from '../../lib/seo';
+import type { GetStaticPaths } from 'astro';
+import type { MemberProfile } from '../../lib/content';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { members } = getSite();
+  return members.map((m) => ({
+    params: { slug: m.slug },
+    props: { profile: m },
+  }));
+};
+
+const { profile } = Astro.props as { profile: MemberProfile };
+const { member, artist } = profile;
+const site = new URL(Astro.site ?? 'http://localhost:4321');
+const stats = getMemberSongStats(member.id);
+const totalLines = stats.reduce((acc, s) => acc + s.lines, 0);
+const maxLines = Math.max(1, ...stats.map((s) => s.lines));
+const description = truncate(
+  `${member.name} (${artist.name}) — ${pluralize(stats.length, 'song')} and ${pluralize(totalLines, 'line')} in the color-coded archive.`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo
+    title={`${member.name} — ${artist.name}`}
+    description={description}
+    path={profile.url}
+    jsonLd={[personJsonLd(member, artist, profile.url, site)]}
+  />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Members', url: '/members/' }, { name: member.name, url: profile.url }]} />
+
+    <header class="flex flex-col gap-6 sm:flex-row sm:items-center">
+      <span class="swatch h-16 w-16 !rounded-2xl" style={`background:${member.color}`} role="img" aria-label={`Member color of ${member.name}`}></span>
+      <div>
+        <h1 class="m-0">{member.name}</h1>
+        {member.nativeName && <p class="mt-0.5 text-muted">{member.nativeName}</p>}
+        <p class="mt-1 text-[0.9375rem] text-muted">
+          of <a class="link" href={artistUrl(artist)}>{artist.name}</a>
+          {member.role ? ` · ${member.role}` : ''}
+        </p>
+        {member.bio && <p class="mt-3 max-w-prose text-[0.9375rem]">{member.bio}</p>}
+        {member.officialColor && (
+          <p class="mt-2 text-[0.8125rem] text-muted">
+            Official color: <code>{member.officialColor}</code>
+            {member.colorSource ? ` — ${member.colorSource}` : ''}
+          </p>
+        )}
+      </div>
+    </header>
+
+    <section class="mt-10" aria-labelledby="songs-title">
+      <div class="section-title">
+        <h2 id="songs-title" class="m-0 text-2xl">
+          {pluralize(stats.length, 'song')} · {pluralize(totalLines, 'line')}
+        </h2>
+      </div>
+      <p class="hint -mt-2 mb-4">
+        Lines count every credit: a duet line adds one line to each member. Adlibs are excluded by default.
+      </p>
+      <ul class="space-y-3">
+        {stats
+          .slice()
+          .sort((a, b) => b.lines - a.lines || b.song.released.localeCompare(a.song.released))
+          .map((stat) => (
+            <li class="surface p-4">
+              <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <a class="font-semibold hover:text-accent" href={songUrl(stat.song, stat.artist)}>{stat.song.title}</a>
+                <a class="meta" href={artistUrl(stat.artist)}>{stat.artist.name}</a>
+                <time class="meta ml-auto" datetime={stat.song.released}>{formatDate(stat.song.released)}</time>
+              </div>
+              <div class="dist-row mt-3">
+                <span class="hidden text-[0.8125rem] font-medium sm:block" aria-hidden="true">{member.name}</span>
+                <div class="dist-bar" role="img" aria-label={`${stat.lines} lines in ${stat.song.title}`}>
+                  <div class="dist-fill" style={`width:${stat.lines === 0 ? 0 : Math.max(3, (stat.lines / maxLines) * 100)}%; background:${member.color}`}></div>
+                </div>
+                <span class="whitespace-nowrap text-[0.8125rem] tabular-nums text-muted">
+                  {stat.lines} lines · {stat.percent}% of the song
+                </span>
+              </div>
+            </li>
+          ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

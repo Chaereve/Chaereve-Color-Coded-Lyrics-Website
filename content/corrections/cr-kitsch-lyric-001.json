@@ -1,0 +1,15 @@
+{
+  "id": "cr-kitsch-lyric-001",
+  "songId": "ive-kitsch",
+  "songUrl": "/lyrics/ive/kitsch/",
+  "type": "lyrics",
+  "title": "Romanization check: [Rap] “가치는 두 배가 돼”",
+  "issue": "The romanization “gachineun du baega dwae” may be missing a vowel; the studio audio sounds closer to “gachineun du baega dwae” with a long “a”.",
+  "excerpt": "가치는 두 배가 돼",
+  "suggestion": "Use “gachineun du baega dwae” with a note that it is a demo romanization.",
+  "evidence": "Studio audio (demo), 1:47.",
+  "reporter": "A listener (placeholder)",
+  "status": "open",
+  "createdAt": "2026-11-02",
+  "issueUrl": "https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO/issues/101"
+}

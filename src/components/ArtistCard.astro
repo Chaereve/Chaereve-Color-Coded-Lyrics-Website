@@ -1,0 +1,41 @@
+---
+import { artistUrl, getSongsByArtist } from '../lib/content';
+import { pluralize } from '../lib/text';
+import type { Artist } from '../lib/types';
+
+interface Props {
+  artist: Artist;
+}
+
+const { artist } = Astro.props;
+const songs = getSongsByArtist(artist.id);
+---
+
+<a class="card group block overflow-hidden" href={artistUrl(artist)}>
+  <div class="relative aspect-square w-full overflow-hidden bg-surface">
+    {artist.cover ? (
+      <img
+        src={artist.cover}
+        alt={`Cover of ${artist.name}`}
+        loading="lazy"
+        width="900"
+        height="900"
+        class="h-full w-full object-cover transition-transform duration-180 group-hover:scale-[1.02]"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center text-4xl font-bold text-muted" aria-hidden="true">
+        {artist.name.charAt(0)}
+      </div>
+    )}
+  </div>
+  <div class="p-3.5">
+    <h3 class="truncate font-semibold text-[0.9375rem]">{artist.name}</h3>
+    <p class="mt-0.5 text-[0.8125rem] capitalize text-muted">
+      {artist.type}
+      <span aria-hidden="true" class="mx-1.5 text-line">·</span>
+      {pluralize(artist.members.length, 'member')}
+      <span aria-hidden="true" class="mx-1.5 text-line">·</span>
+      {pluralize(songs.length, 'song')}
+    </p>
+  </div>
+</a>

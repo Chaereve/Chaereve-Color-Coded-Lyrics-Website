@@ -1,0 +1,24 @@
+# Chaereve — public forms worker (sample config; placeholders only).
+#
+# Submissions (correction / comment / translation / report) become GitHub
+# issues. No database is used.
+#
+# Deploy (free tier):
+#   cd workers/forms
+#   npm install
+#   wrangler secret put GITHUB_TOKEN          # fine-grained PAT, "Issues: write"
+#   wrangler secret put GITHUB_REPO           # e.g. YOUR_GITHUB_USERNAME/YOUR_REPO
+#   wrangler secret put TURNSTILE_SECRET_KEY  # Cloudflare Turnstile secret key
+#   wrangler deploy
+#
+# Then in the site repo set (see .env.example):
+#   PUBLIC_FORMS_ENDPOINT=https://YOUR_FORMS_WORKER_DOMAIN
+#   PUBLIC_TURNSTILE_SITE_KEY=YOUR_TURNSTILE_SITE_KEY
+
+name = "chaereve-forms"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+
+[vars]
+# Origin of the website (CORS allow-list). Replace YOUR_DOMAIN.
+ALLOWED_ORIGIN = "https://YOUR_DOMAIN"

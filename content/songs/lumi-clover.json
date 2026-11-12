@@ -1,0 +1,300 @@
+{
+  "id": "lumi-clover",
+  "title": "Clover",
+  "nativeTitle": "클로버",
+  "artistId": "lumi",
+  "slug": "clover",
+  "status": "draft",
+  "released": "2026-10-20",
+  "createdAt": "2026-11-10",
+  "cover": "/uploads/cover-lumi-clover.svg",
+  "language": "ko",
+  "album": "First Light EP",
+  "categories": [
+    "indie-pop"
+  ],
+  "tags": [
+    "ballad"
+  ],
+  "authorId": "team-chaereve",
+  "credits": {
+    "lyrics": [
+      "Sol (fictional)"
+    ],
+    "composition": [
+      "LUMI (fictional)"
+    ],
+    "arrangement": [
+      "LUMI (fictional)"
+    ],
+    "translation": [],
+    "romanization": [
+      "Team Chaereve"
+    ],
+    "colorCoding": [
+      "Team Chaereve"
+    ],
+    "source": "Fictional song — sample data for development."
+  },
+  "members": [
+    {
+      "id": "haein",
+      "name": "Haein",
+      "color": "#f472b6"
+    },
+    {
+      "id": "mira",
+      "name": "Mira",
+      "color": "#38bdf8"
+    },
+    {
+      "id": "tayo",
+      "name": "Tayo",
+      "color": "#fbbf24"
+    },
+    {
+      "id": "sol",
+      "name": "Sol",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "riri",
+      "name": "Riri",
+      "color": "#34d399"
+    }
+  ],
+  "sections": [
+    {
+      "label": "Intro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "",
+          "type": "instrumental"
+        }
+      ]
+    },
+    {
+      "label": "Verse 1",
+      "lines": [
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "마당 구석의 네 잎 클로버",
+          "romanization": "madang guseok-ui ne ip keurobeo",
+          "translation": "A four-leaf clover in the corner of the yard"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "바람결에 살짝 흔들려",
+          "romanization": "baramgyeole sasang hundeullyeo",
+          "translation": "Swaying softly in the breeze"
+        },
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "소원을 말하라는 듯이",
+          "romanization": "soworeul malharaneun deus-i",
+          "translation": "As if asking me to make a wish"
+        },
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "조용히 고개를 숙여",
+          "romanization": "joyonghi gogaereul sudyeo",
+          "translation": "Quietly bowing its head"
+        }
+      ]
+    },
+    {
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "memberIds": [
+            "tayo"
+          ],
+          "text": "찾게 된 건 우연이 아니야",
+          "romanization": "chagge doen geon uyeoni aniya",
+          "translation": "Finding it was not a coincidence"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "네가 남긴 말 때문이야",
+          "romanization": "nega namgin mal daemuniya",
+          "translation": "It is because of the words you left"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "작은 행운을 찾아 나서면",
+          "romanization": "jageun haenguneul chaja nasemyeon",
+          "translation": "Setting out to find a small luck"
+        },
+        {
+          "memberIds": [],
+          "text": "마음은 벌써 웃고 있어",
+          "romanization": "maeumeun beolseo utgo isseo",
+          "translation": "My heart is already smiling",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "네 잎 클로버 하나면",
+          "romanization": "ne ip keurobeo hanamyen",
+          "translation": "With just one four-leaf clover"
+        },
+        {
+          "memberIds": [],
+          "text": "하루가 든든해져",
+          "romanization": "haruga deundeonhae-jeo",
+          "translation": "The day feels secure",
+          "type": "all"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "Lucky~",
+          "translation": "Lucky~",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "lines": [
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "아침 이슬 머금은 잎사귀",
+          "romanization": "achim isil meogeun ip-sagui",
+          "translation": "A leaf carrying the morning dew"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "햇살이 낙서를 해",
+          "romanization": "haetsari nakseoreul hae",
+          "translation": "Sunlight doodling on it"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "소원은 너무 크지 않아도",
+          "romanization": "sowoneun neomu keuji antado",
+          "translation": "Even if the wish is not very big"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "전해지는 기분이 좋아",
+          "romanization": "jeonhae-jineun gibuni jo-ya",
+          "translation": "It feels good to convey it"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "작은 행운을 찾아 나서면",
+          "romanization": "jageun haenguneul chaja nasemyeon",
+          "translation": "Setting out to find a small luck"
+        },
+        {
+          "memberIds": [],
+          "text": "마음은 벌써 웃고 있어",
+          "romanization": "maeumeun beolseo utgo isseo",
+          "translation": "My heart is already smiling",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "네 잎 클로버 하나면",
+          "romanization": "ne ip keurobeo hanamyen",
+          "translation": "With just one four-leaf clover"
+        },
+        {
+          "memberIds": [],
+          "text": "하루가 든든해져",
+          "romanization": "haruga deundeonhae-jeo",
+          "translation": "The day feels secure",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Bridge",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "작은 약속들이 모여",
+          "romanization": "jageun yaksokdeul-i mwoyeo",
+          "translation": "The small promises gather"
+        },
+        {
+          "memberIds": [],
+          "text": "우리의 행운이 돼",
+          "romanization": "urireui haenguneui dwae",
+          "translation": "And become our luck",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Final Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "작은 행운을 찾아 나서면",
+          "romanization": "jageun haenguneul chaja nasemyeon",
+          "translation": "Setting out to find a small luck"
+        },
+        {
+          "memberIds": [],
+          "text": "마음은 벌써 웃고 있어",
+          "romanization": "maeumeun beolseo utgo isseo",
+          "translation": "My heart is already smiling",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "네 잎 클로버 하나면",
+          "romanization": "ne ip keurobeo hanamyen",
+          "translation": "With just one four-leaf clover"
+        },
+        {
+          "memberIds": [],
+          "text": "하루가 든든해져",
+          "romanization": "haruga deundeonhae-jeo",
+          "translation": "The day feels secure",
+          "type": "all"
+        }
+      ]
+    }
+  ],
+  "versions": [],
+  "notes": [
+    "Fictional song (sample data), status draft — hidden unless SHOW_DRAFTS=true."
+  ],
+  "sources": [
+    "Fictional — sample data."
+  ]
+}

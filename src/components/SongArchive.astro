@@ -1,0 +1,30 @@
+---
+import type { Page } from '../lib/paginate';
+import type { Song } from '../lib/types';
+import SongCard from './SongCard.astro';
+import Pagination from './Pagination.astro';
+
+interface Props {
+  /** All visible songs, newest first. */
+  all: Song[];
+  /** The current page (page.items is what gets rendered). */
+  page: Page<Song>;
+  perPage: number;
+}
+
+const { all, page, perPage } = Astro.props;
+const pages = Math.max(1, Math.ceil(all.length / perPage));
+const adjusted: Page<Song> = {
+  ...page,
+  url: page.page <= 1 ? '/lyrics/' : `/page/${page.page}/`,
+  firstUrl: '/lyrics/',
+  prevUrl: page.page <= 1 ? undefined : page.page === 2 ? '/lyrics/' : `/page/${page.page - 1}/`,
+  nextUrl: page.page >= pages ? undefined : `/page/${page.page + 1}/`,
+};
+---
+
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+  {page.items.map((song) => <SongCard song={song} />)}
+</div>
+{page.items.length === 0 && <p class="text-[0.9375rem] text-muted">No songs here yet.</p>}
+<Pagination page={adjusted} label="lyrics" />

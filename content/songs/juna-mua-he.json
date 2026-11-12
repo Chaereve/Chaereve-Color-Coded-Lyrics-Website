@@ -1,0 +1,299 @@
+{
+  "id": "juna-mua-he",
+  "title": "Mùa hè (ft. LUMI)",
+  "nativeTitle": "Mùa hè",
+  "artistId": "juna",
+  "slug": "mua-he",
+  "status": "in_review",
+  "released": "2026-05-22",
+  "createdAt": "2026-10-28",
+  "cover": "/uploads/cover-juna-mua-he.svg",
+  "language": "vi",
+  "album": "Mùa hè (single)",
+  "categories": [
+    "indie-pop",
+    "ballad"
+  ],
+  "tags": [
+    "ballad",
+    "collab"
+  ],
+  "authorId": "kim-jihye",
+  "credits": {
+    "lyrics": [
+      "Juna (fictional)"
+    ],
+    "composition": [
+      "Juna (fictional)"
+    ],
+    "arrangement": [
+      "Juna, LUMI (fictional)"
+    ],
+    "translation": [],
+    "romanization": [],
+    "colorCoding": [
+      "Team Chaereve"
+    ],
+    "source": "Fictional song — sample data for development."
+  },
+  "members": [
+    {
+      "id": "juna",
+      "name": "Juna",
+      "color": "#fb7185"
+    },
+    {
+      "id": "haein",
+      "name": "Haein",
+      "color": "#f472b6"
+    },
+    {
+      "id": "mira",
+      "name": "Mira",
+      "color": "#38bdf8"
+    },
+    {
+      "id": "tayo",
+      "name": "Tayo",
+      "color": "#fbbf24"
+    },
+    {
+      "id": "sol",
+      "name": "Sol",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "riri",
+      "name": "Riri",
+      "color": "#34d399"
+    }
+  ],
+  "sections": [
+    {
+      "label": "Verse 1",
+      "lines": [
+        {
+          "memberIds": [
+            "juna"
+          ],
+          "text": "Gió chiều thổi qua con đường quê",
+          "translation": "The afternoon wind blows through the country road"
+        },
+        {
+          "memberIds": [
+            "juna"
+          ],
+          "text": "Bóng hoàng hôn rơi thật dịu dàng",
+          "translation": "The evening shadow falls gently"
+        },
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "Tiếng ve kêu cuối của mùa thu",
+          "translation": "The last cicada song of autumn"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "Mây trắng bay qua bầu trời cao",
+          "translation": "White clouds drift across the high sky"
+        },
+        {
+          "memberIds": [
+            "tayo"
+          ],
+          "text": "Nắng tắt dần trong lòng phố nhỏ",
+          "translation": "Sunlight fades in the heart of the small town"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "Em ngồi lại dưới tán cây già",
+          "translation": "I sit beneath the old tree’s canopy"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Mùa hè ơi, đừng vội đi",
+          "translation": "Summer, please do not go in a hurry",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Để em giữ lại chút sáng màu",
+          "translation": "Let me keep a little of the color",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Những ngày xanh như lá non",
+          "translation": "Days green as young leaves",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "In sâu trong ký ức em",
+          "translation": "Etched deep in my memory",
+          "type": "all"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "He he~",
+          "translation": "He he~",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "lines": [
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "Con đường xưa rợp bóng mát",
+          "translation": "The old road covered in shade"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "Chuông xe đạp rung lên thật khẽ",
+          "translation": "The bicycle bell rings softly"
+        },
+        {
+          "memberIds": [
+            "tayo"
+          ],
+          "text": "Cơn mưa chiều chợt ghé qua",
+          "translation": "The afternoon rain suddenly stops by"
+        },
+        {
+          "memberIds": [
+            "tayo"
+          ],
+          "text": "Để lại mùi đất thật gần",
+          "translation": "Leaving the scent of the earth so close"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Mùa hè ơi, đừng vội đi",
+          "translation": "Summer, please do not go in a hurry",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Để em giữ lại chút sáng màu",
+          "translation": "Let me keep a little of the color",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Những ngày xanh như lá non",
+          "translation": "Days green as young leaves",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "In sâu trong ký ức em",
+          "translation": "Etched deep in my memory",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Bridge",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Rồi mùa hè cũng sẽ qua",
+          "translation": "Then summer will also pass",
+          "type": "all"
+        },
+        {
+          "memberIds": [
+            "juna",
+            "haein"
+          ],
+          "text": "Cùng nhau nắm tay đi tiếp",
+          "translation": "We hold hands and keep walking together",
+          "note": "Two-member line without | split — rendered with the gradient fallback."
+        },
+        {
+          "memberIds": [
+            "juna"
+          ],
+          "text": "Cảm ơn một mùa hè đẹp thế",
+          "translation": "Thank you for such a beautiful summer",
+          "type": "spoken"
+        }
+      ]
+    },
+    {
+      "label": "Final Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Mùa hè ơi, đừng vội đi",
+          "translation": "Summer, please do not go in a hurry",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Để em giữ lại chút sáng màu",
+          "translation": "Let me keep a little of the color",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Những ngày xanh như lá non",
+          "translation": "Days green as young leaves",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "In sâu trong ký ức em",
+          "translation": "Etched deep in my memory",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Outro",
+      "lines": [
+        {
+          "memberIds": [
+            "juna"
+          ],
+          "text": "Mùa hè... còn ở lại đây",
+          "translation": "Summer... stays here",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    }
+  ],
+  "versions": [],
+  "notes": [
+    "Fictional song (sample data), status in_review — visible only in dev / with SHOW_DRAFTS=true.",
+    "Vietnamese is the original language: the Romanization tab falls back to the original text."
+  ],
+  "sources": [
+    "Fictional — sample data."
+  ]
+}

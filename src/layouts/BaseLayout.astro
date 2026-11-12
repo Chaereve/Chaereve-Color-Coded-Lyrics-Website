@@ -1,0 +1,48 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+import { getSite } from '../lib/content';
+
+const settings = getSite().settings;
+---
+
+<!doctype html>
+<html lang={settings.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Exactly two web font families (Inter covers Latin + Vietnamese;
+         Noto Sans KR covers Hangul; JP/SC glyphs fall back to system fonts). -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+    />
+    <script is:inline>
+      // Set the theme before first paint to avoid a flash.
+      (function () {
+        try {
+          var stored = localStorage.getItem('chaereve-theme');
+          var dark =
+            stored === 'dark' ||
+            (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-dvh flex-col font-sans antialiased">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

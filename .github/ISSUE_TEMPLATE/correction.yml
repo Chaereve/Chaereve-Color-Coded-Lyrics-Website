@@ -1,0 +1,40 @@
+name: "Correction (lyrics / colors / credits)"
+description: Report an error in a song's lyrics, color coding, credits, romanization or translation.
+title: "Correction: "
+labels: [correction]
+body:
+  - type: input
+    id: song
+    attributes:
+      label: Song (URL)
+      description: Link to the song page.
+      placeholder: https://YOUR_DOMAIN/lyrics/artist/song/
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section / line
+      description: e.g. "[Chorus], 2nd line"
+    validations:
+      required: false
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong?
+      placeholder: Describe the problem with the lyrics, colors, credits…
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix
+    validations:
+      required: false
+  - type: input
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Timestamp in the MV, official source link…
+    validations:
+      required: false

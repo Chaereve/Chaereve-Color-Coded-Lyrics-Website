@@ -1,0 +1,61 @@
+---
+/**
+ * Line distribution as horizontal bars (never a pie chart).
+ *
+ * Renders two variants — the default (adlibs excluded) and the adlib-inclusive
+ * one — so the toolbar toggle can switch between them without recomputing.
+ * Must live inside the same `.vcss-*` scope as the lyrics so it can use the
+ * member color variables.
+ */
+import { computeDistribution, type Distribution } from '../lib/distribution';
+import { memberColorValue } from '../lib/lyrics';
+import { escapeHtml, pluralize } from '../lib/text';
+import type { LyricSection, SongMember } from '../lib/types';
+
+interface Props {
+  members: SongMember[];
+  sections: LyricSection[];
+}
+
+const { members, sections } = Astro.props;
+const def = computeDistribution(members, sections, { includeAdlibs: false });
+const withAdlibs = computeDistribution(members, sections, { includeAdlibs: true });
+
+function barRow(name: string, lines: number, max: number, color: string, percent?: number, sub?: string): string {
+  const width = lines === 0 ? 0 : Math.max(3, (lines / max) * 100);
+  const label = percent === undefined ? `${name}: ${lines} lines` : `${name}: ${lines} lines, ${percent}%`;
+  return `<div class="dist-row">
+    <span class="flex min-w-0 items-center gap-2 text-[0.8125rem] font-medium">
+      <span class="swatch" style="background:${color}" aria-hidden="true"></span>
+      <span class="truncate">${escapeHtml(name)}</span>
+    </span>
+    <div class="dist-bar" role="img" aria-label="${escapeHtml(label)}">
+      <div class="dist-fill" style="width:${width}%; background:${color}"></div>
+    </div>
+    <span class="whitespace-nowrap text-[0.8125rem] tabular-nums text-muted">${lines}${sub ?? ''}</span>
+  </div>`;
+}
+
+function distVariant(dist: Distribution): string {
+  const max = Math.max(1, ...dist.rows.map((r) => r.lines));
+  const rows = dist.rows
+    .map((row) => barRow(row.name, row.lines, max, memberColorValue(row.memberId), row.percent, ` · ${row.percent}%`))
+    .join('\n');
+  const all = barRow('All (ensemble)', dist.allLines, max, 'var(--muted)');
+  const summary = `<p class="hint">
+    ${dist.countedLines} ${dist.countedLines === 1 ? 'line' : 'lines'} counted · ${pluralize(dist.totalCredits, 'member credit')} ·
+    ${pluralize(dist.instrumentalLines, 'instrumental line')}
+    ${dist.includeAdlibs ? ' · adlibs included' : ' · adlibs excluded (toggle to include)'}
+    ${dist.unknownMemberIds.length > 0 ? ` · ${dist.unknownMemberIds.length} unknown member id(s)` : ''}
+  </p>`;
+  return `${rows}\n${all}\n${summary}`;
+}
+
+const defHtml = distVariant(def);
+const adlibHtml = distVariant(withAdlibs);
+---
+
+<div class="dist">
+  <div class="dist-variant" data-dist-variant="default" set:html={defHtml}></div>
+  <div class="dist-variant" data-dist-variant="adlibs" hidden set:html={adlibHtml}></div>
+</div>

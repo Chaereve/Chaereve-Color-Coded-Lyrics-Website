@@ -1,0 +1,14 @@
+{
+  "id": "cr-cr-credits-001",
+  "songId": "ive-crumbs",
+  "songUrl": "/lyrics/ive/crumbs/",
+  "type": "credits",
+  "title": "Placeholder credits replaced",
+  "issue": "credits.source was empty in the first draft of the sample.",
+  "suggestion": "Add a source note clarifying the credits are placeholders.",
+  "status": "accepted",
+  "createdAt": "2026-09-10",
+  "resolvedAt": "2026-09-14",
+  "issueUrl": "https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO/issues/88",
+  "resolution": "Placeholder source note added to content/songs/ive-crumbs.json (demo workflow)."
+}

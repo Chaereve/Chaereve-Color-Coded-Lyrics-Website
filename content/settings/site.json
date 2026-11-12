@@ -1,0 +1,19 @@
+{
+  "name": "Chaereve Lyrics",
+  "tagline": "Color-coded lyrics with line distribution",
+  "description": "Color-coded lyrics, romanization, translations and line distribution for K-pop and beyond. Sample data: all lyrics are original placeholders.",
+  "locale": "en",
+  "ogImage": "/uploads/og-default.svg",
+  "trendingSongIds": [
+    "ive-crumbs",
+    "lumi-neon-rain",
+    "lumi-first-light"
+  ],
+  "popularArtistIds": [
+    "ive",
+    "lumi"
+  ],
+  "songsPerPage": 9,
+  "socials": [],
+  "footerNote": "Demo content: every lyric on this site is an original placeholder written for development. Not affiliated with any artist, group or label."
+}

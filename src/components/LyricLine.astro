@@ -1,0 +1,78 @@
+---
+/**
+ * One lyric line, rendered as colored TEXT only (no per-line background,
+ * border or card).
+ *
+ * - 1 member  → the whole line in that member's color.
+ * - N members → the text is split on `|` (same order as memberIds) into one
+ *   colored part per member; without a matching split the line uses a
+ *   gradient fallback through the member colors.
+ * - no members → neutral "All" / ensemble color.
+ *
+ * The original, romanization and translation are each their own `.lyric-text`
+ * element; the `.lyrics` container's `data-view` decides which one shows.
+ */
+import { lineText, memberColorValue, renderSegments, resolveLine } from '../lib/lyrics';
+import type { LyricLine as LyricLineModel, SongMember } from '../lib/types';
+
+interface Props {
+  line: LyricLineModel;
+  /** The version's member roster (song.members, or the version override). */
+  members: SongMember[];
+  /** BCP-47 code of the original language (sets lang for correct line breaking). */
+  lang?: string;
+}
+
+const { line, members, lang } = Astro.props;
+const roster = new Map(members.map((m) => [m.id, m]));
+const resolved = resolveLine(line, roster);
+const isInstrumental = line.type === 'instrumental';
+
+const views: { key: 'original' | 'romanization' | 'translation'; text: string }[] = [
+  { key: 'original', text: lineText(line, 'original') },
+  { key: 'romanization', text: lineText(line, 'romanization') },
+  { key: 'translation', text: lineText(line, 'translation') },
+];
+
+const typeClass = `type-${line.type}`;
+---
+
+<div class:list={['lyric-line', typeClass, line.type === 'adlib' && 'line-adlib']}>
+  {resolved.isAll ? (
+    <div class="member-names">
+      <span class="member-name text-muted">All</span>
+    </div>
+  ) : resolved.members.length > 0 ? (
+    <div class="member-names">
+      {resolved.members.map((m) => (
+        <span class="member-name" style={`color:${memberColorValue(m.id)}`}>{m.name}</span>
+      ))}
+    </div>
+  ) : null}
+
+  {isInstrumental ? (
+    <p class="lyric-text lt-original">{line.text || 'Instrumental'}</p>
+  ) : (
+    views.map((v) => (
+      <p class:list={['lyric-text', `lt-${v.key}`]} lang={lang}>
+        {v.text === '' ? (
+          <span class="line-missing">{v.key === 'translation' ? '(no translation yet)' : '(missing)'}</span>
+        ) : (
+          renderSegments(v.text, resolved.members).map((seg) =>
+            seg.gradient ? (
+              <span class="lyric-gradient" style={seg.style}>{seg.text}</span>
+            ) : (
+              <span class="lyric-seg" style={seg.style}>{seg.text}</span>
+            )
+          )
+        )}
+      </p>
+    ))
+  )}
+
+  {line.note && (
+    <p class="mt-1 text-[0.75rem] italic text-muted" title={line.note}>
+      <span aria-hidden="true">ℹ</span> {line.note}
+    </p>
+  )}
+</div>

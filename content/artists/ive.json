@@ -1,0 +1,86 @@
+{
+  "id": "ive",
+  "name": "IVE",
+  "nativeName": "아이브",
+  "romanized": "A-i-ve",
+  "slug": "ive",
+  "type": "group",
+  "description": "IVE is a six-member K-pop group. This artist page is SAMPLE DATA: member colors are a demo palette (see colorSource) and every lyric on this site is an original placeholder written for development — it is not affiliated with the real artist or label.",
+  "cover": "/uploads/cover-ive.svg",
+  "debut": "2021-12-01",
+  "label": "Demo label (placeholder)",
+  "socials": [
+    {
+      "label": "Official site (placeholder)",
+      "url": "https://example.com"
+    }
+  ],
+  "members": [
+    {
+      "id": "wonyoung",
+      "name": "Wonyoung",
+      "nativeName": "장원영",
+      "romanized": "Jang Wonyoung",
+      "color": "#ffb7c5",
+      "officialColor": "#ffb7c5",
+      "colorSource": "Demo palette — replace with official/fandom colors",
+      "role": "Vocalist",
+      "bio": "Sample profile. Replace with a real, sourced bio."
+    },
+    {
+      "id": "gacrux",
+      "name": "Gaeul",
+      "nativeName": "안규린",
+      "romanized": "Gaeul (An Gyurin)",
+      "color": "#9cc9ff",
+      "officialColor": "#9cc9ff",
+      "colorSource": "Demo palette — replace with official/fandom colors",
+      "role": "Rapper",
+      "bio": "Sample profile. Replace with a real, sourced bio."
+    },
+    {
+      "id": "ley",
+      "name": "Ley",
+      "nativeName": "임지연",
+      "romanized": "Ley (Lim Jiyeon)",
+      "color": "#ffd98e",
+      "officialColor": "#ffd98e",
+      "colorSource": "Demo palette — replace with official/fandom colors",
+      "role": "Vocalist",
+      "bio": "Sample profile. Replace with a real, sourced bio."
+    },
+    {
+      "id": "jisoo",
+      "name": "Jisoo",
+      "nativeName": "이지수",
+      "romanized": "Lee Jisoo",
+      "color": "#b69cff",
+      "officialColor": "#b69cff",
+      "colorSource": "Demo palette — replace with official/fandom colors",
+      "role": "Rapper",
+      "bio": "Sample profile. Replace with a real, sourced bio."
+    },
+    {
+      "id": "liz",
+      "name": "Liz",
+      "nativeName": "안유진",
+      "romanized": "Liz (An Yujin)",
+      "color": "#7fd1ae",
+      "officialColor": "#7fd1ae",
+      "colorSource": "Demo palette — replace with official/fandom colors",
+      "role": "Vocalist",
+      "bio": "Sample profile. Replace with a real, sourced bio."
+    },
+    {
+      "id": "eunchae",
+      "name": "Eunchae",
+      "nativeName": "이혜빈",
+      "romanized": "Eunchae (Lee Haebin)",
+      "color": "#ff9e9e",
+      "officialColor": "#ff9e9e",
+      "colorSource": "Demo palette — replace with official/fandom colors",
+      "role": "Vocalist",
+      "bio": "Sample profile. Replace with a real, sourced bio."
+    }
+  ]
+}

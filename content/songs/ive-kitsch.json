@@ -1,0 +1,317 @@
+{
+  "id": "ive-kitsch",
+  "title": "Kitsch (DEMO LYRICS)",
+  "nativeTitle": "키츠 (DEMO LYRICS)",
+  "artistId": "ive",
+  "slug": "kitsch",
+  "status": "published",
+  "released": "2024-08-30",
+  "createdAt": "2026-09-18",
+  "cover": "/uploads/cover-ive-kitsch.svg",
+  "language": "ko",
+  "album": "IVE SWITCH",
+  "categories": [
+    "kpop"
+  ],
+  "tags": [
+    "girl-group",
+    "rap"
+  ],
+  "authorId": "team-chaereve",
+  "credits": {
+    "lyrics": [
+      "Demo Writers (placeholder)"
+    ],
+    "composition": [
+      "Demo Writers (placeholder)"
+    ],
+    "arrangement": [
+      "Demo Writers (placeholder)"
+    ],
+    "translation": [
+      "Spanish: Lucía Fernández (placeholder)"
+    ],
+    "romanization": [
+      "Team Chaereve"
+    ],
+    "colorCoding": [
+      "Team Chaereve"
+    ],
+    "source": "Sample data — all credits are placeholders."
+  },
+  "members": [
+    {
+      "id": "wonyoung",
+      "name": "Wonyoung",
+      "color": "#ffb7c5"
+    },
+    {
+      "id": "gacrux",
+      "name": "Gaeul",
+      "color": "#9cc9ff"
+    },
+    {
+      "id": "ley",
+      "name": "Ley",
+      "color": "#ffd98e"
+    },
+    {
+      "id": "jisoo",
+      "name": "Jisoo",
+      "color": "#b69cff"
+    },
+    {
+      "id": "liz",
+      "name": "Liz",
+      "color": "#7fd1ae"
+    },
+    {
+      "id": "eunchae",
+      "name": "Eunchae",
+      "color": "#ff9e9e"
+    }
+  ],
+  "sections": [
+    {
+      "label": "Intro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "",
+          "type": "instrumental"
+        }
+      ]
+    },
+    {
+      "label": "Verse 1",
+      "lines": [
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "화려한 말버릇은 버렸어",
+          "romanization": "hwaryahan malbeoruteun beoryeosseo",
+          "translation": "I've dropped my flashy way of talking"
+        },
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "진짜 모습으로 서 있어",
+          "romanization": "jinjja moseubeuro seo isseo",
+          "translation": "I stand here as the real me"
+        },
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "네 시선이 나를 가늠해도",
+          "romanization": "ne siseoni nareul gaeunhaedo",
+          "translation": "Even if your gaze tries to read me"
+        }
+      ]
+    },
+    {
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "memberIds": [
+            "wonyoung"
+          ],
+          "text": "가면을 벗으면",
+          "romanization": "gamyeoneul beodeureumyeon",
+          "translation": "If you take off the mask"
+        },
+        {
+          "memberIds": [],
+          "text": "더 빛나는 얼굴이 보여",
+          "romanization": "deo bttinneun eolguri boyo",
+          "translation": "You see a brighter face",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Kitsch isn't hiding, it's glowing",
+          "translation": "Kitsch isn't hiding, it's glowing",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "꾸밈없는 진심이",
+          "romanization": "kkumeomneun jinsimi",
+          "translation": "A heart without adornment"
+        },
+        {
+          "memberIds": [],
+          "text": "가장 빛나는 보석이야",
+          "romanization": "gajang btinnaneun Boseogiya",
+          "translation": "Is the brightest jewel",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "So let me shine as I am",
+          "translation": "So let me shine as I am",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Rap",
+      "lines": [
+        {
+          "memberIds": [
+            "jisoo"
+          ],
+          "text": "말투는 담백하게",
+          "romanization": "maltuneun dambaek-hage",
+          "translation": "Keep the words plain"
+        },
+        {
+          "memberIds": [
+            "jisoo"
+          ],
+          "text": "가치는 두 배가 돼",
+          "romanization": "gachineun du baega dwae",
+          "translation": "The value doubles"
+        },
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "반짝이는 건 속이 아니라",
+          "romanization": "bandjagineun geon so-gi aniraya",
+          "translation": "What glitters is not the inside"
+        },
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "마음 깊이 박힌 빛이야",
+          "romanization": "maeum kkeugi pakhin bichiya",
+          "translation": "It's the light etched deep in the heart"
+        }
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "lines": [
+        {
+          "memberIds": [
+            "eunchae"
+          ],
+          "text": "거울 앞이 두렵지 않아",
+          "romanization": "geoul ap-i duryeopji anha",
+          "translation": "I'm not afraid of the mirror"
+        },
+        {
+          "memberIds": [
+            "eunchae"
+          ],
+          "text": "진짜를 보여줄 테니까",
+          "romanization": "jinjgameul boyojul tenikka",
+          "translation": "I am going to show you the real me"
+        },
+        {
+          "memberIds": [
+            "gacrux"
+          ],
+          "text": "하루 한 스푼의 진심",
+          "romanization": "haru han seupuneui jinsim",
+          "translation": "One spoonful of sincerity a day"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Kitsch isn't hiding, it's glowing",
+          "translation": "Kitsch isn't hiding, it's glowing",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "꾸밈없는 진심이",
+          "romanization": "kkumeomneun jinsimi",
+          "translation": "A heart without adornment"
+        },
+        {
+          "memberIds": [],
+          "text": "가장 빛나는 보석이야",
+          "romanization": "gajang btinnaneun Boseogiya",
+          "translation": "Is the brightest jewel",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "So let me shine as I am",
+          "translation": "So let me shine as I am",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Bridge",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "꾸며진 밤보다",
+          "romanization": "kkumyeojin bamdora",
+          "translation": "Rather than a made-up night"
+        },
+        {
+          "memberIds": [],
+          "text": "맑은 아침이 낫지",
+          "romanization": "mareun achimi natji",
+          "translation": "A clear morning is better",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Final Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Kitsch isn't hiding, it's glowing",
+          "translation": "Kitsch isn't hiding, it's glowing",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "꾸밈없는 진심이",
+          "romanization": "kkumeomneun jinsimi",
+          "translation": "A heart without adornment"
+        },
+        {
+          "memberIds": [],
+          "text": "가장 빛나는 보석이야",
+          "romanization": "gajang btinnaneun Boseogiya",
+          "translation": "Is the brightest jewel",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "So let me shine as I am",
+          "translation": "So let me shine as I am",
+          "type": "all"
+        }
+      ]
+    }
+  ],
+  "versions": [],
+  "notes": [
+    "DEMO DATA: all lyric lines are original placeholders. The title is kept for URL parity with the sample schema.",
+    "Color coding basis: studio audio (demo)."
+  ],
+  "sources": [
+    "Sample sources — replace before publishing."
+  ]
+}

@@ -1,0 +1,34 @@
+---
+import type { Page } from '../lib/paginate';
+
+interface Props {
+  page: Page<unknown>;
+  /** Accessible label, e.g. "Lyrics pages". */
+  label?: string;
+}
+
+const { page, label = 'pages' } = Astro.props;
+if (page.totalPages <= 1) return;
+---
+
+<nav class="mt-8 flex items-center justify-between gap-4" aria-label={`Pagination (${label})`}>
+  {page.prevUrl ? (
+    <a class="btn btn-sm" href={page.prevUrl}>
+      <span aria-hidden="true">←</span> Newer
+    </a>
+  ) : (
+    <span class="btn btn-sm" aria-disabled="true">
+      <span aria-hidden="true">←</span> Newer
+    </span>
+  )}
+  <span class="meta text-center">Page {page.page} of {page.totalPages} · {page.totalItems} songs</span>
+  {page.nextUrl ? (
+    <a class="btn btn-sm" href={page.nextUrl}>
+      Older <span aria-hidden="true">→</span>
+    </a>
+  ) : (
+    <span class="btn btn-sm" aria-disabled="true">
+      Older <span aria-hidden="true">→</span>
+    </span>
+  )}
+</nav>

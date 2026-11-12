@@ -1,0 +1,26 @@
+# Chaereve — Decap GitHub OAuth proxy (sample config; placeholders only).
+#
+# Deploy (free tier):
+#   cd workers/oauth
+#   npm install
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
+#   wrangler deploy
+#
+# Then in the site repo set (see .env.example):
+#   CMS_BACKEND=github
+#   CMS_GITHUB_REPO=YOUR_GITHUB_USERNAME/YOUR_REPO
+#   CMS_OAUTH_BASE_URL=https://YOUR_OAUTH_WORKER_DOMAIN
+#   CMS_OAUTH_AUTH_ENDPOINT=auth
+#
+# In the GitHub OAuth App set the callback URL to:
+#   https://YOUR_OAUTH_WORKER_DOMAIN/callback
+
+name = "chaereve-oauth"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+
+# Optional public override for the GitHub callback URL.
+# When unset, the worker uses "<own origin>/callback" automatically.
+# [vars]
+# REDIRECT_URI = "https://YOUR_OAUTH_WORKER_DOMAIN/callback"

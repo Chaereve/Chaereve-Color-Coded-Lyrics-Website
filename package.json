@@ -1,0 +1,37 @@
+{
+  "name": "chaereve-lyrics",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chaereve Lyrics — color-coded lyrics and line distribution website (Astro static site + Decap CMS, content stored as JSON in Git).",
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && npm run validate && npm run check:cms",
+    "validate": "tsx scripts/validate-content.ts",
+    "check:cms": "tsx scripts/check-cms-config.ts",
+    "covers": "node scripts/generate-covers.mjs",
+    "colors": "tsx scripts/generate-member-colors.ts",
+    "cms:generate": "tsx scripts/generate-cms-config.ts",
+    "cms:local": "npx decap-server",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.11",
+    "marked": "^18.2.0",
+    "tailwindcss": "^4.3.5",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

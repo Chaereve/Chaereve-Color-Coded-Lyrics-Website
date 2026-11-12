@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import { authorUrl, getSite } from '../../lib/content';
+import { pluralize, truncate } from '../../lib/text';
+
+const site = getSite();
+const description = truncate(
+  `The people who color, translate and curate the archive — ${pluralize(site.authors.length, 'contributor')} so far.`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo title="Contributors" description={description} path="/authors/" />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Contributors', url: '/authors/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Contributors</h1>
+      <span class="meta">{pluralize(site.authors.length, 'person')}</span>
+    </div>
+    <p class="max-w-prose text-[0.9375rem] text-muted">
+      Everyone works through the editorial workflow: drafts and pull requests only — publishing to <code>main</code>
+      happens through a merge by an admin.
+    </p>
+    <ul class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {site.authors.map((author) => (
+        <li>
+          <a class="surface block p-4 transition-colors hover:border-accent" href={authorUrl(author)}>
+            <p class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-bold text-page" aria-hidden="true">
+                {author.name.charAt(0)}
+              </span>
+              <span class="min-w-0">
+                <span class="block truncate font-semibold">{author.name}</span>
+                <span class="meta block capitalize">{author.role}</span>
+              </span>
+            </p>
+            {author.bio && <p class="mt-3 text-[0.875rem] text-muted">{author.bio}</p>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>

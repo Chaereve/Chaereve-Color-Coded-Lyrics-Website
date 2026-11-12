@@ -1,0 +1,51 @@
+---
+/**
+ * A full set of lyrics for one song version.
+ *
+ * Emits the contrast-adjusted member color variables (one set per theme) as
+ * a small scoped <style is:global>, then renders the sections/lines.
+ * The `data-view` / `data-names` / `data-adlibs` attributes are driven by the
+ * sticky toolbar client script on the song page.
+ */
+import type { Song, SongVersion } from '../lib/types';
+import LyricLine from './LyricLine.astro';
+
+interface Props {
+  song: Song;
+  /** Undefined = main version (song.sections / song.members). */
+  version?: SongVersion;
+  /** Initial state (the client script keeps them in localStorage). */
+  view?: 'original' | 'romanization' | 'translation' | 'stacked';
+  showNames?: boolean;
+  showAdlibs?: boolean;
+}
+
+const { song, version, view = 'original', showNames = true, showAdlibs = true } = Astro.props;
+const members = version?.members ?? song.members;
+const sections = version ? version.sections : song.sections;
+const scopeClass = `vcss-${version ? version.id : 'main'}`;
+---
+
+<!--
+  Member color variables live in src/styles/member-colors.generated.css
+  (regenerated at build setup): `:root`/`[data-theme="dark"]` carry the
+  canonical colors, `.vcss-<versionId>` carries per-version overrides.
+-->
+<div
+  class:list={['lyrics', scopeClass]}
+  data-view={view}
+  data-names={showNames ? 'on' : 'off'}
+  data-adlibs={showAdlibs ? 'on' : 'off'}
+>
+  {sections.length === 0 && (
+    <p class="lyric-text line-missing">No lyrics for this version yet.</p>
+  )}
+  {sections.map((section) => (
+    <section class="lyrics-section">
+      <h3 class="lyrics-section-label">{section.label}</h3>
+      {section.lines.map((line) => (
+        <LyricLine line={line} members={members} lang={version?.language ?? song.language} />
+      ))}
+    </section>
+  ))}
+</div>

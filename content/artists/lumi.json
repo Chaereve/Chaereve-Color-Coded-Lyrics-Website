@@ -1,0 +1,58 @@
+{
+  "id": "lumi",
+  "name": "LUMI",
+  "nativeName": "루미",
+  "slug": "lumi",
+  "type": "group",
+  "description": "LUMI is a FICTIONAL five-member K-pop group created as sample data for this website. All lyrics, credits and dates are original placeholders.",
+  "cover": "/uploads/cover-lumi.svg",
+  "debut": "2025-09-12",
+  "label": "Demo label (placeholder)",
+  "members": [
+    {
+      "id": "haein",
+      "name": "Haein",
+      "nativeName": "해인",
+      "color": "#f472b6",
+      "colorSource": "Demo palette",
+      "role": "Vocalist",
+      "bio": "Fictional member of LUMI (sample data)."
+    },
+    {
+      "id": "mira",
+      "name": "Mira",
+      "nativeName": "미라",
+      "color": "#38bdf8",
+      "colorSource": "Demo palette",
+      "role": "Rapper",
+      "bio": "Fictional member of LUMI (sample data)."
+    },
+    {
+      "id": "tayo",
+      "name": "Tayo",
+      "nativeName": "타요",
+      "color": "#fbbf24",
+      "colorSource": "Demo palette",
+      "role": "Vocalist",
+      "bio": "Fictional member of LUMI (sample data)."
+    },
+    {
+      "id": "sol",
+      "name": "Sol",
+      "nativeName": "솔",
+      "color": "#a78bfa",
+      "colorSource": "Demo palette",
+      "role": "Vocalist",
+      "bio": "Fictional member of LUMI (sample data)."
+    },
+    {
+      "id": "riri",
+      "name": "Riri",
+      "nativeName": "리리",
+      "color": "#34d399",
+      "colorSource": "Demo palette",
+      "role": "Rapper",
+      "bio": "Fictional member of LUMI (sample data)."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+---
+import ArtistCard from '../../components/ArtistCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import { artistsByLetter, getSite } from '../../lib/content';
+import { pluralize, truncate } from '../../lib/text';
+
+const site = getSite();
+const groups = artistsByLetter();
+const letters = groups.map((g) => g.letter);
+const description = truncate(
+  `All ${pluralize(site.artists.length, 'artist')} on the site, indexed A–Z.`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo title="Artists (A–Z)" description={description} path="/artists/" />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Artists', url: '/artists/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Artists</h1>
+      <span class="meta">{pluralize(site.artists.length, 'artist')}</span>
+    </div>
+
+    <nav class="mb-6 flex flex-wrap gap-1" aria-label="Jump to letter">
+      {letters.map((letter) => (
+        <a class="btn btn-sm" href={`#letter-${encodeURIComponent(letter)}`}>{letter}</a>
+      ))}
+    </nav>
+
+    {groups.map((group) => (
+      <section id={`letter-${encodeURIComponent(group.letter)}`} class="mb-8 scroll-mt-24">
+        <h2 class="mb-3 text-xl">{group.letter}</h2>
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {group.artists.map((artist) => <ArtistCard artist={artist} />)}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

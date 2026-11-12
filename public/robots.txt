@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Replace YOUR_DOMAIN with the production domain (see README — "Chỗ cần thay").
+Sitemap: https://YOUR_DOMAIN/sitemap-index.xml

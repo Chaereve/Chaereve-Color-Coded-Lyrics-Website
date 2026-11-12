@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+
+const initialQ = Astro.url.searchParams.get('q') ?? '';
+---
+
+<BaseLayout>
+  <Seo
+    title="Search"
+    description="Search songs, artists, members, albums and lyrics — accent-insensitive, with filters."
+    path="/search/"
+    noIndex={Boolean(initialQ)}
+  />
+  <div class="container-site py-6" data-search-root>
+    <Breadcrumbs items={[{ name: 'Search', url: '/search/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Search</h1>
+    </div>
+
+    <form action="/search/" method="get" class="flex max-w-2xl gap-2" role="search" aria-label="Search">
+      <label class="sr-only" for="search-input">Search</label>
+      <input
+        class="input flex-1"
+        id="search-input"
+        data-search-input
+        name="q"
+        type="search"
+        value={initialQ}
+        placeholder="e.g. “crumbs”, “Jisoo”, “mùa hè”, “tiếng việt”…"
+        autocomplete="off"
+      />
+      <button class="btn btn-primary" type="submit">Search</button>
+      <button class="btn" type="button" data-search-clear aria-label="Clear search and filters">Clear</button>
+    </form>
+
+    <div class="mt-4 grid max-w-3xl grid-cols-2 gap-2 sm:grid-cols-5">
+      <div>
+        <label class="label !mb-1" for="filter-artist">Artist</label>
+        <select class="input" id="filter-artist" data-filter="artist"><option value="">All</option></select>
+      </div>
+      <div>
+        <label class="label !mb-1" for="filter-language">Language</label>
+        <select class="input" id="filter-language" data-filter="language"><option value="">All</option></select>
+      </div>
+      <div>
+        <label class="label !mb-1" for="filter-category">Category</label>
+        <select class="input" id="filter-category" data-filter="category"><option value="">All</option></select>
+      </div>
+      <div>
+        <label class="label !mb-1" for="filter-year">Year</label>
+        <select class="input" id="filter-year" data-filter="year"><option value="">All</option></select>
+      </div>
+      <div>
+        <label class="label !mb-1" for="filter-member">Member</label>
+        <select class="input" id="filter-member" data-filter="member"><option value="">All</option></select>
+      </div>
+    </div>
+
+    <p class="meta mt-6" data-search-count>Loading…</p>
+    <div class="mt-2" data-search-results></div>
+  </div>
+
+  <script>
+    import { initSearch } from '../../components/scripts/search';
+    initSearch();
+  </script>
+</BaseLayout>

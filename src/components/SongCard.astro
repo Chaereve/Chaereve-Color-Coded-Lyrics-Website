@@ -1,0 +1,58 @@
+---
+import { artistUrl, getArtist, songUrl } from '../lib/content';
+import { countLines } from '../lib/lyrics';
+import { formatDate, languageBadge, pluralize } from '../lib/text';
+import StatusBadge from './StatusBadge.astro';
+import type { Song } from '../lib/types';
+
+interface Props {
+  song: Song;
+  /** Compact card for grids. */
+  dense?: boolean;
+}
+
+const { song, dense = false } = Astro.props;
+const artist = getArtist(song.artistId);
+const lines = countLines(song.sections);
+const statusHidden = song.status !== 'published';
+---
+
+<a
+  class="card group block overflow-hidden transition-transform duration-180 hover:-translate-y-0.5"
+  href={songUrl(song, artist)}
+>
+  <div class="relative aspect-square w-full overflow-hidden bg-surface">
+    {song.cover ? (
+      <img
+        src={song.cover}
+        alt={`Cover of ${song.title} by ${artist?.name ?? 'unknown artist'}`}
+        loading="lazy"
+        width="900"
+        height="900"
+        class="h-full w-full object-cover transition-transform duration-180 group-hover:scale-[1.02]"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center text-4xl font-bold text-muted" aria-hidden="true">
+        {song.title.charAt(0)}
+      </div>
+    )}
+    {statusHidden && (
+      <span class="absolute left-2 top-2"><StatusBadge status={song.status} /></span>
+    )}
+  </div>
+  <div class="p-3.5">
+    <h3 class="truncate font-semibold text-[0.9375rem] leading-snug">{song.title}</h3>
+    <p class="mt-0.5 truncate text-[0.8125rem] text-muted">
+      {artist ? <a class="hover:text-accent" href={artistUrl(artist)}>{artist.name}</a> : 'Unknown artist'}
+    </p>
+    {!dense && (
+      <p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.75rem] text-muted">
+        <time datetime={song.released}>{formatDate(song.released)}</time>
+        <span aria-hidden="true" class="text-line">·</span>
+        <span class="font-semibold tracking-wide">{languageBadge(song.language)}</span>
+        <span aria-hidden="true" class="text-line">·</span>
+        <span>{pluralize(lines, 'line')}</span>
+      </p>
+    )}
+  </div>
+</a>

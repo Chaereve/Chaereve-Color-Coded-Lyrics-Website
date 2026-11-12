@@ -1,0 +1,210 @@
+---
+/**
+ * Public community form (correction / comment / translation / report).
+ * Submissions go to the forms Worker (GitHub Issue + Turnstile), with a
+ * pre-filled GitHub issue fallback when the Worker is not configured.
+ *
+ * `idSuffix` disambiguates when a page renders two forms of the same kind.
+ */
+import { GITHUB_REPO, TURNSTILE_SITE_KEY } from '../lib/env';
+import type { FormKind } from './scripts/forms';
+import type { Song } from '../lib/types';
+
+interface Props {
+  kind: FormKind;
+  song?: Song;
+  heading?: string;
+  idSuffix?: string;
+}
+
+const { kind, song, heading, idSuffix = '' } = Astro.props;
+const formId = `form-root-${kind}${idSuffix}`;
+
+const languages = [
+  { code: 'vi', name: 'Tiếng Việt' },
+  { code: 'es', name: 'Español' },
+  { code: 'id', name: 'Bahasa Indonesia' },
+  { code: 'en', name: 'English' },
+  { code: 'ja', name: '日本語' },
+  { code: 'zh', name: '中文' },
+  { code: 'other', name: 'Other' },
+];
+
+const kinds: Record<FormKind, { heading: string; hint: string; submit: string }> = {
+  correction: {
+    heading: 'Report a correction',
+    hint: 'Sends a GitHub issue (label “correction”). An editor reviews it; content is only changed after it is accepted — never automatically.',
+    submit: 'Report correction',
+  },
+  comment: {
+    heading: 'Leave a comment',
+    hint: 'Comments are moderated through GitHub Issues before they appear. Your email is private and is never published.',
+    submit: 'Post comment',
+  },
+  translation: {
+    heading: 'Submit a translation',
+    hint: 'Human translations only — please credit yourself as the translator. Status starts as “submitted” and is reviewed by an editor.',
+    submit: 'Submit translation',
+  },
+  report: {
+    heading: 'Report a problem',
+    hint: 'Use this for copyright or content problems. Sends a GitHub issue (label “report”).',
+    submit: 'Send report',
+  },
+};
+const meta = kinds[kind];
+const title = heading ?? meta.heading;
+
+const spec = {
+  kind,
+  songId: song?.id ?? '',
+  songTitle: song?.title ?? '',
+  songUrl: song ? `/lyrics/${song.artistId}/${song.slug}/` : '',
+  repo: GITHUB_REPO ?? '',
+};
+---
+
+{TURNSTILE_SITE_KEY && (
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}
+
+<section
+  id={formId}
+  class="surface p-4 sm:p-6"
+  data-form-mount
+  data-turnstile={TURNSTILE_SITE_KEY ?? ''}
+  data-spec={JSON.stringify(spec)}
+  aria-labelledby={`${formId}-title`}
+>
+  <h2 id={`${formId}-title`} class="text-lg font-semibold">{title}</h2>
+  <p class="hint mb-4">{meta.hint}</p>
+
+  <form data-form data-submit-label={meta.submit} class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {kind === 'correction' && (
+      <>
+        <div>
+          <label class="label" for={`${formId}-reporter`}>Your name (optional)</label>
+          <input class="input" id={`${formId}-reporter`} name="reporter" type="text" autocomplete="name" placeholder="Anonymous" />
+        </div>
+        <div>
+          <label class="label" for={`${formId}-section`}>Section</label>
+          <input class="input" id={`${formId}-section`} name="section" type="text" placeholder="e.g. [Chorus]" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-excerpt`}>Line(s) concerned (optional)</label>
+          <input class="input" id={`${formId}-excerpt`} name="excerpt" type="text" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-issue`}>What is wrong? <span aria-hidden="true" class="text-danger">*</span></label>
+          <textarea class="input" id={`${formId}-issue`} name="issue" required placeholder="Describe the problem with the lyrics, colors, credits…"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-suggestion`}>Your suggestion (optional)</label>
+          <textarea class="input" id={`${formId}-suggestion`} name="suggestion" rows="3"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-evidence`}>Evidence (optional)</label>
+          <input class="input" id={`${formId}-evidence`} name="evidence" type="text" placeholder="Timestamp, link to official source…" />
+        </div>
+      </>
+    )}
+
+    {kind === 'comment' && (
+      <>
+        <div>
+          <label class="label" for={`${formId}-name`}>Name <span aria-hidden="true" class="text-danger">*</span></label>
+          <input class="input" id={`${formId}-name`} name="name" type="text" required autocomplete="name" maxlength="80" />
+        </div>
+        <div>
+          <label class="label" for={`${formId}-email`}>Email (private, optional)</label>
+          <input class="input" id={`${formId}-email`} name="email" type="email" autocomplete="email" />
+          <p class="hint">Used only in moderation; never shown on the site.</p>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-content`}>Comment <span aria-hidden="true" class="text-danger">*</span></label>
+          <textarea class="input" id={`${formId}-content`} name="content" required maxlength="2000"></textarea>
+        </div>
+      </>
+    )}
+
+    {kind === 'translation' && (
+      <>
+        <div>
+          <label class="label" for={`${formId}-translator`}>Your name (translator credit) <span aria-hidden="true" class="text-danger">*</span></label>
+          <input class="input" id={`${formId}-translator`} name="translator" type="text" required autocomplete="name" maxlength="80" />
+        </div>
+        <div>
+          <label class="label" for={`${formId}-language`}>Target language <span aria-hidden="true" class="text-danger">*</span></label>
+          <select class="input" id={`${formId}-language`} name="language" required>
+            {languages.map((l) => (
+              <option value={l.code}>{l.name}</option>
+            ))}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-content`}>Translation <span aria-hidden="true" class="text-danger">*</span></label>
+          <textarea class="input" id={`${formId}-content`} name="content" required rows="8" placeholder="[Chorus]&#10;…"></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-sourceUrl`}>Source (optional)</label>
+          <input class="input" id={`${formId}-sourceUrl`} name="sourceUrl" type="url" placeholder="https://…" />
+        </div>
+      </>
+    )}
+
+    {kind === 'report' && (
+      <>
+        <div>
+          <label class="label" for={`${formId}-reason`}>Reason <span aria-hidden="true" class="text-danger">*</span></label>
+          <select class="input" id={`${formId}-reason`} name="reason" required>
+            <option value="copyright">Copyright concern</option>
+            <option value="incorrect">Incorrect content</option>
+            <option value="offensive">Offensive content</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="label" for={`${formId}-reporter`}>Your contact (optional)</label>
+          <input class="input" id={`${formId}-reporter`} name="reporter" type="text" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for={`${formId}-description`}>Details <span aria-hidden="true" class="text-danger">*</span></label>
+          <textarea class="input" id={`${formId}-description`} name="description" required></textarea>
+        </div>
+      </>
+    )}
+
+    {TURNSTILE_SITE_KEY && (
+      <div class="sm:col-span-2" data-turnstile aria-label="Cloudflare Turnstile verification"></div>
+    )}
+
+    <div class="sm:col-span-2 flex flex-wrap items-center gap-3">
+      <button class="btn btn-primary" type="submit">{meta.submit}</button>
+      <p class="hint m-0">Nothing is published automatically.</p>
+    </div>
+  </form>
+
+  <p data-form-status class="mt-4 text-[0.875rem] font-medium" hidden></p>
+
+  <script>
+    import { initForm, type FormSpec } from '../components/scripts/forms';
+    // This script is identical for every form on the page, so Vite bundles it
+    // once; each mount carries its own config in data-spec.
+    for (const root of Array.from(document.querySelectorAll<HTMLElement>('[data-form-mount]'))) {
+      try {
+        const spec = JSON.parse(root.dataset.spec ?? '{}') as FormSpec;
+        if (spec.kind) initForm(root, spec);
+      } catch {
+        /* skip broken config */
+      }
+    }
+  </script>
+</section>
+<style>
+  [data-form-status][data-tone='ok'] {
+    color: var(--success);
+  }
+  [data-form-status][data-tone='warn'] {
+    color: var(--danger);
+  }
+</style>

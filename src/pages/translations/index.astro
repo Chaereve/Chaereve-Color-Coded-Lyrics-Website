@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CommunityForm from '../../components/CommunityForm.astro';
+import Seo from '../../components/Seo.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import {
+  getArtist,
+  getSite,
+  getSongById,
+  songUrl,
+} from '../../lib/content';
+import { formatDate, languageName, pluralize, truncate } from '../../lib/text';
+import { websiteJsonLd } from '../../lib/seo';
+
+const site = new URL(Astro.site ?? 'http://localhost:4321');
+const { translations } = getSite();
+const approved = translations.filter((t) => t.status === 'approved');
+const inProgress = translations.filter((t) => t.status !== 'approved');
+const description = truncate(
+  `Community translations for the songs in the archive — ${pluralize(approved.length, 'approved')} and counting. Submit your own (human translations only, always credited).`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo
+    title="Translations"
+    description={description}
+    path="/translations/"
+    jsonLd={[websiteJsonLd('Translations', description, site)]}
+  />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Translations', url: '/translations/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Translations</h1>
+      <span class="meta">{pluralize(translations.length, 'translation')}</span>
+    </div>
+    <p class="max-w-prose text-[0.9375rem] text-muted">
+      Every translation is written by a person and credited to its translator. Translations start as
+      <em> submitted</em>, move to <em>reviewing</em>, and only appear on song pages once <em>approved</em> —
+      nothing is published automatically.
+    </p>
+
+    <section class="mt-8" aria-labelledby="approved-title">
+      <h2 id="approved-title" class="mb-4 text-xl">Approved ({approved.length})</h2>
+      <div class="space-y-4">
+        {approved.map((t) => {
+          const song = getSongById(t.songId);
+          const artist = song ? getArtist(song.artistId) : undefined;
+          return (
+            <article class="surface p-5">
+              <p class="flex flex-wrap items-center gap-2">
+                <span class="badge badge-accent">{languageName(t.language).toUpperCase()}</span>
+                {song ? (
+                  <a class="font-semibold hover:text-accent" href={songUrl(song, artist)}>{song.title}</a>
+                ) : (
+                  <span class="font-semibold">{t.songId}</span>
+                )}
+                <span class="meta ml-auto">
+                  by <strong>{t.translator}</strong>
+                  {t.translatorUrl && (
+                    <>
+                      {' '}· <a class="link" href={t.translatorUrl} target="_blank" rel="noopener noreferrer">profile</a>
+                    </>
+                  )}
+                </span>
+              </p>
+              {song && <p class="meta mt-1">{artist?.name} · submitted {formatDate(t.submittedAt)}{t.reviewedAt ? ` · reviewed ${formatDate(t.reviewedAt)}` : ''}</p>}
+              <pre class="mt-3 whitespace-pre-wrap font-sans text-[0.9375rem] leading-relaxed">{t.content}</pre>
+              {t.notes && <p class="hint mt-2">{t.notes}</p>}
+            </article>
+          );
+        })}
+      </div>
+      {approved.length === 0 && <p class="text-[0.9375rem] text-muted">No approved translations yet.</p>}
+    </section>
+
+    {inProgress.length > 0 && (
+      <section class="mt-10" aria-labelledby="inprogress-title">
+        <h2 id="inprogress-title" class="mb-4 text-xl">Under review ({inProgress.length})</h2>
+        <ul class="space-y-2">
+          {inProgress.map((t) => {
+            const song = getSongById(t.songId);
+            const artist = song ? getArtist(song.artistId) : undefined;
+            return (
+              <li class="surface flex flex-wrap items-center gap-2 p-3">
+                <StatusBadge status={t.status} />
+                <span class="text-[0.9375rem]">{languageName(t.language).toUpperCase()}</span>
+                {song ? (
+                  <a class="min-w-0 flex-1 truncate font-semibold hover:text-accent" href={songUrl(song, artist)}>{song.title}</a>
+                ) : (
+                  <span class="min-w-0 flex-1 truncate font-semibold">{t.songId}</span>
+                )}
+                <span class="meta">by {t.translator} · {formatDate(t.submittedAt)}</span>
+              </li>
+            );
+          })}
+        </ul>
+        <p class="hint mt-2">Content of pending translations is hidden here; it is shown on the song page once approved.</p>
+      </section>
+    )}
+
+    <section class="mt-10 max-w-2xl" aria-label="Submit a translation">
+      <CommunityForm kind="translation" />
+    </section>
+  </div>
+</BaseLayout>

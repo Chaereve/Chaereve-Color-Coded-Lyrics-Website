@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import { getMemberSongStats, getSite } from '../../lib/content';
+import { pluralize, truncate } from '../../lib/text';
+
+const site = getSite();
+const totalLines = site.members.reduce((acc, m) => acc + getMemberSongStats(m.member.id).reduce((a, s) => a + s.lines, 0), 0);
+const description = truncate(
+  `Every member on the site — ${pluralize(site.members.length, 'member')} in total — with their colors, groups and line counts.`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo title="Members" description={description} path="/members/" />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Members', url: '/members/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Members</h1>
+      <span class="meta">{pluralize(site.members.length, 'member')} · {pluralize(totalLines, 'line credit')}</span>
+    </div>
+
+    <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {site.members.map(({ member, artist, url }) => (
+        <li>
+          <a class="surface flex items-center gap-3 p-3 transition-colors hover:border-accent" href={url}>
+            <span class="swatch h-4 w-4" style={`background:${member.color}`} aria-hidden="true"></span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate font-semibold">{member.name}</span>
+              <span class="meta block truncate">
+                {artist.name}
+                {member.role ? ` · ${member.role}` : ''}
+              </span>
+            </span>
+            <span aria-hidden="true" class="text-muted">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>

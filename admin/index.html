@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Chaereve Lyrics · CMS</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- Decap CMS ≥3.17 includes the Turbo backends (turbo-github / turbo-gitlab). -->
+    <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // The configuration (backend, collections, editorial workflow) is served
+      // from /admin/config.yml, generated at build time from environment
+      // variables (Decap Turbo by default, self-hosted GitHub OAuth Worker as
+      // the open-authoring fallback).
+      CMS.init();
+    </script>
+  </body>
+</html>

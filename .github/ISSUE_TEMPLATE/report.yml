@@ -1,0 +1,28 @@
+name: "Report a problem"
+description: Copyright concern, offensive content, or something else that needs attention.
+title: "[report] "
+labels: [report]
+body:
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Reason
+      options:
+        - Copyright concern
+        - Incorrect content
+        - Offensive content
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Your contact (optional)
+    validations:
+      required: false

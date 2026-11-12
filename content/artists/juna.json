@@ -1,0 +1,20 @@
+{
+  "id": "juna",
+  "name": "Juna",
+  "slug": "juna",
+  "type": "solo",
+  "description": "Juna is a FICTIONAL Vietnamese indie artist created as sample data for this website. All lyrics and credits are original placeholders.",
+  "cover": "/uploads/cover-juna.svg",
+  "debut": "2025-04-02",
+  "label": "Demo label (placeholder)",
+  "members": [
+    {
+      "id": "juna",
+      "name": "Juna",
+      "color": "#fb7185",
+      "colorSource": "Demo palette",
+      "role": "Singer-songwriter",
+      "bio": "Fictional Vietnamese artist (sample data)."
+    }
+  ]
+}

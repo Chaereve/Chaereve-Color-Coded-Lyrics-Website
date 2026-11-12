@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import SongArchive from '../../components/SongArchive.astro';
+import { getSite } from '../../lib/content';
+import { paginateItems } from '../../lib/paginate';
+import { pluralize } from '../../lib/text';
+import type { GetStaticPaths } from 'astro';
+import type { Page } from '../../lib/paginate';
+import type { Song } from '../../lib/types';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { songs, settings } = getSite();
+  const perPage = settings.songsPerPage;
+  const pages = paginateItems(songs, perPage, '/page/');
+  return pages
+    .filter((p) => p.page > 1)
+    .map((p) => ({
+      params: { page: String(p.page) },
+      props: { page: p, all: songs, perPage },
+    }));
+};
+
+const { page, all, perPage } = Astro.props as { page: Page<Song>; all: Song[]; perPage: number };
+---
+
+<BaseLayout>
+  <Seo
+    title={`Lyrics archive — page ${page.page}`}
+    description={`Page ${page.page} of ${page.totalPages} of the ${pluralize(page.totalItems, 'color-coded lyric sheet')} archive.`}
+    path={`/page/${page.page}/`}
+    noIndex
+  />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Lyrics', url: '/lyrics/' }, { name: `Page ${page.page}`, url: `/page/${page.page}/` }]} />
+    <div class="section-title">
+      <h1 class="m-0">Lyrics archive</h1>
+      <span class="meta">page {page.page} of {page.totalPages}</span>
+    </div>
+    <SongArchive all={all} page={page} perPage={perPage} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,344 @@
+{
+  "id": "ive-crumbs",
+  "title": "Crumbs",
+  "nativeTitle": "크럼즈 (DEMO LYRICS)",
+  "artistId": "ive",
+  "slug": "crumbs",
+  "status": "published",
+  "released": "2024-12-05",
+  "createdAt": "2026-09-02",
+  "youtube": "https://www.youtube.com/watch?v=REPLACE_WITH_VIDEO_ID",
+  "cover": "/uploads/cover-ive-crumbs.svg",
+  "language": "ko",
+  "album": "I've IVE",
+  "categories": [
+    "kpop"
+  ],
+  "tags": [
+    "girl-group",
+    "rap",
+    "choreo"
+  ],
+  "authorId": "team-chaereve",
+  "featured": true,
+  "credits": {
+    "lyrics": [
+      "Demo Writers (placeholder)"
+    ],
+    "composition": [
+      "Demo Writers (placeholder)"
+    ],
+    "arrangement": [
+      "Demo Writers (placeholder)"
+    ],
+    "translation": [
+      "Vietnamese: Minh Anh (placeholder)"
+    ],
+    "romanization": [
+      "Team Chaereve"
+    ],
+    "colorCoding": [
+      "Team Chaereve"
+    ],
+    "source": "Sample data — all credits are placeholders. Replace with licensed metadata before going live."
+  },
+  "members": [
+    {
+      "id": "wonyoung",
+      "name": "Wonyoung",
+      "color": "#ffb7c5"
+    },
+    {
+      "id": "gacrux",
+      "name": "Gaeul",
+      "color": "#9cc9ff"
+    },
+    {
+      "id": "ley",
+      "name": "Ley",
+      "color": "#ffd98e"
+    },
+    {
+      "id": "jisoo",
+      "name": "Jisoo",
+      "color": "#b69cff"
+    },
+    {
+      "id": "liz",
+      "name": "Liz",
+      "color": "#7fd1ae"
+    },
+    {
+      "id": "eunchae",
+      "name": "Eunchae",
+      "color": "#ff9e9e"
+    }
+  ],
+  "sections": [
+    {
+      "label": "Intro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "",
+          "type": "instrumental"
+        }
+      ]
+    },
+    {
+      "label": "Verse 1",
+      "lines": [
+        {
+          "memberIds": [
+            "wonyoung"
+          ],
+          "text": "밤이 내려앉아 창가에",
+          "romanization": "bami naerae-anja chwang-gae-e",
+          "translation": "The night settles on the windowsill"
+        },
+        {
+          "memberIds": [
+            "wonyoung"
+          ],
+          "text": "떨어진 별 하나 줍지",
+          "romanization": "tteoreon seol hana jjujji",
+          "translation": "I pick up one fallen star"
+        },
+        {
+          "memberIds": [
+            "gacrux"
+          ],
+          "text": "작은 빛은 거울처럼 반짝",
+          "romanization": "jageun bicheun geoul-cheoreom bandjak",
+          "translation": "A tiny light, glimmering like a mirror"
+        },
+        {
+          "memberIds": [
+            "ley"
+          ],
+          "text": "우리 둘만의 암호야",
+          "romanization": "uri dulman-ui amhoya",
+          "translation": "It's a secret code just for us two"
+        }
+      ]
+    },
+    {
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "memberIds": [
+            "jisoo"
+          ],
+          "text": "줍기 좋게 줄을 맞춰",
+          "romanization": "jupgi johege jureul matjyo",
+          "translation": "Neatly lined up, just right for picking"
+        },
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "손끝에 닿으면 따뜻해",
+          "romanization": "sonkkeute dasseumyeon ttatteuthae",
+          "translation": "The moment it touches my fingertips, it is warm"
+        },
+        {
+          "memberIds": [],
+          "text": "하나하나 모으면 빛이 될 거야",
+          "romanization": "hanahana moeumyeon bichi dol geoya",
+          "translation": "Gather them one by one and they will become light",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "We are the crumbs of a shining day",
+          "translation": "We are the crumbs of a shining day",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "흩어져도 다시 빛나",
+          "romanization": "hichyeojeodo dasi btinna",
+          "translation": "Even scattered, we shine again",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "밤새 모은 별을 하늘에 두고",
+          "romanization": "bamsae moun seoreul haneure daigo",
+          "translation": "The stars I gathered through the night, I leave in the sky",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "내일을 향해 걸어가",
+          "romanization": "nae-ireul hyanghae georeoga",
+          "translation": "I walk toward tomorrow",
+          "type": "all"
+        },
+        {
+          "memberIds": [
+            "eunchae"
+          ],
+          "text": "빛나, 빛나",
+          "romanization": "btinna, btinna",
+          "translation": "Shine, shine",
+          "type": "adlib",
+          "note": "Adlib from the demo MV placeholder — add only when it is needed and sourced."
+        }
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "lines": [
+        {
+          "memberIds": [
+            "eunchae"
+          ],
+          "text": "거리 끝에 환등이 켜지면",
+          "romanization": "geori kkeunde hwandungi kkeumyeomyeon",
+          "translation": "When the street lamps light at the end of the road"
+        },
+        {
+          "memberIds": [
+            "eunchae"
+          ],
+          "text": "그림자도 반짝반짝",
+          "romanization": "geurimagdo bandjakbandjak",
+          "translation": "Even the shadows sparkle"
+        },
+        {
+          "memberIds": [
+            "wonyoung"
+          ],
+          "text": "네가 남긴 자취가",
+          "romanization": "nega namgin jachuga",
+          "translation": "The trace you left behind"
+        },
+        {
+          "memberIds": [
+            "liz"
+          ],
+          "text": "발밑에서 꽃피워",
+          "romanization": "balmiteseo kkotpiwo",
+          "translation": "Blooms beneath my feet"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "We are the crumbs of a shining day",
+          "translation": "We are the crumbs of a shining day",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "흩어져도 다시 빛나",
+          "romanization": "hichyeojeodo dasi btinna",
+          "translation": "Even scattered, we shine again",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "밤새 모은 별을 하늘에 두고",
+          "romanization": "bamsae moun seoreul haneure daigo",
+          "translation": "The stars I gathered through the night, I leave in the sky",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "내일을 향해 걸어가",
+          "romanization": "nae-ireul hyanghae georeoga",
+          "translation": "I walk toward tomorrow",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Bridge",
+      "lines": [
+        {
+          "memberIds": [
+            "jisoo"
+          ],
+          "text": "잃어버린 밤의 조각들도",
+          "romanization": "ilheoboreun bameui jochagdeuldo",
+          "translation": "Even the lost fragments of the night"
+        },
+        {
+          "memberIds": [],
+          "text": "다시 모이는 날이 올 거야",
+          "romanization": "dasi moyineun nari ol geoya",
+          "translation": "A day when they gather again will come",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "우리만의 별을 모아",
+          "romanization": "uriman-ui seoreul mwa",
+          "translation": "Let's gather the stars that are ours",
+          "type": "spoken"
+        }
+      ]
+    },
+    {
+      "label": "Final Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "We are the crumbs of a shining day",
+          "translation": "We are the crumbs of a shining day",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "흩어져도 다시 빛나",
+          "romanization": "hichyeojeodo dasi btinna",
+          "translation": "Even scattered, we shine again",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "밤새 모은 별을 하늘에 두고",
+          "romanization": "bamsae moun seoreul haneure daigo",
+          "translation": "The stars I gathered through the night, I leave in the sky",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "내일을 향해 걸어가",
+          "romanization": "nae-ireul hyanghae georeoga",
+          "translation": "I walk toward tomorrow",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Outro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Twinkle, twinkle, our light",
+          "translation": "Twinkle, twinkle, our light",
+          "type": "adlib",
+          "note": "Demo adlib — placeholder only."
+        }
+      ]
+    }
+  ],
+  "versions": [],
+  "notes": [
+    "DEMO DATA: the song title and artist are real, but every lyric line on this page is an original placeholder written for development. Replace with properly licensed content before publishing.",
+    "Color coding basis: studio audio (demo)."
+  ],
+  "sources": [
+    "Sample sources — replace with licensed metadata sources (official discography, press releases)."
+  ]
+}

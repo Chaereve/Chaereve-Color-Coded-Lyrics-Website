@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import SongArchive from '../../components/SongArchive.astro';
+import { getSite } from '../../lib/content';
+import { paginateItems } from '../../lib/paginate';
+import { pluralize, truncate } from '../../lib/text';
+
+const { songs, settings } = getSite();
+const perPage = settings.songsPerPage;
+const pages = paginateItems(songs, perPage, '/page/');
+const page = pages[0]!;
+const description = truncate(
+  `Browse ${pluralize(songs.length, 'color-coded lyric sheet')} — newest first, with romanization, translations and line distribution.`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo title="All lyrics" description={description} path="/lyrics/" />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Lyrics', url: '/lyrics/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Lyrics archive</h1>
+      <span class="meta">{pluralize(songs.length, 'song')} · newest first</span>
+    </div>
+    <SongArchive all={songs} page={page} perPage={perPage} />
+  </div>
+</BaseLayout>

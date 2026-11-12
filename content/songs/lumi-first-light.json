@@ -1,0 +1,345 @@
+{
+  "id": "lumi-first-light",
+  "title": "First Light",
+  "nativeTitle": "빛 한 점",
+  "artistId": "lumi",
+  "slug": "first-light",
+  "status": "published",
+  "released": "2026-03-14",
+  "createdAt": "2026-09-25",
+  "cover": "/uploads/cover-lumi-first-light.svg",
+  "language": "ko",
+  "album": "First Light EP",
+  "categories": [
+    "indie-pop",
+    "ballad"
+  ],
+  "tags": [
+    "ballad",
+    "summer"
+  ],
+  "authorId": "team-chaereve",
+  "featured": true,
+  "credits": {
+    "lyrics": [
+      "Haein, Mira (fictional)"
+    ],
+    "composition": [
+      "LUMI (fictional)"
+    ],
+    "arrangement": [
+      "LUMI (fictional)"
+    ],
+    "translation": [
+      "Indonesian: Raka Wijaya (placeholder)"
+    ],
+    "romanization": [
+      "Team Chaereve"
+    ],
+    "colorCoding": [
+      "Team Chaereve"
+    ],
+    "source": "Fictional song — sample data for development."
+  },
+  "members": [
+    {
+      "id": "haein",
+      "name": "Haein",
+      "color": "#f472b6"
+    },
+    {
+      "id": "mira",
+      "name": "Mira",
+      "color": "#38bdf8"
+    },
+    {
+      "id": "tayo",
+      "name": "Tayo",
+      "color": "#fbbf24"
+    },
+    {
+      "id": "sol",
+      "name": "Sol",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "riri",
+      "name": "Riri",
+      "color": "#34d399"
+    }
+  ],
+  "sections": [
+    {
+      "label": "Intro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "",
+          "type": "instrumental"
+        }
+      ]
+    },
+    {
+      "label": "Verse 1",
+      "lines": [
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "새벽 하늘은 아직 어둡다",
+          "romanization": "saekbok haneureun ajik eodubda",
+          "translation": "The dawn sky is still dark"
+        },
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "창문을 열면 공기가 달라",
+          "romanization": "chwangmureul yeolmyeon gong-gi-ga darya",
+          "translation": "Open the window and the air changes"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "손바닥에 올려둔 별 씨앗",
+          "romanization": "sonbadage ollyeodun seol ssi-ad",
+          "translation": "A seed of a star resting in my palm"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "숨을 쉬면 자라나기 시작",
+          "romanization": "sumeul swiomyeon jaranagi sijak",
+          "translation": "Take a breath and it starts to grow"
+        }
+      ]
+    },
+    {
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "memberIds": [
+            "tayo"
+          ],
+          "text": "첫 빛 한 줄기 쏟아내",
+          "romanization": "cheot bich han junggi ssodanae",
+          "translation": "Pour out the first beam of light"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "어둠도 부드럽게 깨워",
+          "romanization": "eodumdo burubudke kkaewo",
+          "translation": "Gently rousing even the dark"
+        },
+        {
+          "memberIds": [],
+          "text": "이 밤을 건너 첫 빛을 향해",
+          "romanization": "i bameul geoneona cheot bicheul hyanghae",
+          "translation": "Crossing this night, toward the first light",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "손을 뻗어 잡아",
+          "romanization": "soneul peodeo jaba",
+          "translation": "Reach out your hand and catch it",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "내 안의 밤도 끝나가",
+          "romanization": "nae an-ui bamd kkeunnaga",
+          "translation": "The night inside me is ending too",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "아침이 오고 있어",
+          "romanization": "achimi ogo isseo",
+          "translation": "Morning is coming",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "우리의 아침이 되어",
+          "romanization": "urireui achimi doeoeo",
+          "translation": "It becomes our morning",
+          "type": "all"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "첫 빛, 첫 빛",
+          "romanization": "cheot bich, cheot bich",
+          "translation": "First light, first light",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "lines": [
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "발걸음마다 소리가 나",
+          "romanization": "balgeureom-mada soriga na",
+          "translation": "Every step makes a sound"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "거울 같은 골목은 반짝",
+          "romanization": "geoul gaten golmogeun bandjak",
+          "translation": "The mirror-like alley glistens"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "잃었던 길을 다시 찾았어",
+          "romanization": "ilheoddeun gireul dasi chajasseo",
+          "translation": "I found the road I had lost again"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "네가 심어둔 별 씨앗",
+          "romanization": "nega simeodun seol ssi-ad",
+          "translation": "The star seed you planted"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "손을 뻗어 잡아",
+          "romanization": "soneul peodeo jaba",
+          "translation": "Reach out your hand and catch it",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "내 안의 밤도 끝나가",
+          "romanization": "nae an-ui bamd kkeunnaga",
+          "translation": "The night inside me is ending too",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "아침이 오고 있어",
+          "romanization": "achimi ogo isseo",
+          "translation": "Morning is coming",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "우리의 아침이 되어",
+          "romanization": "urireui achimi doeoeo",
+          "translation": "It becomes our morning",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Bridge",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "기다린 것들이 하나로",
+          "romanization": "gidarineun geotdeul-i haroro",
+          "translation": "The things I waited for become one"
+        },
+        {
+          "memberIds": [
+            "haein",
+            "mira"
+          ],
+          "text": "함께 보는 아침이니까|이 밤도 곧 지나가",
+          "romanization": "hamkke boneun achimi-nikka | i bamdo goot jijnaga",
+          "translation": "Because it is a morning we watch together | This night will soon pass",
+          "note": "Duet line — text split per member with the | separator."
+        },
+        {
+          "memberIds": [],
+          "text": "하늘을 채우는 빛이 돼",
+          "romanization": "haneureul chaeuneun bichi dwae",
+          "translation": "Becoming light that fills the sky",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Final Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "손을 뻗어 잡아",
+          "romanization": "soneul peodeo jaba",
+          "translation": "Reach out your hand and catch it",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "내 안의 밤도 끝나가",
+          "romanization": "nae an-ui bamd kkeunnaga",
+          "translation": "The night inside me is ending too",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "아침이 오고 있어",
+          "romanization": "achimi ogo isseo",
+          "translation": "Morning is coming",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "우리의 아침이 되어",
+          "romanization": "urireui achimi doeoeo",
+          "translation": "It becomes our morning",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Outro",
+      "lines": [
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "빛 한 점...",
+          "romanization": "bich han jeom...",
+          "translation": "Just a point of light...",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    }
+  ],
+  "versions": [],
+  "notes": [
+    "Fictional song (sample data).",
+    "Color coding basis: studio audio (demo)."
+  ],
+  "sources": [
+    "Fictional — sample data."
+  ]
+}

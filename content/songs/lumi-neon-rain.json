@@ -1,0 +1,376 @@
+{
+  "id": "lumi-neon-rain",
+  "title": "Neon Rain",
+  "nativeTitle": "네온 비",
+  "artistId": "lumi",
+  "slug": "neon-rain",
+  "status": "published",
+  "released": "2026-06-01",
+  "createdAt": "2026-10-08",
+  "cover": "/uploads/cover-lumi-neon-rain.svg",
+  "language": "ko",
+  "album": "Neon Rain (single)",
+  "categories": [
+    "indie-pop"
+  ],
+  "tags": [
+    "choreo"
+  ],
+  "authorId": "kim-jihye",
+  "featured": true,
+  "credits": {
+    "lyrics": [
+      "Mira, Tayo (fictional)"
+    ],
+    "composition": [
+      "LUMI (fictional)"
+    ],
+    "arrangement": [
+      "LUMI (fictional)"
+    ],
+    "translation": [],
+    "romanization": [
+      "Team Chaereve"
+    ],
+    "colorCoding": [
+      "Team Chaereve"
+    ],
+    "source": "Fictional song — sample data for development."
+  },
+  "members": [
+    {
+      "id": "haein",
+      "name": "Haein",
+      "color": "#f472b6"
+    },
+    {
+      "id": "mira",
+      "name": "Mira",
+      "color": "#38bdf8"
+    },
+    {
+      "id": "tayo",
+      "name": "Tayo",
+      "color": "#fbbf24"
+    },
+    {
+      "id": "sol",
+      "name": "Sol",
+      "color": "#a78bfa"
+    },
+    {
+      "id": "riri",
+      "name": "Riri",
+      "color": "#34d399"
+    }
+  ],
+  "sections": [
+    {
+      "label": "Intro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "",
+          "type": "instrumental"
+        }
+      ]
+    },
+    {
+      "label": "Verse 1",
+      "lines": [
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "네온사인 아래 비가 떨어져",
+          "romanization": "neonsain arae biga tteoreojyeo",
+          "translation": "Rain falling beneath the neon signs"
+        },
+        {
+          "memberIds": [
+            "haein"
+          ],
+          "text": "유리창에 지워지지 않아",
+          "romanization": "yurichwange jiwoddoji anha",
+          "translation": "It doesn't wipe off the glass"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "발밑이 거울이 돼",
+          "romanization": "bambidi geururi dwae",
+          "translation": "The ground under my feet becomes a mirror"
+        },
+        {
+          "memberIds": [
+            "mira"
+          ],
+          "text": "색색으로 번져",
+          "romanization": "saeksaek-euro byeonjyeo",
+          "translation": "Spreading in every color"
+        }
+      ]
+    },
+    {
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "memberIds": [
+            "tayo"
+          ],
+          "text": "우산 없이 걸었어",
+          "romanization": "usaneopsi georeosseo",
+          "translation": "I walked without an umbrella"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "젖은 밤은 반짝여",
+          "romanization": "jotdeun bameun bandjagyeo",
+          "translation": "A wet night sparkles"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Neon rain, fall on me",
+          "translation": "Neon rain, fall on me",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "비속에서도 빛나는",
+          "romanization": "bisogeudeseo btinnaneun",
+          "translation": "Even in the rain, shining"
+        },
+        {
+          "memberIds": [],
+          "text": "우리 도시의 불빛이야",
+          "romanization": "uri dosi-ui bulbichiya",
+          "translation": "The lights of our city",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Soaked in color, we are alive",
+          "translation": "Soaked in color, we are alive",
+          "type": "all"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "네온~ 비~",
+          "romanization": "neon~ bi~",
+          "translation": "Neon~ rain~",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    },
+    {
+      "label": "Verse 2",
+      "lines": [
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "가로등 그림자가 늘어서",
+          "romanization": "garodeung geurimag-a neoreoseo",
+          "translation": "The street-lamp shadows line up"
+        },
+        {
+          "memberIds": [
+            "sol"
+          ],
+          "text": "무지개 같은 길을 만들어",
+          "romanization": "mujigae gaten gireul mandeureo",
+          "translation": "Making a rainbow-like road"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "네가 남긴 흔적이",
+          "romanization": "nega namgin heunchoe-gi",
+          "translation": "The trace you left"
+        },
+        {
+          "memberIds": [
+            "riri"
+          ],
+          "text": "물방울 속에 반짝여",
+          "romanization": "mulbangul soge bandjagyeo",
+          "translation": "Glimmers inside a raindrop"
+        }
+      ]
+    },
+    {
+      "label": "Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Neon rain, fall on me",
+          "translation": "Neon rain, fall on me",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "비속에서도 빛나는",
+          "romanization": "bisogeudeseo btinnaneun",
+          "translation": "Even in the rain, shining"
+        },
+        {
+          "memberIds": [],
+          "text": "우리 도시의 불빛이야",
+          "romanization": "uri dosi-ui bulbichiya",
+          "translation": "The lights of our city",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Soaked in color, we are alive",
+          "translation": "Soaked in color, we are alive",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Bridge",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "우산 대신 달력을 펼쳐",
+          "romanization": "usandae-sin dallireul pyeolchyeo",
+          "translation": "Instead of an umbrella, I open the calendar"
+        },
+        {
+          "memberIds": [
+            "haein",
+            "mira"
+          ],
+          "text": "네온비 내리다|우리는 춤춰",
+          "romanization": "neonbi naerida | urineun chumchwo",
+          "translation": "The neon rain is falling | We dance (gradient fallback demo: no | split)",
+          "note": "Duet line rendered with the gradient fallback (no | separator in the text)."
+        },
+        {
+          "memberIds": [],
+          "text": "색이 되는 밤이야",
+          "romanization": "saegi doeuneun bamiya",
+          "translation": "It is a night that becomes color",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Final Chorus",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Neon rain, fall on me",
+          "translation": "Neon rain, fall on me",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "비속에서도 빛나는",
+          "romanization": "bisogeudeseo btinnaneun",
+          "translation": "Even in the rain, shining"
+        },
+        {
+          "memberIds": [],
+          "text": "우리 도시의 불빛이야",
+          "romanization": "uri dosi-ui bulbichiya",
+          "translation": "The lights of our city",
+          "type": "all"
+        },
+        {
+          "memberIds": [],
+          "text": "Soaked in color, we are alive",
+          "translation": "Soaked in color, we are alive",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "label": "Outro",
+      "lines": [
+        {
+          "memberIds": [],
+          "text": "Rain, stay a while...",
+          "translation": "Rain, stay a while...",
+          "type": "adlib",
+          "note": "Demo adlib."
+        }
+      ]
+    }
+  ],
+  "versions": [
+    {
+      "id": "live-rooftop-2026",
+      "name": "Live at Rooftop 2026",
+      "audioType": "live",
+      "youtube": "https://www.youtube.com/watch?v=REPLACE_WITH_VIDEO_ID",
+      "notes": [
+        "Live color coding differs from the studio version: the adlib lines are removed, the [Bridge] duet line is sung only by Haein, and the [Outro] is sung by Riri instead of the whole group.",
+        "Live coding is explicit (never assumed): the studio coding above is the default basis."
+      ],
+      "sections": [
+        {
+          "label": "Bridge (live)",
+          "lines": [
+            {
+              "memberIds": [],
+              "text": "우산 대신 달력을 펼쳐",
+              "romanization": "usandae-sin dallireul pyeolchyeo",
+              "translation": "Instead of an umbrella, I open the calendar",
+              "type": "all"
+            },
+            {
+              "memberIds": [
+                "haein"
+              ],
+              "text": "네온비 내리다, 우리는 춤춰",
+              "romanization": "neonbi naerida, urineun chumchwo",
+              "translation": "The neon rain is falling, we dance"
+            },
+            {
+              "memberIds": [],
+              "text": "색이 되는 밤이야",
+              "romanization": "saegi doeuneun bamiya",
+              "translation": "It is a night that becomes color",
+              "type": "all"
+            }
+          ]
+        },
+        {
+          "label": "Outro (live)",
+          "lines": [
+            {
+              "memberIds": [
+                "riri"
+              ],
+              "text": "Rain, stay a while...",
+              "translation": "Rain, stay a while...",
+              "type": "adlib",
+              "note": "Only Riri adlibs in the live set."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Fictional song (sample data).",
+    "Color coding basis: studio audio (demo). The live version has its own explicit coding in versions[]."
+  ],
+  "sources": [
+    "Fictional — sample data."
+  ]
+}

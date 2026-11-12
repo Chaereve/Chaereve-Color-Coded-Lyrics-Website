@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import { getSite, pageUrl } from '../../lib/content';
+import { formatDate, truncate } from '../../lib/text';
+import type { GetStaticPaths } from 'astro';
+import type { PageDoc } from '../../lib/types';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { pages } = getSite();
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+};
+
+const { page } = Astro.props as { page: PageDoc };
+const description = truncate(page.description || page.title, 160);
+---
+
+<BaseLayout>
+  <Seo title={page.title} description={description} path={pageUrl(page)} />
+  <div class="container-site py-8">
+    <Breadcrumbs items={[{ name: page.title, url: pageUrl(page) }]} />
+    <article class="prose-doc">
+      <h1>{page.title}</h1>
+      {page.updated && <p class="meta">Updated {formatDate(page.updated)}</p>}
+      <div set:html={page.html}></div>
+    </article>
+  </div>
+</BaseLayout>

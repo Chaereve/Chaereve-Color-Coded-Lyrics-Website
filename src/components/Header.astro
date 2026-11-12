@@ -1,0 +1,95 @@
+---
+import { getSite } from '../lib/content';
+
+const settings = getSite().settings;
+
+const nav = [
+  { href: '/lyrics/', label: 'Lyrics' },
+  { href: '/artists/', label: 'Artists' },
+  { href: '/members/', label: 'Members' },
+  { href: '/translations/', label: 'Translations' },
+  { href: '/corrections/', label: 'Corrections' },
+  { href: '/search/', label: 'Search' },
+];
+---
+
+<header class="border-b border-line bg-page">
+  <div class="container-site flex items-center gap-3 py-3">
+    <a href="/" class="flex min-h-[44px] items-center gap-2 font-bold tracking-tight" aria-label={`${settings.name} — home`}>
+      <span
+        class="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-[0.8rem] font-extrabold text-page"
+        aria-hidden="true"
+      >C</span>
+      <span class="text-[1.0625rem]">{settings.name}</span>
+    </a>
+
+    <div class="ml-auto flex items-center gap-1.5">
+      <a
+        href="/search/"
+        class="btn btn-icon"
+        aria-label="Search lyrics, artists and members"
+        title="Search"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+      </a>
+      <button
+        type="button"
+        id="theme-toggle"
+        class="btn btn-icon"
+        aria-label="Toggle dark mode"
+        title="Toggle theme"
+      >
+        <svg class="icon-sun h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="border-t border-line" aria-label="Main">
+    <div class="container-site scroll-x">
+      <ul class="flex items-center gap-0.5">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={Astro.url.pathname.startsWith(item.href) ? 'page' : undefined}
+              class="flex min-h-[44px] items-center border-b-2 border-transparent px-3 text-[0.9375rem] font-medium text-muted transition-colors hover:text-fg aria-[current=page]:border-accent aria-[current=page]:text-fg"
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+
+  <script>
+    const btn = document.getElementById('theme-toggle') as HTMLButtonElement | null;
+    const root = document.documentElement;
+    const apply = (theme: 'light' | 'dark') => {
+      if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
+    };
+    try {
+      const saved = localStorage.getItem('chaereve-theme');
+      if (saved === 'dark') apply('dark');
+    } catch {
+      /* no storage */
+    }
+    btn?.addEventListener('click', () => {
+      const next = root.hasAttribute('data-theme') ? 'light' : 'dark';
+      apply(next);
+      try {
+        localStorage.setItem('chaereve-theme', next);
+      } catch {
+        /* no storage */
+      }
+    });
+  </script>
+</header>

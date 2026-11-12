@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { getSite } from '../../lib/content';
+import { formatDate, pluralize, truncate } from '../../lib/text';
+import { websiteJsonLd } from '../../lib/seo';
+
+const site = new URL(Astro.site ?? 'http://localhost:4321');
+const { corrections } = getSite();
+const open = corrections.filter((c) => c.status === 'open' || c.status === 'reviewing');
+const closed = corrections.filter((c) => c.status !== 'open' && c.status !== 'reviewing');
+const description = truncate(
+  'Every correction reported for the archive, and where it stands. Corrections become GitHub issues and are only applied after an editor accepts them.',
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo
+    title="Corrections"
+    description={description}
+    path="/corrections/"
+    jsonLd={[websiteJsonLd('Corrections', description, site)]}
+  />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Corrections', url: '/corrections/' }]} />
+    <div class="section-title">
+      <h1 class="m-0">Corrections</h1>
+      <span class="meta">{pluralize(corrections.length, 'correction')}</span>
+    </div>
+    <p class="max-w-prose text-[0.9375rem] text-muted">
+      Corrections are submitted through the form on each song page (or directly as a GitHub issue). They are
+      reviewed in this order: <strong>open → reviewing → accepted/rejected</strong>, and the JSON is only edited
+      after acceptance — never automatically.
+    </p>
+
+    <section class="mt-8" aria-labelledby="open-title">
+      <h2 id="open-title" class="mb-4 text-xl">Open ({open.length})</h2>
+      <ul class="space-y-3">
+        {open.map((cr) => (
+          <li class="surface p-4">
+            <p class="flex flex-wrap items-center gap-2">
+              <StatusBadge status={cr.status} />
+              <span class="badge">#{cr.type}</span>
+              <a class="min-w-0 flex-1 truncate font-semibold hover:text-accent" href={cr.songUrl || '/lyrics/'}>{cr.title}</a>
+              <span class="meta">{formatDate(cr.createdAt)}</span>
+            </p>
+            <p class="mt-2 text-[0.9375rem]">{cr.issue}</p>
+            {cr.suggestion && <p class="mt-1 text-[0.875rem] text-muted">Suggestion: {cr.suggestion}</p>}
+            {cr.evidence && <p class="mt-1 text-[0.875rem] text-muted">Evidence: {cr.evidence}</p>}
+            <p class="mt-2 flex flex-wrap items-center gap-3 text-[0.8125rem] text-muted">
+              {cr.reporter && <span>Reported by {cr.reporter}</span>}
+              {cr.issueUrl && (
+                <a class="link" href={cr.issueUrl} target="_blank" rel="noopener noreferrer">GitHub issue</a>
+              )}
+            </p>
+          </li>
+        ))}
+      </ul>
+      {open.length === 0 && <p class="text-[0.9375rem] text-muted">No open corrections.</p>}
+    </section>
+
+    {closed.length > 0 && (
+      <section class="mt-10" aria-labelledby="closed-title">
+        <h2 id="closed-title" class="mb-4 text-xl">Resolved ({closed.length})</h2>
+        <ul class="space-y-2">
+          {closed.map((cr) => (
+            <li class="surface flex flex-wrap items-center gap-2 p-3">
+              <StatusBadge status={cr.status} />
+              <span class="badge">#{cr.type}</span>
+              <a class="min-w-0 flex-1 truncate font-semibold hover:text-accent" href={cr.songUrl || '/lyrics/'}>{cr.title}</a>
+              <span class="meta">{formatDate(cr.createdAt)} → {cr.resolvedAt ? formatDate(cr.resolvedAt) : '—'}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</BaseLayout>

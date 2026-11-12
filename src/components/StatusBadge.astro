@@ -1,0 +1,29 @@
+---
+/** Small status pill for review workflows (songs, translations, corrections, comments). */
+
+interface Props {
+  status: string;
+  label?: string;
+}
+
+const { status, label } = Astro.props;
+
+const tone: Record<string, string> = {
+  published: 'badge-success',
+  approved: 'badge-success',
+  accepted: 'badge-accent',
+  applied: 'badge-success',
+  open: 'badge-accent',
+  submitted: 'badge-accent',
+  reviewing: 'badge-accent',
+  in_review: 'badge-accent',
+  draft: 'badge',
+  pending: 'badge',
+  rejected: 'badge-danger',
+  spam: 'badge-danger',
+  trash: 'badge',
+};
+const cls = tone[status] ?? 'badge';
+---
+
+<span class:list={['badge', cls]}>{label ?? status.replaceAll('_', ' ')}</span>

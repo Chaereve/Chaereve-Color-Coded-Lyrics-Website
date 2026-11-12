@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import SongCard from '../../components/SongCard.astro';
+import { authorUrl, getSite, getSongsByAuthor } from '../../lib/content';
+import { pluralize, truncate } from '../../lib/text';
+import { personJsonLd } from '../../lib/seo';
+import type { GetStaticPaths } from 'astro';
+import type { Author } from '../../lib/types';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { authors } = getSite();
+  return authors.map((author) => ({ params: { slug: author.slug }, props: { author } }));
+};
+
+const { author } = Astro.props as { author: Author };
+const site = new URL(Astro.site ?? 'http://localhost:4321');
+const songs = getSongsByAuthor(author.id);
+const description = truncate(author.bio || `${author.name} (${author.role}) — ${pluralize(songs.length, 'song')} in the archive.`, 160);
+---
+
+<BaseLayout>
+  <Seo
+    title={`${author.name} — contributor`}
+    description={description}
+    path={authorUrl(author)}
+    jsonLd={[personJsonLd(
+      { id: author.id, name: author.name, color: '#6b7280', role: author.role, bio: author.bio, socials: author.socials },
+      { id: 'site', name: getSite().settings.name, slug: 'site', type: 'group', description: getSite().settings.description, cover: '', members: [] },
+      authorUrl(author),
+      site,
+    )]}
+  />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Contributors', url: '/authors/' }, { name: author.name, url: authorUrl(author) }]} />
+
+    <header class="flex items-center gap-4">
+      <span class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-page" aria-hidden="true">
+        {author.name.charAt(0)}
+      </span>
+      <div>
+        <h1 class="m-0">{author.name}</h1>
+        <p class="mt-0.5 text-[0.9375rem] capitalize text-muted">{author.role}</p>
+        {author.bio && <p class="mt-2 max-w-prose text-[0.9375rem]">{author.bio}</p>}
+        {author.socials && author.socials.length > 0 && (
+          <p class="mt-2 flex flex-wrap gap-x-4 text-[0.9375rem]">
+            {author.socials.map((s) => (
+              <a class="link" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+            ))}
+          </p>
+        )}
+      </div>
+    </header>
+
+    <section class="mt-10" aria-labelledby="songs-title">
+      <div class="section-title">
+        <h2 id="songs-title" class="m-0 text-2xl">
+          Color-coded by {author.name} ({songs.length})
+        </h2>
+      </div>
+      <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {songs.map((song) => <SongCard song={song} />)}
+      </div>
+      {songs.length === 0 && <p class="mt-4 text-[0.9375rem] text-muted">No songs yet.</p>}
+    </section>
+  </div>
+</BaseLayout>

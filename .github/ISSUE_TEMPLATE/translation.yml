@@ -1,0 +1,33 @@
+name: "Translation submission"
+description: Submit a human-written translation for a song (always credited to you).
+title: "[translation] "
+labels: [translation]
+body:
+  - type: input
+    id: song
+    attributes:
+      label: Song (URL)
+      placeholder: https://YOUR_DOMAIN/lyrics/artist/song/
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Target language
+      placeholder: vi, es, id, en…
+    validations:
+      required: true
+  - type: input
+    id: translator
+    attributes:
+      label: Your name (translator credit)
+      description: Mandatory — translations are always credited.
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: Translation
+      description: "[Chorus]\n…"
+    validations:
+      required: true

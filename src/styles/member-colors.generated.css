@@ -1,0 +1,8 @@
+/* GENERATED FILE — do not edit. Written by scripts/generate-member-colors.ts
+ * (runs automatically at dev/build setup; manual: npm run colors).
+ *
+ * Each member color is adjusted per theme to keep colored lyric TEXT readable
+ * (WCAG AA 4.5:1 on the light and dark backgrounds, src/lib/color.ts). */
+:root{--m-wonyoung:#ea002d;--m-gacrux:#006cee;--m-ley:#986500;--m-jisoo:#7a4aff;--m-liz:#2e7f5c;--m-eunchae:#e50000;--m-juna:#eb0728;--m-haein:#db117a;--m-mira:#067baf;--m-tayo:#986e03;--m-sol:#7a50f7;--m-riri:#1d845f}
+[data-theme="dark"]{--m-wonyoung:#ffb7c5;--m-gacrux:#9cc9ff;--m-ley:#ffd98e;--m-jisoo:#b69cff;--m-liz:#7fd1ae;--m-eunchae:#ff9e9e;--m-juna:#fb7185;--m-haein:#f472b6;--m-mira:#38bdf8;--m-tayo:#fbbf24;--m-sol:#a78bfa;--m-riri:#34d399}
+

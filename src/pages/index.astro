@@ -1,0 +1,196 @@
+---
+import ArtistCard from '../components/ArtistCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seo from '../components/Seo.astro';
+import SongCard from '../components/SongCard.astro';
+import {
+  getFeaturedSongs,
+  getLatestSongs,
+  getPage,
+  getPopularArtists,
+  getSite,
+  getTrendingSongs,
+  songUrl,
+  pageUrl,
+} from '../lib/content';
+import { formatDate, languageName, pluralize, truncate } from '../lib/text';
+import { websiteJsonLd } from '../lib/seo';
+
+const site = new URL(Astro.site ?? 'http://localhost:4321');
+const { settings, songs, artists, translations, corrections } = getSite();
+
+const trending = getTrendingSongs(6);
+const latest = getLatestSongs(6).filter((s) => !trending.includes(s)).slice(0, 4);
+const featured = getFeaturedSongs(4);
+const popularArtists = getPopularArtists(4);
+const latestTranslations = translations.filter((t) => t.status === 'approved').slice(0, 3);
+const latestCorrections = corrections.slice(0, 3);
+const about = getPage('about');
+
+const description = truncate(settings.description, 160);
+---
+
+<BaseLayout>
+  <Seo
+    title={settings.tagline}
+    description={description}
+    path="/"
+    jsonLd={[websiteJsonLd(settings.name, description, site)]}
+  />
+
+  <div class="container-site">
+    {/* ---------------- hero + search ---------------- */}
+    <section class="py-10 sm:py-14">
+      <h1 class="max-w-2xl">Color-coded lyrics, line by line — with the numbers to prove it.</h1>
+      <p class="mt-3 max-w-2xl text-[1.0625rem] text-muted">
+        Every line is colored by the member who sings it. Browse {pluralize(songs.length, 'song')} across
+        {pluralize(artists.length, 'artist')}, with romanization, translations and per-member line distribution.
+      </p>
+      <form action="/search/" method="get" class="mt-6 flex max-w-xl gap-2" role="search" aria-label="Site search">
+        <label class="sr-only" for="hero-search">Search lyrics, artists, members</label>
+        <input
+          class="input flex-1"
+          id="hero-search"
+          name="q"
+          type="search"
+          placeholder="Search a song, artist, member or lyric…"
+          autocomplete="off"
+        />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+      <p class="meta mt-2">Tip: search is accent-insensitive — “tieng viet” finds “Tiếng Việt”.</p>
+    </section>
+
+    {/* ---------------- trending ---------------- */}
+    <section aria-labelledby="trending-title">
+      <div class="section-title">
+        <h2 id="trending-title" class="m-0 text-2xl">Trending</h2>
+        <a class="link text-[0.875rem]" href="/lyrics/">All lyrics</a>
+      </div>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3">
+        {trending.map((song) => <SongCard song={song} />)}
+      </div>
+    </section>
+
+    {/* ---------------- popular artists ---------------- */}
+    <section class="mt-12" aria-labelledby="artists-title">
+      <div class="section-title">
+        <h2 id="artists-title" class="m-0 text-2xl">Popular artists</h2>
+        <a class="link text-[0.875rem]" href="/artists/">A–Z</a>
+      </div>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {popularArtists.map((artist) => <ArtistCard artist={artist} />)}
+      </div>
+    </section>
+
+    {/* ---------------- two columns: latest + community ---------------- */}
+    <section class="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      <div>
+        <div class="section-title">
+          <h2 class="m-0 text-2xl">Latest</h2>
+          <a class="link text-[0.875rem]" href="/lyrics/">Archive</a>
+        </div>
+        <div class="space-y-3">
+          {latest.map((song) => {
+            const artist = artists.find((a) => a.id === song.artistId);
+            return (
+              <a class="card flex items-center gap-4 p-3" href={songUrl(song, artist)}>
+                {song.cover ? (
+                  <img src={song.cover} alt="" loading="lazy" width="72" height="72" class="h-14 w-14 shrink-0 rounded-lg object-cover" />
+                ) : (
+                  <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-surface font-bold text-muted" aria-hidden="true">
+                    {song.title.charAt(0)}
+                  </span>
+                )}
+                <span class="min-w-0 flex-1">
+                  <span class="block truncate font-semibold">{song.title}</span>
+                  <span class="meta block truncate">
+                    {artist?.name} · {languageName(song.language)} · <time datetime={song.released}>{formatDate(song.released)}</time>
+                  </span>
+                </span>
+                <span aria-hidden="true" class="text-muted">→</span>
+              </a>
+            );
+          })}
+        </div>
+
+        {featured.length > 0 && (
+          <>
+            <div class="section-title mt-10">
+              <h2 class="m-0 text-2xl">Featured</h2>
+            </div>
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {featured.map((song) => <SongCard song={song} dense />)}
+            </div>
+          </>
+        )}
+      </div>
+
+      <div class="space-y-8">
+        <div>
+          <div class="section-title">
+            <h2 class="m-0 text-2xl">Latest translations</h2>
+            <a class="link text-[0.875rem]" href="/translations/">All</a>
+          </div>
+          {latestTranslations.length > 0 ? (
+            <ul class="space-y-2">
+              {latestTranslations.map((t) => {
+                const song = songs.find((s) => s.id === t.songId);
+                const artist = song ? artists.find((a) => a.id === song.artistId) : undefined;
+                return (
+                  <li class="surface p-3">
+                    {song ? (
+                      <a class="font-semibold hover:text-accent" href={songUrl(song, artist)}>{song.title}</a>
+                    ) : (
+                      <span class="font-semibold">{t.songId}</span>
+                    )}
+                    <span class="meta block">
+                      {t.languageName ?? t.language} · by {t.translator} · {formatDate(t.reviewedAt ?? t.submittedAt)}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p class="text-[0.9375rem] text-muted">No approved translations yet.</p>
+          )}
+        </div>
+
+        <div>
+          <div class="section-title">
+            <h2 class="m-0 text-2xl">Latest corrections</h2>
+            <a class="link text-[0.875rem]" href="/corrections/">All</a>
+          </div>
+          {latestCorrections.length > 0 ? (
+            <ul class="space-y-2">
+              {latestCorrections.map((cr) => (
+                <li class="surface p-3">
+                  <a class="font-semibold hover:text-accent" href={cr.songUrl || '/corrections/'}>{cr.title}</a>
+                  <span class="meta block">{cr.type} · {formatDate(cr.createdAt)} · {cr.status.replaceAll('_', ' ')}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-[0.9375rem] text-muted">No corrections reported yet.</p>
+          )}
+        </div>
+
+        <div class="surface p-4">
+          <h2 class="mb-2 text-lg font-semibold">How this site works</h2>
+          <p class="text-[0.9375rem] text-muted">
+            Content lives in Git as JSON, edited through Decap CMS with an editorial workflow — every change is
+            reviewed and merged by an admin. See
+            {about ? (
+              <a class="link" href={pageUrl(about)}>{about.title}</a>
+            ) : (
+              <span>About</span>
+            )}.
+          </p>
+          <p class="mt-2 text-[0.9375rem]">
+            <a class="btn btn-sm" href="/pages/contributor-guidelines/">Contribute</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

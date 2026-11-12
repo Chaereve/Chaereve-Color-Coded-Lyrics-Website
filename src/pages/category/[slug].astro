@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Seo from '../../components/Seo.astro';
+import SongCard from '../../components/SongCard.astro';
+import { categoryUrl, getSite, getSongsByCategory } from '../../lib/content';
+import { pluralize, truncate } from '../../lib/text';
+import type { GetStaticPaths } from 'astro';
+import type { Category } from '../../lib/types';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { categories } = getSite();
+  return categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+};
+
+const { category } = Astro.props as { category: Category };
+const songs = getSongsByCategory(category.id);
+const description = truncate(
+  category.description || `All songs in the “${category.name}” category.`,
+  160,
+);
+---
+
+<BaseLayout>
+  <Seo title={`Category: ${category.name}`} description={description} path={categoryUrl(category)} />
+  <div class="container-site py-6">
+    <Breadcrumbs items={[{ name: 'Categories', url: '/lyrics/' }, { name: category.name, url: categoryUrl(category) }]} />
+    <div class="section-title">
+      <h1 class="m-0">{category.name}</h1>
+      <span class="meta">{pluralize(songs.length, 'song')}</span>
+    </div>
+    {category.description && <p class="max-w-prose text-[0.9375rem] text-muted">{category.description}</p>}
+    <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      {songs.map((song) => <SongCard song={song} />)}
+    </div>
+  </div>
+</BaseLayout>
