@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedSongs } from '../lib/content';
+import { getGithubRepo } from '../lib/config';
+
+const songs = getPublishedSongs();
+const repo = getGithubRepo();
+const presetSong = Astro.url.searchParams.get('song') ?? '';
+const presetType = Astro.url.searchParams.get('type') ?? 'lyric';
+---
+<BaseLayout
+  title="Gửi correction"
+  description="Báo lỗi hoặc đề xuất sửa lyrics, color coding, translation — cần bằng chứng và nguồn đối chiếu. Correction được duyệt trước khi dữ liệu đổi."
+  path="/corrections/"
+>
+  <div class="container-page max-w-3xl pb-16">
+    <header class="pt-6">
+      <h1 class="text-2xl font-black tracking-tight sm:text-3xl">Gửi correction</h1>
+      <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+        Phát hiện lời sai, color coding sai hoặc thiếu nguồn? Gửi correction kèm <strong>bằng chứng</strong>
+        và <strong>link nguồn đối chiếu</strong>. Mọi correction được tạo thành GitHub Issue và đi qua
+        quy trình duyệt — <strong>không có thay đổi tự động</strong> vào dữ liệu JSON.
+      </p>
+    </header>
+
+    <!-- Trạng thái quy trình -->
+    <section aria-labelledby="status-heading" class="card mt-6 p-4 sm:p-5">
+      <h2 id="status-heading" class="text-sm font-bold">Trạng thái correction</h2>
+      <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+        <li class="chip border-sky-400/40 bg-sky-400/10 text-sky-300">submitted — đã gửi</li>
+        <li class="chip border-amber-400/40 bg-amber-400/10 text-amber-300">reviewing — đang duyệt</li>
+        <li class="chip border-emerald-400/40 bg-emerald-400/10 text-emerald-300">approved — đã duyệt</li>
+        <li class="chip border-rose-400/40 bg-rose-400/10 text-rose-300">rejected — từ chối</li>
+      </ul>
+      <p class="mt-3 text-xs leading-relaxed text-ink-faint">
+        Maintainer gắn label tương ứng trên GitHub Issue. Correction approved sẽ được sửa JSON qua Pull
+        Request và chỉ lên site sau khi PR được merge.
+      </p>
+    </section>
+
+    <!-- Form -->
+    <form id="correction-form" class="card mt-6 flex flex-col gap-5 p-4 sm:p-6" data-repo={repo}>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="flex flex-col gap-1.5 text-sm font-semibold">
+          Loại correction
+          <select
+            name="type"
+            id="corr-type"
+            class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+          >
+            <option value="lyric" selected={presetType === 'lyric'}>Sửa lyrics</option>
+            <option value="color" selected={presetType === 'color'}>Sửa color coding</option>
+            <option value="translation" selected={presetType === 'translation'}>Sửa translation</option>
+            <option value="romanization" selected={presetType === 'romanization'}>Sửa romanization</option>
+            <option value="content" selected={presetType === 'content'}>Báo nội dung / bản quyền</option>
+            <option value="other" selected={presetType === 'other'}>Khác</option>
+          </select>
+        </label>
+        <label class="flex flex-col gap-1.5 text-sm font-semibold">
+          Bài hát
+          <select
+            name="song"
+            id="corr-song"
+            class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+          >
+            <option value="">— Chọn bài hát —</option>
+            {
+              songs.map((s) => (
+                <option value={s.slug} selected={presetSong === s.slug}>
+                  {s.title}
+                </option>
+              ))
+            }
+            <option value="other" selected={!songs.some((s) => s.slug === presetSong) && presetSong !== ''}>
+              Bài khác / trang khác
+            </option>
+          </select>
+        </label>
+      </div>
+
+      <label class="flex flex-col gap-1.5 text-sm font-semibold">
+        Vị trí (section / dòng) <span class="font-normal text-ink-faint">— tùy chọn</span>
+        <input
+          type="text"
+          name="location"
+          placeholder="Ví dụ: Chorus, line-013"
+          class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+        />
+      </label>
+
+      <label class="flex flex-col gap-1.5 text-sm font-semibold">
+        Đoạn lyrics cần sửa <span class="text-rose-400">*</span>
+        <textarea
+          name="current"
+          required
+          rows="3"
+          placeholder="Dán nguyên văn đoạn đang sai trên website…"
+          class="rounded-xl border border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
+      </label>
+
+      <label class="flex flex-col gap-1.5 text-sm font-semibold">
+        Đề xuất sửa thành <span class="font-normal text-ink-faint">— tùy chọn</span>
+        <textarea
+          name="proposed"
+          rows="3"
+          placeholder="Nếu biết chính xác nội dung đúng, điền vào đây…"
+          class="rounded-xl border border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
+      </label>
+
+      <label class="flex flex-col gap-1.5 text-sm font-semibold">
+        Lý do / bằng chứng <span class="text-rose-400">*</span>
+        <textarea
+          name="reason"
+          required
+          rows="3"
+          placeholder="Giải thích vì sao đoạn này sai, bạn nghe/đọc thấy ở đâu…"
+          class="rounded-xl border border-white/10 bg-surface-muted px-3 py-2.5 text-sm font-normal leading-relaxed text-ink"></textarea>
+      </label>
+
+      <label class="flex flex-col gap-1.5 text-sm font-semibold">
+        Link nguồn đối chiếu <span class="text-rose-400">*</span>
+        <input
+          type="url"
+          name="source"
+          required
+          placeholder="https://… (official audio, official MV, lyric video, interview…)"
+          class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+        />
+        <span class="text-xs font-normal text-ink-faint">
+          Correction không có nguồn đối chiếu sẽ khó được duyệt.
+        </span>
+      </label>
+
+      <label class="flex flex-col gap-1.5 text-sm font-semibold">
+        Email hoặc GitHub username <span class="font-normal text-ink-faint">— tùy chọn</span>
+        <input
+          type="text"
+          name="contact"
+          placeholder="để maintainer liên hệ khi cần trao đổi thêm"
+          class="min-h-touch rounded-xl border border-white/10 bg-surface-muted px-3 text-sm font-normal text-ink"
+        />
+      </label>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button type="submit" class="btn-primary">Tạo GitHub Issue</button>
+        <button type="button" id="copy-correction" class="btn-ghost">Sao chép nội dung</button>
+      </div>
+
+      <p id="correction-hint" class="text-xs leading-relaxed text-ink-faint">
+        {
+          repo ? (
+            <>
+              Nút trên sẽ mở GitHub Issue có sẵn nội dung trong <strong>{repo}</strong> — bạn chỉ cần
+              bấm Submit trên GitHub.
+            </>
+          ) : (
+            <>
+              Chưa cấu hình <code class="rounded bg-white/10 px-1">PUBLIC_GITHUB_REPO</code> — nút sẽ sao
+              chép nội dung để bạn tự tạo Issue trên GitHub. Xem README để cấu hình.
+            </>
+          )
+        }
+      </p>
+      <div id="correction-done" class="hidden rounded-xl border border-emerald-400/40 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200" role="status">
+      </div>
+    </form>
+
+    <section class="mt-8 text-xs leading-relaxed text-ink-faint">
+      <p>
+        Correction KHÔNG tự thay đổi JSON. Sau khi duyệt, maintainer sửa dữ liệu qua Pull Request trên
+        GitHub — Cloudflare Pages tự build lại khi PR được merge.
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('correction-form') as HTMLFormElement | null;
+  const doneEl = document.getElementById('correction-done');
+
+  const buildBody = (fd: FormData): { title: string; body: string } => {
+    const get = (k: string) => String(fd.get(k) ?? '').trim();
+    const typeSel = document.getElementById('corr-type') as HTMLSelectElement | null;
+    const songSel = document.getElementById('corr-song') as HTMLSelectElement | null;
+    const typeLabel = typeSel?.selectedOptions[0]?.text ?? get('type');
+    const songLabel = songSel?.value === 'other' ? 'Bài khác' : songSel?.selectedOptions[0]?.text ?? '';
+    const title = `[Correction] ${typeLabel}${songLabel && songLabel !== '— Chọn bài hát —' ? ` — ${songLabel}` : ''}`;
+    const body = [
+      '## Thông tin',
+      `- Loại: **${typeLabel}**`,
+      `- Bài hát: **${songLabel || 'không chọn'}**`,
+      `- Vị trí: ${get('location') || '—'}`,
+      '',
+      '## Đoạn lyrics cần sửa',
+      '```',
+      get('current'),
+      '```',
+      '',
+      '## Đề xuất sửa thành',
+      get('proposed') || '—',
+      '',
+      '## Lý do / bằng chứng',
+      get('reason'),
+      '',
+      '## Link nguồn đối chiếu',
+      get('source'),
+      '',
+      '## Liên hệ',
+      get('contact') || '—',
+      '',
+      '---',
+      '_Gửi từ form Correction của website. Maintainer sẽ gắn label trạng thái: `submitted` → `reviewing` → `approved` / `rejected`._',
+    ].join('\n');
+    return { title, body };
+  };
+
+  const openGithub = (title: string, body: string) => {
+    const repo = form?.dataset.repo ?? '';
+    const url = `https://github.com/${repo}/issues/new?template=correction.md&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+    window.open(url, '_blank', 'noopener');
+    if (doneEl) {
+      doneEl.textContent = 'Đã mở GitHub Issue — kiểm tra cửa sổ GitHub mới và bấm Submit để hoàn tất.';
+      doneEl.classList.remove('hidden');
+    }
+  };
+
+  const copyBody = async (body: string) => {
+    try {
+      await navigator.clipboard.writeText(body);
+      if (doneEl) {
+        doneEl.textContent = 'Đã sao chép nội dung. Mở GitHub → Issues → New issue và dán vào.';
+        doneEl.classList.remove('hidden');
+      }
+    } catch {
+      if (doneEl) {
+        doneEl.textContent = 'Không sao chép được — hãy copy thủ công từ form.';
+        doneEl.classList.remove('hidden');
+      }
+    }
+  };
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const { title, body } = buildBody(new FormData(form));
+    const repo = form.dataset.repo ?? '';
+    if (repo) openGithub(title, body);
+    else void copyBody(body);
+  });
+
+  document.getElementById('copy-correction')?.addEventListener('click', () => {
+    if (!form) return;
+    const { body } = buildBody(new FormData(form));
+    void copyBody(body);
+  });
+</script>

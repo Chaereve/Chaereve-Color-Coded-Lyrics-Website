@@ -1,0 +1,350 @@
+{
+  "id": "song-demo-03",
+  "title": "Demo Song 03",
+  "artistId": "demo",
+  "slug": "demo-song-03",
+  "status": "published",
+  "released": "2026-11-01",
+  "youtube": "",
+  "cover": "/uploads/demo-song-03-cover.svg",
+  "language": "ko",
+  "album": "Demo Album A",
+  "credits": {
+    "lyrics": [
+      "Demo lyricist (tên giả lập)"
+    ],
+    "composition": [
+      "Demo composer (tên giả lập)"
+    ],
+    "arrangement": [
+      "Demo arranger (tên giả lập)"
+    ],
+    "translation": [
+      "Demo translation team"
+    ],
+    "romanization": [
+      "Demo romanization team"
+    ],
+    "colorCoding": [
+      "Demo color coder"
+    ],
+    "source": "Dữ liệu demo — cần thay bằng nguồn chính thức khi có bản quyền."
+  },
+  "members": [
+    {
+      "id": "aria",
+      "name": "Aria",
+      "color": "#ff6b9d"
+    },
+    {
+      "id": "bora",
+      "name": "Bora",
+      "color": "#ffa94d"
+    },
+    {
+      "id": "ciel",
+      "name": "Ciel",
+      "color": "#4dabf7"
+    },
+    {
+      "id": "dana",
+      "name": "Dana",
+      "color": "#69db7c"
+    },
+    {
+      "id": "eko",
+      "name": "Eko",
+      "color": "#b197fc"
+    },
+    {
+      "id": "faye",
+      "name": "Faye",
+      "color": "#ffd43b"
+    }
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "label": "Intro",
+      "lines": [
+        {
+          "id": "line-001",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "밤하늘의 별을 세며",
+          "romanization": "bamhaneur byeoreul semyeo",
+          "translation": "Đếm những vì sao trên trời đêm",
+          "type": "lyric"
+        },
+        {
+          "id": "line-002",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "너에게 보내는 말",
+          "romanization": "neoege boneuneun mal",
+          "translation": "Lời gửi đến bạn",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "verse-1",
+      "label": "Verse 1",
+      "lines": [
+        {
+          "id": "line-003",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "텔레비전이 꺼진 후",
+          "romanization": "tellebijeoni kkeojin hu",
+          "translation": "Sau khi tivi tắt",
+          "type": "lyric"
+        },
+        {
+          "id": "line-004",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "방 안에 남은 정적",
+          "romanization": "bang ane nameun jeongjeok",
+          "translation": "Tĩnh lặng còn lại trong phòng",
+          "type": "lyric"
+        },
+        {
+          "id": "line-005",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "창밖의 불빛들이",
+          "romanization": "changbagui bulbitdeuri",
+          "translation": "Những ánh đèn ngoài cửa sổ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-006",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "작은 별처럼 반짝여",
+          "romanization": "jageun byeolcheoreom banjjakyeo",
+          "translation": "Tỏa sáng như những ngôi sao nhỏ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-007",
+          "memberIds": [
+            "eko",
+            "faye"
+          ],
+          "text": "오래 전의 우리에게도",
+          "romanization": "oreo jeonui uregedo",
+          "translation": "Dành cho chúng ta của ngày xưa",
+          "type": "lyric"
+        },
+        {
+          "id": "line-008",
+          "memberIds": [
+            "aria",
+            "bora"
+          ],
+          "text": "이 밤이 전하는 마음",
+          "romanization": "i bam-i jeonhanun maeum",
+          "translation": "Trái tim mà đêm nay truyền tải",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "pre-chorus",
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "id": "line-009",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "혹시 넌 듣고 있을까",
+          "romanization": "hoksi neon deureugo isseulkka",
+          "translation": "Biết đâu bạn đang lắng nghe",
+          "type": "lyric"
+        },
+        {
+          "id": "line-010",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "먼 미래의 너에게도",
+          "romanization": "meon miraeui neoege-do",
+          "translation": "Gửi cả tới bạn của tương lai xa",
+          "type": "lyric"
+        },
+        {
+          "id": "line-011",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "같은 별을 보며",
+          "romanization": "gateun byeoreul bomyeo",
+          "translation": "Cùng nhìn một ngôi sao",
+          "type": "lyric"
+        },
+        {
+          "id": "line-012",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "같은 마음을 담아",
+          "romanization": "gateun maeumeul dama",
+          "translation": "Chứa cùng một tấm lòng",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "chorus",
+      "label": "Chorus",
+      "lines": [
+        {
+          "id": "line-013",
+          "memberIds": [],
+          "text": "밤하늘에 이름을 적어",
+          "romanization": "bamhaneure ireumeul jeokeo",
+          "translation": "Viết tên lên trời đêm",
+          "type": "all"
+        },
+        {
+          "id": "line-014",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "내일이 오기 전에",
+          "romanization": "naeri oigi jeone",
+          "translation": "Trước khi ngày mai tới",
+          "type": "lyric"
+        },
+        {
+          "id": "line-015",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "조금 더 오래 머물자",
+          "romanization": "jogeum deo ore meomulja",
+          "translation": "Ở lại thêm một chút lâu hơn",
+          "type": "lyric"
+        },
+        {
+          "id": "line-016",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "별빛이 남긴 자리",
+          "romanization": "byeolbichi namgin jari",
+          "translation": "Vết sao để lại",
+          "type": "lyric"
+        },
+        {
+          "id": "line-017",
+          "memberIds": [
+            "dana",
+            "eko"
+          ],
+          "text": "우리의 약속이 되어",
+          "romanization": "uriui yaksoge doeeo",
+          "translation": "Trở thành lời hứa của chúng ta",
+          "type": "lyric"
+        },
+        {
+          "id": "line-018",
+          "memberIds": [
+            "faye",
+            "aria"
+          ],
+          "text": "오래도록 빛나길",
+          "romanization": "oraedorok bitnage",
+          "translation": "Mong mãi mãi tỏa sáng",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "label": "Bridge",
+      "lines": [
+        {
+          "id": "line-019",
+          "memberIds": [],
+          "text": "",
+          "romanization": "",
+          "translation": "",
+          "type": "instrumental"
+        },
+        {
+          "id": "line-020",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "숨을 고르며",
+          "romanization": "sumeul geureumya",
+          "translation": "Hít thở điều hòa",
+          "type": "lyric"
+        },
+        {
+          "id": "line-021",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "우릴 봐!",
+          "romanization": "uril bwa",
+          "translation": "Nhìn chúng ta đi!",
+          "type": "adlib"
+        },
+        {
+          "id": "line-022",
+          "memberIds": [],
+          "text": "같은 하늘 아래서",
+          "romanization": "gateun hul alaeseo",
+          "translation": "Dưới cùng một bầu trời",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "lines": [
+        {
+          "id": "line-023",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "별이 지는 순간에도",
+          "romanization": "byeoli jineun sungandeodo",
+          "translation": "Ngay cả lúc sao rơi",
+          "type": "lyric"
+        },
+        {
+          "id": "line-024",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "우리는 함께야",
+          "romanization": "urineun hamkkeya",
+          "translation": "Chúng ta luôn ở bên nhau",
+          "type": "lyric"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Bản demo: toàn bộ lời bài hát được viết giả lập cho mục đích minh họa giao diện, không phải lời gốc có bản quyền.",
+    "Color coding theo bản thu studio (studio version), không theo live stage.",
+    "Dòng adlib chỉ hiển thị khi bật toggle Adlib và KHÔNG được tính vào line distribution.",
+    "Version: studio."
+  ],
+  "sources": [
+    "Bản demo nội bộ — thay bằng link official audio / official MV / lyric video."
+  ]
+}

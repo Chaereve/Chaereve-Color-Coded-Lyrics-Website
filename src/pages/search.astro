@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBar from '../components/SearchBar.astro';
+import Skeleton from '../components/Skeleton.astro';
+import { getArtists, getPublishedSongs } from '../lib/content';
+import { buildSearchIndex } from '../lib/search';
+
+const index = buildSearchIndex(getArtists(), getPublishedSongs());
+const initialSuggestions = index.filter((e) => e.type === 'song').slice(0, 6);
+---
+<BaseLayout title="Tìm kiếm" description="Tìm bài hát, nghệ sĩ và thành viên — tìm kiếm phía client, không dấu, không phân biệt hoa thường." path="/search/" noindex>
+  <div class="container-page pb-16">
+    <header class="pt-6">
+      <h1 class="text-2xl font-black tracking-tight sm:text-3xl">Tìm kiếm</h1>
+      <p class="mt-2 text-sm text-ink-muted">
+        Tìm theo tên bài hát, nghệ sĩ hoặc thành viên. Hỗ trợ tìm không dấu và không phân biệt hoa/thường.
+      </p>
+      <div class="mt-4 max-w-2xl">
+        <SearchBar autofocus />
+      </div>
+    </header>
+
+    <p id="search-status" class="mt-6 text-sm text-ink-muted" role="status" aria-live="polite"></p>
+
+    <!-- Skeleton hiển thị trước khi JS render kết quả -->
+    <div class="mt-4">
+      <Skeleton count={6} />
+    </div>
+    <noscript>
+      <p class="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-ink-muted">
+        Tìm kiếm cần JavaScript. Bạn vẫn có thể vào trực tiếp trang chủ hoặc trang bài hát từ menu.
+      </p>
+    </noscript>
+
+    <ul id="search-results" class="mt-4 hidden flex-col gap-2"></ul>
+
+    <div id="search-empty" class="mt-4 hidden">
+      <div class="card flex flex-col items-center gap-3 px-6 py-12 text-center">
+        <p class="text-sm font-semibold">Không tìm thấy kết quả nào</p>
+        <p class="text-xs text-ink-muted">Thử từ khóa khác, ví dụ tên bài hát hoặc tên thành viên.</p>
+      </div>
+    </div>
+
+    <section id="search-suggestions" class="mt-8">
+      <h2 class="mb-3 text-sm font-bold uppercase tracking-wide text-ink-faint">Gợi ý cho bạn</h2>
+      <ul class="flex flex-wrap gap-2">
+        {
+          initialSuggestions.map((e) => (
+            <li>
+              <a href={e.url} class="chip min-h-touch items-center border-white/15 bg-white/5 px-3 text-ink-muted hover:text-ink">
+                {e.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+
+  <script type="application/json" id="search-index" set:html={JSON.stringify(index).replace(/</g, '\\u003c')} />
+</BaseLayout>
+
+<script>
+  const TYPE_LABEL: Record<string, string> = { song: 'Bài hát', artist: 'Nghệ sĩ', member: 'Thành viên' };
+
+  const normalize = (text: string): string =>
+    text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/Đ/g, 'D')
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  interface Entry {
+    type: 'song' | 'artist' | 'member';
+    title: string;
+    subtitle: string;
+    url: string;
+    keywords: string;
+  }
+
+  const raw = document.getElementById('search-index')?.textContent ?? '[]';
+  const entries = JSON.parse(raw) as Entry[];
+
+  const resultsEl = document.getElementById('search-results');
+  const emptyEl = document.getElementById('search-empty');
+  const statusEl = document.getElementById('search-status');
+  const suggestionsEl = document.getElementById('search-suggestions');
+  const skeleton = document.querySelector<HTMLElement>('[data-skeleton]');
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+
+  const search = (query: string): Entry[] => {
+    const q = normalize(query);
+    if (!q) return [];
+    const tokens = q.split(' ').filter(Boolean);
+    return entries.filter((e) => tokens.every((t) => e.keywords.includes(t)));
+  };
+
+  const render = (query: string) => {
+    const results = search(query);
+
+    skeleton?.classList.add('hidden');
+    resultsEl?.classList.remove('hidden');
+    resultsEl?.classList.add('flex');
+
+    if (!query.trim()) {
+      resultsEl!.innerHTML = '';
+      resultsEl!.classList.add('hidden');
+      resultsEl!.classList.remove('flex');
+      emptyEl?.classList.add('hidden');
+      suggestionsEl?.classList.remove('hidden');
+      if (statusEl) statusEl.textContent = '';
+      return;
+    }
+
+    suggestionsEl?.classList.add('hidden');
+    if (statusEl) {
+      statusEl.textContent = results.length > 0 ? `${results.length} kết quả cho “${query}”` : '';
+    }
+
+    if (results.length === 0) {
+      resultsEl!.innerHTML = '';
+      emptyEl?.classList.remove('hidden');
+      return;
+    }
+    emptyEl?.classList.add('hidden');
+
+    resultsEl!.innerHTML = results
+      .map(
+        (e) => `
+      <li>
+        <a href="${e.url}" class="card flex items-center gap-3 px-4 py-3 transition-transform hover:-translate-y-0.5">
+          <span class="chip shrink-0 border-white/15 bg-white/5 text-[11px] text-ink-faint">${TYPE_LABEL[e.type] ?? e.type}</span>
+          <span class="min-w-0 flex-1">
+            <span class="block truncate text-sm font-bold">${e.title}</span>
+            ${e.subtitle ? `<span class="block truncate text-xs text-ink-muted">${e.subtitle}</span>` : ''}
+          </span>
+          <span aria-hidden="true" class="text-ink-faint">→</span>
+        </a>
+      </li>`,
+      )
+      .join('');
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q') ?? '';
+  if (input && q) input.value = q;
+  render(q);
+
+  input?.addEventListener('input', () => render(input.value));
+  input?.closest('form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    render(input.value);
+    const url = new URL(window.location.href);
+    if (input.value) url.searchParams.set('q', input.value);
+    else url.searchParams.delete('q');
+    window.history.replaceState({}, '', url);
+  });
+</script>

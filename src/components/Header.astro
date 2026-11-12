@@ -1,0 +1,120 @@
+---
+import { SITE_NAME } from '../lib/config';
+import ThemeToggle from './ThemeToggle.astro';
+
+const nav = [
+  { href: '/', label: 'Trang chủ' },
+  { href: '/search/', label: 'Tìm kiếm' },
+  { href: '/corrections/', label: 'Gửi correction' },
+  { href: '/content-policy/', label: 'Chính sách nội dung' },
+];
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+---
+<header class="sticky top-0 z-40 border-b border-white/10 bg-surface/85 backdrop-blur-md">
+  <div class="container-page flex h-14 items-center justify-between gap-2">
+    <div class="flex min-w-0 items-center gap-1">
+      <button
+        type="button"
+        id="header-back"
+        aria-label="Quay lại trang trước"
+        class="btn-ghost hidden h-11 w-11 !min-w-11 shrink-0 rounded-full !px-0"
+        data-back
+      >
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+      </button>
+      <a href="/" class="flex items-center gap-2 rounded-lg px-1 py-1" aria-label={`${SITE_NAME} — trang chủ`}>
+        <span
+          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-pink-500 text-sm font-black text-white"
+          aria-hidden="true">C</span
+        >
+        <span class="truncate text-base font-bold tracking-tight">{SITE_NAME}</span>
+      </a>
+    </div>
+
+    <nav aria-label="Điều hướng chính" class="hidden md:block">
+      <ul class="flex items-center gap-1">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  'inline-flex min-h-touch items-center rounded-lg px-3 text-sm font-medium transition-colors',
+                  isActive(item.href) ? 'text-accent-soft' : 'text-ink-muted hover:text-ink',
+                ]}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-1">
+      <a
+        href="/search/"
+        aria-label="Tìm kiếm"
+        class="btn-ghost h-11 w-11 !min-w-11 rounded-full !px-0"
+      >
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+      </a>
+      <ThemeToggle />
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        aria-label="Mở menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="btn-ghost h-11 w-11 !min-w-11 rounded-full !px-0 md:hidden"
+      >
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu mobile -->
+  <nav
+    id="mobile-menu"
+    aria-label="Điều hướng mobile"
+    class="hidden border-t border-white/10 bg-surface md:hidden"
+  >
+    <ul class="container-page flex flex-col gap-1 py-3">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'flex min-h-touch items-center rounded-xl px-3 text-sm font-medium',
+                isActive(item.href) ? 'bg-accent/15 text-accent-soft' : 'text-ink-muted',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  // Nút back (ẩn nếu không có lịch sử trong tab này)
+  const backBtn = document.querySelector<HTMLButtonElement>('[data-back]');
+  if (backBtn) {
+    if (window.history.length > 1) backBtn.classList.remove('hidden');
+    backBtn.addEventListener('click', () => window.history.back());
+  }
+
+  // Menu mobile
+  const menuBtn = document.querySelector<HTMLButtonElement>('#mobile-menu-btn');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  menuBtn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+  });
+</script>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const sections = [
+  {
+    title: 'Không lưu trữ lyrics trái phép',
+    body: 'Website chỉ đăng lyrics khi có quyền sử dụng hợp lý và ghi rõ nguồn. Nội dung demo trong repo được viết giả lập, không phải lời bài hát thật có bản quyền. Khi nhận khiếu nại bản quyền hợp lý, chúng tôi gỡ nội dung trong thời gian sớm nhất.',
+  },
+  {
+    title: 'Credits và nguồn translation',
+    body: 'Mỗi bài có credits: lyrics, composer, arranger, translation, romanization, color coding và nguồn (source). Translation phải trích dẫn nguồn dịch rõ ràng (dịch giả, trang, video…). Không dùng auto-translation làm nguồn chính — dịch máy chỉ có thể tham khảo, không được đặt làm translation chính thức.',
+  },
+  {
+    title: 'Correction cần bằng chứng',
+    body: 'Mọi đề xuất sửa đổi (lyrics, color coding, translation, romanization) phải kèm lý do và link nguồn đối chiếu (official audio, official MV, lyric video, interview…). Correction đi qua quy trình duyệt: submitted → reviewing → approved / rejected. Không có thay đổi tự động vào dữ liệu JSON.',
+  },
+  {
+    title: 'Color coding theo studio version',
+    body: 'Mặc định, color coding dựa trên bản thu studio (bản gốc trong album/official audio), không dựa trên live stage. Nếu bài là live version, phải có ghi chú (notes) riêng nói rõ điều đó.',
+  },
+  {
+    title: 'Quy tắc adlib và background vocal',
+    body: 'Adlib KHÔNG được thêm mặc định — chỉ thêm khi thực sự cần và phải có ghi chú. Adlib không được tính vào line distribution và bị ẩn cho đến khi người xem bật hiển thị. Background vocal chỉ được color-code lặp lại khi thực sự cần phân biệt, tránh tô màu thừa gây hiểu nhầm.',
+  },
+  {
+    title: 'Không cổ vũ so sánh cạnh tranh',
+    body: 'Line distribution được hiển thị để tra cứu nội dung, KHÔNG để so sánh cạnh tranh giữa các thành viên. Website không đăng nội dung gây fanwar, không dùng số liệu để công kích ai.',
+  },
+];
+---
+<BaseLayout
+  title="Chính sách nội dung"
+  description="Quy tắc nội dung: không lưu trữ lyrics trái phép, credits nguồn translation, correction cần bằng chứng, color coding theo studio version, adlib không mặc định."
+  path="/content-policy/"
+>
+  <div class="container-page max-w-3xl pb-16">
+    <header class="pt-6">
+      <h1 class="text-2xl font-black tracking-tight sm:text-3xl">Chính sách nội dung</h1>
+      <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+        Trang này giải thích các quy tắc nội dung của website — áp dụng cho mọi bài hát, mọi contributor
+        và mọi correction.
+      </p>
+    </header>
+
+    <div class="mt-6 flex flex-col gap-4">
+      {
+        sections.map((s, i) => (
+          <section class="card p-5">
+            <div class="flex items-start gap-3">
+              <span
+                class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/20 text-xs font-black text-accent-soft"
+                aria-hidden="true"
+              >
+                {i + 1}
+              </span>
+              <div>
+                <h2 class="text-base font-bold">{s.title}</h2>
+                <p class="mt-2 text-sm leading-relaxed text-ink-muted">{s.body}</p>
+              </div>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="card mt-6 flex flex-col items-start gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="text-base font-bold">Thấy nội dung vi phạm?</h2>
+        <p class="mt-1 text-sm text-ink-muted">Báo lỗi nội dung kèm nguồn đối chiếu — chúng tôi xử lý có kiểm duyệt.</p>
+      </div>
+      <a href="/corrections/?type=content" class="btn-primary shrink-0">Báo nội dung</a>
+    </div>
+  </div>
+</BaseLayout>

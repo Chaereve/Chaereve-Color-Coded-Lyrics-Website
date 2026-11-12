@@ -1,0 +1,44 @@
+---
+import type { Song } from '../lib/types';
+interface Props {
+  prev?: Song;
+  next?: Song;
+}
+const { prev, next } = Astro.props;
+---
+{
+  (prev || next) && (
+    <nav aria-label="Bài hát trước/sau" class="grid gap-3 sm:grid-cols-2">
+      {prev ? (
+        <a
+          href={`/lyrics/${prev.slug}/`}
+          class="card group flex items-center gap-3 p-4 text-left transition-transform hover:-translate-y-0.5"
+        >
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-ink-faint">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+          <span class="min-w-0">
+            <span class="block text-xs text-ink-faint">Bài trước</span>
+            <span class="block truncate text-sm font-bold group-hover:text-accent-soft">{prev.title}</span>
+          </span>
+        </a>
+      ) : (
+        <span aria-hidden="true" class="hidden sm:block" />
+      )}
+      {next && (
+        <a
+          href={`/lyrics/${next.slug}/`}
+          class="card group flex items-center justify-end gap-3 p-4 text-right transition-transform hover:-translate-y-0.5"
+        >
+          <span class="min-w-0">
+            <span class="block text-xs text-ink-faint">Bài tiếp theo</span>
+            <span class="block truncate text-sm font-bold group-hover:text-accent-soft">{next.title}</span>
+          </span>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-ink-faint">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </a>
+      )}
+    </nav>
+  )
+}

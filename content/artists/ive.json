@@ -1,0 +1,64 @@
+{
+  "id": "ive",
+  "name": "IVE",
+  "slug": "ive",
+  "type": "group",
+  "description": "Nghệ sĩ mẫu (demo) cho website color-coded lyrics. Mô tả và dữ liệu trong file này chỉ dùng để minh họa giao diện, không phải thông tin chính thức.",
+  "cover": "/uploads/ive-cover.svg",
+  "members": [
+    {
+      "id": "gaeul",
+      "name": "Gaeul",
+      "romanized": "Gaeul",
+      "color": "#e05c8a",
+      "role": "Main Dancer",
+      "officialColor": "#e05c8a",
+      "colorSource": ""
+    },
+    {
+      "id": "yujin",
+      "name": "Yujin",
+      "romanized": "Yujin",
+      "color": "#5c8ae0",
+      "role": "Leader, Vocalist",
+      "officialColor": "#5c8ae0",
+      "colorSource": ""
+    },
+    {
+      "id": "rei",
+      "name": "Rei",
+      "romanized": "Rei",
+      "color": "#e0a55c",
+      "role": "Rapper, Vocalist",
+      "officialColor": "#e0a55c",
+      "colorSource": ""
+    },
+    {
+      "id": "wonyoung",
+      "name": "Wonyoung",
+      "romanized": "Wonyoung",
+      "color": "#9b5ce0",
+      "role": "Vocalist, Center",
+      "officialColor": "#9b5ce0",
+      "colorSource": ""
+    },
+    {
+      "id": "liz",
+      "name": "Liz",
+      "romanized": "Liz",
+      "color": "#3fb8a0",
+      "role": "Main Vocalist",
+      "officialColor": "#3fb8a0",
+      "colorSource": ""
+    },
+    {
+      "id": "leeseo",
+      "name": "Leeseo",
+      "romanized": "Leeseo",
+      "color": "#e05c5c",
+      "role": "Vocalist, Maknae",
+      "officialColor": "#e05c5c",
+      "colorSource": ""
+    }
+  ]
+}

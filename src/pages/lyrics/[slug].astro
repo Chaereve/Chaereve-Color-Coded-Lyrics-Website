@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LyricsPanel from '../../components/LyricsPanel.astro';
+import Distribution from '../../components/Distribution.astro';
+import CreditsPanel from '../../components/CreditsPanel.astro';
+import PrevNextNav from '../../components/PrevNextNav.astro';
+import SongCard from '../../components/SongCard.astro';
+import { getArtists, getPublishedSongs, getSongs } from '../../lib/content';
+import { formatDate } from '../../lib/format';
+import { breadcrumbJsonLd, musicRecordingJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  // Mọi file JSON trong content/songs/ đều có trang riêng.
+  // Bài chưa publish vẫn render (noindex) để admin/preview xem được.
+  return getSongs().map((song) => ({ params: { slug: song.slug }, props: { song } }));
+}
+
+const { song } = Astro.props;
+const artists = getArtists();
+const artist = artists.find((a) => a.id === song.artistId);
+const published = getPublishedSongs();
+const idx = published.findIndex((s) => s.slug === song.slug);
+const prev = idx > 0 ? published[idx - 1] : undefined;
+const next = idx >= 0 && idx < published.length - 1 ? published[idx + 1] : undefined;
+const related = published.filter((s) => s.artistId === song.artistId && s.slug !== song.slug).slice(0, 4);
+
+const description = `Lyrics tô màu theo thành viên cho "${song.title}"${artist ? ` — ${artist.name}` : ''}: line distribution, romanization, translation, credits và ghi chú nguồn.`;
+const jsonLd = [
+  musicRecordingJsonLd({
+    title: song.title,
+    slug: song.slug,
+    artistName: artist?.name ?? song.artistId,
+    artistSlug: artist?.slug ?? song.artistId,
+    released: song.released,
+    cover: song.cover,
+  }),
+  breadcrumbJsonLd([
+    { name: 'Trang chủ', path: '/' },
+    ...(artist ? [{ name: artist.name, path: `/artist/${artist.slug}/` }] : []),
+    { name: song.title, path: `/lyrics/${song.slug}/` },
+  ]),
+];
+const isDraft = song.status !== 'published';
+---
+<BaseLayout
+  title={`${song.title}${artist ? ` – ${artist.name}` : ''}`}
+  description={description}
+  path={`/lyrics/${song.slug}/`}
+  ogType="music.song"
+  image={song.cover}
+  jsonLd={jsonLd}
+  noindex={isDraft}
+>
+  <div class="container-page pb-16">
+    <Breadcrumbs
+      items={[
+        { label: 'Trang chủ', href: '/' },
+        ...(artist ? [{ label: artist.name, href: `/artist/${artist.slug}/` }] : []),
+        { label: song.title },
+      ]}
+    />
+
+    {
+      isDraft && (
+        <p class="mb-4 rounded-xl border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
+          Bài hát đang ở trạng thái <strong>{song.status}</strong> — trang này chỉ để xem trước, không
+          được đưa vào danh sách công khai hay sitemap.
+        </p>
+      )
+    }
+
+    <!-- Header bài hát -->
+    <header class="mt-2 grid gap-6 sm:grid-cols-[12rem_1fr] sm:items-start lg:grid-cols-[16rem_1fr]">
+      <img
+        src={song.cover || '/uploads/placeholder-cover.svg'}
+        alt={`Bìa bài hát ${song.title}`}
+        width="400"
+        height="400"
+        decoding="async"
+        class="aspect-square w-full max-w-[16rem] rounded-2xl object-cover shadow-lg ring-1 ring-white/10"
+      />
+      <div class="min-w-0">
+        <h1 class="text-2xl font-black leading-tight tracking-tight sm:text-4xl">{song.title}</h1>
+        <p class="mt-2 text-base text-ink-muted">
+          {
+            artist ? (
+              <a href={`/artist/${artist.slug}/`} class="font-semibold text-accent-soft hover:underline">
+                {artist.name}
+              </a>
+            ) : (
+              song.artistId
+            )
+          }
+        </p>
+        <dl class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-muted">
+          {
+            song.released && (
+              <div class="flex gap-1.5">
+                <dt class="text-ink-faint">Phát hành:</dt>
+                <dd>
+                  <time datetime={song.released}>{formatDate(song.released)}</time>
+                </dd>
+              </div>
+            )
+          }
+          {song.album && <div class="flex gap-1.5"><dt class="text-ink-faint">Album:</dt><dd>{song.album}</dd></div>}
+          {
+            song.language && (
+              <div class="flex gap-1.5">
+                <dt class="text-ink-faint">Ngôn ngữ:</dt>
+                <dd>{song.language.toUpperCase()}</dd>
+              </div>
+            )
+          }
+        </dl>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {
+            song.youtube && (
+              <a
+                href={song.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary"
+              >
+                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.8 2.8 0 00-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 00-2 2A29 29 0 002 12a29 29 0 00.4 4.8 2.8 2.8 0 002 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 002-2A29 29 0 0022 12a29 29 0 00-.4-4.8zM10 15.2V8.8L15.5 12 10 15.2z" /></svg>
+                Xem trên YouTube
+              </a>
+            )
+          }
+          <a href={`/corrections/?song=${encodeURIComponent(song.slug)}`} class="btn-ghost">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4m0 4h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" /></svg>
+            Báo lỗi / Sửa lyrics
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Nội dung chính -->
+    <div class="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
+      <div class="flex min-w-0 flex-col gap-6">
+        <LyricsPanel song={song} />
+        <PrevNextNav prev={prev} next={next} />
+      </div>
+
+      <aside class="flex flex-col gap-6 lg:sticky lg:top-20" aria-label="Thông tin kèm theo">
+        <Distribution song={song} />
+        <CreditsPanel song={song} />
+        <section class="card p-4 text-xs leading-relaxed text-ink-muted">
+          <p class="font-semibold text-ink">Thấy thông tin sai?</p>
+          <p class="mt-1">
+            Gửi correction kèm bằng chứng và nguồn đối chiếu — maintainer sẽ duyệt trước khi đổi dữ liệu.
+          </p>
+          <a href={`/corrections/?song=${encodeURIComponent(song.slug)}`} class="mt-3 inline-flex min-h-touch items-center font-semibold text-accent-soft hover:underline">
+            Gửi correction →
+          </a>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Bài hát liên quan -->
+    {
+      related.length > 0 && (
+        <section aria-labelledby="related-heading" class="mt-12">
+          <h2 id="related-heading" class="mb-4 text-lg font-bold">Bài hát khác của {artist?.name ?? 'nghệ sĩ'}</h2>
+          <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {related.map((s) => (
+              <SongCard song={s} artist={artist} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</BaseLayout>

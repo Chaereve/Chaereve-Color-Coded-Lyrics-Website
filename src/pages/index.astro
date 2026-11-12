@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBar from '../components/SearchBar.astro';
+import SongCard from '../components/SongCard.astro';
+import ArtistCard from '../components/ArtistCard.astro';
+import MemberCard from '../components/MemberCard.astro';
+import { getArtists, getPublishedSongs } from '../lib/content';
+import { computeDistribution, memberLinesAcrossSongs } from '../lib/distribution';
+import { SITE_NAME, SITE_TAGLINE } from '../lib/config';
+
+const artists = getArtists();
+const songs = getPublishedSongs();
+
+const latest = songs.slice(0, 6);
+const trending = [...songs]
+  .map((s) => ({ song: s, lines: computeDistribution(s).totalLines }))
+  .sort((a, b) => b.lines - a.lines)
+  .slice(0, 3);
+
+const artistRank = artists
+  .map((a) => ({ artist: a, count: songs.filter((s) => s.artistId === a.id).length }))
+  .sort((a, b) => b.count - a.count);
+
+const memberSpotlight = artists
+  .flatMap((a) => (a.members ?? []).map((m) => ({ member: m, artist: a })))
+  .map((x) => ({
+    ...x,
+    lines: memberLinesAcrossSongs(x.member.id, songs),
+  }))
+  .sort((a, b) => b.lines - a.lines)
+  .slice(0, 6);
+---
+<BaseLayout path="/" jsonLd={[]}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-white/10 bg-surface-raised">
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(124,108,255,0.25),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(236,72,153,0.18),transparent_50%)]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="container-page relative py-12 sm:py-16">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-accent-soft">{SITE_TAGLINE}</p>
+      <h1 class="mt-3 max-w-2xl text-3xl font-black leading-tight tracking-tight sm:text-5xl">
+        {SITE_NAME}
+        <span class="bg-gradient-to-r from-accent-soft via-pink-400 to-amber-300 bg-clip-text text-transparent">
+          lyrics tô màu theo thành viên
+        </span>
+      </h1>
+      <p class="mt-4 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
+        Xem color-coded lyrics, line distribution minh bạch, romanization và translation — mọi dữ liệu
+        lưu trong Git, có credits, có nguồn, có quy trình correction có kiểm duyệt.
+      </p>
+      <div class="mt-6 max-w-2xl">
+        <SearchBar large />
+      </div>
+      <dl class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+        <div>
+          <dt class="text-ink-faint">Bài hát</dt>
+          <dd class="text-xl font-black tabular-nums">{songs.length}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-faint">Nghệ sĩ</dt>
+          <dd class="text-xl font-black tabular-nums">{artists.length}</dd>
+        </div>
+        <div>
+          <dt class="text-ink-faint">Thành viên</dt>
+          <dd class="text-xl font-black tabular-nums">{memberSpotlight.length > 0 ? artists.reduce((n, a) => n + (a.members?.length ?? 0), 0) : 0}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="container-page flex flex-col gap-12 py-10">
+    <!-- Bài hát mới nhất -->
+    <section aria-labelledby="latest-heading">
+      <div class="mb-4 flex items-end justify-between gap-3">
+        <div>
+          <h2 id="latest-heading" class="text-lg font-bold">Bài hát mới nhất</h2>
+          <p class="text-xs text-ink-faint">Theo ngày phát hành</p>
+        </div>
+        <a href="/search/" class="text-sm font-semibold text-accent-soft hover:underline">Xem tất cả →</a>
+      </div>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        {latest.map((song) => <SongCard song={song} artist={artists.find((a) => a.id === song.artistId)} />)}
+      </div>
+    </section>
+
+    <!-- Trending -->
+    {
+      trending.length > 0 && (
+        <section aria-labelledby="trending-heading">
+          <div class="mb-4">
+            <h2 id="trending-heading" class="text-lg font-bold">Trending</h2>
+            <p class="text-xs text-ink-faint">Bài có nhiều dòng lời nhất (không dùng dữ liệu ẩn danh)</p>
+          </div>
+          <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {trending.map(({ song, lines }) => (
+              <a href={`/lyrics/${song.slug}/`} class="card group flex gap-4 p-4 transition-transform hover:-translate-y-0.5">
+                <img
+                  src={song.cover || '/uploads/placeholder-cover.svg'}
+                  alt={`Bìa bài ${song.title}`}
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-[88px] w-[88px] shrink-0 rounded-xl object-cover"
+                />
+                <div class="min-w-0 flex-1">
+                  <h3 class="truncate text-sm font-bold group-hover:text-accent-soft">{song.title}</h3>
+                  <p class="truncate text-xs text-ink-muted">
+                    {artists.find((a) => a.id === song.artistId)?.name ?? song.artistId}
+                  </p>
+                  <p class="mt-2 text-xs font-semibold text-accent-soft tabular-nums">{lines} dòng lời</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Nghệ sĩ phổ biến -->
+    <section aria-labelledby="artists-heading">
+      <div class="mb-4">
+        <h2 id="artists-heading" class="text-lg font-bold">Nghệ sĩ</h2>
+        <p class="text-xs text-ink-faint">Sắp xếp theo số bài hát</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {artistRank.map(({ artist, count }) => <ArtistCard artist={artist} songCount={count} />)}
+      </div>
+    </section>
+
+    <!-- Thành viên nổi bật -->
+    <section aria-labelledby="members-heading">
+      <div class="mb-4">
+        <h2 id="members-heading" class="text-lg font-bold">Thành viên nổi bật</h2>
+        <p class="text-xs text-ink-faint">Theo tổng số dòng trên toàn site — chỉ để tra cứu nội dung, không so sánh cạnh tranh</p>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          memberSpotlight.map(({ member, artist, lines }) => (
+            <MemberCard
+              href={`/member/${member.id}/`}
+              name={member.name}
+              color={member.color}
+              subtitle={`${artist.name}${member.role ? ` · ${member.role}` : ''}`}
+              lines={lines}
+            />
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>

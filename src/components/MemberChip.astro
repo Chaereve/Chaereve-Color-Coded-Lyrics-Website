@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  color: string;
+  href?: string;
+  size?: 'sm' | 'md';
+}
+const { name, color, href, size = 'sm' } = Astro.props;
+const sizeCls = size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-sm px-2.5 py-1';
+---
+{
+  href ? (
+    <a href={href} class="rounded-full hover:opacity-80">
+      <span
+        class={`chip ${sizeCls}`}
+        style={`border-color: ${color}55; background: ${color}14; color: ${color}`}
+      >
+        <span class="h-2 w-2 shrink-0 rounded-full" style={`background: ${color}`} aria-hidden="true" />
+        {name}
+      </span>
+    </a>
+  ) : (
+    <span
+      class={`chip ${sizeCls}`}
+      style={`border-color: ${color}55; background: ${color}14; color: ${color}`}
+    >
+      <span class="h-2 w-2 shrink-0 rounded-full" style={`background: ${color}`} aria-hidden="true" />
+      {name}
+    </span>
+  )
+}

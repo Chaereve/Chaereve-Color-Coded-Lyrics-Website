@@ -1,0 +1,264 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SongCard from '../../components/SongCard.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import { getArtists, getSongsByArtist } from '../../lib/content';
+import { computeDistribution, memberLinesAcrossSongs } from '../../lib/distribution';
+import { breadcrumbJsonLd, musicGroupJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return getArtists().map((artist) => ({ params: { slug: artist.slug }, props: { artist } }));
+}
+
+const { artist } = Astro.props;
+const songs = getSongsByArtist(artist.id);
+const totalLines = songs.reduce((n, s) => n + computeDistribution(s).totalLines, 0);
+
+const memberStats = (artist.members ?? [])
+  .map((m) => ({
+    member: m,
+    lines: songs.length > 0 ? memberLinesAcrossSongs(m.id, songs) : 0,
+  }))
+  .sort((a, b) => b.lines - a.lines);
+
+// Giá trị cho filter (client-side)
+const albums = [...new Set(songs.map((s) => s.album?.trim()).filter((a): a is string => Boolean(a)))].sort();
+const years = [...new Set(songs.map((s) => (s.released ?? '').slice(0, 4)).filter(Boolean))].sort().reverse();
+const languages = [...new Set(songs.map((s) => s.language).filter((l): l is string => Boolean(l)))].sort();
+
+const jsonLd = [
+  musicGroupJsonLd({
+    name: artist.name,
+    slug: artist.slug,
+    description: artist.description,
+    cover: artist.cover,
+    members: (artist.members ?? []).map((m) => ({ name: m.name })),
+  }),
+  breadcrumbJsonLd([
+    { name: 'Trang chủ', path: '/' },
+    { name: artist.name, path: `/artist/${artist.slug}/` },
+  ]),
+];
+---
+<BaseLayout
+  title={artist.name}
+  description={`${artist.name} — danh sách bài hát color-coded lyrics, thành viên và line distribution.${artist.description ? ` ${artist.description}` : ''}`.slice(0, 160)}
+  path={`/artist/${artist.slug}/`}
+  ogType="profile"
+  image={artist.cover}
+  jsonLd={jsonLd}
+>
+  <div class="container-page pb-16">
+    <Breadcrumbs items={[{ label: 'Trang chủ', href: '/' }, { label: artist.name }]} />
+
+    <header class="mt-2 grid gap-6 sm:grid-cols-[10rem_1fr] sm:items-center lg:grid-cols-[14rem_1fr]">
+      <img
+        src={artist.cover || '/uploads/placeholder-cover.svg'}
+        alt={`Ảnh nghệ sĩ ${artist.name}`}
+        width="400"
+        height="400"
+        decoding="async"
+        class="aspect-square w-full max-w-[14rem] rounded-2xl object-cover shadow-lg ring-1 ring-white/10"
+      />
+      <div>
+        <p class="text-xs font-bold uppercase tracking-wider text-accent-soft">
+          {artist.type === 'group' ? 'Nhóm' : 'Nghệ sĩ solo'}
+        </p>
+        <h1 class="mt-1 text-3xl font-black tracking-tight sm:text-4xl">{artist.name}</h1>
+        {artist.description && <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">{artist.description}</p>}
+        <dl class="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+          <div>
+            <dt class="text-ink-faint">Bài hát</dt>
+            <dd class="text-lg font-black tabular-nums">{songs.length}</dd>
+          </div>
+          <div>
+            <dt class="text-ink-faint">Tổng số dòng</dt>
+            <dd class="text-lg font-black tabular-nums">{totalLines}</dd>
+          </div>
+          <div>
+            <dt class="text-ink-faint">Thành viên</dt>
+            <dd class="text-lg font-black tabular-nums">{artist.members?.length ?? 0}</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <!-- Thành viên -->
+    <section aria-labelledby="members-heading" class="mt-10">
+      <h2 id="members-heading" class="mb-4 text-lg font-bold">Thành viên & màu nhận diện</h2>
+      <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          (artist.members ?? []).map((m) => (
+            <li>
+              <a
+                href={`/member/${m.id}/`}
+                class="card flex items-center gap-3 p-4 transition-transform hover:-translate-y-0.5"
+              >
+                <span
+                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-black text-white"
+                  style={`background: ${m.color}`}
+                  aria-hidden="true"
+                >
+                  {m.name.charAt(0).toUpperCase()}
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="block truncate text-sm font-bold">{m.name}</span>
+                  <span class="block truncate text-xs text-ink-muted">
+                    {m.role || 'Thành viên'}
+                    {m.romanized && m.romanized !== m.name ? ` · ${m.romanized}` : ''}
+                  </span>
+                </span>
+                <span
+                  class="h-6 w-6 shrink-0 rounded-full ring-2 ring-white/20"
+                  style={`background: ${m.color}`}
+                  title={`Màu: ${m.color}`}
+                  aria-label={`Màu ${m.color}`}
+                />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Top thành viên theo tổng số dòng (trong nghệ sĩ này) -->
+    {
+      songs.length > 0 && (
+        <section aria-labelledby="top-members-heading" class="mt-10">
+          <h2 id="top-members-heading" class="mb-1 text-lg font-bold">Tổng số dòng trong các bài của nghệ sĩ</h2>
+          <p class="mb-4 text-xs text-ink-faint">Sắp xếp giảm dần — dùng để tra cứu, không so sánh cạnh tranh.</p>
+          <ul class="card divide-y divide-white/10">
+            {memberStats.map(({ member, lines }) => (
+              <li class="flex items-center gap-3 px-4 py-3">
+                <span class="h-3 w-3 shrink-0 rounded-full" style={`background: ${member.color}`} aria-hidden="true" />
+                <a href={`/member/${member.id}/`} class="min-w-0 flex-1 truncate text-sm font-semibold hover:text-accent-soft">
+                  {member.name}
+                </a>
+                <div class="hidden h-2 w-40 overflow-hidden rounded-full bg-white/10 sm:block" aria-hidden="true">
+                  <span
+                    class="block h-full rounded-full"
+                    style={`width: ${memberStats[0] && memberStats[0].lines > 0 ? Math.round((lines / memberStats[0].lines) * 100) : 0}%; background: ${member.color}`}
+                  />
+                </div>
+                <span class="shrink-0 text-sm font-bold tabular-nums">{lines} dòng</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <!-- Filter + danh sách bài hát -->
+    <section aria-labelledby="songs-heading" class="mt-10">
+      <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <h2 id="songs-heading" class="text-lg font-bold">Bài hát <span class="text-ink-faint">({songs.length})</span></h2>
+      </div>
+
+      {
+        songs.length > 0 && (albums.length > 1 || years.length > 1 || languages.length > 1) && (
+          <form
+            id="song-filters"
+            class="card mb-5 flex flex-wrap items-end gap-3 p-4"
+            aria-label="Lọc bài hát"
+          >
+            {albums.length > 1 && (
+              <label class="flex min-w-[10rem] flex-1 flex-col gap-1 text-xs font-semibold text-ink-faint">
+                Album
+                <select
+                  name="album"
+                  class="min-h-touch w-full rounded-xl border border-white/10 bg-surface-muted px-3 text-sm text-ink"
+                >
+                  <option value="">Tất cả</option>
+                  {albums.map((a) => (
+                    <option value={a}>{a}</option>
+                  ))}
+                </select>
+              </label>
+            )}
+            {years.length > 1 && (
+              <label class="flex min-w-[8rem] flex-1 flex-col gap-1 text-xs font-semibold text-ink-faint">
+                Năm
+                <select
+                  name="year"
+                  class="min-h-touch w-full rounded-xl border border-white/10 bg-surface-muted px-3 text-sm text-ink"
+                >
+                  <option value="">Tất cả</option>
+                  {years.map((y) => (
+                    <option value={y}>{y}</option>
+                  ))}
+                </select>
+              </label>
+            )}
+            {languages.length > 1 && (
+              <label class="flex min-w-[8rem] flex-1 flex-col gap-1 text-xs font-semibold text-ink-faint">
+                Ngôn ngữ
+                <select
+                  name="language"
+                  class="min-h-touch w-full rounded-xl border border-white/10 bg-surface-muted px-3 text-sm text-ink"
+                >
+                  <option value="">Tất cả</option>
+                  {languages.map((l) => (
+                    <option value={l}>{l.toUpperCase()}</option>
+                  ))}
+                </select>
+              </label>
+            )}
+            <button type="reset" id="filter-reset" class="btn-ghost h-11">
+              Xoá bộ lọc
+            </button>
+          </form>
+        )
+      }
+
+      {
+        songs.length > 0 ? (
+          <div id="song-grid" class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {songs.map((song) => (
+              <div
+                class="song-item"
+                data-album={(song.album ?? '').trim()}
+                data-year={(song.released ?? '').slice(0, 4)}
+                data-language={song.language ?? ''}
+              >
+                <SongCard song={song} artist={artist} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyState title="Chưa có bài hát nào được publish" hint="Nghệ sĩ này sẽ hiển thị bài hát ngay sau khi admin merge PR." />
+        )
+      }
+      <p id="filter-empty" class="hidden text-sm text-ink-muted">Không có bài hát khớp bộ lọc.</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  // Filter album / năm / ngôn ngữ (client-side, không cần backend)
+  const form = document.getElementById('song-filters') as HTMLFormElement | null;
+  const grid = document.getElementById('song-grid');
+  const emptyMsg = document.getElementById('filter-empty');
+  const items = grid ? Array.from(grid.querySelectorAll<HTMLElement>('.song-item')) : [];
+
+  const applyFilter = () => {
+    if (!form) return;
+    const data = new FormData(form);
+    const album = String(data.get('album') ?? '');
+    const year = String(data.get('year') ?? '');
+    const language = String(data.get('language') ?? '');
+    let visible = 0;
+    for (const item of items) {
+      const ok =
+        (!album || item.dataset.album === album) &&
+        (!year || item.dataset.year === year) &&
+        (!language || item.dataset.language === language);
+      item.classList.toggle('hidden', !ok);
+      if (ok) visible += 1;
+    }
+    emptyMsg?.classList.toggle('hidden', visible > 0);
+  };
+
+  form?.addEventListener('change', applyFilter);
+  form?.addEventListener('reset', () => window.setTimeout(applyFilter, 0));
+</script>

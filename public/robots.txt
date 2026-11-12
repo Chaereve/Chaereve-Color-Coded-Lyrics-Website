@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Thay YOUR_DOMAIN bằng domain thật của bạn (PUBLIC_SITE_URL), ví dụ:
+# Sitemap: https://your-project.pages.dev/sitemap.xml
+Sitemap: https://YOUR_DOMAIN/sitemap.xml

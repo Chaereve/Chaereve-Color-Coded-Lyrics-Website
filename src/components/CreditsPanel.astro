@@ -1,0 +1,81 @@
+---
+import type { Song } from '../lib/types';
+import { nonEmpty } from '../lib/format';
+
+interface Props {
+  song: Song;
+}
+const { song } = Astro.props;
+const c = song.credits ?? {};
+
+const rows: { label: string; values: string[] }[] = [
+  { label: 'Lyrics', values: nonEmpty(c.lyrics) },
+  { label: 'Composer', values: nonEmpty(c.composition) },
+  { label: 'Arranger', values: nonEmpty(c.arrangement) },
+  { label: 'Translation', values: nonEmpty(c.translation) },
+  { label: 'Romanization', values: nonEmpty(c.romanization) },
+  { label: 'Color coding', values: nonEmpty(c.colorCoding) },
+];
+const source = c.source?.trim();
+const notes = nonEmpty(song.notes);
+const sources = nonEmpty(song.sources);
+---
+<div class="flex flex-col gap-4">
+  <section aria-labelledby="credits-heading" class="card p-4 sm:p-6">
+    <h2 id="credits-heading" class="text-base font-bold">Credits</h2>
+    <dl class="mt-4 flex flex-col divide-y divide-white/10">
+      {
+        rows.map((row) => (
+          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[10rem_1fr] sm:gap-4">
+            <dt class="text-xs font-semibold uppercase tracking-wide text-ink-faint">{row.label}</dt>
+            <dd class="text-sm text-ink-muted">
+              {row.values.length > 0 ? (
+                <ul class="flex flex-wrap gap-x-3 gap-y-1">
+                  {row.values.map((v) => (
+                    <li>{v}</li>
+                  ))}
+                </ul>
+              ) : (
+                <span class="text-ink-faint italic">Chưa cập nhật</span>
+              )}
+            </dd>
+          </div>
+        ))
+      }
+      <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-[10rem_1fr] sm:gap-4">
+        <dt class="text-xs font-semibold uppercase tracking-wide text-ink-faint">Nguồn</dt>
+        <dd class="break-words text-sm text-ink-muted">
+          {source ? source : <span class="text-ink-faint italic">Chưa cập nhật</span>}
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  {
+    (notes.length > 0 || sources.length > 0) && (
+      <section aria-labelledby="notes-heading" class="card p-4 sm:p-6">
+        <h2 id="notes-heading" class="text-base font-bold">Ghi chú & nguồn đối chiếu</h2>
+        {notes.length > 0 && (
+          <ul class="mt-3 flex flex-col gap-2 text-sm leading-relaxed text-ink-muted">
+            {notes.map((n) => (
+              <li class="flex gap-2">
+                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                <span>{n}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {sources.length > 0 && (
+          <div class="mt-4 border-t border-white/10 pt-3">
+            <p class="text-xs font-semibold uppercase tracking-wide text-ink-faint">Nguồn đối chiếu</p>
+            <ul class="mt-2 flex flex-col gap-1.5 text-sm text-ink-muted">
+              {sources.map((s) => (
+                <li class="break-words">{s}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    )
+  }
+</div>

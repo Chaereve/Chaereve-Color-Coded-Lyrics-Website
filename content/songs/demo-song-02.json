@@ -1,0 +1,354 @@
+{
+  "id": "song-demo-02",
+  "title": "Demo Song 02",
+  "artistId": "demo",
+  "slug": "demo-song-02",
+  "status": "published",
+  "released": "2026-10-15",
+  "youtube": "",
+  "cover": "/uploads/demo-song-02-cover.svg",
+  "language": "ko",
+  "album": "Demo Album B",
+  "credits": {
+    "lyrics": [
+      "Demo lyricist (tên giả lập)"
+    ],
+    "composition": [
+      "Demo composer (tên giả lập)"
+    ],
+    "arrangement": [
+      "Demo arranger (tên giả lập)"
+    ],
+    "translation": [
+      "Demo translation team"
+    ],
+    "romanization": [
+      "Demo romanization team"
+    ],
+    "colorCoding": [
+      "Demo color coder"
+    ],
+    "source": "Dữ liệu demo — cần thay bằng nguồn chính thức khi có bản quyền."
+  },
+  "members": [
+    {
+      "id": "aria",
+      "name": "Aria",
+      "color": "#ff6b9d"
+    },
+    {
+      "id": "bora",
+      "name": "Bora",
+      "color": "#ffa94d"
+    },
+    {
+      "id": "ciel",
+      "name": "Ciel",
+      "color": "#4dabf7"
+    },
+    {
+      "id": "dana",
+      "name": "Dana",
+      "color": "#69db7c"
+    },
+    {
+      "id": "eko",
+      "name": "Eko",
+      "color": "#b197fc"
+    },
+    {
+      "id": "faye",
+      "name": "Faye",
+      "color": "#ffd43b"
+    }
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "label": "Intro",
+      "lines": [
+        {
+          "id": "line-001",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "창을 열면 오는 아침",
+          "romanization": "chang-eul yeolmyeo oneun achim",
+          "translation": "Buổi sáng đến khi mở cửa sổ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-002",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "커피 향이 감싸는 시간",
+          "romanization": "keopi hyangi gamssaneun sigan",
+          "translation": "Thời gian bao phủ mùi cà phê",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "verse-1",
+      "label": "Verse 1",
+      "lines": [
+        {
+          "id": "line-003",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "먼지를 털고 일어나",
+          "romanization": "meonjireul teolgo ireona",
+          "translation": "Rũ bụi và thức dậy",
+          "type": "lyric"
+        },
+        {
+          "id": "line-004",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "책장을 넘기는 소리",
+          "romanization": "chaekjangeul neomgineun sori",
+          "translation": "Âm thanh lật trang sách",
+          "type": "lyric"
+        },
+        {
+          "id": "line-005",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "거울 속의 나에게",
+          "romanization": "geoulsogui na-ege",
+          "translation": "Gửi tới tôi trong gương",
+          "type": "lyric"
+        },
+        {
+          "id": "line-006",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "안녕이라고 인사했어",
+          "romanization": "annyeongirago insahaesseo",
+          "translation": "Đã chào một lời buổi sớm",
+          "type": "lyric"
+        },
+        {
+          "id": "line-007",
+          "memberIds": [
+            "dana",
+            "eko"
+          ],
+          "text": "평범한 오늘을 시작해",
+          "romanization": "pyeongbeomhan oneureul sijakhae",
+          "translation": "Bắt đầu một ngày bình thường",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "verse-2",
+      "label": "Verse 2",
+      "lines": [
+        {
+          "id": "line-008",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "버스 창에 비친 하늘",
+          "romanization": "beoseu chang-e bicin hul",
+          "translation": "Bầu trời phản chiếu trên cửa xe buýt",
+          "type": "lyric"
+        },
+        {
+          "id": "line-009",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "잠든 도시가 깨어나고",
+          "romanization": "jamdeun dosiga kkaeeonago",
+          "translation": "Thành phố ngủ say đang tỉnh dậy",
+          "type": "lyric"
+        },
+        {
+          "id": "line-010",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "이어폰 너머로 들리는",
+          "romanization": "ieopeon neomeoro deullyeoneun",
+          "translation": "Vang qua tai nghe",
+          "type": "lyric"
+        },
+        {
+          "id": "line-011",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "처음 듣는 멜로디",
+          "romanization": "cheoeum deuneun mellodi",
+          "translation": "Giai điệu lần đầu nghe thấy",
+          "type": "lyric"
+        },
+        {
+          "id": "line-012",
+          "memberIds": [
+            "dana",
+            "eko"
+          ],
+          "text": "오늘의 첫 소원을 빌어",
+          "romanization": "oneurui cheot soneureul bireo",
+          "translation": "Ước điều ước đầu tiên của hôm nay",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "pre-chorus",
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "id": "line-013",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "조금 서툴러도 괜찮아",
+          "romanization": "jogeum seotureodo gwaenchana",
+          "translation": "Dù còn lóng ngóng cũng không sao",
+          "type": "lyric"
+        },
+        {
+          "id": "line-014",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "천천히 올라가는 해처럼",
+          "romanization": "cheoncheonhi ollaganeun haecheoreom",
+          "translation": "Như mặt trời lên chậm chạp",
+          "type": "lyric"
+        },
+        {
+          "id": "line-015",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "마음도 함께 데워가고",
+          "romanization": "maeumdo hamkke dewogago",
+          "translation": "Trái tim cũng ấm dần lên",
+          "type": "lyric"
+        },
+        {
+          "id": "line-016",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "한 걸음씩 나아가자",
+          "romanization": "han georeumssik naagaja",
+          "translation": "Hãy tiến về phía trước từng bước",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "chorus",
+      "label": "Chorus",
+      "lines": [
+        {
+          "id": "line-017",
+          "memberIds": [],
+          "text": "새로운 하루를 열어보자",
+          "romanization": "saeroun harureul yeoreoboja",
+          "translation": "Hãy mở ra một ngày mới",
+          "type": "all"
+        },
+        {
+          "id": "line-018",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "첫 모금의 따뜻함처럼",
+          "romanization": "cheot mogeumui ttatteuthamcheoreom",
+          "translation": "Như hơi ấm ngụm đầu tiên",
+          "type": "lyric"
+        },
+        {
+          "id": "line-019",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "지나간 어제는 잠시",
+          "romanization": "jinagan eojeneun jamsi",
+          "translation": "Hôm qua cứ tạm gác lại",
+          "type": "lyric"
+        },
+        {
+          "id": "line-020",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "책상 위에 놓아두고",
+          "romanization": "chaesang wie noadugo",
+          "translation": "Để lại trên bàn học",
+          "type": "lyric"
+        },
+        {
+          "id": "line-021",
+          "memberIds": [
+            "aria",
+            "bora"
+          ],
+          "text": "창가의 햇살과 함께",
+          "romanization": "changga-ui haetsalwa hamkke",
+          "translation": "Cùng ánh nắng bên cửa sổ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-022",
+          "memberIds": [
+            "ciel",
+            "dana"
+          ],
+          "text": "오늘을 기록해 가자",
+          "romanization": "oneureul girokhae gaja",
+          "translation": "Hãy ghi chép hôm nay lại",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "lines": [
+        {
+          "id": "line-023",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "내일 아침에도",
+          "romanization": "naer achimedo",
+          "translation": "Sáng ngày mai nữa",
+          "type": "lyric"
+        },
+        {
+          "id": "line-024",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "이 노래를 들으며",
+          "romanization": "i norae-reul deureumyeo",
+          "translation": "Trong khi nghe bài hát này",
+          "type": "lyric"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Bản demo: toàn bộ lời bài hát được viết giả lập cho mục đích minh họa giao diện, không phải lời gốc có bản quyền.",
+    "Color coding theo bản thu studio (studio version), không theo live stage.",
+    "Dòng adlib chỉ hiển thị khi bật toggle Adlib và KHÔNG được tính vào line distribution.",
+    "Version: studio."
+  ],
+  "sources": [
+    "Bản demo nội bộ — thay bằng link official audio / official MV / lyric video."
+  ]
+}

@@ -1,0 +1,280 @@
+# =====================================================================
+# Decap CMS — /admin/config.yml
+# ĐỌC README mục "Cấu hình đăng nhập GitHub" trước khi deploy.
+#
+# backend `github` + open_authoring: contributor đăng nhập GitHub,
+# fork repo, tạo draft và gửi "Ready for review" (PR). Contributor
+# KHÔNG có quyền merge vào `main` — admin review trên GitHub rồi merge.
+#
+# ĐĂNG NHẬP — chọn MỘT trong hai phương án (README có hướng dẫn chi tiết):
+#   A) Decap Turbo (mặc định): đổi backend thành:
+#        name: turbo-github
+#        turbo_site_id: <site-id từ turbo.decapcms.org>
+#   B) Cloudflare Worker OAuth tự host: bỏ comment 2 dòng dưới đây:
+#        base_url: "https://YOUR_DOMAIN"
+#        auth_endpoint: "auth"
+# =====================================================================
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  branch: main
+  open_authoring: true
+  # base_url: "https://YOUR_DOMAIN"
+  # auth_endpoint: "auth"
+
+# Dùng cho nút "View live" / preview (thay YOUR_DOMAIN ở bước deploy).
+site_url: "https://YOUR_DOMAIN"
+
+# Workflow: draft → review → PR → admin merge (không commit thẳng vào main).
+publish_mode: editorial_workflow
+
+# Ảnh upload nằm trong repo: public/uploads → hiển thị tại /uploads/...
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "artists"
+    label: "Artists"
+    folder: "content/artists"
+    create: true
+    slug: "{slug}"
+    fields:
+      - label: "ID"
+        name: "id"
+        widget: "string"
+        hint: "ID nội bộ, lowercase, không dấu, không khoảng trắng (ví dụ: ive)"
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["solo", "group"]
+      - label: "Description"
+        name: "description"
+        widget: "text"
+      - label: "Cover"
+        name: "cover"
+        widget: "image"
+      - label: "Members"
+        name: "members"
+        widget: "list"
+        summary: "{fields.name} ({fields.id})"
+        fields:
+          - label: "ID"
+            name: "id"
+            widget: "string"
+            hint: "ID duy nhất, lowercase, không dấu"
+          - label: "Name"
+            name: "name"
+            widget: "string"
+          - label: "Romanized name"
+            name: "romanized"
+            widget: "string"
+            required: false
+          - label: "Color"
+            name: "color"
+            widget: "color"
+          - label: "Official color"
+            name: "officialColor"
+            widget: "color"
+            required: false
+          - label: "Color source"
+            name: "colorSource"
+            widget: "string"
+            required: false
+          - label: "Role"
+            name: "role"
+            widget: "string"
+            required: false
+
+  - name: "songs"
+    label: "Songs"
+    folder: "content/songs"
+    create: true
+    slug: "{slug}"
+    preview_path: "lyrics/{slug}/"
+    fields:
+      - label: "ID"
+        name: "id"
+        widget: "string"
+        hint: "ID nội bộ duy nhất (ví dụ: song-ive-crumbs)"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Artist"
+        name: "artistId"
+        widget: "relation"
+        collection: "artists"
+        search_fields: ["name"]
+        value_field: "id"
+        display_fields: ["name"]
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Released"
+        name: "released"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - label: "YouTube URL"
+        name: "youtube"
+        widget: "string"
+        required: false
+      - label: "Cover"
+        name: "cover"
+        widget: "image"
+        required: false
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["draft", "in_review", "published"]
+      - label: "Language"
+        name: "language"
+        widget: "select"
+        options: ["ko", "ja", "zh", "en", "other"]
+      - label: "Album"
+        name: "album"
+        widget: "string"
+        required: false
+      - label: "Members"
+        name: "members"
+        widget: "list"
+        summary: "{fields.name} ({fields.id})"
+        fields:
+          - label: "ID"
+            name: "id"
+            widget: "string"
+            hint: "Phải khớp members[].id của bài hát và khớp ID thành viên trong Artists"
+          - label: "Name"
+            name: "name"
+            widget: "string"
+          - label: "Color"
+            name: "color"
+            widget: "color"
+      - label: "Sections"
+        name: "sections"
+        widget: "list"
+        summary: "{fields.label}"
+        fields:
+          - label: "Section ID"
+            name: "id"
+            widget: "string"
+            hint: "ID duy nhất trong bài (ví dụ: intro, chorus)"
+          - label: "Section label"
+            name: "label"
+            widget: "string"
+          - label: "Lines"
+            name: "lines"
+            widget: "list"
+            summary: "{fields.text}"
+            fields:
+              - label: "Line ID"
+                name: "id"
+                widget: "string"
+                hint: "ID duy nhất trong bài (ví dụ: line-001)"
+              - label: "Member IDs"
+                name: "memberIds"
+                widget: "list"
+                required: false
+                hint: "Chọn 0, 1 hoặc nhiều thành viên. Để trống = All/ensemble. Thêm nhiều mục cho dòng nhiều thành viên."
+                field:
+                  label: "Member"
+                  widget: "select"
+                  options:
+                  - ["Aria (Demo Group)", "aria"]
+                  - ["Bora (Demo Group)", "bora"]
+                  - ["Ciel (Demo Group)", "ciel"]
+                  - ["Dana (Demo Group)", "dana"]
+                  - ["Eko (Demo Group)", "eko"]
+                  - ["Faye (Demo Group)", "faye"]
+                  - ["Gaeul (IVE)", "gaeul"]
+                  - ["Yujin (IVE)", "yujin"]
+                  - ["Rei (IVE)", "rei"]
+                  - ["Wonyoung (IVE)", "wonyoung"]
+                  - ["Liz (IVE)", "liz"]
+                  - ["Leeseo (IVE)", "leeseo"]
+              - label: "Line type"
+                name: "type"
+                widget: "select"
+                options: ["lyric", "all", "instrumental", "spoken", "adlib"]
+              - label: "Lyrics"
+                name: "text"
+                widget: "text"
+              - label: "Romanization"
+                name: "romanization"
+                widget: "text"
+                required: false
+              - label: "Translation"
+                name: "translation"
+                widget: "text"
+                required: false
+      - label: "Credits"
+        name: "credits"
+        widget: "object"
+        fields:
+          - label: "Lyrics"
+            name: "lyrics"
+            widget: "list"
+            required: false
+            field:
+              label: "Name"
+              widget: "string"
+          - label: "Composition"
+            name: "composition"
+            widget: "list"
+            required: false
+            field:
+              label: "Name"
+              widget: "string"
+          - label: "Arrangement"
+            name: "arrangement"
+            widget: "list"
+            required: false
+            field:
+              label: "Name"
+              widget: "string"
+          - label: "Translation"
+            name: "translation"
+            widget: "list"
+            required: false
+            field:
+              label: "Name / nguồn"
+              widget: "string"
+          - label: "Romanization"
+            name: "romanization"
+            widget: "list"
+            required: false
+            field:
+              label: "Name / nguồn"
+              widget: "string"
+          - label: "Color coding"
+            name: "colorCoding"
+            widget: "list"
+            required: false
+            field:
+              label: "Name"
+              widget: "string"
+          - label: "Source"
+            name: "source"
+            widget: "string"
+            required: false
+      - label: "Notes"
+        name: "notes"
+        widget: "list"
+        required: false
+        field:
+          label: "Note"
+          widget: "string"
+      - label: "Sources"
+        name: "sources"
+        widget: "list"
+        required: false
+        field:
+          label: "Source"
+          widget: "string"

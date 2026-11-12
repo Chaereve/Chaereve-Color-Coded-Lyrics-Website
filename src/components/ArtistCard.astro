@@ -1,0 +1,33 @@
+---
+import type { Artist } from '../lib/types';
+import MemberChip from './MemberChip.astro';
+
+interface Props {
+  artist: Artist;
+  songCount?: number;
+}
+const { artist, songCount } = Astro.props;
+---
+<a href={`/artist/${artist.slug}/`} class="card group flex flex-col gap-4 p-4 transition-transform hover:-translate-y-0.5">
+  <div class="flex items-center gap-3">
+    <img
+      src={artist.cover || '/uploads/placeholder-cover.svg'}
+      alt={`Ảnh nghệ sĩ ${artist.name}`}
+      width="64"
+      height="64"
+      loading="lazy"
+      decoding="async"
+      class="h-16 w-16 shrink-0 rounded-xl object-cover"
+    />
+    <div class="min-w-0">
+      <h3 class="truncate text-base font-bold group-hover:text-accent-soft">{artist.name}</h3>
+      <p class="text-xs text-ink-muted">
+        {artist.type === 'group' ? 'Nhóm' : 'Nghệ sĩ solo'}
+        {typeof songCount === 'number' && ` · ${songCount} bài`}
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-wrap gap-1.5">
+    {(artist.members ?? []).slice(0, 6).map((m) => <MemberChip name={m.name} color={m.color} />)}
+  </div>
+</a>

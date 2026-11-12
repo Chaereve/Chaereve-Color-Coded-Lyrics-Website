@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import type { Artist, ArtistMember } from '../../lib/types';
+import { getArtists, getPublishedSongs, getSongs } from '../../lib/content';
+import { computeDistribution, memberLinesAcrossSongs } from '../../lib/distribution';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  const paths: { params: { slug: string }; props: { member: ArtistMember; artist: Artist } }[] = [];
+  const seen = new Set<string>();
+  for (const artist of getArtists()) {
+    for (const member of artist.members ?? []) {
+      if (seen.has(member.id)) continue;
+      seen.add(member.id);
+      paths.push({ params: { slug: member.id }, props: { member, artist } });
+    }
+  }
+  return paths;
+}
+
+const { member, artist } = Astro.props;
+
+// Bài hát có mặt thành viên này (published hiển thị công khai; tất cả để tính tổng)
+const allSongs = getSongs().filter((s) => (s.members ?? []).some((m) => m.id === member.id));
+const published = getPublishedSongs().filter((s) => (s.members ?? []).some((m) => m.id === member.id));
+
+const perSong = published
+  .map((song) => ({
+    song,
+    lines: computeDistribution(song).members.find((m) => m.memberId === member.id)?.lines ?? 0,
+  }))
+  .sort((a, b) => b.lines - a.lines || b.song.title.localeCompare(a.song.title));
+
+const siteTotal = memberLinesAcrossSongs(member.id, getSongs());
+const artistTotal = memberLinesAcrossSongs(
+  member.id,
+  allSongs.filter((s) => s.artistId === artist.id),
+);
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Trang chủ', path: '/' },
+    { name: artist.name, path: `/artist/${artist.slug}/` },
+    { name: member.name, path: `/member/${member.id}/` },
+  ]),
+];
+---
+<BaseLayout
+  title={`${member.name} – ${artist.name}`}
+  description={`${member.name} (${artist.name}) — màu thành viên, danh sách bài hát và số dòng trong color-coded lyrics.`}
+  path={`/member/${member.id}/`}
+  ogType="profile"
+  jsonLd={jsonLd}
+>
+  <div class="container-page pb-16">
+    <Breadcrumbs
+      items={[
+        { label: 'Trang chủ', href: '/' },
+        { label: artist.name, href: `/artist/${artist.slug}/` },
+        { label: member.name },
+      ]}
+    />
+
+    <header class="card mt-2 flex flex-col gap-5 p-6 sm:flex-row sm:items-center">
+      <span
+        class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full text-2xl font-black text-white shadow-lg ring-4 ring-white/10"
+        style={`background: ${member.color}`}
+        aria-hidden="true">{member.name.charAt(0).toUpperCase()}</span
+      >
+      <div class="min-w-0 flex-1">
+        <p class="text-xs font-bold uppercase tracking-wider text-accent-soft">Thành viên</p>
+        <h1 class="mt-1 text-3xl font-black tracking-tight">{member.name}</h1>
+        <p class="mt-1 text-sm text-ink-muted">
+          <a href={`/artist/${artist.slug}/`} class="font-semibold hover:text-accent-soft">{artist.name}</a>
+          {member.role && ` · ${member.role}`}
+          {member.romanized && member.romanized !== member.name && ` · ${member.romanized}`}
+        </p>
+        <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+          <span class="chip" style={`border-color: ${member.color}55; background: ${member.color}18; color: ${member.color}`}>
+            <span class="h-2.5 w-2.5 rounded-full" style={`background: ${member.color}`} aria-hidden="true"></span>
+            Màu: {member.color}
+          </span>
+          {
+            member.officialColor && (
+              <span class="chip border-white/15 bg-white/5 text-ink-muted">Official: {member.officialColor}</span>
+            )
+          }
+          {member.colorSource && <span class="text-ink-faint">Nguồn màu: {member.colorSource}</span>}
+        </div>
+      </div>
+      <dl class="grid grid-cols-2 gap-4 text-center sm:w-56">
+        <div class="rounded-xl bg-white/5 p-3">
+          <dt class="text-[11px] text-ink-faint">Dòng (nghệ sĩ)</dt>
+          <dd class="text-xl font-black tabular-nums">{artistTotal}</dd>
+        </div>
+        <div class="rounded-xl bg-white/5 p-3">
+          <dt class="text-[11px] text-ink-faint">Dòng toàn site</dt>
+          <dd class="text-xl font-black tabular-nums">{siteTotal}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section aria-labelledby="songs-heading" class="mt-10">
+      <h2 id="songs-heading" class="mb-1 text-lg font-bold">Bài hát có xuất hiện</h2>
+      <p class="mb-4 text-xs text-ink-faint">Số dòng = số lần thành viên xuất hiện trong các dòng (adlib không tính).</p>
+      {
+        perSong.length > 0 ? (
+          <ul class="card divide-y divide-white/10">
+            {perSong.map(({ song, lines }) => (
+              <li class="flex items-center gap-3 px-4 py-3">
+                <img
+                  src={song.cover || '/uploads/placeholder-cover.svg'}
+                  alt=""
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-12 w-12 shrink-0 rounded-lg object-cover"
+                />
+                <a href={`/lyrics/${song.slug}/`} class="min-w-0 flex-1">
+                  <span class="block truncate text-sm font-bold hover:text-accent-soft">{song.title}</span>
+                  <span class="block truncate text-xs text-ink-muted">
+                    {song.album || song.released || ''}
+                  </span>
+                </a>
+                <div class="hidden h-2 w-32 overflow-hidden rounded-full bg-white/10 sm:block" aria-hidden="true">
+                  <span
+                    class="block h-full rounded-full"
+                    style={`width: ${perSong[0] && perSong[0].lines > 0 ? Math.round((lines / perSong[0].lines) * 100) : 0}%; background: ${member.color}`}
+                  />
+                </div>
+                <span class="shrink-0 text-sm font-bold tabular-nums">{lines} dòng</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="card px-6 py-10 text-center text-sm text-ink-muted">
+            Chưa có bài hát published nào có dòng của thành viên này.
+          </div>
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>

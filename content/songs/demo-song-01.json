@@ -1,0 +1,350 @@
+{
+  "id": "song-demo-01",
+  "title": "Demo Song 01",
+  "artistId": "demo",
+  "slug": "demo-song-01",
+  "status": "published",
+  "released": "2026-10-01",
+  "youtube": "",
+  "cover": "/uploads/demo-song-01-cover.svg",
+  "language": "ko",
+  "album": "Demo Album A",
+  "credits": {
+    "lyrics": [
+      "Demo lyricist (tên giả lập)"
+    ],
+    "composition": [
+      "Demo composer (tên giả lập)"
+    ],
+    "arrangement": [
+      "Demo arranger (tên giả lập)"
+    ],
+    "translation": [
+      "Demo translation team"
+    ],
+    "romanization": [
+      "Demo romanization team"
+    ],
+    "colorCoding": [
+      "Demo color coder"
+    ],
+    "source": "Dữ liệu demo — cần thay bằng nguồn chính thức khi có bản quyền."
+  },
+  "members": [
+    {
+      "id": "aria",
+      "name": "Aria",
+      "color": "#ff6b9d"
+    },
+    {
+      "id": "bora",
+      "name": "Bora",
+      "color": "#ffa94d"
+    },
+    {
+      "id": "ciel",
+      "name": "Ciel",
+      "color": "#4dabf7"
+    },
+    {
+      "id": "dana",
+      "name": "Dana",
+      "color": "#69db7c"
+    },
+    {
+      "id": "eko",
+      "name": "Eko",
+      "color": "#b197fc"
+    },
+    {
+      "id": "faye",
+      "name": "Faye",
+      "color": "#ffd43b"
+    }
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "label": "Intro",
+      "lines": [
+        {
+          "id": "line-001",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "저녁빛이 내리는 곳",
+          "romanization": "jeonyeobichi naerineun got",
+          "translation": "Nơi ánh chiều tà buông xuống",
+          "type": "lyric"
+        },
+        {
+          "id": "line-002",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "함께 걸어가는 길",
+          "romanization": "hamkke georeoganeun gil",
+          "translation": "Con đường ta cùng bước",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "verse-1",
+      "label": "Verse 1",
+      "lines": [
+        {
+          "id": "line-003",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "가로등이 켜지고",
+          "romanization": "garodeungi kyeojigo",
+          "translation": "Đèn đường bật sáng",
+          "type": "lyric"
+        },
+        {
+          "id": "line-004",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "그림자가 길어지네",
+          "romanization": "geurimgaja gireojine",
+          "translation": "Bóng dài dần ra",
+          "type": "lyric"
+        },
+        {
+          "id": "line-005",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "창문 너머로 들려오는",
+          "romanization": "changmun neomeoro deullyeooneun",
+          "translation": "Vang vọng qua cửa sổ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-006",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "익숙한 노래 소리",
+          "romanization": "iksukhan norae sori",
+          "translation": "Âm thanh bài hát quen thuộc",
+          "type": "lyric"
+        },
+        {
+          "id": "line-007",
+          "memberIds": [
+            "aria",
+            "bora"
+          ],
+          "text": "발맞춰 걷는 이 거리",
+          "romanization": "balmatchwo geotneun i geori",
+          "translation": "Con đường này ta đi cùng nhịp",
+          "type": "lyric"
+        },
+        {
+          "id": "line-008",
+          "memberIds": [
+            "ciel",
+            "dana"
+          ],
+          "text": "오늘도 어제처럼",
+          "romanization": "oneuldo eojeecheoreom",
+          "translation": "Hôm nay cũng như hôm qua",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "pre-chorus",
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "id": "line-009",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "머릿속에 남은 말",
+          "romanization": "meoritsoge nameun mal",
+          "translation": "Lời còn vương trong đầu",
+          "type": "lyric"
+        },
+        {
+          "id": "line-010",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "아직 전하지 못해서",
+          "romanization": "ajik jeonhaji mothaeseo",
+          "translation": "Vẫn chưa nói ra được",
+          "type": "lyric"
+        },
+        {
+          "id": "line-011",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "다음 순간을 기다리며",
+          "romanization": "daeum sunganeul gidaryimyeo",
+          "translation": "Chờ đợi khoảnh khắc kế tiếp",
+          "type": "lyric"
+        },
+        {
+          "id": "line-012",
+          "memberIds": [
+            "bora"
+          ],
+          "text": "발걸음을 옮겼어",
+          "romanization": "balgeoreumeul omgyeosseo",
+          "translation": "Ta đã bước thêm một bước",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "chorus",
+      "label": "Chorus",
+      "lines": [
+        {
+          "id": "line-013",
+          "memberIds": [],
+          "text": "이 도시의 불빛을 세어보자",
+          "romanization": "i dosiui bulbicheul seoeoboja",
+          "translation": "Hãy cùng đếm ánh đèn thành phố",
+          "type": "all"
+        },
+        {
+          "id": "line-014",
+          "memberIds": [
+            "ciel"
+          ],
+          "text": "너의 목소리가 들릴 때",
+          "romanization": "neoui moksoriga deullil ttae",
+          "translation": "Khi nghe thấy giọng bạn",
+          "type": "lyric"
+        },
+        {
+          "id": "line-015",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "잠시 멈춰 서볼까",
+          "romanization": "jamsi meomchwo seobolkka",
+          "translation": "Dừng lại một chút có nên không",
+          "type": "lyric"
+        },
+        {
+          "id": "line-016",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "바람이 지나간 자리",
+          "romanization": "barami jinanhan jari",
+          "translation": "Nơi cơn gió vừa đi qua",
+          "type": "lyric"
+        },
+        {
+          "id": "line-017",
+          "memberIds": [
+            "faye",
+            "aria"
+          ],
+          "text": "우리의 이야기로 채우고",
+          "romanization": "uriui iyagiro chaeugo",
+          "translation": "Lấp đầy bằng câu chuyện của chúng ta",
+          "type": "lyric"
+        },
+        {
+          "id": "line-018",
+          "memberIds": [
+            "bora",
+            "ciel"
+          ],
+          "text": "밤이 와도 돌아가자",
+          "romanization": "bam-i wado doragaja",
+          "translation": "Dù đêm tới cũng hãy quay về",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "label": "Bridge",
+      "lines": [
+        {
+          "id": "line-019",
+          "memberIds": [],
+          "text": "",
+          "romanization": "",
+          "translation": "",
+          "type": "instrumental"
+        },
+        {
+          "id": "line-020",
+          "memberIds": [
+            "dana"
+          ],
+          "text": "잠깐의 정적 속에서",
+          "romanization": "jamkkanui jeongjeok sogeseo",
+          "translation": "Trong khoảng tĩnh lặng ngắn ngủi",
+          "type": "lyric"
+        },
+        {
+          "id": "line-021",
+          "memberIds": [
+            "eko"
+          ],
+          "text": "한 번 더!",
+          "romanization": "han beon deo",
+          "translation": "Thêm một lần nữa!",
+          "type": "adlib"
+        },
+        {
+          "id": "line-022",
+          "memberIds": [],
+          "text": "같은 곳을 바라보며",
+          "romanization": "gateun goseul barabomyeo",
+          "translation": "Cùng nhìn về một hướng",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "lines": [
+        {
+          "id": "line-023",
+          "memberIds": [
+            "faye"
+          ],
+          "text": "내일도 이 거리에서",
+          "romanization": "naerido i georieseo",
+          "translation": "Ngày mai cũng trên con đường này",
+          "type": "lyric"
+        },
+        {
+          "id": "line-024",
+          "memberIds": [
+            "aria"
+          ],
+          "text": "우리는 다시 만나",
+          "romanization": "urineun dasi manna",
+          "translation": "Ta sẽ gặp lại",
+          "type": "lyric"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Bản demo: toàn bộ lời bài hát được viết giả lập cho mục đích minh họa giao diện, không phải lời gốc có bản quyền.",
+    "Color coding theo bản thu studio (studio version), không theo live stage.",
+    "Dòng adlib chỉ hiển thị khi bật toggle Adlib và KHÔNG được tính vào line distribution.",
+    "Version: studio."
+  ],
+  "sources": [
+    "Bản demo nội bộ — thay bằng link official audio / official MV / lyric video."
+  ]
+}

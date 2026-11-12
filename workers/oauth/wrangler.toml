@@ -1,0 +1,30 @@
+# =====================================================================
+# Wrangler config — Cloudflare Worker OAuth cho Decap CMS (MẪU)
+# KHÔNG đặt secret vào file này. Dùng:
+#   npx wrangler secret put GITHUB_CLIENT_ID
+#   npx wrangler secret put GITHUB_CLIENT_SECRET
+#   npx wrangler secret put STATE_SECRET        (khuyến nghị)
+# =====================================================================
+
+name = "decap-oauth"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Biến môi trường không phải secret — sửa theo site của bạn.
+[vars]
+# Phương án A (khuyến nghị, khớp yêu cầu callback = trang admin):
+#   GitHub OAuth App → Authorization callback URL = https://YOUR_DOMAIN/admin/
+REDIRECT_URI = "https://YOUR_DOMAIN/admin/"
+
+# Phương án B (chỉ dùng workers.dev, không cần domain riêng):
+#   GitHub OAuth App → Authorization callback URL = https://decap-oauth.<ten-ban>.workers.dev/callback
+# REDIRECT_URI = "https://decap-oauth.<ten-ban>.workers.dev/callback"
+
+# Gắn route vào zone Cloudflare đang chứa YOUR_DOMAIN (chỉ cần cho phương án A).
+# Bỏ comment và sửa pattern/zone_name rồi chạy: npx wrangler deploy
+# [[routes]]
+#   pattern = "YOUR_DOMAIN/auth"
+#   zone_name = "YOUR_DOMAIN"
+# [[routes]]
+#   pattern = "YOUR_DOMAIN/callback"
+#   zone_name = "YOUR_DOMAIN"

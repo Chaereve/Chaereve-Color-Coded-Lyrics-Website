@@ -1,0 +1,64 @@
+{
+  "id": "demo",
+  "name": "Demo Group",
+  "slug": "demo-group",
+  "type": "group",
+  "description": "Nhóm nghệ sĩ giả lập dùng cho 3 bài Demo Song. Mọi dữ liệu (tên thành viên, màu, lời hát) đều là dữ liệu mẫu để kiểm thử giao diện color-coded lyrics và line distribution.",
+  "cover": "/uploads/demo-group-cover.svg",
+  "members": [
+    {
+      "id": "aria",
+      "name": "Aria",
+      "romanized": "Aria",
+      "color": "#ff6b9d",
+      "role": "Leader, Main Vocalist",
+      "officialColor": "#ff6b9d",
+      "colorSource": ""
+    },
+    {
+      "id": "bora",
+      "name": "Bora",
+      "romanized": "Bora",
+      "color": "#ffa94d",
+      "role": "Lead Vocalist",
+      "officialColor": "#ffa94d",
+      "colorSource": ""
+    },
+    {
+      "id": "ciel",
+      "name": "Ciel",
+      "romanized": "Ciel",
+      "color": "#4dabf7",
+      "role": "Main Rapper",
+      "officialColor": "#4dabf7",
+      "colorSource": ""
+    },
+    {
+      "id": "dana",
+      "name": "Dana",
+      "romanized": "Dana",
+      "color": "#69db7c",
+      "role": "Vocalist",
+      "officialColor": "#69db7c",
+      "colorSource": ""
+    },
+    {
+      "id": "eko",
+      "name": "Eko",
+      "romanized": "Eko",
+      "color": "#b197fc",
+      "role": "Lead Dancer",
+      "officialColor": "#b197fc",
+      "colorSource": ""
+    },
+    {
+      "id": "faye",
+      "name": "Faye",
+      "romanized": "Faye",
+      "color": "#ffd43b",
+      "role": "Maknae, Vocalist",
+      "officialColor": "#ffd43b",
+      "colorSource": ""
+    }
+  ]
+}

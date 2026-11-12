@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Content Manager — Decap CMS</title>
+
+    <!--
+      OAuth relay (phương án Cloudflare Worker tự host).
+      GitHub OAuth App callback = https://YOUR_DOMAIN/admin/ → popup quay về trang này
+      với ?code=...&state=... → chuyển sang route /callback của Worker để đổi token
+      và trả về Decap CMS bằng window.postMessage.
+      Nếu không có ?code (dùng Decap Turbo / Netlify OAuth) đoạn mã này tự bỏ qua.
+    -->
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var code = params.get('code');
+        var state = params.get('state');
+        if (!code || !state) return;
+        if (!window.opener) {
+          // Truy cập trực tiếp (không phải popup): dọn query string, không làm gì thêm.
+          params.delete('code');
+          params.delete('state');
+          var clean =
+            window.location.pathname +
+            (params.toString() ? '?' + params.toString() : '');
+          window.history.replaceState({}, '', clean);
+          return;
+        }
+        // Popup OAuth: điều hướng sang Worker /callback (cùng origin site).
+        window.location.replace(
+          '/callback?code=' + encodeURIComponent(code) + '&state=' + encodeURIComponent(state),
+        );
+      })();
+    </script>
+
+    <!-- Decap CMS (open source, CDN — không cần API key) -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <p style="font-family: system-ui; padding: 2rem">
+        Decap CMS cần JavaScript để chạy. Vui lòng bật JavaScript và tải lại trang.
+      </p>
+    </noscript>
+  </body>
+</html>

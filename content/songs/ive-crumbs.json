@@ -1,0 +1,295 @@
+{
+  "id": "song-ive-crumbs",
+  "title": "CRUMBS",
+  "artistId": "ive",
+  "slug": "ive-crumbs",
+  "status": "published",
+  "released": "2026-11-07",
+  "youtube": "https://www.youtube.com/watch?v=demo",
+  "cover": "/uploads/ive-crumbs-cover.svg",
+  "language": "ko",
+  "album": "",
+  "credits": {
+    "lyrics": [],
+    "composition": [],
+    "arrangement": [],
+    "translation": [],
+    "romanization": [],
+    "colorCoding": [],
+    "source": ""
+  },
+  "members": [
+    { "id": "gaeul", "name": "Gaeul", "color": "#e05c8a" },
+    { "id": "yujin", "name": "Yujin", "color": "#5c8ae0" },
+    { "id": "rei", "name": "Rei", "color": "#e0a55c" },
+    { "id": "wonyoung", "name": "Wonyoung", "color": "#9b5ce0" },
+    { "id": "liz", "name": "Liz", "color": "#3fb8a0" },
+    { "id": "leeseo", "name": "Leeseo", "color": "#e05c5c" }
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "label": "Intro",
+      "lines": [
+        {
+          "id": "line-001",
+          "memberIds": ["gaeul"],
+          "text": "불빛이 흔들리는 밤",
+          "romanization": "buri-ti heundeullineun bam",
+          "translation": "Đêm ánh đèn rung rinh",
+          "type": "lyric"
+        },
+        {
+          "id": "line-002",
+          "memberIds": ["yujin"],
+          "text": "조금씩 다가오는 너",
+          "romanization": "jogeumssik dagaoneun neo",
+          "translation": "Người đến gần từng chút một",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "verse-1",
+      "label": "Verse 1",
+      "lines": [
+        {
+          "id": "line-003",
+          "memberIds": ["rei"],
+          "text": "창가에 남은 커피 한 잔",
+          "romanization": "changga-e nameun keopi han jan",
+          "translation": "Tách cà phê còn lại bên cửa sổ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-004",
+          "memberIds": ["wonyoung"],
+          "text": "속삭이듯 흘러가는 말",
+          "romanization": "soksagideut heulleoganeun mal",
+          "translation": "Lời thì thầm trôi qua",
+          "type": "lyric"
+        },
+        {
+          "id": "line-005",
+          "memberIds": ["liz"],
+          "text": "발걸음마다 들리는 소리",
+          "romanization": "balgeoreumada deullineun sori",
+          "translation": "Âm thanh vang lên mỗi bước chân",
+          "type": "lyric"
+        },
+        {
+          "id": "line-006",
+          "memberIds": ["leeseo"],
+          "text": "너를 기다리는 마음",
+          "romanization": "neoreul gidarineun maeum",
+          "translation": "Trái tim đang chờ đợi bạn",
+          "type": "lyric"
+        },
+        {
+          "id": "line-007",
+          "memberIds": ["gaeul", "yujin"],
+          "text": "작은 불빛 하나까지 세어보며",
+          "romanization": "jageun bulbit hana kkaji seoeobomyeo",
+          "translation": "Đếm từng ngọn đèn nhỏ một",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "pre-chorus",
+      "label": "Pre-Chorus",
+      "lines": [
+        {
+          "id": "line-008",
+          "memberIds": ["rei", "wonyoung"],
+          "text": "머리 위로 흩어진 별처럼",
+          "romanization": "meori wiro heuteojin byeolcheoreom",
+          "translation": "Như những sao rải rác trên đầu",
+          "type": "lyric"
+        },
+        {
+          "id": "line-009",
+          "memberIds": ["liz"],
+          "text": "깊은 숨을 내쉬고",
+          "romanization": "gipeun sumeul naeswigo",
+          "translation": "Hít một hơi thật sâu",
+          "type": "lyric"
+        },
+        {
+          "id": "line-010",
+          "memberIds": ["leeseo"],
+          "text": "다시 걸어가는 중",
+          "romanization": "dasi georeoganeun jung",
+          "translation": "Tiếp tục bước đi",
+          "type": "lyric"
+        },
+        {
+          "id": "line-011",
+          "memberIds": ["gaeul"],
+          "text": "이 거리 끝에서",
+          "romanization": "i geori kkeuteseo",
+          "translation": "Tại cuối con đường này",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "chorus",
+      "label": "Chorus",
+      "lines": [
+        {
+          "id": "line-012",
+          "memberIds": [],
+          "text": "부스러기처럼 남은 오늘을 줍자",
+          "romanization": "busureogicheoreom nameun oneureul jupja",
+          "translation": "Hãy nhặt lấy hôm nay còn sót lại như mẩu bánh",
+          "type": "all"
+        },
+        {
+          "id": "line-013",
+          "memberIds": ["yujin"],
+          "text": "손끝에 남은 조각 하나",
+          "romanization": "sonkkeute nameun jogak hana",
+          "translation": "Mảnh vụn còn lại nơi đầu ngón tay",
+          "type": "lyric"
+        },
+        {
+          "id": "line-014",
+          "memberIds": ["rei"],
+          "text": "파란 하늘 아래서",
+          "romanization": "paran hul alaeseo",
+          "translation": "Dưới bầu trời xanh",
+          "type": "lyric"
+        },
+        {
+          "id": "line-015",
+          "memberIds": ["wonyoung"],
+          "text": "버리지 않을 작은 기억",
+          "romanization": "beoriji aneul jagun gieok",
+          "translation": "Ký ức nhỏ sẽ không vứt đi",
+          "type": "lyric"
+        },
+        {
+          "id": "line-016",
+          "memberIds": ["liz", "leeseo"],
+          "text": "함께 모은 조각들이",
+          "romanization": "hamkke moeun jogakdeuri",
+          "translation": "Những mảnh ghép cùng nhau thu gom",
+          "type": "lyric"
+        },
+        {
+          "id": "line-017",
+          "memberIds": ["gaeul", "yujin"],
+          "text": "빛이 되어 돌아올 테니",
+          "romanization": "bit-i doeeo doraoel teni",
+          "translation": "Sẽ trở thành ánh sáng và quay về",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "verse-2",
+      "label": "Verse 2",
+      "lines": [
+        {
+          "id": "line-018",
+          "memberIds": ["leeseo"],
+          "text": "오래된 길모퉁이",
+          "romanization": "oraedoen gilmotungi",
+          "translation": "Góc phố cũ",
+          "type": "lyric"
+        },
+        {
+          "id": "line-019",
+          "memberIds": ["liz"],
+          "text": "여전히 그대로인 풍경",
+          "romanization": "yeojeoni geudaeroeun punggyeong",
+          "translation": "Khung cảnh vẫn như xưa",
+          "type": "lyric"
+        },
+        {
+          "id": "line-020",
+          "memberIds": ["rei"],
+          "text": "여기서 잠깐 쉬어갈까?",
+          "romanization": "yeogiseo jamkkan swieogalkka?",
+          "translation": "Dừng lại nghỉ một chút ở đây chứ?",
+          "type": "spoken"
+        },
+        {
+          "id": "line-021",
+          "memberIds": ["wonyoung"],
+          "text": "커피 식기 전에",
+          "romanization": "keopi sigi jeone",
+          "translation": "Trước khi cà phê nguội",
+          "type": "lyric"
+        }
+      ]
+    },
+    {
+      "id": "bridge",
+      "label": "Bridge",
+      "lines": [
+        {
+          "id": "line-022",
+          "memberIds": [],
+          "text": "",
+          "romanization": "",
+          "translation": "",
+          "type": "instrumental"
+        },
+        {
+          "id": "line-023",
+          "memberIds": ["yujin"],
+          "text": "문득 떠오른 너의 말",
+          "romanization": "mundeuk ttaooreun neoeui mal",
+          "translation": "Lời bạn bỗng hiện lên",
+          "type": "lyric"
+        },
+        {
+          "id": "line-024",
+          "memberIds": ["gaeul"],
+          "text": "그대로, 좋아!",
+          "romanization": "geudaero, joa!",
+          "translation": "Nguyên vẹn thế, tuyệt vời!",
+          "type": "adlib"
+        },
+        {
+          "id": "line-025",
+          "memberIds": [],
+          "text": "오늘의 부스러기를 다시 모아",
+          "romanization": "oneurui busureogireul dasi moa",
+          "translation": "Gom lại những mẩu vụn của hôm nay",
+          "type": "all"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "lines": [
+        {
+          "id": "line-026",
+          "memberIds": ["liz"],
+          "text": "밤이 깊어져도",
+          "romanization": "bam-i gipeojeodo",
+          "translation": "Dù đêm đã khuya",
+          "type": "lyric"
+        },
+        {
+          "id": "line-027",
+          "memberIds": ["gaeul"],
+          "text": "우리는 걷고 있어",
+          "romanization": "urineun geotgo isseo",
+          "translation": "Chúng ta vẫn đang bước đi",
+          "type": "lyric"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Bản demo: lời bài hát được viết giả lập cho mục đích minh họa giao diện, không phải lời gốc.",
+    "Color coding theo bản thu studio (bản gốc trong album), không theo live stage.",
+    "Dòng adlib (line-024) chỉ hiển thị khi bật toggle Adlib và KHÔNG được tính vào line distribution."
+  ],
+  "sources": ["Bản demo nội bộ — cần thay bằng link official audio / lyric video khi có dữ liệu thật."]
+}

@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------
+   Theme tokens — dark là mặc định (html.dark), light qua class.
+   Giá trị RGB dùng chung cho Tailwind (rgb(var(--x) / alpha)).
+---------------------------------------------------------------- */
+:root {
+  --surface: 3 7 18;
+  --surface-raised: 11 18 32;
+  --surface-muted: 15 23 42;
+  --ink: 241 245 249;
+  --ink-muted: 148 163 184;
+  --ink-faint: 100 116 139;
+  --lyrics-font-size: 1.125rem;
+  --ring: 124 108 255;
+}
+
+html:not(.dark) {
+  --surface: 255 255 255;
+  --surface-raised: 248 250 252;
+  --surface-muted: 241 245 249;
+  --ink: 15 23 42;
+  --ink-muted: 71 85 105;
+  --ink-faint: 100 116 139;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus visible cho điều hướng bàn phím */
+  :focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    @apply bg-accent/40 text-ink;
+  }
+}
+
+@layer components {
+  /* Container chính */
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+
+  /* Nút chạm tối thiểu 44x44 */
+  .btn {
+    @apply inline-flex min-h-touch min-w-touch items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-soft;
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/5 text-ink hover:bg-white/10;
+  }
+
+  /* Thẻ (card) */
+  .card {
+    @apply rounded-2xl border border-white/10 bg-surface-raised shadow-sm;
+  }
+  html:not(.dark) .card {
+    @apply border-slate-200 bg-white;
+  }
+
+  /* Chip thành viên */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse rounded-lg bg-white/10;
+  }
+  html:not(.dark) .skeleton {
+    @apply bg-slate-200;
+  }
+}
+
+/* ---------------- Lyrics ---------------- */
+.lyric-text {
+  font-size: var(--lyrics-font-size);
+  line-height: 1.7;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Tabs ngôn ngữ: ẩn các text không thuộc tab đang chọn */
+.lang-panel [data-lang] {
+  display: none;
+}
+.lang-panel[data-lang='text'] [data-lang='text'],
+.lang-panel[data-lang='romanization'] [data-lang='romanization'],
+.lang-panel[data-lang='translation'] [data-lang='translation'] {
+  display: block;
+}
+
+/* Adlib: ẩn mặc định, chỉ hiện khi bật toggle */
+.adlib-line {
+  display: none;
+}
+.lang-panel[data-show-adlib='on'] .adlib-line {
+  display: block;
+}
+
+/* Thanh scroll ngang gọn cho tabs */
+.scroll-x {
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+}
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+/* Line distribution: thanh stacked bar */
+.stacked-segment {
+  min-width: 2px;
+  transition: width 0.4s ease;
+}

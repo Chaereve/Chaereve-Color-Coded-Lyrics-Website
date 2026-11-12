@@ -1,0 +1,285 @@
+---
+import type { Song, SongLine } from '../lib/types';
+
+interface Props {
+  song: Song;
+}
+const { song } = Astro.props;
+
+const LANGS = [
+  { id: 'text', label: 'Original' },
+  { id: 'romanization', label: 'Romanization' },
+  { id: 'translation', label: 'Translation' },
+] as const;
+
+function memberOf(line: SongLine) {
+  return line.memberIds
+    .map((id) => (song.members ?? []).find((m) => m.id === id))
+    .filter((m): m is NonNullable<typeof m> => Boolean(m));
+}
+
+function lineStyle(line: SongLine): string {
+  const members = memberOf(line);
+  if (members.length === 0) return 'border-left-color: rgb(148 163 184 / 0.6);';
+  if (members.length === 1) {
+    const c = members[0]!.color;
+    return `border-left-color: ${c}; background: ${c}12;`;
+  }
+  const [a, b] = [members[0]!.color, members[members.length - 1]!.color];
+  return `border-left-image: linear-gradient(180deg, ${a}, ${b}); border-left-style: solid; border-left-width: 4px; background: linear-gradient(90deg, ${a}16, ${b}10);`;
+}
+
+const TYPE_LABEL: Record<string, string> = {
+  lyric: '',
+  all: 'All',
+  instrumental: 'Nhạc không lời',
+  spoken: 'Spoken',
+  adlib: 'Adlib',
+};
+
+// Dữ liệu nhúng cho nút Copy (theo tab đang chọn)
+const copyData = (song.sections ?? []).map((sec) => ({
+  label: sec.label,
+  lines: (sec.lines ?? []).map((l) => ({
+    type: l.type,
+    text: l.text ?? '',
+    romanization: l.romanization ?? '',
+    translation: l.translation ?? '',
+  })),
+}));
+---
+<section aria-labelledby="lyrics-heading" class="card overflow-hidden">
+  <div class="flex items-center justify-between gap-3 px-4 pt-4 sm:px-6">
+    <h2 id="lyrics-heading" class="text-base font-bold">Lyrics</h2>
+    <div class="flex items-center gap-1.5">
+      <button type="button" id="font-dec" class="btn-ghost h-11 w-11 !min-w-11 rounded-xl !px-0" aria-label="Giảm cỡ chữ" title="Giảm cỡ chữ">
+        <span aria-hidden="true" class="text-base font-bold leading-none">A−</span>
+      </button>
+      <button type="button" id="font-inc" class="btn-ghost h-11 w-11 !min-w-11 rounded-xl !px-0" aria-label="Tăng cỡ chữ" title="Tăng cỡ chữ">
+        <span aria-hidden="true" class="text-base font-bold leading-none">A+</span>
+      </button>
+      <button type="button" id="copy-lyrics" class="btn-ghost h-11 rounded-xl px-3" title="Sao chép lyrics theo tab đang chọn">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 012-2h10" /></svg>
+        <span class="hidden sm:inline">Copy</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabs ngôn ngữ + controls: sticky ngay dưới header -->
+  <div class="sticky top-14 z-30 mt-3 -mx-4 border-b border-white/10 bg-surface/95 px-4 backdrop-blur sm:-mx-6 sm:px-6">
+    <div class="flex flex-col gap-2 py-2 sm:flex-row sm:items-center sm:justify-between">
+      <div class="-mx-1 flex gap-1 overflow-x-auto scroll-x px-1" role="tablist" aria-label="Ngôn ngữ hiển thị">
+        {
+          LANGS.map((lang, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${lang.id}`}
+              data-tab={lang.id}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-controls="lyrics-lines"
+              class="min-h-touch shrink-0 rounded-lg px-3 text-sm font-semibold transition-colors aria-selected:bg-accent aria-selected:text-white text-ink-muted hover:text-ink"
+            >
+              {lang.label}
+            </button>
+          ))
+        }
+      </div>
+      <label class="flex min-h-touch cursor-pointer items-center gap-2 px-2 text-sm text-ink-muted select-none">
+        <input
+          type="checkbox"
+          id="adlib-toggle"
+          class="h-5 w-5 shrink-0 cursor-pointer accent-accent"
+        />
+        Hiện adlib
+      </label>
+    </div>
+  </div>
+
+  <div
+    id="lyrics-lines"
+    class="lang-panel flex flex-col gap-6 px-4 py-5 sm:px-6"
+    data-lang="text"
+    data-show-adlib="off"
+    role="tabpanel"
+    aria-labelledby="tab-text"
+    tabindex="0"
+  >
+    {
+      (song.sections ?? []).map((section) => (
+        <section aria-label={section.label}>
+          <h3 class="mb-3 flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-ink-faint">
+            <span>{section.label}</span>
+            <span class="h-px flex-1 bg-white/10" aria-hidden="true" />
+          </h3>
+          <div class="flex flex-col gap-3">
+            {(section.lines ?? []).map((line) => {
+              const members = memberOf(line);
+              const typeLabel = TYPE_LABEL[line.type] ?? '';
+              const adlib = line.type === 'adlib';
+              return (
+                <article
+                  id={line.id}
+                  class:list={[
+                    'rounded-r-xl rounded-l-md border-l-4 px-4 py-3',
+                    adlib && 'adlib-line border-dashed',
+                    !adlib && 'border-solid',
+                    line.type === 'instrumental' && 'bg-white/[0.03]',
+                  ]}
+                  style={lineStyle(line)}
+                  data-type={line.type}
+                >
+                  <div class="mb-1.5 flex flex-wrap items-center gap-1.5">
+                    {members.length > 0 ? (
+                      members.map((m) => (
+                        <span
+                          class="chip text-xs"
+                          style={`border-color: ${m.color}55; background: ${m.color}18; color: ${m.color}`}
+                        >
+                          <span class="h-1.5 w-1.5 rounded-full" style={`background: ${m.color}`} aria-hidden="true" />
+                          {m.name}
+                        </span>
+                      ))
+                    ) : (
+                      line.type === 'all' && (
+                        <span class="chip border-white/20 bg-white/10 text-ink-muted">All / Ensemble</span>
+                      )
+                    )}
+                    {typeLabel && line.type !== 'all' && (
+                      <span class="chip border-white/15 bg-white/5 text-ink-faint">{typeLabel}</span>
+                    )}
+                  </div>
+                  <p class="lyric-text text-ink" data-lang="text">
+                    {line.type === 'instrumental' && !line.text ? (
+                      <span class="text-ink-faint italic">♪ Nhạc không lời</span>
+                    ) : (
+                      line.text || <span class="text-ink-faint italic">—</span>
+                    )}
+                  </p>
+                  <p class="lyric-text text-ink-muted italic" data-lang="romanization">
+                    {line.romanization || <span class="text-ink-faint not-italic">—</span>}
+                  </p>
+                  <p class="lyric-text text-ink" data-lang="translation">
+                    {line.translation || <span class="text-ink-faint italic">—</span>}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <script type="application/json" id="lyrics-data" set:html={JSON.stringify(copyData).replace(/</g, '\\u003c')} />
+</section>
+
+<script>
+  const panel = document.getElementById('lyrics-lines');
+  if (panel) {
+    // ---- Tabs ngôn ngữ ----
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-tab]'));
+    const selectTab = (id: string) => {
+      panel!.setAttribute('data-lang', id);
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+      panel!.setAttribute('aria-labelledby', `tab-${id}`);
+    };
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => selectTab(tab.dataset.tab ?? 'text'));
+      tab.addEventListener('keydown', (e) => {
+        const i = tabs.indexOf(tab);
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          const next = tabs[(i + 1) % tabs.length]!;
+          next.focus();
+          selectTab(next.dataset.tab ?? 'text');
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const prev = tabs[(i - 1 + tabs.length) % tabs.length]!;
+          prev.focus();
+          selectTab(prev.dataset.tab ?? 'text');
+        }
+      });
+    });
+
+    // ---- Hiện/ẩn adlib ----
+    const adlibToggle = document.getElementById('adlib-toggle') as HTMLInputElement | null;
+    adlibToggle?.addEventListener('change', () => {
+      panel!.setAttribute('data-show-adlib', adlibToggle.checked ? 'on' : 'off');
+    });
+
+    // ---- Cỡ chữ ----
+    const MIN = 16;
+    const MAX = 28;
+    const STEP = 2;
+    let size = 18;
+    try {
+      const saved = Number(localStorage.getItem('lyricsFontSize'));
+      if (saved >= MIN && saved <= MAX) size = saved;
+    } catch { /* bỏ qua */ }
+    const applySize = () => {
+      panel!.style.setProperty('--lyrics-font-size', `${size}px`);
+      try {
+        localStorage.setItem('lyricsFontSize', String(size));
+      } catch { /* bỏ qua */ }
+    };
+    applySize();
+    document.getElementById('font-inc')?.addEventListener('click', () => {
+      size = Math.min(MAX, size + STEP);
+      applySize();
+    });
+    document.getElementById('font-dec')?.addEventListener('click', () => {
+      size = Math.max(MIN, size - STEP);
+      applySize();
+    });
+
+    // ---- Copy theo tab đang chọn ----
+    const toast = (msg: string) => {
+      let el = document.getElementById('copy-toast');
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'copy-toast';
+        el.setAttribute('role', 'status');
+        el.className =
+          'fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-accent px-4 py-3 text-sm font-semibold text-white shadow-lg';
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+      el.style.display = 'block';
+      window.setTimeout(() => {
+        el.style.display = 'none';
+      }, 2000);
+    };
+
+    document.getElementById('copy-lyrics')?.addEventListener('click', async () => {
+      const lang = panel!.getAttribute('data-lang') ?? 'text';
+      const showAdlib = panel!.getAttribute('data-show-adlib') === 'on';
+      const raw = document.getElementById('lyrics-data')?.textContent ?? '[]';
+      const sections = JSON.parse(raw) as {
+        label: string;
+        lines: { type: string; text: string; romanization: string; translation: string }[];
+      }[];
+      const parts: string[] = [];
+      for (const sec of sections) {
+        const rows: string[] = [];
+        for (const line of sec.lines) {
+          if (line.type === 'adlib' && !showAdlib) continue;
+          if (line.type === 'instrumental') {
+            rows.push('♪ (Instrumental)');
+            continue;
+          }
+          const t = lang === 'text' ? line.text : lang === 'romanization' ? line.romanization : line.translation;
+          if (t.trim()) rows.push(t);
+        }
+        if (rows.length) parts.push(`[${sec.label}]`, ...rows, '');
+      }
+      const text = parts.join('\n').trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        toast('Đã sao chép lyrics ✓');
+      } catch {
+        toast('Không thể sao chép tự động — hãy chọn text thủ công.');
+      }
+    });
+  }
+</script>
