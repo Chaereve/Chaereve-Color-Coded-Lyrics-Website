@@ -402,8 +402,10 @@ main > .sec-title:first-child { margin-top: 4px; }
 }
 @media (max-width: 640px) {
   .bar-in { flex-wrap: wrap; padding: 10px 0; gap: 12px; }
-  .search-wrap { order: 3; flex-basis: 100%; width: auto; }
-  .head-tools { margin-left: auto; }
+  .head-tools { display: contents; }
+  .icon-btn { order: 1; }
+  .icon-btn:first-of-type { margin-left: auto; }
+  .search-wrap { order: 2; flex-basis: 100%; width: auto; }
   .trend-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .post-row { grid-template-columns: 132px minmax(0, 1fr); gap: 14px; padding: 16px 0; }
   .post-row-b b { font-size: 15.5px; }

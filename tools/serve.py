@@ -30,6 +30,10 @@ class Handler(SimpleHTTPRequestHandler):
             return
         super().send_error(code, message, explain)
 
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate")
+        super().end_headers()
+
     def list_directory(self, path):
         idx = pathlib.Path(path) / "index.html"
         if idx.exists():

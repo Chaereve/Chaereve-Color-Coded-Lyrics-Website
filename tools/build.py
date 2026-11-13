@@ -14,6 +14,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = json.loads((ROOT / "data" / "site.json").read_text(encoding="utf-8"))
 SITE = DATA["site"]
 BASE_URL = "https://chaereve.github.io/Chaereve-Color-Coded-Lyrics-Website"  # adjust when deploying
+BUILD = datetime.datetime.now().strftime("%m%d%H%M%S")  # cache-busting tag for assets
 
 MONTHS = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
@@ -88,8 +89,8 @@ def head(title, desc, prefix):
 <meta property="og:type" content="website">
 <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="{esc(SITE['name'])} RSS" href="{prefix}feed.xml">
-<link rel="stylesheet" href="{prefix}assets/css/fonts.css">
-<link rel="stylesheet" href="{prefix}assets/css/main.css">
+<link rel="stylesheet" href="{prefix}assets/css/fonts.css?v={BUILD}">
+<link rel="stylesheet" href="{prefix}assets/css/main.css?v={BUILD}">
 <script>
 (function () {{
   try {{
@@ -193,8 +194,8 @@ def footer(prefix):
   </div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="{prefix}assets/js/search-index.js"></script>
-<script src="{prefix}assets/js/site.js" defer></script>
+<script src="{prefix}assets/js/search-index.js?v={BUILD}"></script>
+<script src="{prefix}assets/js/site.js?v={BUILD}" defer></script>
 </body>
 </html>
 '''
