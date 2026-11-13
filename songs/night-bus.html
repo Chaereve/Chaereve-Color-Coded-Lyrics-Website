@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TIDEWORK – Night Bus lyrics · Chaereve</title>
-<meta name="description" content="Color-coded lyrics for TIDEWORK – Night Bus: romanization, original and translation.">
+<meta name="description" content="Color-coded lyrics for TIDEWORK – Night Bus: romanization, hangul and translation.">
 <meta property="og:title" content="TIDEWORK – Night Bus lyrics · Chaereve">
-<meta property="og:description" content="Color-coded lyrics for TIDEWORK – Night Bus: romanization, original and translation.">
+<meta property="og:description" content="Color-coded lyrics for TIDEWORK – Night Bus: romanization, hangul and translation.">
 <meta property="og:type" content="website">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Chaereve RSS" href="../feed.xml">
@@ -16,75 +16,106 @@
 (function () {
   try {
     var t = localStorage.getItem("chaereve-theme");
-    if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    if (!t) t = "light";
     document.documentElement.setAttribute("data-theme", t);
   } catch (e) {}
 })();
 </script>
 </head>
-<body data-page="songs.html" data-prefix="../">
-<a class="skip" href="#main">Skip to content</a>
+<body data-page="song" data-prefix="../">
 <header class="bar">
-  <div class="w">
+  <div class="w bar-in">
     <a class="logo" href="../index.html">Chaereve</a>
-    <div class="search-wrap">
-      <input class="srch" id="siteSearch" type="search" autocomplete="off"
-             aria-label="Search songs or artists" placeholder="Search songs or artists">
-      <div class="search-drop" id="searchDrop" hidden></div>
+    <nav class="menu" id="mainNav" aria-label="Main">
+      <a href="../index.html">Home</a><a href="../artists.html">Index</a><a href="../https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests ↗</a><a href="../faq.html">FAQ</a>
+    </nav>
+    <div class="head-tools">
+      <div class="search-wrap">
+        <input class="srch" id="siteSearch" type="search" placeholder="Search songs or artists…" autocomplete="off" aria-label="Search">
+        <div class="search-drop" id="searchDrop" hidden></div>
+      </div>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">
+        <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
-    <nav class="lk" id="mainNav" aria-label="Main"><a href="../artists.html">Index</a><a class="ext" href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a href="../faq.html">FAQ</a></nav>
-    <button class="icon-btn" id="themeToggle" aria-label="Toggle color theme">
-      <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-      <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
-    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
   </div>
 </header>
-<main class="w" id="main">
-<div class="mu mono crumb"><a href="../artists.html">Korean</a> · <a href="../artists/tidework.html">TIDEWORK</a></div>
-<h1 class="page-title">TIDEWORK – Night Bus</h1>
-<div class="mu mono">November 11, 2026 · by kai_wr</div>
-<div class="top song-top">
-  <div class="vid" role="img" aria-label="Video placeholder">
-    <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="currentColor" opacity=".9"/><path d="M20 14v20l16-10z" fill="var(--bg)"/></svg>
-  </div>
-  <div class="meta">
-    <div class="alb">
-      <div class="cv k3" style="--bg:#1F5F54;--a:#E8F1A0;--b:#16463E"></div>
-      <div><b>Night Bus</b><span>Single · 1 track</span></div>
-    </div>
-    <dl><div><dt>Released</dt><dd>2026.11.11</dd></div><div><dt>Duration</dt><dd>3:12</dd></div><div><dt>Language</dt><dd>Korean</dd></div><div><dt>Genre</dt><dd>Electronic</dd></div><div><dt>Lyrics</dt><dd>Kiro, Vann</dd></div><div><dt>Composer</dt><dd>TIDEWORK</dd></div></dl>
-  </div>
+<div class="w layout">
+<main id="main">
+<article class="post">
+<div class="post-tags mono"><a href="../search.html?q=Korean">KOREAN</a><a href="../artists/tidework.html">TIDEWORK</a></div>
+<h1 class="post-title">TIDEWORK – Night Bus</h1>
+<p class="byline mono">color-coded by kai_wr · November 11, 2026</p>
+<hr class="sep">
+<div class="post-meta"><p class="mu">Night Bus [Single] · 2026.11.11</p><p><b>Lyrics</b>: Kiro, Vann</p><p><b>Composer</b>: TIDEWORK</p><p><b>Arranger</b>: TIDEWORK</p></div>
+<div class="post-cover"><div class="cv k3" style="--bg:#1F5F54;--a:#E8F1A0;--b:#16463E"></div></div>
+<div class="vid" role="img" aria-label="Video placeholder">
+  <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="currentColor" opacity=".9"/><path d="M20 14v20l16-10z" fill="var(--bg)"/></svg>
 </div>
-<section class="sec" aria-label="Lyrics">
+<hr class="sep">
 <div class="lyr-wrap" data-song="night-bus">
 <div class="ctl">
   <div class="lg"><button class="chip" data-spot="Kiro" style="--c:#60A5FA;--cl:#2563EB">Kiro</button><button class="chip" data-spot="Vann" style="--c:#F472B6;--cl:#DB2777">Vann</button><button class="chip chip-all on" data-spot="" style="--c:#F2F2F5;--cl:#22201C">All</button></div>
 </div>
-<div class="lyr-block"><h3 class="lyr-sec">Romanization</h3><div class="lyr" data-lang="rom"><div class="lr line" data-who="Kiro" data-part="Verse 1" style="--c:#60A5FA;--cl:#2563EB">bambeonho bus</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">changmuneul ttara</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">heulleoneun dosi</div><div class="lr line g" data-who="Vann" data-part="Pre-Chorus" style="--c:#F472B6;--cl:#DB2777">neomeojineun bit</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">i bam bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">nal deryeoga</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">meomchun sigan</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">dasi dolligo</div><div class="lr line g" data-who="Vann" data-part="Verse 2" style="--c:#F472B6;--cl:#DB2777">gieok sogui</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">neon utgo isseo</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">nae ireumeul bulleo</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">i bam bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">nal deryeoga</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">meomchun sigan</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">dasi dolligo</div><div class="lr line g" data-who="Kiro" data-part="Outro" style="--c:#60A5FA;--cl:#2563EB">nal deryeoga</div></div></div><div class="lyr-block"><h3 class="lyr-sec">Hangul</h3><div class="lyr" data-lang="orig"><div class="lr line" data-who="Kiro" data-part="Verse 1" style="--c:#60A5FA;--cl:#2563EB">밤번호 버스</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">창문을 따라</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">흘러오는 도시</div><div class="lr line g" data-who="Vann" data-part="Pre-Chorus" style="--c:#F472B6;--cl:#DB2777">넘어지는 빛</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">이 밤 버스</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">날 데려가</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">멈춘 시간</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">다시 돌리고</div><div class="lr line g" data-who="Vann" data-part="Verse 2" style="--c:#F472B6;--cl:#DB2777">기억 속의</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">넌 웃고 있어</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">내 이름을 불러</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">이 밤 버스</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">날 데려가</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">멈춘 시간</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">다시 돌리고</div><div class="lr line g" data-who="Kiro" data-part="Outro" style="--c:#60A5FA;--cl:#2563EB">날 데려가</div></div></div><div class="lyr-block"><h3 class="lyr-sec">Translation</h3><div class="lyr" data-lang="eng"><div class="lr line" data-who="Kiro" data-part="Verse 1" style="--c:#60A5FA;--cl:#2563EB">The night-route bus</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">Along the window</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">The city flowing by</div><div class="lr line g" data-who="Vann" data-part="Pre-Chorus" style="--c:#F472B6;--cl:#DB2777">Lights falling past</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">This night&#x27;s bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Take me away</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">The stopped time</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Wind it back again</div><div class="lr line g" data-who="Vann" data-part="Verse 2" style="--c:#F472B6;--cl:#DB2777">In my memory</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">You&#x27;re smiling</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">Calling my name</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">This night&#x27;s bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Take me away</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">The stopped time</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Wind it back again</div><div class="lr line g" data-who="Kiro" data-part="Outro" style="--c:#60A5FA;--cl:#2563EB">Take me away</div></div></div>
-<div class="lyr-block"><h3 class="lyr-sec">Credits</h3><p class="credits">Korean: [SOURCE]<br>Romanization: kai_wr<br>Translation: kai_wr</p></div>
+<h3 class="lyr-sec">Romanization</h3>
+<div class="lyr" data-lang="rom"><div class="lr line" data-who="Kiro" data-part="Verse 1" style="--c:#60A5FA;--cl:#2563EB">bambeonho bus</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">changmuneul ttara</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">heulleoneun dosi</div><div class="lr line g" data-who="Vann" data-part="Pre-Chorus" style="--c:#F472B6;--cl:#DB2777">neomeojineun bit</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">i bam bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">nal deryeoga</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">meomchun sigan</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">dasi dolligo</div><div class="lr line g" data-who="Vann" data-part="Verse 2" style="--c:#F472B6;--cl:#DB2777">gieok sogui</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">neon utgo isseo</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">nae ireumeul bulleo</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">i bam bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">nal deryeoga</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">meomchun sigan</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">dasi dolligo</div><div class="lr line g" data-who="Kiro" data-part="Outro" style="--c:#60A5FA;--cl:#2563EB">nal deryeoga</div></div>
+<hr class="sep">
+<h3 class="lyr-sec">Hangul</h3>
+<div class="lyr" data-lang="orig"><div class="lr line" data-who="Kiro" data-part="Verse 1" style="--c:#60A5FA;--cl:#2563EB">밤번호 버스</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">창문을 따라</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">흘러오는 도시</div><div class="lr line g" data-who="Vann" data-part="Pre-Chorus" style="--c:#F472B6;--cl:#DB2777">넘어지는 빛</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">이 밤 버스</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">날 데려가</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">멈춘 시간</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">다시 돌리고</div><div class="lr line g" data-who="Vann" data-part="Verse 2" style="--c:#F472B6;--cl:#DB2777">기억 속의</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">넌 웃고 있어</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">내 이름을 불러</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">이 밤 버스</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">날 데려가</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">멈춘 시간</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">다시 돌리고</div><div class="lr line g" data-who="Kiro" data-part="Outro" style="--c:#60A5FA;--cl:#2563EB">날 데려가</div></div>
+<hr class="sep">
+<h3 class="lyr-sec">Translation</h3>
+<div class="lyr" data-lang="eng"><div class="lr line" data-who="Kiro" data-part="Verse 1" style="--c:#60A5FA;--cl:#2563EB">The night-route bus</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">Along the window</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">The city flowing by</div><div class="lr line g" data-who="Vann" data-part="Pre-Chorus" style="--c:#F472B6;--cl:#DB2777">Lights falling past</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">This night&#x27;s bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Take me away</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">The stopped time</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Wind it back again</div><div class="lr line g" data-who="Vann" data-part="Verse 2" style="--c:#F472B6;--cl:#DB2777">In my memory</div><div class="lr line" data-who="Kiro" style="--c:#60A5FA;--cl:#2563EB">You&#x27;re smiling</div><div class="lr line" data-who="Vann" style="--c:#F472B6;--cl:#DB2777">Calling my name</div><div class="lr line all g" data-who="All" data-part="Chorus" style="--c:#F2F2F5;--cl:#22201C">This night&#x27;s bus</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Take me away</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">The stopped time</div><div class="lr line all" data-who="All" style="--c:#F2F2F5;--cl:#22201C">Wind it back again</div><div class="lr line g" data-who="Kiro" data-part="Outro" style="--c:#60A5FA;--cl:#2563EB">Take me away</div></div>
+<hr class="sep">
+<h3 class="lyr-sec">Credits</h3>
+<p class="credits">Korean: [SOURCE]<br>Romanization: kai_wr<br>Translation: kai_wr</p>
 </div>
-</section>
-<h2 class="sec-h">More by TIDEWORK</h2><div class="mg"><a class="mg-item" href="../songs/paper-cuts.html"><div class="cv k5" style="--bg:#6B4226;--a:#F2CC8F;--b:#52321C"></div><b>Paper Cuts</b></a></div>
-<div class="prevnext"><a href="../songs/glass-hours.html">← Mooncrest – Glass Hours</a><a href="../songs/small-fires.html">Kite Season – Small Fires →</a></div>
-</main><footer class="foot">
+<hr class="sep">
+<p class="disclaimer"><b>Disclaimer –</b> Chaereve does not authorize any usage of our work
+(including, but not limited to: transliterations, translations, codings, etc.) in monetized media.</p>
+<hr class="sep">
+<h3 class="more-h">More songs by TIDEWORK (타이드워크)</h3>
+<ul class="more-list"><li><a href="../songs/paper-cuts.html">TIDEWORK – Paper Cuts</a></li></ul>
+<p><a class="all-link" href="../artists/tidework.html">All TIDEWORK lyrics →</a></p>
+<nav class="post-nav"><a href="../songs/glass-hours.html">← Mooncrest – Glass Hours</a><a href="../songs/small-fires.html">Kite Season – Small Fires →</a></nav>
+</article>
+</main>
+<aside class="side" aria-label="Sidebar">
+  <section class="widget">
+    <h4 class="widget-t">Recent Posts</h4>
+    <ul class="widget-list"><li><a href="../songs/low-tide.html">Paper Lanterns – Low Tide</a></li><li><a href="../songs/glass-hours.html">Mooncrest – Glass Hours</a></li><li><a href="../songs/night-bus.html">TIDEWORK – Night Bus</a></li><li><a href="../songs/small-fires.html">Kite Season – Small Fires</a></li><li><a href="../songs/afterimage.html">Velvet Orchard – Afterimage</a></li><li><a href="../songs/slow-weather.html">Nine Rivers – Slow Weather</a></li></ul>
+  </section>
+  <section class="widget">
+    <h4 class="widget-t">Languages</h4>
+    <ul class="widget-list"><li><a href="../search.html?q=English">English (2)</a></li><li><a href="../search.html?q=Japanese">Japanese (1)</a></li><li><a href="../search.html?q=Korean">Korean (11)</a></li></ul>
+  </section>
+  <section class="widget">
+    <h4 class="widget-t">Artists</h4>
+    <ul class="widget-list"><li><a href="../artists/kite-season.html">Kite Season</a></li><li><a href="../artists/mooncrest.html">Mooncrest</a></li><li><a href="../artists/nine-rivers.html">Nine Rivers</a></li><li><a href="../artists/paper-lanterns.html">Paper Lanterns</a></li><li><a href="../artists/tidework.html">TIDEWORK</a></li><li><a href="../artists/velvet-orchard.html">Velvet Orchard</a></li></ul>
+  </section>
+  <section class="widget">
+    <h4 class="widget-t">About</h4>
+    <p class="mu">Chaereve is a fan-run archive of color-coded lyrics —
+    romanization, hangul and translation, credited to the people who wrote them.</p>
+    <p class="mu"><a href="../feed.xml">RSS feed</a> · <a href="https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website" target="_blank" rel="noopener">GitHub</a></p>
+  </section>
+</aside>
+</div>
+<footer class="site-foot">
   <div class="w foot-in">
-    <div class="foot-brand">
-      <b>Chaereve</b>
-      <span class="mu">Fan translations, credited to their authors</span>
-    </div>
+    <p class="foot-brand">© 2026 Chaereve · Fan translations, credited to their authors.</p>
     <nav class="foot-links" aria-label="Footer">
       <a href="../index.html">Home</a>
       <a href="../artists.html">Index</a>
-      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests ↗</a>
+      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests</a>
       <a href="../faq.html">FAQ</a>
       <a href="../feed.xml">RSS</a>
-      <a href="https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </div>
-  <div class="w foot-legal">© 2026 Chaereve. All rights reserved.</div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="../assets/js/search-index.js"></script>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Search · Chaereve</title>
-<meta name="description" content="Search Chaereve lyrics by song or artist.">
+<meta name="description" content="Search songs and artists on Chaereve.">
 <meta property="og:title" content="Search · Chaereve">
-<meta property="og:description" content="Search Chaereve lyrics by song or artist.">
+<meta property="og:description" content="Search songs and artists on Chaereve.">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="Chaereve RSS" href="feed.xml">
@@ -16,56 +16,78 @@
 (function () {
   try {
     var t = localStorage.getItem("chaereve-theme");
-    if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    if (!t) t = "light";
     document.documentElement.setAttribute("data-theme", t);
   } catch (e) {}
 })();
 </script>
 </head>
-<body data-page="search.html" data-prefix="">
-<a class="skip" href="#main">Skip to content</a>
+<body data-page="search" data-prefix="">
 <header class="bar">
-  <div class="w">
+  <div class="w bar-in">
     <a class="logo" href="index.html">Chaereve</a>
-    <div class="search-wrap">
-      <input class="srch" id="siteSearch" type="search" autocomplete="off"
-             aria-label="Search songs or artists" placeholder="Search songs or artists">
-      <div class="search-drop" id="searchDrop" hidden></div>
+    <nav class="menu" id="mainNav" aria-label="Main">
+      <a href="index.html">Home</a><a href="artists.html">Index</a><a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests ↗</a><a href="faq.html">FAQ</a>
+    </nav>
+    <div class="head-tools">
+      <div class="search-wrap">
+        <input class="srch" id="siteSearch" type="search" placeholder="Search songs or artists…" autocomplete="off" aria-label="Search">
+        <div class="search-drop" id="searchDrop" hidden></div>
+      </div>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle color theme">
+        <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
-    <nav class="lk" id="mainNav" aria-label="Main"><a href="artists.html">Index</a><a class="ext" href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a><a href="faq.html">FAQ</a></nav>
-    <button class="icon-btn" id="themeToggle" aria-label="Toggle color theme">
-      <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-      <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
-    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
   </div>
 </header>
-<main class="w" id="main">
-<div class="page-head">
-  <h1>Search</h1>
-  <p class="mu">Songs and artists on Chaereve.</p>
+<div class="w layout">
+<main id="main">
+<h1 class="post-title">Search</h1>
+<p class="mu">Songs and artists on Chaereve.</p>
+<hr class="sep">
+<div class="search-page">
+  <input class="srch wide" id="pageSearch" type="search" placeholder="Search songs or artists…" aria-label="Search">
+  <p class="mono mu" id="searchCount"></p>
+  <div id="searchResults" class="res-list"></div>
 </div>
-<input class="srch wide" id="pageSearch" type="search" placeholder="Search songs or artists…" aria-label="Search">
-<p class="mu mono" id="searchCount" style="margin:18px 2px"></p>
-<div class="search-results" id="searchResults"></div>
-</main><footer class="foot">
+</main>
+<aside class="side" aria-label="Sidebar">
+  <section class="widget">
+    <h4 class="widget-t">Recent Posts</h4>
+    <ul class="widget-list"><li><a href="songs/low-tide.html">Paper Lanterns – Low Tide</a></li><li><a href="songs/glass-hours.html">Mooncrest – Glass Hours</a></li><li><a href="songs/night-bus.html">TIDEWORK – Night Bus</a></li><li><a href="songs/small-fires.html">Kite Season – Small Fires</a></li><li><a href="songs/afterimage.html">Velvet Orchard – Afterimage</a></li><li><a href="songs/slow-weather.html">Nine Rivers – Slow Weather</a></li></ul>
+  </section>
+  <section class="widget">
+    <h4 class="widget-t">Languages</h4>
+    <ul class="widget-list"><li><a href="search.html?q=English">English (2)</a></li><li><a href="search.html?q=Japanese">Japanese (1)</a></li><li><a href="search.html?q=Korean">Korean (11)</a></li></ul>
+  </section>
+  <section class="widget">
+    <h4 class="widget-t">Artists</h4>
+    <ul class="widget-list"><li><a href="artists/kite-season.html">Kite Season</a></li><li><a href="artists/mooncrest.html">Mooncrest</a></li><li><a href="artists/nine-rivers.html">Nine Rivers</a></li><li><a href="artists/paper-lanterns.html">Paper Lanterns</a></li><li><a href="artists/tidework.html">TIDEWORK</a></li><li><a href="artists/velvet-orchard.html">Velvet Orchard</a></li></ul>
+  </section>
+  <section class="widget">
+    <h4 class="widget-t">About</h4>
+    <p class="mu">Chaereve is a fan-run archive of color-coded lyrics —
+    romanization, hangul and translation, credited to the people who wrote them.</p>
+    <p class="mu"><a href="feed.xml">RSS feed</a> · <a href="https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website" target="_blank" rel="noopener">GitHub</a></p>
+  </section>
+</aside>
+</div>
+<footer class="site-foot">
   <div class="w foot-in">
-    <div class="foot-brand">
-      <b>Chaereve</b>
-      <span class="mu">Fan translations, credited to their authors</span>
-    </div>
+    <p class="foot-brand">© 2026 Chaereve · Fan translations, credited to their authors.</p>
     <nav class="foot-links" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="artists.html">Index</a>
-      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests ↗</a>
+      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests</a>
       <a href="faq.html">FAQ</a>
       <a href="feed.xml">RSS</a>
-      <a href="https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </div>
-  <div class="w foot-legal">© 2026 Chaereve. All rights reserved.</div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="assets/js/search-index.js"></script>
