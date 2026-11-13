@@ -208,11 +208,7 @@ def lyrics_html(song):
     }
     toggles = ""
 
-    rows = ['<div class="lr head" aria-hidden="true">'
-            + ('<span class="col col-rom">Romanization</span>' if has["rom"] else "")
-            + ('<span class="col col-orig">Original</span>' if has["orig"] else "")
-            + ('<span class="col col-eng">Translation</span>' if has["eng"] else "")
-            + "</div>"]
+    rows = []
 
     pending_part = None
     first = True
@@ -232,9 +228,9 @@ def lyrics_html(song):
         first = False
         rows.append(
             f'<div class="{cls}" data-who="{esc(l.get("who", "All"))}"{part_attr}{style}>'
-            + (f'<span class="col col-rom" data-label="Romanization">{esc(l.get("rom", ""))}</span>' if has["rom"] else "")
-            + (f'<span class="col col-orig" data-label="Original">{esc(l.get("orig", ""))}</span>' if has["orig"] else "")
-            + (f'<span class="col col-eng" data-label="Translation">{esc(l.get("eng", ""))}</span>' if has["eng"] else "")
+            + (f'<span class="col col-rom">{esc(l.get("rom", ""))}</span>' if has["rom"] else "")
+            + (f'<span class="col col-orig">{esc(l.get("orig", ""))}</span>' if has["orig"] else "")
+            + (f'<span class="col col-eng">{esc(l.get("eng", ""))}</span>' if has["eng"] else "")
             + "</div>")
 
     return f'''<div class="lyr-wrap" data-song="{song['slug']}">
