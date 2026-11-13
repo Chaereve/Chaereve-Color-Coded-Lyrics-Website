@@ -36,7 +36,9 @@ Song requests live on the separate request app: **https://chaereve.pages.dev/**
 ```
 data/site.json     ← ALL content lives here (artists, songs, lyrics, FAQ)
 tools/build.py     ← static site generator (Python 3, no dependencies)
+tools/serve.py     ← local preview server with proper 404 handling
 assets/css/main.css
+assets/css/fonts.css + assets/fonts/  ← self-hosted fonts (OFL), no Google Fonts dependency
 assets/js/site.js  ← theme, search, filters, lyric spotlight
 assets/js/search-index.js  ← generated from data/site.json
 index.html, songs/, artists/, …  ← generated pages (host these)
