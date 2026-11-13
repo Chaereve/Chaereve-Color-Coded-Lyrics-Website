@@ -150,13 +150,12 @@ def render(out_rel, *, title, desc, page, body, prefix=""):
 
 
 # ---------------------------------------------------------------- pieces
-def song_card(song, prefix, show_date=True):
+def song_card(song, prefix, show_date=False):
     a = artist_of(song)
-    sub = esc(a["name"]) + (f' · {fmt_short(song["release"])}' if show_date else "")
     return f'''<a class="card" href="{prefix}songs/{song['slug']}.html" data-lang="{esc(song['language'])}">
 {cover_html(song['cover'])}
 <b>{esc(song['title'])}</b>
-<span>{sub}</span>
+<span>{esc(a['name'])}</span>
 </a>'''
 
 
@@ -170,21 +169,23 @@ def trend_row(song, rank, prefix):
 
 
 def legend_html(artist, interactive):
+    """Mockup-style legend: plain colored text names (clickable when interactive)."""
     out = []
     for m in artist["members"]:
+        tag = "button" if interactive else "span"
         cls = "chip" + ("" if interactive else " static")
-        btn = "button" if interactive else "span"
         out.append(
-            f'<{btn} class="{cls}" data-spot="{esc(m["name"])}" '
-            f'style="--c:{m["color"]};--cl:{m["colorLight"]}">'
-            f'<i class="dot"></i>{esc(m["name"])}</{btn}>')
+            f'<{tag} class="{cls}" data-spot="{esc(m["name"])}" '
+            f'style="--c:{m["color"]};--cl:{m["colorLight"]}">{esc(m["name"])}</{tag}>')
     out.append(
-        f'<{"button" if interactive else "span"} class="chip chip-all{" on" if interactive else ""}" data-spot="" '
-        f'style="--c:#F2F2F5;--cl:#22201C"><i class="dot"></i>All</{"button" if interactive else "span"}>')
+        f'<{"button" if interactive else "span"} class="chip chip-all{" on" if interactive else ""}" '
+        f'data-spot="" style="--c:#F2F2F5;--cl:#22201C">All</{"button" if interactive else "span"}>')
     return "".join(out)
 
 
 def lyrics_html(song):
+    """Mockup-faithful lyrics: 3 aligned type-columns, colored lines, no name column.
+    Section breaks are spacing only (.g), the way the mockup does it."""
     a = artist_of(song)
     lines = song["lyrics"]
     has = {
@@ -197,21 +198,30 @@ def lyrics_html(song):
         for col, label in (("rom", "Romanization"), ("orig", "Original"), ("eng", "Translation"))
         if has[col])
 
-    rows = ['<div class="lr head" aria-hidden="true"><span class="who"></span>'
-            + (f'<span class="col col-rom">Romanization</span>' if has["rom"] else "")
-            + (f'<span class="col col-orig">Original</span>' if has["orig"] else "")
-            + (f'<span class="col col-eng">Translation</span>' if has["eng"] else "")
+    rows = ['<div class="lr head" aria-hidden="true">'
+            + ('<span class="col col-rom">Romanization</span>' if has["rom"] else "")
+            + ('<span class="col col-orig">Original</span>' if has["orig"] else "")
+            + ('<span class="col col-eng">Translation</span>' if has["eng"] else "")
             + "</div>"]
 
+    pending_part = None
+    first = True
     for l in lines:
         if "part" in l:
-            rows.append(f'<div class="lr part"><span>{esc(l["part"])}</span></div>')
+            pending_part = l["part"]
             continue
-        style, who_label, is_all = member_style(a, l.get("who", "All"))
+        style, _, is_all = member_style(a, l.get("who", "All"))
         cls = "lr line" + (" all" if is_all else "")
+        if pending_part is not None:
+            if not first:
+                cls += " g"
+            part_attr = f' data-part="{esc(pending_part)}"'
+            pending_part = None
+        else:
+            part_attr = ""
+        first = False
         rows.append(
-            f'<div class="{cls}" data-who="{esc(l.get("who", "All"))}"{style}>'
-            f'<span class="who"><i class="dot"></i>{esc(who_label)}</span>'
+            f'<div class="{cls}" data-who="{esc(l.get("who", "All"))}"{part_attr}{style}>'
             + (f'<span class="col col-rom" data-label="Romanization">{esc(l.get("rom", ""))}</span>' if has["rom"] else "")
             + (f'<span class="col col-orig" data-label="Original">{esc(l.get("orig", ""))}</span>' if has["orig"] else "")
             + (f'<span class="col col-eng" data-label="Translation">{esc(l.get("eng", ""))}</span>' if has["eng"] else "")
@@ -220,11 +230,13 @@ def lyrics_html(song):
     return f'''<div class="lyr-wrap" data-song="{song['slug']}">
 <div class="ctl">
   <div class="lg">{legend_html(a, True)}</div>
-  <div class="seg">{toggles}</div>
-  <div class="tools">
-    <button data-fs="dec" aria-label="Smaller lyrics text">A−</button>
-    <button data-fs="inc" aria-label="Larger lyrics text">A+</button>
-    <button data-copy>Copy</button>
+  <div class="extras">
+    <div class="seg">{toggles}</div>
+    <div class="tools">
+      <button data-fs="dec" aria-label="Smaller lyrics text">A−</button>
+      <button data-fs="inc" aria-label="Larger lyrics text">A+</button>
+      <button data-copy>Copy</button>
+    </div>
   </div>
 </div>
 <div class="lyr">{"".join(rows)}</div>
@@ -335,8 +347,7 @@ def page_song(s):
     c = s["credits"]
     dl = [("Released", fmt_dot(s["release"])), ("Duration", s["duration"]),
           ("Language", s["language"]), ("Genre", s["genre"]),
-          ("Lyrics", c["lyrics"]), ("Composer", c["composer"]),
-          ("Arranger", c.get("arranger", "—")), ("Translation", c["translation"])]
+          ("Lyrics", c["lyrics"]), ("Composer", c["composer"])]
     dl_html = "".join(f"<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>" for k, v in dl)
 
     more = [x for x in SONG_LIST if x["artist"] == a["slug"] and x["slug"] != s["slug"]][:4]
@@ -356,11 +367,10 @@ def page_song(s):
     body = f'''<main class="w" id="main">
 <div class="mu mono crumb"><a href="{prefix}artists.html">{esc(s['language'])}</a> · <a href="{prefix}artists/{a['slug']}.html">{esc(a['name'])}</a></div>
 <h1 class="page-title">{esc(a['name'])} – {esc(s['title'])}</h1>
-<div class="mu mono">{fmt_long(s['release'])} · colored by {esc(s['coloredBy'])}</div>
-<div class="top">
+<div class="mu mono">{fmt_long(s['release'])} · by {esc(s['coloredBy'])}</div>
+<div class="top song-top">
   <div class="vid" role="img" aria-label="Video placeholder">
     <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="currentColor" opacity=".9"/><path d="M20 14v20l16-10z" fill="var(--bg)"/></svg>
-    <span class="mu mono">official video</span>
   </div>
   <div class="meta">
     <div class="alb">
@@ -372,7 +382,7 @@ def page_song(s):
 </div>
 <section class="sec" aria-label="Lyrics">
 {lyrics_html(s)}
-<p class="credits mu mono">Credits: {esc(s['language'])} {esc(c['source'])} · Romanization and translation by {esc(c['translation'])} · <a href="{prefix}requests.html">Report a fix</a></p>
+<p class="credits mu mono">Credits: {esc(s['language'])} {esc(c['source'])} · Romanization and translation by {esc(c['translation'])}</p>
 </section>
 {more_block}
 <div class="prevnext">{left}{right}</div>

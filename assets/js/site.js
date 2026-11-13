@@ -269,10 +269,7 @@
         var out = [title, ""];
         $$(".lr", lyr).forEach(function (row) {
           if (row.classList.contains("head")) return;
-          if (row.classList.contains("part")) {
-            out.push("[" + row.textContent.trim() + "]");
-            return;
-          }
+          if (row.dataset.part) out.push("[" + row.dataset.part + "]");
           var who = row.dataset.who || "";
           var parts = cols.map(function (col) {
             var cell = $(".col-" + col, row);
