@@ -5,7 +5,7 @@ translation in aligned columns, every member's lines in their color.
 
 Inspired by the convenience of [colorcodedlyrics.com](https://colorcodedlyrics.com/)
 (artist index, one page per song, credits up front) with a modern editorial dark
-UI — plus a light theme, instant search and reading controls.
+UI — plus a light theme, instant search and a fully responsive layout.
 
 ## Pages
 
@@ -15,27 +15,29 @@ UI — plus a light theme, instant search and reading controls.
 | `artists.html` | A–Z artist index with instant filter |
 | `artists/<slug>.html` | Artist page — bio, members, all their songs |
 | `songs/<slug>.html` | Song page — info block + color-coded lyrics |
-| `requests.html` | Request board (filterable) + request form |
-| `submit.html` | Submission guidelines + form |
 | `faq.html` | FAQ accordion |
 | `search.html` | Full search (works with `?q=`) |
 | `feed.xml` | RSS feed of new lyrics |
+| `404.html` | Not-found page |
+
+Song requests live on the separate request app: **https://chaereve.pages.dev/**
+(linked from the navbar and footer).
 
 ## Song page features
 
-- Three aligned columns: **Romanization / Original / Translation**, toggleable
-- **Member legend chips** — click a member to spotlight their lines
-- **Font size** A− / A+ and **Copy lyrics** (copies the visible columns)
-- Section labels (Verse / Chorus / …), credits line, prev/next song
-- Light & dark theme, fully responsive (stacked lyrics on mobile)
+- Three aligned columns: **Romanization / Original / Translation**
+- **Member legend** — click a name to spotlight that member's lines
+- Section spacing (Verse / Chorus / …) kept quiet, the way the mockup shows it
+- Credits line, prev/next song, more-by-artist grid
+- Light & dark theme, responsive (stacked lyrics with column labels on mobile)
 
 ## Project layout
 
 ```
-data/site.json     ← ALL content lives here (artists, songs, lyrics, FAQ, requests)
+data/site.json     ← ALL content lives here (artists, songs, lyrics, FAQ)
 tools/build.py     ← static site generator (Python 3, no dependencies)
 assets/css/main.css
-assets/js/site.js  ← theme, search, filters, lyric controls
+assets/js/site.js  ← theme, search, filters, lyric spotlight
 assets/js/search-index.js  ← generated from data/site.json
 index.html, songs/, artists/, …  ← generated pages (host these)
 ```

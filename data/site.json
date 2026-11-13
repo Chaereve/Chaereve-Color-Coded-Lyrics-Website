@@ -634,7 +634,7 @@
     },
     {
       "q": "What do the three columns mean?",
-      "a": "Romanization is the original lyrics written in Latin letters so you can follow the sound. Original is the lyrics as written in the song's own script (Hangul, Japanese, or English). Translation is the English meaning. You can hide any column with the toggle above the lyrics."
+      "a": "Romanization is the original lyrics written in Latin letters so you can follow the sound. Original is the lyrics as written in the song's own script (Hangul, Japanese, or English). Translation is the English meaning."
     },
     {
       "q": "Can I use your lyrics or translations?",
@@ -642,15 +642,11 @@
     },
     {
       "q": "How do I request a song?",
-      "a": "Open the Requests page and fill in the short form. Requests are visible to everyone, so you can see what is already being worked on before adding yours."
-    },
-    {
-      "q": "How do I submit lyrics or a translation?",
-      "a": "Use the Submit page. Paste the lyrics, tell us who wrote what so credit is preserved, and our editors will format and color-code the post. You keep full credit for your work."
+      "a": "Head to the [Requests page](https://chaereve.pages.dev/) and send your request there — you can see what the team is already working on before adding yours."
     },
     {
       "q": "Why is a song missing a column?",
-      "a": "Some songs have not been translated or romanized yet. If you can help, submit the missing part — and if something looks wrong, use “Report a fix” on the song page."
+      "a": "Some songs have not been translated or romanized yet. If something looks wrong or you can help fill in the gaps, let us know on the [Requests page](https://chaereve.pages.dev/)."
     },
     {
       "q": "How often are new lyrics added?",

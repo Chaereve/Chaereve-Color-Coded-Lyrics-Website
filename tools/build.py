@@ -97,32 +97,37 @@ def head(title, desc, prefix):
 '''
 
 
-NAV = [("Index", "artists.html"), ("Requests", "requests.html"),
-       ("Submit", "submit.html"), ("FAQ", "faq.html")]
+NAV = [("Index", "artists.html", False), ("Requests", "https://chaereve.pages.dev/", True),
+       ("FAQ", "faq.html", False)]
 
 
 def header(prefix, page):
     items = []
-    for label, href in NAV:
-        cur = ' aria-current="page"' if href.startswith(page) else ""
-        items.append(f'<a href="{prefix}{href}"{cur}>{label}</a>')
+    for label, href, ext in NAV:
+        if ext:
+            items.append(f'<a class="ext" href="{href}" target="_blank" rel="noopener">{label}'
+                         '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>')
+        else:
+            cur = ' aria-current="page"' if href.startswith(page) else ""
+            items.append(f'<a href="{prefix}{href}"{cur}>{label}</a>')
     links = "".join(items)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="bar">
   <div class="w">
     <a class="logo" href="{prefix}index.html">{esc(SITE['name'])}</a>
     <div class="search-wrap">
+      <svg class="srch-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input class="srch" id="siteSearch" type="search" autocomplete="off"
              aria-label="Search songs or artists" placeholder="Search songs or artists">
       <div class="search-drop" id="searchDrop" hidden></div>
     </div>
     <nav class="lk" id="mainNav" aria-label="Main">{links}</nav>
     <button class="icon-btn" id="themeToggle" aria-label="Toggle color theme">
-      <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-      <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
     <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
   </div>
 </header>
@@ -130,8 +135,18 @@ def header(prefix, page):
 
 
 def footer(prefix):
-    return f'''<footer class="w mu foot">
-  {esc(SITE['footerNote'])} · <a href="{prefix}feed.xml">RSS</a> · <a href="{esc(SITE['github'])}" rel="noopener">GitHub</a>
+    return f'''<footer class="foot">
+  <div class="w foot-in">
+    <p class="foot-brand">© 2026 {esc(SITE['name'])} <span class="mu">· Fan translations, credited to their authors</span></p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="{prefix}index.html">Home</a>
+      <a href="{prefix}artists.html">Index</a>
+      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests</a>
+      <a href="{prefix}faq.html">FAQ</a>
+      <a href="{prefix}feed.xml">RSS</a>
+      <a href="{esc(SITE['github'])}" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="{prefix}assets/js/search-index.js"></script>
@@ -193,10 +208,7 @@ def lyrics_html(song):
         "orig": any(l.get("orig") for l in lines if "part" not in l),
         "eng": any(l.get("eng") for l in lines if "part" not in l),
     }
-    toggles = "".join(
-        f'<button data-col="{col}" aria-pressed="true">{label}</button>'
-        for col, label in (("rom", "Romanization"), ("orig", "Original"), ("eng", "Translation"))
-        if has[col])
+    toggles = ""
 
     rows = ['<div class="lr head" aria-hidden="true">'
             + ('<span class="col col-rom">Romanization</span>' if has["rom"] else "")
@@ -230,16 +242,8 @@ def lyrics_html(song):
     return f'''<div class="lyr-wrap" data-song="{song['slug']}">
 <div class="ctl">
   <div class="lg">{legend_html(a, True)}</div>
-  <div class="extras">
-    <div class="seg">{toggles}</div>
-    <div class="tools">
-      <button data-fs="dec" aria-label="Smaller lyrics text">A−</button>
-      <button data-fs="inc" aria-label="Larger lyrics text">A+</button>
-      <button data-copy>Copy</button>
-    </div>
-  </div>
 </div>
-<div class="lyr">{"".join(rows)}</div>
+<div class="lyr-outer"><div class="lyr">{"".join(rows)}</div></div>
 </div>'''
 
 
@@ -393,98 +397,14 @@ def page_song(s):
                   page="songs.html", body=body, prefix=prefix)
 
 
-def page_requests():
-    statuses = ["All", "Open", "In progress", "Done"]
-    chips = "".join(
-        f'<button class="chip status-chip{" on" if i == 0 else ""}" data-status="{esc(st)}">{esc(st)}</button>'
-        for i, st in enumerate(statuses))
-    rows = "".join(f'''<div class="req-row" data-status="{esc(r['status'])}">
-<b>{esc(r['song'])}</b>
-<span>{esc(r['artist'])}</span>
-<span class="mu">{esc(r['by'])}</span>
-<span class="mu mono">{fmt_dot(r['date'])}</span>
-<span class="st st-{r['status'].lower().replace(' ', '-')}">{esc(r['status'])}</span>
-</div>''' for r in DATA["requests"])
-    body = f'''<main class="w" id="main">
-<div class="page-head">
-  <h1>Requests</h1>
-  <p class="mu">Ask for a song to be color-coded — and see what the team is already working on.</p>
-</div>
-<div class="lg req-filter">{chips}</div>
-<div class="req-list" id="reqList">
-  <div class="req-row head mono"><span>Song</span><span>Artist</span><span>Requested by</span><span>Date</span><span>Status</span></div>
-  {rows}
-</div>
-<div class="panel">
-  <h2 class="sec-h">New request</h2>
-  <form id="reqForm" class="form">
-    <div class="frow">
-      <label>Song title<input name="song" required placeholder="e.g. Static Bloom"></label>
-      <label>Artist<input name="artist" required placeholder="e.g. TIDEWORK"></label>
-    </div>
-    <div class="frow">
-      <label>Your name<input name="by" required placeholder="How you'll be credited"></label>
-      <label>Video link <span class="mu">(optional)</span><input name="video" type="url" placeholder="https://…"></label>
-    </div>
-    <label>Notes <span class="mu">(optional)</span><textarea name="note" rows="3" placeholder="Anything that helps — album, version, teaser link…"></textarea></label>
-    <button class="btn" type="submit">Send request</button>
-  </form>
-</div>
-</main>'''
-    return render("requests.html", title=f"Requests · {SITE['name']}",
-                  desc="Request a song for color-coded lyrics on Chaereve.",
-                  page="requests.html", body=body)
-
-
-def page_submit():
-    body = f'''<main class="w" id="main">
-<div class="page-head">
-  <h1>Submit lyrics</h1>
-  <p class="mu">Got lyrics, a romanization or a translation? Send them in — you keep full credit.</p>
-</div>
-<div class="panel">
-  <h2 class="sec-h">Guidelines</h2>
-  <ol class="guide">
-    <li><b>Credit is sacred.</b> Tell us who wrote the lyrics, romanization and translation — every post is credited to its authors.</li>
-    <li><b>One line per singer.</b> Split lines the way they are sung, and mark who sings each line (or “All”).</li>
-    <li><b>Keep the columns apart.</b> Send original, romanization and translation as separate blocks — our editors line them up.</li>
-    <li><b>Link your sources.</b> If the original lyrics come from an album booklet or a label site, include the link.</li>
-    <li><b>Personal use only.</b> By submitting, you agree the work can be published here with credit and shared for personal use.</li>
-  </ol>
-</div>
-<div class="panel">
-  <h2 class="sec-h">Submission form</h2>
-  <form id="subForm" class="form">
-    <div class="frow">
-      <label>Your name<input name="name" required placeholder="How you'll be credited"></label>
-      <label>Email<input name="email" type="email" required placeholder="you@example.com"></label>
-    </div>
-    <div class="frow">
-      <label>Artist<input name="artist" required placeholder="e.g. Paper Lanterns"></label>
-      <label>Song title<input name="song" required placeholder="e.g. Low Tide"></label>
-    </div>
-    <label>What are you submitting?
-      <select name="kind">
-        <option>Full lyrics (original + romanization + translation)</option>
-        <option>Original lyrics only</option>
-        <option>Romanization</option>
-        <option>Translation</option>
-        <option>Correction / fix</option>
-      </select>
-    </label>
-    <label>Lyrics<textarea name="lyrics" rows="8" required placeholder="Paste lyrics here — mark singers per line if you can."></textarea></label>
-    <label>Sources &amp; notes <span class="mu">(optional)</span><textarea name="notes" rows="3" placeholder="Links, credits, context…"></textarea></label>
-    <button class="btn" type="submit">Submit</button>
-  </form>
-</div>
-</main>'''
-    return render("submit.html", title=f"Submit lyrics · {SITE['name']}",
-                  desc="Submit lyrics, romanization or translations to Chaereve.",
-                  page="submit.html", body=body)
+def linkify(text):
+    """Turn [label](url) into links after escaping."""
+    import re as _re
+    return _re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank" rel="noopener">\1</a>', esc(text))
 
 
 def page_faq():
-    items = "".join(f'<details class="faq-item"><summary>{esc(f["q"])}</summary><p>{esc(f["a"])}</p></details>'
+    items = "".join(f'<details class="faq-item"><summary>{esc(f["q"])}</summary><p>{linkify(f["a"])}</p></details>'
                     for f in DATA["faq"])
     body = f'''<main class="w" id="main">
 <div class="page-head">
@@ -494,7 +414,7 @@ def page_faq():
 <div class="faq-list">{items}</div>
 <div class="panel" style="margin-top:32px">
   <h2 class="sec-h">Still stuck?</h2>
-  <p class="mu">Ask on the <a href="requests.html">Requests page</a> or open an issue on <a href="{esc(SITE['github'])}" rel="noopener">GitHub</a>.</p>
+  <p class="mu">Ask on the <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests page</a> or open an issue on <a href="{esc(SITE['github'])}" rel="noopener">GitHub</a>.</p>
 </div>
 </main>'''
     return render("faq.html", title=f"FAQ · {SITE['name']}",
@@ -588,8 +508,6 @@ def main():
         built.append(page_artist(a))
     for s in SONG_LIST:
         built.append(page_song(s))
-    built.append(page_requests())
-    built.append(page_submit())
     built.append(page_faq())
     built.append(page_search())
     built.append(page_404())
