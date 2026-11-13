@@ -114,7 +114,6 @@ def header(prefix, page):
   <div class="w">
     <a class="logo" href="{prefix}index.html">{esc(SITE['name'])}</a>
     <div class="search-wrap">
-      <svg class="srch-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input class="srch" id="siteSearch" type="search" autocomplete="off"
              aria-label="Search songs or artists" placeholder="Search songs or artists">
       <div class="search-drop" id="searchDrop" hidden></div>

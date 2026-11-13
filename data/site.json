@@ -6,9 +6,20 @@
     "footerNote": "Chaereve · Fan translations, credited to their authors",
     "github": "https://github.com/Chaereve/Chaereve-Color-Coded-Lyrics-Website"
   },
-  "languages": ["All", "Korean", "English", "Japanese"],
+  "languages": [
+    "All",
+    "Korean",
+    "English",
+    "Japanese"
+  ],
   "featured": "low-tide",
-  "trending": ["glass-hours", "night-bus", "small-fires", "afterimage", "slow-weather"],
+  "trending": [
+    "glass-hours",
+    "night-bus",
+    "small-fires",
+    "afterimage",
+    "slow-weather"
+  ],
   "artists": [
     {
       "slug": "paper-lanterns",
@@ -17,12 +28,33 @@
       "type": "Group",
       "language": "Korean",
       "bio": "A four-piece band from Seoul mixing warm synth pop with paper-thin harmonies. Debuted in 2023 with the EP “Paper Skies”.",
-      "cover": { "bg": "#2B3A67", "a": "#FF9F6E", "b": "#1E2A4D", "k": "" },
+      "cover": {
+        "bg": "#2B3A67",
+        "a": "#FF9F6E",
+        "b": "#1E2A4D",
+        "k": ""
+      },
       "members": [
-        { "name": "Hana", "color": "#FF7AA8", "colorLight": "#D64F7E" },
-        { "name": "Jiwoo", "color": "#7DB4FF", "colorLight": "#2F6FD6" },
-        { "name": "Mira", "color": "#FFC857", "colorLight": "#A67C00" },
-        { "name": "Sol", "color": "#5EE0C4", "colorLight": "#0E9E86" }
+        {
+          "name": "Hana",
+          "color": "#FF7AA8",
+          "colorLight": "#D64F7E"
+        },
+        {
+          "name": "Jiwoo",
+          "color": "#7DB4FF",
+          "colorLight": "#2F6FD6"
+        },
+        {
+          "name": "Mira",
+          "color": "#FFC857",
+          "colorLight": "#A67C00"
+        },
+        {
+          "name": "Sol",
+          "color": "#5EE0C4",
+          "colorLight": "#0E9E86"
+        }
       ]
     },
     {
@@ -32,13 +64,38 @@
       "type": "Group",
       "language": "Korean",
       "bio": "Five members, night-drive synths and glassy vocals. Mooncrest released their first LP “Blue Alarm” in 2025.",
-      "cover": { "bg": "#7A2E4A", "a": "#FFD166", "b": "#5E2038", "k": "k2" },
+      "cover": {
+        "bg": "#7A2E4A",
+        "a": "#FFD166",
+        "b": "#5E2038",
+        "k": "k2"
+      },
       "members": [
-        { "name": "Arin", "color": "#FF8FA3", "colorLight": "#E2536B" },
-        { "name": "Bora", "color": "#A78BFA", "colorLight": "#7C5CE0" },
-        { "name": "Chae", "color": "#67E8F9", "colorLight": "#0891A6" },
-        { "name": "Dami", "color": "#FBBF24", "colorLight": "#B07C00" },
-        { "name": "Eun", "color": "#86EFAC", "colorLight": "#2F9E5B" }
+        {
+          "name": "Arin",
+          "color": "#FF8FA3",
+          "colorLight": "#E2536B"
+        },
+        {
+          "name": "Bora",
+          "color": "#A78BFA",
+          "colorLight": "#7C5CE0"
+        },
+        {
+          "name": "Chae",
+          "color": "#67E8F9",
+          "colorLight": "#0891A6"
+        },
+        {
+          "name": "Dami",
+          "color": "#FBBF24",
+          "colorLight": "#B07C00"
+        },
+        {
+          "name": "Eun",
+          "color": "#86EFAC",
+          "colorLight": "#2F9E5B"
+        }
       ]
     },
     {
@@ -48,10 +105,23 @@
       "type": "Duo",
       "language": "Korean",
       "bio": "Producer duo Kiro and Vann building songs out of city noise, tape hiss and half-remembered choruses.",
-      "cover": { "bg": "#1F5F54", "a": "#E8F1A0", "b": "#16463E", "k": "k3" },
+      "cover": {
+        "bg": "#1F5F54",
+        "a": "#E8F1A0",
+        "b": "#16463E",
+        "k": "k3"
+      },
       "members": [
-        { "name": "Kiro", "color": "#60A5FA", "colorLight": "#2563EB" },
-        { "name": "Vann", "color": "#F472B6", "colorLight": "#DB2777" }
+        {
+          "name": "Kiro",
+          "color": "#60A5FA",
+          "colorLight": "#2563EB"
+        },
+        {
+          "name": "Vann",
+          "color": "#F472B6",
+          "colorLight": "#DB2777"
+        }
       ]
     },
     {
@@ -61,10 +131,23 @@
       "type": "Duo",
       "language": "Korean",
       "bio": "Indie duo Nari and Woojin — acoustic guitars, small fires and songs that fit in a coat pocket.",
-      "cover": { "bg": "#E9E4D6", "a": "#E4572E", "b": "#CFC8B4", "k": "k4" },
+      "cover": {
+        "bg": "#E9E4D6",
+        "a": "#E4572E",
+        "b": "#CFC8B4",
+        "k": "k4"
+      },
       "members": [
-        { "name": "Nari", "color": "#FCA5A5", "colorLight": "#DC5B5B" },
-        { "name": "Woojin", "color": "#A5B4FC", "colorLight": "#6C7BE0" }
+        {
+          "name": "Nari",
+          "color": "#FCA5A5",
+          "colorLight": "#DC5B5B"
+        },
+        {
+          "name": "Woojin",
+          "color": "#A5B4FC",
+          "colorLight": "#6C7BE0"
+        }
       ]
     },
     {
@@ -74,12 +157,33 @@
       "type": "Group",
       "language": "Japanese",
       "bio": "Tokyo quartet blending city-pop grooves with orchard-soft vocals. First EP “Orchard” arrived in 2026.",
-      "cover": { "bg": "#4B2E83", "a": "#7DE2D1", "b": "#382266", "k": "k5" },
+      "cover": {
+        "bg": "#4B2E83",
+        "a": "#7DE2D1",
+        "b": "#382266",
+        "k": "k5"
+      },
       "members": [
-        { "name": "Hikari", "color": "#FFB4A2", "colorLight": "#E07A5F" },
-        { "name": "Mei", "color": "#E5989B", "colorLight": "#C1666B" },
-        { "name": "Rina", "color": "#B5838D", "colorLight": "#8D5B66" },
-        { "name": "Yua", "color": "#CDB4DB", "colorLight": "#9A6FB0" }
+        {
+          "name": "Hikari",
+          "color": "#FFB4A2",
+          "colorLight": "#E07A5F"
+        },
+        {
+          "name": "Mei",
+          "color": "#E5989B",
+          "colorLight": "#C1666B"
+        },
+        {
+          "name": "Rina",
+          "color": "#B5838D",
+          "colorLight": "#8D5B66"
+        },
+        {
+          "name": "Yua",
+          "color": "#CDB4DB",
+          "colorLight": "#9A6FB0"
+        }
       ]
     },
     {
@@ -89,9 +193,18 @@
       "type": "Solo",
       "language": "English",
       "bio": "Sori writes slow-burning English pop under the name Nine Rivers — one voice, nine rivers, weather for every mood.",
-      "cover": { "bg": "#C94F3D", "a": "#1B1B1F", "b": "#A63C2D", "k": "" },
+      "cover": {
+        "bg": "#C94F3D",
+        "a": "#1B1B1F",
+        "b": "#A63C2D",
+        "k": ""
+      },
       "members": [
-        { "name": "Sori", "color": "#E9C46A", "colorLight": "#B08900" }
+        {
+          "name": "Sori",
+          "color": "#E9C46A",
+          "colorLight": "#B08900"
+        }
       ]
     }
   ],
@@ -101,7 +214,9 @@
       "title": "Low Tide",
       "artist": "paper-lanterns",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Slow Weather",
       "albumType": "EP",
       "albumTracks": 5,
@@ -109,50 +224,239 @@
       "duration": "3:24",
       "genre": "Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#2B3A67", "a": "#FF9F6E", "b": "#1E2A4D", "k": "" },
-      "credits": { "lyrics": "A. Moreau", "composer": "K. Han", "arranger": "R. Seo", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#2B3A67",
+        "a": "#FF9F6E",
+        "b": "#1E2A4D",
+        "k": ""
+      },
+      "credits": {
+        "lyrics": "A. Moreau",
+        "composer": "K. Han",
+        "arranger": "R. Seo",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Hana", "rom": "byeori jineun bame", "orig": "별이 지는 밤에", "eng": "On the night the stars fall" },
-        { "who": "Jiwoo", "rom": "ne ireumeul bulleo", "orig": "네 이름을 불러", "eng": "I call out your name" },
-        { "who": "Hana", "rom": "sumgyeoon seorameul", "orig": "숨겨온 서로를", "eng": "The selves we kept hidden" },
-        { "who": "Jiwoo", "rom": "dallyeoga gal su itge", "orig": "달려갈 수 있게", "eng": "So we can run to each other" },
-        { "part": "Pre-Chorus" },
-        { "who": "Mira", "rom": "meolli gaji ma", "orig": "멀리 가지 마", "eng": "Don't go far" },
-        { "who": "Sol", "rom": "yeogi isseulge", "orig": "여기 있을게", "eng": "I'll be right here" },
-        { "who": "Mira", "rom": "nunmul gateun biche", "orig": "눈물 같은 빛에", "eng": "In light like tears" },
-        { "who": "Sol", "rom": "uri modu gachi", "orig": "우리 모두 같이", "eng": "All of us together" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "bulbichi beonjyeo", "orig": "불빛이 번져", "eng": "The lights bleed outward" },
-        { "who": "All", "rom": "dasi hanbeon deo", "orig": "다시 한번 더", "eng": "One more time" },
-        { "who": "All", "rom": "uri gachi", "orig": "우리 같이", "eng": "Together" },
-        { "who": "All", "rom": "geudaero isseo", "orig": "그대로 있어", "eng": "Stay just as you are" },
-        { "part": "Verse 2" },
-        { "who": "Sol", "rom": "hemaeyeo isseo", "orig": "헤매여 있어", "eng": "I'm wandering" },
-        { "who": "Hana", "rom": "gieokui sogeul", "orig": "기억의 속을", "eng": "Deep inside my memories" },
-        { "who": "Sol", "rom": "jom deo gipi", "orig": "좀 더 깊이", "eng": "A little deeper" },
-        { "who": "Hana", "rom": "ppajyeodeulgo isseo", "orig": "빠져들고 있어", "eng": "I'm falling in" },
-        { "part": "Pre-Chorus" },
-        { "who": "Mira", "rom": "meorigi jeonghae", "orig": "머리가 정해", "eng": "My mind is made up" },
-        { "who": "Jiwoo", "rom": "nae ireumeul bulleo", "orig": "내 이름을 불러", "eng": "Call my name" },
-        { "who": "Mira", "rom": "nuni mallyeo", "orig": "눈이 멀려", "eng": "Blinded" },
-        { "who": "Jiwoo", "rom": "barameul ttara", "orig": "바람을 따라", "eng": "Following the wind" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "bulbichi beonjyeo", "orig": "불빛이 번져", "eng": "The lights bleed outward" },
-        { "who": "All", "rom": "dasi hanbeon deo", "orig": "다시 한번 더", "eng": "One more time" },
-        { "who": "All", "rom": "uri gachi", "orig": "우리 같이", "eng": "Together" },
-        { "who": "All", "rom": "geudaero isseo", "orig": "그대로 있어", "eng": "Stay just as you are" },
-        { "part": "Bridge" },
-        { "who": "Sol", "rom": "hanbameul gieokhae", "orig": "한밤을 기억해", "eng": "Remember the midnight" },
-        { "who": "Hana", "rom": "uriui sigani", "orig": "우리의 시간이", "eng": "Our time" },
-        { "who": "All", "rom": "heureuge mandeulja", "orig": "흐르게 만들자", "eng": "Let's make it flow" },
-        { "part": "Final Chorus" },
-        { "who": "All", "rom": "bulbichi beonjyeo", "orig": "불빛이 번져", "eng": "The lights bleed outward" },
-        { "who": "All", "rom": "dasi hanbeon deo", "orig": "다시 한번 더", "eng": "One more time" },
-        { "who": "All", "rom": "uri gachi", "orig": "우리 같이", "eng": "Together" },
-        { "who": "All", "rom": "yeogi isseulge", "orig": "여기 있을게", "eng": "I'll be right here" },
-        { "part": "Outro" },
-        { "who": "Hana", "rom": "geudaero isseo", "orig": "그대로 있어", "eng": "Stay just as you are" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Hana",
+          "rom": "byeori jineun bame",
+          "orig": "별이 지는 밤에",
+          "eng": "On the night the stars fall"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "ne ireumeul bulleo",
+          "orig": "네 이름을 불러",
+          "eng": "I call out your name"
+        },
+        {
+          "who": "Hana",
+          "rom": "sumgyeoon seorameul",
+          "orig": "숨겨온 서로를",
+          "eng": "The selves we kept hidden"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "dallyeoga gal su itge",
+          "orig": "달려갈 수 있게",
+          "eng": "So we can run to each other"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Mira",
+          "rom": "meolli gaji ma",
+          "orig": "멀리 가지 마",
+          "eng": "Don't go far"
+        },
+        {
+          "who": "Sol",
+          "rom": "yeogi isseulge",
+          "orig": "여기 있을게",
+          "eng": "I'll be right here"
+        },
+        {
+          "who": "Mira",
+          "rom": "nunmul gateun biche",
+          "orig": "눈물 같은 빛에",
+          "eng": "In light like tears"
+        },
+        {
+          "who": "Sol",
+          "rom": "uri modu gachi",
+          "orig": "우리 모두 같이",
+          "eng": "All of us together"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "bulbichi beonjyeo",
+          "orig": "불빛이 번져",
+          "eng": "The lights bleed outward"
+        },
+        {
+          "who": "All",
+          "rom": "dasi hanbeon deo",
+          "orig": "다시 한번 더",
+          "eng": "One more time"
+        },
+        {
+          "who": "All",
+          "rom": "uri gachi",
+          "orig": "우리 같이",
+          "eng": "Together"
+        },
+        {
+          "who": "All",
+          "rom": "geudaero isseo",
+          "orig": "그대로 있어",
+          "eng": "Stay just as you are"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Sol",
+          "rom": "hemaeyeo isseo",
+          "orig": "헤매여 있어",
+          "eng": "I'm wandering"
+        },
+        {
+          "who": "Hana",
+          "rom": "gieokui sogeul",
+          "orig": "기억의 속을",
+          "eng": "Deep inside my memories"
+        },
+        {
+          "who": "Sol",
+          "rom": "jom deo gipi",
+          "orig": "좀 더 깊이",
+          "eng": "A little deeper"
+        },
+        {
+          "who": "Hana",
+          "rom": "ppajyeodeulgo isseo",
+          "orig": "빠져들고 있어",
+          "eng": "I'm falling in"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Mira",
+          "rom": "meorigi jeonghae",
+          "orig": "머리가 정해",
+          "eng": "My mind is made up"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "nae ireumeul bulleo",
+          "orig": "내 이름을 불러",
+          "eng": "Call my name"
+        },
+        {
+          "who": "Mira",
+          "rom": "nuni mallyeo",
+          "orig": "눈이 멀려",
+          "eng": "Blinded"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "barameul ttara",
+          "orig": "바람을 따라",
+          "eng": "Following the wind"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "bulbichi beonjyeo",
+          "orig": "불빛이 번져",
+          "eng": "The lights bleed outward"
+        },
+        {
+          "who": "All",
+          "rom": "dasi hanbeon deo",
+          "orig": "다시 한번 더",
+          "eng": "One more time"
+        },
+        {
+          "who": "All",
+          "rom": "uri gachi",
+          "orig": "우리 같이",
+          "eng": "Together"
+        },
+        {
+          "who": "All",
+          "rom": "geudaero isseo",
+          "orig": "그대로 있어",
+          "eng": "Stay just as you are"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Sol",
+          "rom": "hanbameul gieokhae",
+          "orig": "한밤을 기억해",
+          "eng": "Remember the midnight"
+        },
+        {
+          "who": "Hana",
+          "rom": "uriui sigani",
+          "orig": "우리의 시간이",
+          "eng": "Our time"
+        },
+        {
+          "who": "All",
+          "rom": "heureuge mandeulja",
+          "orig": "흐르게 만들자",
+          "eng": "Let's make it flow"
+        },
+        {
+          "part": "Final Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "bulbichi beonjyeo",
+          "orig": "불빛이 번져",
+          "eng": "The lights bleed outward"
+        },
+        {
+          "who": "All",
+          "rom": "dasi hanbeon deo",
+          "orig": "다시 한번 더",
+          "eng": "One more time"
+        },
+        {
+          "who": "All",
+          "rom": "uri gachi",
+          "orig": "우리 같이",
+          "eng": "Together"
+        },
+        {
+          "who": "All",
+          "rom": "yeogi isseulge",
+          "orig": "여기 있을게",
+          "eng": "I'll be right here"
+        },
+        {
+          "part": "Outro"
+        },
+        {
+          "who": "Hana",
+          "rom": "geudaero isseo",
+          "orig": "그대로 있어",
+          "eng": "Stay just as you are"
+        }
       ]
     },
     {
@@ -160,7 +464,9 @@
       "title": "Glass Hours",
       "artist": "mooncrest",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Blue Alarm",
       "albumType": "LP",
       "albumTracks": 11,
@@ -168,36 +474,161 @@
       "duration": "3:41",
       "genre": "Synth Pop",
       "coloredBy": "haru88",
-      "cover": { "bg": "#7A2E4A", "a": "#FFD166", "b": "#5E2038", "k": "k2" },
-      "credits": { "lyrics": "Yoon Hae", "composer": "ditch david", "arranger": "Mooncrest", "translation": "haru88", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#7A2E4A",
+        "a": "#FFD166",
+        "b": "#5E2038",
+        "k": "k2"
+      },
+      "credits": {
+        "lyrics": "Yoon Hae",
+        "composer": "ditch david",
+        "arranger": "Mooncrest",
+        "translation": "haru88",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Arin", "rom": "eoduun jibuneul", "orig": "어두운 집은", "eng": "The dark house" },
-        { "who": "Bora", "rom": "seuchin barami", "orig": "스친 바람이", "eng": "The wind that brushed past" },
-        { "who": "Chae", "rom": "yuriga kkaejyeo", "orig": "유리가 깨져", "eng": "The glass breaks" },
-        { "part": "Pre-Chorus" },
-        { "who": "Dami", "rom": "jamdeul su eobseo", "orig": "잠들 수 없어", "eng": "I can't fall asleep" },
-        { "who": "Eun", "rom": "saebyeogeul bwa", "orig": "새벽을 봐", "eng": "Look at the dawn" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "geu jigeum", "orig": "그 지금", "eng": "This very moment" },
-        { "who": "All", "rom": "uriui sigani", "orig": "우리의 시간이", "eng": "Our time" },
-        { "who": "All", "rom": "yurijogacheoreom", "orig": "유리조각처럼", "eng": "Like shards of glass" },
-        { "who": "All", "rom": "bitnaneun glass hours", "orig": "빛나는 glass hours", "eng": "Shining glass hours" },
-        { "part": "Verse 2" },
-        { "who": "Eun", "rom": "heulleooneun moksori", "orig": "흘러오는 목소리", "eng": "A voice flowing in" },
-        { "who": "Dami", "rom": "geu aneseo", "orig": "그 안에서", "eng": "Inside it" },
-        { "who": "Arin", "rom": "nal bureuneun", "orig": "날 부르는", "eng": "Calling me" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "geu jigeum", "orig": "그 지금", "eng": "This very moment" },
-        { "who": "All", "rom": "uriui sigani", "orig": "우리의 시간이", "eng": "Our time" },
-        { "who": "All", "rom": "yurijogacheoreom", "orig": "유리조각처럼", "eng": "Like shards of glass" },
-        { "who": "All", "rom": "bitnaneun glass hours", "orig": "빛나는 glass hours", "eng": "Shining glass hours" },
-        { "part": "Bridge" },
-        { "who": "Bora", "rom": "modu jweokatji", "orig": "모두 죄 없지", "eng": "No one is guilty" },
-        { "who": "Chae", "rom": "uri sarangcheoreom", "orig": "우리 사랑처럼", "eng": "Like our love" },
-        { "who": "All", "rom": "bitnaneun glass hours", "orig": "빛나는 glass hours", "eng": "Shining glass hours" },
-        { "part": "Outro" },
-        { "who": "Arin", "rom": "jamdeul su eobseo", "orig": "잠들 수 없어", "eng": "I can't fall asleep" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Arin",
+          "rom": "eoduun jibuneul",
+          "orig": "어두운 집은",
+          "eng": "The dark house"
+        },
+        {
+          "who": "Bora",
+          "rom": "seuchin barami",
+          "orig": "스친 바람이",
+          "eng": "The wind that brushed past"
+        },
+        {
+          "who": "Chae",
+          "rom": "yuriga kkaejyeo",
+          "orig": "유리가 깨져",
+          "eng": "The glass breaks"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Dami",
+          "rom": "jamdeul su eobseo",
+          "orig": "잠들 수 없어",
+          "eng": "I can't fall asleep"
+        },
+        {
+          "who": "Eun",
+          "rom": "saebyeogeul bwa",
+          "orig": "새벽을 봐",
+          "eng": "Look at the dawn"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "geu jigeum",
+          "orig": "그 지금",
+          "eng": "This very moment"
+        },
+        {
+          "who": "All",
+          "rom": "uriui sigani",
+          "orig": "우리의 시간이",
+          "eng": "Our time"
+        },
+        {
+          "who": "All",
+          "rom": "yurijogacheoreom",
+          "orig": "유리조각처럼",
+          "eng": "Like shards of glass"
+        },
+        {
+          "who": "All",
+          "rom": "bitnaneun glass hours",
+          "orig": "빛나는 glass hours",
+          "eng": "Shining glass hours"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Eun",
+          "rom": "heulleooneun moksori",
+          "orig": "흘러오는 목소리",
+          "eng": "A voice flowing in"
+        },
+        {
+          "who": "Dami",
+          "rom": "geu aneseo",
+          "orig": "그 안에서",
+          "eng": "Inside it"
+        },
+        {
+          "who": "Arin",
+          "rom": "nal bureuneun",
+          "orig": "날 부르는",
+          "eng": "Calling me"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "geu jigeum",
+          "orig": "그 지금",
+          "eng": "This very moment"
+        },
+        {
+          "who": "All",
+          "rom": "uriui sigani",
+          "orig": "우리의 시간이",
+          "eng": "Our time"
+        },
+        {
+          "who": "All",
+          "rom": "yurijogacheoreom",
+          "orig": "유리조각처럼",
+          "eng": "Like shards of glass"
+        },
+        {
+          "who": "All",
+          "rom": "bitnaneun glass hours",
+          "orig": "빛나는 glass hours",
+          "eng": "Shining glass hours"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Bora",
+          "rom": "modu jweokatji",
+          "orig": "모두 죄 없지",
+          "eng": "No one is guilty"
+        },
+        {
+          "who": "Chae",
+          "rom": "uri sarangcheoreom",
+          "orig": "우리 사랑처럼",
+          "eng": "Like our love"
+        },
+        {
+          "who": "All",
+          "rom": "bitnaneun glass hours",
+          "orig": "빛나는 glass hours",
+          "eng": "Shining glass hours"
+        },
+        {
+          "part": "Outro"
+        },
+        {
+          "who": "Arin",
+          "rom": "jamdeul su eobseo",
+          "orig": "잠들 수 없어",
+          "eng": "I can't fall asleep"
+        }
       ]
     },
     {
@@ -205,7 +636,9 @@
       "title": "Night Bus",
       "artist": "tidework",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Night Bus",
       "albumType": "Single",
       "albumTracks": 1,
@@ -213,31 +646,134 @@
       "duration": "3:12",
       "genre": "Electronic",
       "coloredBy": "kai_wr",
-      "cover": { "bg": "#1F5F54", "a": "#E8F1A0", "b": "#16463E", "k": "k3" },
-      "credits": { "lyrics": "Kiro, Vann", "composer": "TIDEWORK", "arranger": "TIDEWORK", "translation": "kai_wr", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#1F5F54",
+        "a": "#E8F1A0",
+        "b": "#16463E",
+        "k": "k3"
+      },
+      "credits": {
+        "lyrics": "Kiro, Vann",
+        "composer": "TIDEWORK",
+        "arranger": "TIDEWORK",
+        "translation": "kai_wr",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Kiro", "rom": "bambeonho bus", "orig": "밤번호 버스", "eng": "The night-route bus" },
-        { "who": "Vann", "rom": "changmuneul ttara", "orig": "창문을 따라", "eng": "Along the window" },
-        { "who": "Kiro", "rom": "heulleoneun dosi", "orig": "흘러오는 도시", "eng": "The city flowing by" },
-        { "part": "Pre-Chorus" },
-        { "who": "Vann", "rom": "neomeojineun bit", "orig": "넘어지는 빛", "eng": "Lights falling past" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "i bam bus", "orig": "이 밤 버스", "eng": "This night's bus" },
-        { "who": "All", "rom": "nal deryeoga", "orig": "날 데려가", "eng": "Take me away" },
-        { "who": "All", "rom": "meomchun sigan", "orig": "멈춘 시간", "eng": "The stopped time" },
-        { "who": "All", "rom": "dasi dolligo", "orig": "다시 돌리고", "eng": "Wind it back again" },
-        { "part": "Verse 2" },
-        { "who": "Vann", "rom": "gieok sogui", "orig": "기억 속의", "eng": "In my memory" },
-        { "who": "Kiro", "rom": "neon utgo isseo", "orig": "넌 웃고 있어", "eng": "You're smiling" },
-        { "who": "Vann", "rom": "nae ireumeul bulleo", "orig": "내 이름을 불러", "eng": "Calling my name" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "i bam bus", "orig": "이 밤 버스", "eng": "This night's bus" },
-        { "who": "All", "rom": "nal deryeoga", "orig": "날 데려가", "eng": "Take me away" },
-        { "who": "All", "rom": "meomchun sigan", "orig": "멈춘 시간", "eng": "The stopped time" },
-        { "who": "All", "rom": "dasi dolligo", "orig": "다시 돌리고", "eng": "Wind it back again" },
-        { "part": "Outro" },
-        { "who": "Kiro", "rom": "nal deryeoga", "orig": "날 데려가", "eng": "Take me away" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Kiro",
+          "rom": "bambeonho bus",
+          "orig": "밤번호 버스",
+          "eng": "The night-route bus"
+        },
+        {
+          "who": "Vann",
+          "rom": "changmuneul ttara",
+          "orig": "창문을 따라",
+          "eng": "Along the window"
+        },
+        {
+          "who": "Kiro",
+          "rom": "heulleoneun dosi",
+          "orig": "흘러오는 도시",
+          "eng": "The city flowing by"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Vann",
+          "rom": "neomeojineun bit",
+          "orig": "넘어지는 빛",
+          "eng": "Lights falling past"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "i bam bus",
+          "orig": "이 밤 버스",
+          "eng": "This night's bus"
+        },
+        {
+          "who": "All",
+          "rom": "nal deryeoga",
+          "orig": "날 데려가",
+          "eng": "Take me away"
+        },
+        {
+          "who": "All",
+          "rom": "meomchun sigan",
+          "orig": "멈춘 시간",
+          "eng": "The stopped time"
+        },
+        {
+          "who": "All",
+          "rom": "dasi dolligo",
+          "orig": "다시 돌리고",
+          "eng": "Wind it back again"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Vann",
+          "rom": "gieok sogui",
+          "orig": "기억 속의",
+          "eng": "In my memory"
+        },
+        {
+          "who": "Kiro",
+          "rom": "neon utgo isseo",
+          "orig": "넌 웃고 있어",
+          "eng": "You're smiling"
+        },
+        {
+          "who": "Vann",
+          "rom": "nae ireumeul bulleo",
+          "orig": "내 이름을 불러",
+          "eng": "Calling my name"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "i bam bus",
+          "orig": "이 밤 버스",
+          "eng": "This night's bus"
+        },
+        {
+          "who": "All",
+          "rom": "nal deryeoga",
+          "orig": "날 데려가",
+          "eng": "Take me away"
+        },
+        {
+          "who": "All",
+          "rom": "meomchun sigan",
+          "orig": "멈춘 시간",
+          "eng": "The stopped time"
+        },
+        {
+          "who": "All",
+          "rom": "dasi dolligo",
+          "orig": "다시 돌리고",
+          "eng": "Wind it back again"
+        },
+        {
+          "part": "Outro"
+        },
+        {
+          "who": "Kiro",
+          "rom": "nal deryeoga",
+          "orig": "날 데려가",
+          "eng": "Take me away"
+        }
       ]
     },
     {
@@ -245,7 +781,10 @@
       "title": "Small Fires",
       "artist": "kite-season",
       "language": "Korean",
-      "tags": ["Korean", "OST"],
+      "tags": [
+        "Korean",
+        "OST"
+      ],
       "album": "When the City Sleeps OST",
       "albumType": "Single",
       "albumTracks": 1,
@@ -253,27 +792,113 @@
       "duration": "3:58",
       "genre": "OST / Ballad",
       "coloredBy": "lunasol",
-      "cover": { "bg": "#E9E4D6", "a": "#E4572E", "b": "#CFC8B4", "k": "k4" },
-      "credits": { "lyrics": "Nari", "composer": "Woojin", "arranger": "Kite Season", "translation": "lunasol", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#E9E4D6",
+        "a": "#E4572E",
+        "b": "#CFC8B4",
+        "k": "k4"
+      },
+      "credits": {
+        "lyrics": "Nari",
+        "composer": "Woojin",
+        "arranger": "Kite Season",
+        "translation": "lunasol",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Nari", "rom": "jageun bulkkochi", "orig": "작은 불꽃이", "eng": "A small flame" },
-        { "who": "Woojin", "rom": "sonkkeuteseogeseo", "orig": "손끝에서", "eng": "From my fingertips" },
-        { "who": "Nari", "rom": "bogo isseo", "orig": "보고 있어", "eng": "I'm watching" },
-        { "who": "Woojin", "rom": "i jageun bulkkochireul", "orig": "이 작은 불꽃을", "eng": "This little flame" },
-        { "part": "Pre-Chorus" },
-        { "who": "Nari", "rom": "sigani jinado", "orig": "시간이 지나도", "eng": "Even as time passes" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "jageun bulkkochi", "orig": "작은 불꽃이", "eng": "Small fires" },
-        { "who": "All", "rom": "kkaejiji anneunde", "orig": "꺼지지 않는데", "eng": "Won't go out" },
-        { "who": "All", "rom": "uri saie", "orig": "우리 사이에", "eng": "Between us" },
-        { "who": "All", "rom": "bitnago isseo", "orig": "빛나고 있어", "eng": "They're shining" },
-        { "part": "Verse 2" },
-        { "who": "Woojin", "rom": "chagaun bame", "orig": "차가운 밤에", "eng": "On a cold night" },
-        { "who": "Nari", "rom": "neol ana", "orig": "널 안아", "eng": "Holding you" },
-        { "part": "Bridge" },
-        { "who": "Nari", "rom": "gieokhae jweo", "orig": "기억해 줘", "eng": "Please remember" },
-        { "who": "All", "rom": "i jageun bulkkochireul", "orig": "이 작은 불꽃을", "eng": "These small fires" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Nari",
+          "rom": "jageun bulkkochi",
+          "orig": "작은 불꽃이",
+          "eng": "A small flame"
+        },
+        {
+          "who": "Woojin",
+          "rom": "sonkkeuteseogeseo",
+          "orig": "손끝에서",
+          "eng": "From my fingertips"
+        },
+        {
+          "who": "Nari",
+          "rom": "bogo isseo",
+          "orig": "보고 있어",
+          "eng": "I'm watching"
+        },
+        {
+          "who": "Woojin",
+          "rom": "i jageun bulkkochireul",
+          "orig": "이 작은 불꽃을",
+          "eng": "This little flame"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Nari",
+          "rom": "sigani jinado",
+          "orig": "시간이 지나도",
+          "eng": "Even as time passes"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "jageun bulkkochi",
+          "orig": "작은 불꽃이",
+          "eng": "Small fires"
+        },
+        {
+          "who": "All",
+          "rom": "kkaejiji anneunde",
+          "orig": "꺼지지 않는데",
+          "eng": "Won't go out"
+        },
+        {
+          "who": "All",
+          "rom": "uri saie",
+          "orig": "우리 사이에",
+          "eng": "Between us"
+        },
+        {
+          "who": "All",
+          "rom": "bitnago isseo",
+          "orig": "빛나고 있어",
+          "eng": "They're shining"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Woojin",
+          "rom": "chagaun bame",
+          "orig": "차가운 밤에",
+          "eng": "On a cold night"
+        },
+        {
+          "who": "Nari",
+          "rom": "neol ana",
+          "orig": "널 안아",
+          "eng": "Holding you"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Nari",
+          "rom": "gieokhae jweo",
+          "orig": "기억해 줘",
+          "eng": "Please remember"
+        },
+        {
+          "who": "All",
+          "rom": "i jageun bulkkochireul",
+          "orig": "이 작은 불꽃을",
+          "eng": "These small fires"
+        }
       ]
     },
     {
@@ -282,7 +907,9 @@
       "titleNative": "残像",
       "artist": "velvet-orchard",
       "language": "Japanese",
-      "tags": ["Japanese"],
+      "tags": [
+        "Japanese"
+      ],
       "album": "Orchard",
       "albumType": "EP",
       "albumTracks": 6,
@@ -290,32 +917,140 @@
       "duration": "3:33",
       "genre": "City Pop",
       "coloredBy": "mei_mei",
-      "cover": { "bg": "#4B2E83", "a": "#7DE2D1", "b": "#382266", "k": "k5" },
-      "credits": { "lyrics": "Rina", "composer": "Y. Takeda", "arranger": "Velvet Orchard", "translation": "mei_mei", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#4B2E83",
+        "a": "#7DE2D1",
+        "b": "#382266",
+        "k": "k5"
+      },
+      "credits": {
+        "lyrics": "Rina",
+        "composer": "Y. Takeda",
+        "arranger": "Velvet Orchard",
+        "translation": "mei_mei",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Hikari", "rom": "yūgure no saki e", "orig": "夕暮れの先へ", "eng": "Beyond the dusk" },
-        { "who": "Mei", "rom": "kimi no koe ga", "orig": "君の声が", "eng": "Your voice" },
-        { "who": "Rina", "rom": "nokoru zanzō", "orig": "残る残像", "eng": "A lingering afterimage" },
-        { "part": "Pre-Chorus" },
-        { "who": "Yua", "rom": "sagashite iru", "orig": "探している", "eng": "I keep searching" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "zanzō", "orig": "残像", "eng": "Afterimage" },
-        { "who": "All", "rom": "mabataku hikari", "orig": "まばたく光", "eng": "Flickering light" },
-        { "who": "All", "rom": "wasurerarenai", "orig": "忘れられない", "eng": "I can't forget" },
-        { "who": "All", "rom": "kimi no sugata", "orig": "君の姿", "eng": "The shape of you" },
-        { "part": "Verse 2" },
-        { "who": "Rina", "rom": "samishii yoru ni", "orig": "寂しい夜に", "eng": "On a lonely night" },
-        { "who": "Mei", "rom": "te o nobashite", "orig": "手を伸ばして", "eng": "I reach out my hand" },
-        { "who": "Hikari", "rom": "kimi o yobu", "orig": "君を呼ぶ", "eng": "I call for you" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "zanzō", "orig": "残像", "eng": "Afterimage" },
-        { "who": "All", "rom": "mabataku hikari", "orig": "まばたく光", "eng": "Flickering light" },
-        { "who": "All", "rom": "wasurerarenai", "orig": "忘れられない", "eng": "I can't forget" },
-        { "who": "All", "rom": "kimi no sugata", "orig": "君の姿", "eng": "The shape of you" },
-        { "part": "Bridge" },
-        { "who": "Yua", "rom": "mou ichido", "orig": "もう一度", "eng": "One more time" },
-        { "who": "All", "rom": "zanzō", "orig": "残像", "eng": "Afterimage" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Hikari",
+          "rom": "yūgure no saki e",
+          "orig": "夕暮れの先へ",
+          "eng": "Beyond the dusk"
+        },
+        {
+          "who": "Mei",
+          "rom": "kimi no koe ga",
+          "orig": "君の声が",
+          "eng": "Your voice"
+        },
+        {
+          "who": "Rina",
+          "rom": "nokoru zanzō",
+          "orig": "残る残像",
+          "eng": "A lingering afterimage"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Yua",
+          "rom": "sagashite iru",
+          "orig": "探している",
+          "eng": "I keep searching"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "zanzō",
+          "orig": "残像",
+          "eng": "Afterimage"
+        },
+        {
+          "who": "All",
+          "rom": "mabataku hikari",
+          "orig": "まばたく光",
+          "eng": "Flickering light"
+        },
+        {
+          "who": "All",
+          "rom": "wasurerarenai",
+          "orig": "忘れられない",
+          "eng": "I can't forget"
+        },
+        {
+          "who": "All",
+          "rom": "kimi no sugata",
+          "orig": "君の姿",
+          "eng": "The shape of you"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Rina",
+          "rom": "samishii yoru ni",
+          "orig": "寂しい夜に",
+          "eng": "On a lonely night"
+        },
+        {
+          "who": "Mei",
+          "rom": "te o nobashite",
+          "orig": "手を伸ばして",
+          "eng": "I reach out my hand"
+        },
+        {
+          "who": "Hikari",
+          "rom": "kimi o yobu",
+          "orig": "君を呼ぶ",
+          "eng": "I call for you"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "zanzō",
+          "orig": "残像",
+          "eng": "Afterimage"
+        },
+        {
+          "who": "All",
+          "rom": "mabataku hikari",
+          "orig": "まばたく光",
+          "eng": "Flickering light"
+        },
+        {
+          "who": "All",
+          "rom": "wasurerarenai",
+          "orig": "忘れられない",
+          "eng": "I can't forget"
+        },
+        {
+          "who": "All",
+          "rom": "kimi no sugata",
+          "orig": "君の姿",
+          "eng": "The shape of you"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Yua",
+          "rom": "mou ichido",
+          "orig": "もう一度",
+          "eng": "One more time"
+        },
+        {
+          "who": "All",
+          "rom": "zanzō",
+          "orig": "残像",
+          "eng": "Afterimage"
+        }
       ]
     },
     {
@@ -323,7 +1058,9 @@
       "title": "Slow Weather",
       "artist": "nine-rivers",
       "language": "English",
-      "tags": ["English"],
+      "tags": [
+        "English"
+      ],
       "album": "Slow Weather",
       "albumType": "Single",
       "albumTracks": 1,
@@ -331,26 +1068,83 @@
       "duration": "3:20",
       "genre": "Indie Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#C94F3D", "a": "#1B1B1F", "b": "#A63C2D", "k": "" },
-      "credits": { "lyrics": "Sori", "composer": "Sori", "arranger": "Nine Rivers", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#C94F3D",
+        "a": "#1B1B1F",
+        "b": "#A63C2D",
+        "k": ""
+      },
+      "credits": {
+        "lyrics": "Sori",
+        "composer": "Sori",
+        "arranger": "Nine Rivers",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Sori", "orig": "Slow weather coming in" },
-        { "who": "Sori", "orig": "I can feel it on my skin" },
-        { "who": "Sori", "orig": "The sky forgets its color" },
-        { "part": "Chorus" },
-        { "who": "Sori", "orig": "Slow weather, hold me under" },
-        { "who": "Sori", "orig": "Slow weather, rain like thunder" },
-        { "who": "Sori", "orig": "Stay a little longer now" },
-        { "part": "Verse 2" },
-        { "who": "Sori", "orig": "Every window keeps the cold" },
-        { "who": "Sori", "orig": "Every story's getting old" },
-        { "part": "Chorus" },
-        { "who": "Sori", "orig": "Slow weather, hold me under" },
-        { "who": "Sori", "orig": "Slow weather, rain like thunder" },
-        { "who": "Sori", "orig": "Stay a little longer now" },
-        { "part": "Outro" },
-        { "who": "Sori", "orig": "Slow weather, stay with me" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Sori",
+          "orig": "Slow weather coming in"
+        },
+        {
+          "who": "Sori",
+          "orig": "I can feel it on my skin"
+        },
+        {
+          "who": "Sori",
+          "orig": "The sky forgets its color"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "Sori",
+          "orig": "Slow weather, hold me under"
+        },
+        {
+          "who": "Sori",
+          "orig": "Slow weather, rain like thunder"
+        },
+        {
+          "who": "Sori",
+          "orig": "Stay a little longer now"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Sori",
+          "orig": "Every window keeps the cold"
+        },
+        {
+          "who": "Sori",
+          "orig": "Every story's getting old"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "Sori",
+          "orig": "Slow weather, hold me under"
+        },
+        {
+          "who": "Sori",
+          "orig": "Slow weather, rain like thunder"
+        },
+        {
+          "who": "Sori",
+          "orig": "Stay a little longer now"
+        },
+        {
+          "part": "Outro"
+        },
+        {
+          "who": "Sori",
+          "orig": "Slow weather, stay with me"
+        }
       ]
     },
     {
@@ -358,7 +1152,9 @@
       "title": "Glasshouse",
       "artist": "paper-lanterns",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Slow Weather",
       "albumType": "EP",
       "albumTracks": 5,
@@ -366,28 +1162,119 @@
       "duration": "3:18",
       "genre": "Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#2F4858", "a": "#F4A261", "b": "#223644", "k": "k3" },
-      "credits": { "lyrics": "A. Moreau", "composer": "K. Han", "arranger": "R. Seo", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#2F4858",
+        "a": "#F4A261",
+        "b": "#223644",
+        "k": "k3"
+      },
+      "credits": {
+        "lyrics": "A. Moreau",
+        "composer": "K. Han",
+        "arranger": "R. Seo",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Jiwoo", "rom": "yurijip aneseo", "orig": "유리집 안에서", "eng": "Inside the glasshouse" },
-        { "who": "Mira", "rom": "uri moseubi", "orig": "우리 모습이", "eng": "The way we look" },
-        { "who": "Hana", "rom": "hwanhage bitnago", "orig": "환하게 빛나고", "eng": "Shining brightly" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "kkaejigi jeone", "orig": "깨지기 전에", "eng": "Before it breaks" },
-        { "who": "All", "rom": "i sunganeul", "orig": "이 순간을", "eng": "This moment" },
-        { "who": "All", "rom": "jabajweo", "orig": "잡아줘", "eng": "Hold onto it" },
-        { "part": "Verse 2" },
-        { "who": "Sol", "rom": "chagaun eoreum", "orig": "차가운 얼음", "eng": "Cold ice" },
-        { "who": "Jiwoo", "rom": "yuriewie", "orig": "유리 위에", "eng": "On the glass" },
-        { "who": "Mira", "rom": "seuchyeo gago", "orig": "스쳐 가고", "eng": "Brushes past" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "kkaejigi jeone", "orig": "깨지기 전에", "eng": "Before it breaks" },
-        { "who": "All", "rom": "i sunganeul", "orig": "이 순간을", "eng": "This moment" },
-        { "who": "All", "rom": "jabajweo", "orig": "잡아줘", "eng": "Hold onto it" },
-        { "part": "Bridge" },
-        { "who": "Hana", "rom": "uri moseubi", "orig": "우리 모습이", "eng": "The way we look" },
-        { "who": "All", "rom": "hwanhage bitnago", "orig": "환하게 빛나고", "eng": "Shining brightly" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "yurijip aneseo",
+          "orig": "유리집 안에서",
+          "eng": "Inside the glasshouse"
+        },
+        {
+          "who": "Mira",
+          "rom": "uri moseubi",
+          "orig": "우리 모습이",
+          "eng": "The way we look"
+        },
+        {
+          "who": "Hana",
+          "rom": "hwanhage bitnago",
+          "orig": "환하게 빛나고",
+          "eng": "Shining brightly"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "kkaejigi jeone",
+          "orig": "깨지기 전에",
+          "eng": "Before it breaks"
+        },
+        {
+          "who": "All",
+          "rom": "i sunganeul",
+          "orig": "이 순간을",
+          "eng": "This moment"
+        },
+        {
+          "who": "All",
+          "rom": "jabajweo",
+          "orig": "잡아줘",
+          "eng": "Hold onto it"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Sol",
+          "rom": "chagaun eoreum",
+          "orig": "차가운 얼음",
+          "eng": "Cold ice"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "yuriewie",
+          "orig": "유리 위에",
+          "eng": "On the glass"
+        },
+        {
+          "who": "Mira",
+          "rom": "seuchyeo gago",
+          "orig": "스쳐 가고",
+          "eng": "Brushes past"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "kkaejigi jeone",
+          "orig": "깨지기 전에",
+          "eng": "Before it breaks"
+        },
+        {
+          "who": "All",
+          "rom": "i sunganeul",
+          "orig": "이 순간을",
+          "eng": "This moment"
+        },
+        {
+          "who": "All",
+          "rom": "jabajweo",
+          "orig": "잡아줘",
+          "eng": "Hold onto it"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Hana",
+          "rom": "uri moseubi",
+          "orig": "우리 모습이",
+          "eng": "The way we look"
+        },
+        {
+          "who": "All",
+          "rom": "hwanhage bitnago",
+          "orig": "환하게 빛나고",
+          "eng": "Shining brightly"
+        }
       ]
     },
     {
@@ -395,7 +1282,9 @@
       "title": "Seventh Floor",
       "artist": "mooncrest",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Blue Alarm",
       "albumType": "LP",
       "albumTracks": 11,
@@ -403,27 +1292,110 @@
       "duration": "3:27",
       "genre": "Synth Pop",
       "coloredBy": "haru88",
-      "cover": { "bg": "#264653", "a": "#E9C46A", "b": "#1B3640", "k": "k2" },
-      "credits": { "lyrics": "Yoon Hae", "composer": "ditch david", "arranger": "Mooncrest", "translation": "haru88", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#264653",
+        "a": "#E9C46A",
+        "b": "#1B3640",
+        "k": "k2"
+      },
+      "credits": {
+        "lyrics": "Yoon Hae",
+        "composer": "ditch david",
+        "arranger": "Mooncrest",
+        "translation": "haru88",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Dami", "rom": "chilcheungui bame", "orig": "칠층의 밤에", "eng": "On the seventh-floor night" },
-        { "who": "Eun", "rom": "neon nareul bwa", "orig": "넌 나를 봐", "eng": "You look at me" },
-        { "part": "Pre-Chorus" },
-        { "who": "Bora", "rom": "meomchun hwanseung", "orig": "멈춘 환상", "eng": "A frozen illusion" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "chilcheung", "orig": "칠층", "eng": "Seventh floor" },
-        { "who": "All", "rom": "gipi ppajyeo", "orig": "깊이 빠져", "eng": "Falling in deep" },
-        { "who": "All", "rom": "doraoji ana", "orig": "돌아오지 않아", "eng": "Won't come back" },
-        { "part": "Verse 2" },
-        { "who": "Chae", "rom": "changmune", "orig": "창문에", "eng": "On the window" },
-        { "who": "Eun", "rom": "biti heulleo", "orig": "빛이 흘러", "eng": "Light flows" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "chilcheung", "orig": "칠층", "eng": "Seventh floor" },
-        { "who": "All", "rom": "gipi ppajyeo", "orig": "깊이 빠져", "eng": "Falling in deep" },
-        { "who": "All", "rom": "doraoji ana", "orig": "돌아오지 않아", "eng": "Won't come back" },
-        { "part": "Outro" },
-        { "who": "Arin", "rom": "gipi ppajyeo", "orig": "깊이 빠져", "eng": "Falling in deep" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Dami",
+          "rom": "chilcheungui bame",
+          "orig": "칠층의 밤에",
+          "eng": "On the seventh-floor night"
+        },
+        {
+          "who": "Eun",
+          "rom": "neon nareul bwa",
+          "orig": "넌 나를 봐",
+          "eng": "You look at me"
+        },
+        {
+          "part": "Pre-Chorus"
+        },
+        {
+          "who": "Bora",
+          "rom": "meomchun hwanseung",
+          "orig": "멈춘 환상",
+          "eng": "A frozen illusion"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "chilcheung",
+          "orig": "칠층",
+          "eng": "Seventh floor"
+        },
+        {
+          "who": "All",
+          "rom": "gipi ppajyeo",
+          "orig": "깊이 빠져",
+          "eng": "Falling in deep"
+        },
+        {
+          "who": "All",
+          "rom": "doraoji ana",
+          "orig": "돌아오지 않아",
+          "eng": "Won't come back"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Chae",
+          "rom": "changmune",
+          "orig": "창문에",
+          "eng": "On the window"
+        },
+        {
+          "who": "Eun",
+          "rom": "biti heulleo",
+          "orig": "빛이 흘러",
+          "eng": "Light flows"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "chilcheung",
+          "orig": "칠층",
+          "eng": "Seventh floor"
+        },
+        {
+          "who": "All",
+          "rom": "gipi ppajyeo",
+          "orig": "깊이 빠져",
+          "eng": "Falling in deep"
+        },
+        {
+          "who": "All",
+          "rom": "doraoji ana",
+          "orig": "돌아오지 않아",
+          "eng": "Won't come back"
+        },
+        {
+          "part": "Outro"
+        },
+        {
+          "who": "Arin",
+          "rom": "gipi ppajyeo",
+          "orig": "깊이 빠져",
+          "eng": "Falling in deep"
+        }
       ]
     },
     {
@@ -431,7 +1403,9 @@
       "title": "Paper Cuts",
       "artist": "tidework",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Paper Cuts",
       "albumType": "Single",
       "albumTracks": 1,
@@ -439,25 +1413,104 @@
       "duration": "2:58",
       "genre": "Electronic",
       "coloredBy": "kai_wr",
-      "cover": { "bg": "#6B4226", "a": "#F2CC8F", "b": "#52321C", "k": "k5" },
-      "credits": { "lyrics": "Kiro, Vann", "composer": "TIDEWORK", "arranger": "TIDEWORK", "translation": "kai_wr", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#6B4226",
+        "a": "#F2CC8F",
+        "b": "#52321C",
+        "k": "k5"
+      },
+      "credits": {
+        "lyrics": "Kiro, Vann",
+        "composer": "TIDEWORK",
+        "arranger": "TIDEWORK",
+        "translation": "kai_wr",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Kiro", "rom": "sonkkeute jageuk", "orig": "손끝의 자극", "eng": "A sting at my fingertips" },
-        { "who": "Vann", "rom": "jageun sonjjaega", "orig": "작은 손자국", "eng": "Little fingerprints" },
-        { "who": "Kiro", "rom": "jongireul janda", "orig": "종이를 잡아", "eng": "Grabbing paper" },
-        { "who": "Vann", "rom": "sonap arae", "orig": "손바닥 아래", "eng": "Under my palm" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "jongiui sangcheo", "orig": "종이의 상처", "eng": "Paper cuts" },
-        { "who": "All", "rom": "nal beorineun", "orig": "날 베는", "eng": "Cutting me" },
-        { "who": "All", "rom": "i sonkkeute", "orig": "이 손끝에", "eng": "On these fingertips" },
-        { "who": "All", "rom": "namaitjiman", "orig": "남아있지만", "eng": "They still remain" },
-        { "part": "Verse 2" },
-        { "who": "Vann", "rom": "jageun sonjjaege", "orig": "작은 손자국에", "eng": "On little fingerprints" },
-        { "who": "Kiro", "rom": "gieogeul janda", "orig": "기억을 잡아", "eng": "Holding onto memories" },
-        { "part": "Bridge" },
-        { "who": "Kiro", "rom": "beoril su eobseo", "orig": "버릴 수 없어", "eng": "I can't throw it away" },
-        { "who": "Vann", "rom": "jageun sonjjaega", "orig": "작은 손자국", "eng": "Little fingerprints" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Kiro",
+          "rom": "sonkkeute jageuk",
+          "orig": "손끝의 자극",
+          "eng": "A sting at my fingertips"
+        },
+        {
+          "who": "Vann",
+          "rom": "jageun sonjjaega",
+          "orig": "작은 손자국",
+          "eng": "Little fingerprints"
+        },
+        {
+          "who": "Kiro",
+          "rom": "jongireul janda",
+          "orig": "종이를 잡아",
+          "eng": "Grabbing paper"
+        },
+        {
+          "who": "Vann",
+          "rom": "sonap arae",
+          "orig": "손바닥 아래",
+          "eng": "Under my palm"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "jongiui sangcheo",
+          "orig": "종이의 상처",
+          "eng": "Paper cuts"
+        },
+        {
+          "who": "All",
+          "rom": "nal beorineun",
+          "orig": "날 베는",
+          "eng": "Cutting me"
+        },
+        {
+          "who": "All",
+          "rom": "i sonkkeute",
+          "orig": "이 손끝에",
+          "eng": "On these fingertips"
+        },
+        {
+          "who": "All",
+          "rom": "namaitjiman",
+          "orig": "남아있지만",
+          "eng": "They still remain"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Vann",
+          "rom": "jageun sonjjaege",
+          "orig": "작은 손자국에",
+          "eng": "On little fingerprints"
+        },
+        {
+          "who": "Kiro",
+          "rom": "gieogeul janda",
+          "orig": "기억을 잡아",
+          "eng": "Holding onto memories"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Kiro",
+          "rom": "beoril su eobseo",
+          "orig": "버릴 수 없어",
+          "eng": "I can't throw it away"
+        },
+        {
+          "who": "Vann",
+          "rom": "jageun sonjjaega",
+          "orig": "작은 손자국",
+          "eng": "Little fingerprints"
+        }
       ]
     },
     {
@@ -465,7 +1518,9 @@
       "title": "Tin Roof",
       "artist": "kite-season",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Daylight Savings",
       "albumType": "EP",
       "albumTracks": 4,
@@ -473,22 +1528,86 @@
       "duration": "3:05",
       "genre": "Indie Pop",
       "coloredBy": "lunasol",
-      "cover": { "bg": "#33477A", "a": "#FFD9A0", "b": "#263660", "k": "k4" },
-      "credits": { "lyrics": "Nari", "composer": "Woojin", "arranger": "Kite Season", "translation": "lunasol", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#33477A",
+        "a": "#FFD9A0",
+        "b": "#263660",
+        "k": "k4"
+      },
+      "credits": {
+        "lyrics": "Nari",
+        "composer": "Woojin",
+        "arranger": "Kite Season",
+        "translation": "lunasol",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Woojin", "rom": "cheoljibwire", "orig": "철집 위에", "eng": "On the tin roof" },
-        { "who": "Nari", "rom": "bichi ssodajyeo", "orig": "빛이 쏟아져", "eng": "Light pours down" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "i jageun jib", "orig": "이 작은 집", "eng": "This little house" },
-        { "who": "All", "rom": "uriui bang", "orig": "우리의 방", "eng": "Our room" },
-        { "who": "All", "rom": "ttadeuge bogo", "orig": "따뜻해 보고", "eng": "Looking so warm" },
-        { "part": "Verse 2" },
-        { "who": "Nari", "rom": "bitmulcheoreom", "orig": "빗물처럼", "eng": "Like rainwater" },
-        { "who": "Woojin", "rom": "heulleo naeryeo", "orig": "흘러 내려", "eng": "It flows down" },
-        { "part": "Bridge" },
-        { "who": "Nari", "rom": "cheoljibwire", "orig": "철집 위에", "eng": "On the tin roof" },
-        { "who": "All", "rom": "bichi ssodajyeo", "orig": "빛이 쏟아져", "eng": "Light pours down" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Woojin",
+          "rom": "cheoljibwire",
+          "orig": "철집 위에",
+          "eng": "On the tin roof"
+        },
+        {
+          "who": "Nari",
+          "rom": "bichi ssodajyeo",
+          "orig": "빛이 쏟아져",
+          "eng": "Light pours down"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "i jageun jib",
+          "orig": "이 작은 집",
+          "eng": "This little house"
+        },
+        {
+          "who": "All",
+          "rom": "uriui bang",
+          "orig": "우리의 방",
+          "eng": "Our room"
+        },
+        {
+          "who": "All",
+          "rom": "ttadeuge bogo",
+          "orig": "따뜻해 보고",
+          "eng": "Looking so warm"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Nari",
+          "rom": "bitmulcheoreom",
+          "orig": "빗물처럼",
+          "eng": "Like rainwater"
+        },
+        {
+          "who": "Woojin",
+          "rom": "heulleo naeryeo",
+          "orig": "흘러 내려",
+          "eng": "It flows down"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Nari",
+          "rom": "cheoljibwire",
+          "orig": "철집 위에",
+          "eng": "On the tin roof"
+        },
+        {
+          "who": "All",
+          "rom": "bichi ssodajyeo",
+          "orig": "빛이 쏟아져",
+          "eng": "Light pours down"
+        }
       ]
     },
     {
@@ -496,7 +1615,9 @@
       "title": "Salt Road",
       "artist": "nine-rivers",
       "language": "English",
-      "tags": ["English"],
+      "tags": [
+        "English"
+      ],
       "album": "Long Way Home",
       "albumType": "LP",
       "albumTracks": 10,
@@ -504,25 +1625,79 @@
       "duration": "4:02",
       "genre": "Indie Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#31435E", "a": "#F2B880", "b": "#24324A", "k": "" },
-      "credits": { "lyrics": "Sori", "composer": "Sori", "arranger": "Nine Rivers", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#31435E",
+        "a": "#F2B880",
+        "b": "#24324A",
+        "k": ""
+      },
+      "credits": {
+        "lyrics": "Sori",
+        "composer": "Sori",
+        "arranger": "Nine Rivers",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Sori", "orig": "We drove the salt road home" },
-        { "who": "Sori", "orig": "Windows down, the ocean close" },
-        { "part": "Chorus" },
-        { "who": "Sori", "orig": "Salt road, take me slowly" },
-        { "who": "Sori", "orig": "Salt road, nothing holy" },
-        { "who": "Sori", "orig": "Just the sea and the radio" },
-        { "part": "Verse 2" },
-        { "who": "Sori", "orig": "Your name in the fog on the glass" },
-        { "who": "Sori", "orig": "Every mile a little less" },
-        { "part": "Chorus" },
-        { "who": "Sori", "orig": "Salt road, take me slowly" },
-        { "who": "Sori", "orig": "Salt road, nothing holy" },
-        { "who": "Sori", "orig": "Just the sea and the radio" },
-        { "part": "Outro" },
-        { "who": "Sori", "orig": "We drove the salt road home" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Sori",
+          "orig": "We drove the salt road home"
+        },
+        {
+          "who": "Sori",
+          "orig": "Windows down, the ocean close"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "Sori",
+          "orig": "Salt road, take me slowly"
+        },
+        {
+          "who": "Sori",
+          "orig": "Salt road, nothing holy"
+        },
+        {
+          "who": "Sori",
+          "orig": "Just the sea and the radio"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Sori",
+          "orig": "Your name in the fog on the glass"
+        },
+        {
+          "who": "Sori",
+          "orig": "Every mile a little less"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "Sori",
+          "orig": "Salt road, take me slowly"
+        },
+        {
+          "who": "Sori",
+          "orig": "Salt road, nothing holy"
+        },
+        {
+          "who": "Sori",
+          "orig": "Just the sea and the radio"
+        },
+        {
+          "part": "Outro"
+        },
+        {
+          "who": "Sori",
+          "orig": "We drove the salt road home"
+        }
       ]
     },
     {
@@ -530,7 +1705,9 @@
       "title": "Lantern Season",
       "artist": "paper-lanterns",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Lantern Season",
       "albumType": "EP",
       "albumTracks": 4,
@@ -538,22 +1715,86 @@
       "duration": "3:15",
       "genre": "Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#3A506B", "a": "#F6E8B1", "b": "#2C3E57", "k": "k4" },
-      "credits": { "lyrics": "A. Moreau", "composer": "K. Han", "arranger": "R. Seo", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#3A506B",
+        "a": "#F6E8B1",
+        "b": "#2C3E57",
+        "k": "k4"
+      },
+      "credits": {
+        "lyrics": "A. Moreau",
+        "composer": "K. Han",
+        "arranger": "R. Seo",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Hana", "rom": "deungbul bureojyeo", "orig": "등불 불려져", "eng": "Lanterns are lit" },
-        { "who": "Sol", "rom": "gyeouri dochakhae", "orig": "겨울이 도착해", "eng": "Winter has arrived" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "deungbulcheoreom", "orig": "등불처럼", "eng": "Like lanterns" },
-        { "who": "All", "rom": "bichi heulleo", "orig": "빛이 흘러", "eng": "The light flows" },
-        { "who": "All", "rom": "i gyeourul", "orig": "이 겨울을", "eng": "Through this winter" },
-        { "part": "Verse 2" },
-        { "who": "Jiwoo", "rom": "neol bureumyeo", "orig": "널 부르며", "eng": "Calling you" },
-        { "who": "Mira", "rom": "deungbul bureojyeo", "orig": "등불 불려져", "eng": "Lanterns are lit" },
-        { "part": "Bridge" },
-        { "who": "Sol", "rom": "bichi heulleo", "orig": "빛이 흘러", "eng": "The light flows" },
-        { "who": "All", "rom": "deungbulcheoreom", "orig": "등불처럼", "eng": "Like lanterns" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Hana",
+          "rom": "deungbul bureojyeo",
+          "orig": "등불 불려져",
+          "eng": "Lanterns are lit"
+        },
+        {
+          "who": "Sol",
+          "rom": "gyeouri dochakhae",
+          "orig": "겨울이 도착해",
+          "eng": "Winter has arrived"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "deungbulcheoreom",
+          "orig": "등불처럼",
+          "eng": "Like lanterns"
+        },
+        {
+          "who": "All",
+          "rom": "bichi heulleo",
+          "orig": "빛이 흘러",
+          "eng": "The light flows"
+        },
+        {
+          "who": "All",
+          "rom": "i gyeourul",
+          "orig": "이 겨울을",
+          "eng": "Through this winter"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "neol bureumyeo",
+          "orig": "널 부르며",
+          "eng": "Calling you"
+        },
+        {
+          "who": "Mira",
+          "rom": "deungbul bureojyeo",
+          "orig": "등불 불려져",
+          "eng": "Lanterns are lit"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Sol",
+          "rom": "bichi heulleo",
+          "orig": "빛이 흘러",
+          "eng": "The light flows"
+        },
+        {
+          "who": "All",
+          "rom": "deungbulcheoreom",
+          "orig": "등불처럼",
+          "eng": "Like lanterns"
+        }
       ]
     },
     {
@@ -561,7 +1802,9 @@
       "title": "Second Wind",
       "artist": "paper-lanterns",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Second Wind",
       "albumType": "Single",
       "albumTracks": 1,
@@ -569,22 +1812,86 @@
       "duration": "3:09",
       "genre": "Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#264653", "a": "#E9C46A", "b": "#1B3640", "k": "k2" },
-      "credits": { "lyrics": "A. Moreau", "composer": "K. Han", "arranger": "R. Seo", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#264653",
+        "a": "#E9C46A",
+        "b": "#1B3640",
+        "k": "k2"
+      },
+      "credits": {
+        "lyrics": "A. Moreau",
+        "composer": "K. Han",
+        "arranger": "R. Seo",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Jiwoo", "rom": "dashi tteonago", "orig": "다시 떠나고", "eng": "Setting off again" },
-        { "who": "Mira", "rom": "barami bureo", "orig": "바람이 불어", "eng": "The wind blows" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "dashi tteollyeo", "orig": "다시 떨려", "eng": "My heart races again" },
-        { "who": "All", "rom": "i baramcheoreom", "orig": "이 바람처럼", "eng": "Like this wind" },
-        { "who": "All", "rom": "dashi dallyeo", "orig": "다시 달려", "eng": "Running again" },
-        { "part": "Verse 2" },
-        { "who": "Hana", "rom": "meomchuji ma", "orig": "멈추지 마", "eng": "Don't stop" },
-        { "who": "Sol", "rom": "dashi tteonago", "orig": "다시 떠나고", "eng": "Setting off again" },
-        { "part": "Bridge" },
-        { "who": "All", "rom": "i baramcheoreom", "orig": "이 바람처럼", "eng": "Like this wind" },
-        { "who": "All", "rom": "dashi dallyeo", "orig": "다시 달려", "eng": "Running again" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "dashi tteonago",
+          "orig": "다시 떠나고",
+          "eng": "Setting off again"
+        },
+        {
+          "who": "Mira",
+          "rom": "barami bureo",
+          "orig": "바람이 불어",
+          "eng": "The wind blows"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "dashi tteollyeo",
+          "orig": "다시 떨려",
+          "eng": "My heart races again"
+        },
+        {
+          "who": "All",
+          "rom": "i baramcheoreom",
+          "orig": "이 바람처럼",
+          "eng": "Like this wind"
+        },
+        {
+          "who": "All",
+          "rom": "dashi dallyeo",
+          "orig": "다시 달려",
+          "eng": "Running again"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Hana",
+          "rom": "meomchuji ma",
+          "orig": "멈추지 마",
+          "eng": "Don't stop"
+        },
+        {
+          "who": "Sol",
+          "rom": "dashi tteonago",
+          "orig": "다시 떠나고",
+          "eng": "Setting off again"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "All",
+          "rom": "i baramcheoreom",
+          "orig": "이 바람처럼",
+          "eng": "Like this wind"
+        },
+        {
+          "who": "All",
+          "rom": "dashi dallyeo",
+          "orig": "다시 달려",
+          "eng": "Running again"
+        }
       ]
     },
     {
@@ -592,7 +1899,9 @@
       "title": "Paper Skies",
       "artist": "paper-lanterns",
       "language": "Korean",
-      "tags": ["Korean"],
+      "tags": [
+        "Korean"
+      ],
       "album": "Paper Skies",
       "albumType": "LP",
       "albumTracks": 9,
@@ -600,32 +1909,132 @@
       "duration": "3:36",
       "genre": "Pop",
       "coloredBy": "mira_k",
-      "cover": { "bg": "#5C2A2A", "a": "#9AD1D4", "b": "#431E1E", "k": "k5" },
-      "credits": { "lyrics": "A. Moreau", "composer": "K. Han", "arranger": "R. Seo", "translation": "mira_k", "source": "[SOURCE]" },
+      "cover": {
+        "bg": "#5C2A2A",
+        "a": "#9AD1D4",
+        "b": "#431E1E",
+        "k": "k5"
+      },
+      "credits": {
+        "lyrics": "A. Moreau",
+        "composer": "K. Han",
+        "arranger": "R. Seo",
+        "translation": "mira_k",
+        "source": "[SOURCE]"
+      },
       "lyrics": [
-        { "part": "Verse 1" },
-        { "who": "Mira", "rom": "jongi haneul", "orig": "종이 하늘", "eng": "Paper skies" },
-        { "who": "Hana", "rom": "gureumeul janda", "orig": "구름을 잡아", "eng": "Grabbing the clouds" },
-        { "part": "Chorus" },
-        { "who": "All", "rom": "jongi haneul arae", "orig": "종이 하늘 아래", "eng": "Under paper skies" },
-        { "who": "All", "rom": "uri gachi", "orig": "우리 같이", "eng": "Together" },
-        { "who": "All", "rom": "chumeul chwo", "orig": "춤을 춰", "eng": "Let's dance" },
-        { "part": "Verse 2" },
-        { "who": "Sol", "rom": "barami bureo", "orig": "바람이 불어", "eng": "The wind blows" },
-        { "who": "Jiwoo", "rom": "jongi haneul", "orig": "종이 하늘", "eng": "Paper skies" },
-        { "part": "Bridge" },
-        { "who": "Hana", "rom": "uri gachi", "orig": "우리 같이", "eng": "Together" },
-        { "who": "All", "rom": "chumeul chwo", "orig": "춤을 춰", "eng": "Let's dance" }
+        {
+          "part": "Verse 1"
+        },
+        {
+          "who": "Mira",
+          "rom": "jongi haneul",
+          "orig": "종이 하늘",
+          "eng": "Paper skies"
+        },
+        {
+          "who": "Hana",
+          "rom": "gureumeul janda",
+          "orig": "구름을 잡아",
+          "eng": "Grabbing the clouds"
+        },
+        {
+          "part": "Chorus"
+        },
+        {
+          "who": "All",
+          "rom": "jongi haneul arae",
+          "orig": "종이 하늘 아래",
+          "eng": "Under paper skies"
+        },
+        {
+          "who": "All",
+          "rom": "uri gachi",
+          "orig": "우리 같이",
+          "eng": "Together"
+        },
+        {
+          "who": "All",
+          "rom": "chumeul chwo",
+          "orig": "춤을 춰",
+          "eng": "Let's dance"
+        },
+        {
+          "part": "Verse 2"
+        },
+        {
+          "who": "Sol",
+          "rom": "barami bureo",
+          "orig": "바람이 불어",
+          "eng": "The wind blows"
+        },
+        {
+          "who": "Jiwoo",
+          "rom": "jongi haneul",
+          "orig": "종이 하늘",
+          "eng": "Paper skies"
+        },
+        {
+          "part": "Bridge"
+        },
+        {
+          "who": "Hana",
+          "rom": "uri gachi",
+          "orig": "우리 같이",
+          "eng": "Together"
+        },
+        {
+          "who": "All",
+          "rom": "chumeul chwo",
+          "orig": "춤을 춰",
+          "eng": "Let's dance"
+        }
       ]
     }
   ],
   "requests": [
-    { "song": "Static Bloom", "artist": "TIDEWORK", "by": "kai_wr", "status": "In progress", "date": "2026-11-12" },
-    { "song": "Winter Radio", "artist": "Mooncrest", "by": "haru88", "status": "Open", "date": "2026-11-11" },
-    { "song": "Blue Hour", "artist": "Paper Lanterns", "by": "lunasol", "status": "Done", "date": "2026-11-08" },
-    { "song": "Kite Song", "artist": "Kite Season", "by": "anon", "status": "Open", "date": "2026-11-06" },
-    { "song": "Orchard Night", "artist": "Velvet Orchard", "by": "mei_mei", "status": "In progress", "date": "2026-11-04" },
-    { "song": "Tape Hiss", "artist": "TIDEWORK", "by": "nightowl", "status": "Done", "date": "2026-10-29" }
+    {
+      "song": "Static Bloom",
+      "artist": "TIDEWORK",
+      "by": "kai_wr",
+      "status": "In progress",
+      "date": "2026-11-12"
+    },
+    {
+      "song": "Winter Radio",
+      "artist": "Mooncrest",
+      "by": "haru88",
+      "status": "Open",
+      "date": "2026-11-11"
+    },
+    {
+      "song": "Blue Hour",
+      "artist": "Paper Lanterns",
+      "by": "lunasol",
+      "status": "Done",
+      "date": "2026-11-08"
+    },
+    {
+      "song": "Kite Song",
+      "artist": "Kite Season",
+      "by": "anon",
+      "status": "Open",
+      "date": "2026-11-06"
+    },
+    {
+      "song": "Orchard Night",
+      "artist": "Velvet Orchard",
+      "by": "mei_mei",
+      "status": "In progress",
+      "date": "2026-11-04"
+    },
+    {
+      "song": "Tape Hiss",
+      "artist": "TIDEWORK",
+      "by": "nightowl",
+      "status": "Done",
+      "date": "2026-10-29"
+    }
   ],
   "faq": [
     {
@@ -633,8 +2042,8 @@
       "a": "Every line of the song is written in the color of the member singing it. The legend at the top of each song tells you which color belongs to whom — lines for everyone are shown in white (or black on the light theme)."
     },
     {
-      "q": "What do the three columns mean?",
-      "a": "Romanization is the original lyrics written in Latin letters so you can follow the sound. Original is the lyrics as written in the song's own script (Hangul, Japanese, or English). Translation is the English meaning."
+      "q": "What do the lyric sections mean?",
+      "a": "Each song is shown in three separate sections like Color Coded Lyrics: Romanization is the original lyrics written in Latin letters so you can follow the sound, Hangul (or Original) is the lyrics in their own script, and Translation is the English meaning. The order of the lines is the same in every section."
     },
     {
       "q": "Can I use your lyrics or translations?",
@@ -645,8 +2054,8 @@
       "a": "Head to the [Requests page](https://chaereve.pages.dev/) and send your request there — you can see what the team is already working on before adding yours."
     },
     {
-      "q": "Why is a song missing a column?",
-      "a": "Some songs have not been translated or romanized yet. If something looks wrong or you can help fill in the gaps, let us know on the [Requests page](https://chaereve.pages.dev/)."
+      "q": "Why is a song missing a section?",
+      "a": "Some songs have not been translated or romanized yet, so that section is left out. If something looks wrong or you can help fill in the gap, tell us on the [Requests page](https://chaereve.pages.dev/)."
     },
     {
       "q": "How often are new lyrics added?",
