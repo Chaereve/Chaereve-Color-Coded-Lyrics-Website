@@ -191,7 +191,7 @@
   /* ---------------------------------------------------------- song page */
   var lyrWrap = $(".lyr-wrap");
   if (lyrWrap) {
-    var lyr = $(".lyr", lyrWrap);
+    var lyrs = $$(".lyr", lyrWrap);
 
     /* member spotlight */
     $$(".lg .chip", lyrWrap).forEach(function (chip) {
@@ -200,20 +200,39 @@
         var already = chip.classList.contains("on");
         $$(".lg .chip", lyrWrap).forEach(function (c) { c.classList.remove("on"); });
         if (!who || already) {
-          lyr.classList.remove("spot");
-          $$(".lr.line", lyr).forEach(function (l) { l.classList.remove("spot-on"); });
+          lyrs.forEach(function (l) { l.classList.remove("spot"); });
+          $$(".lr.line", lyrWrap).forEach(function (l) { l.classList.remove("spot-on"); });
           var allChip = $('.lg .chip[data-spot=""]', lyrWrap);
           if (allChip) allChip.classList.add("on");
           return;
         }
         chip.classList.add("on");
-        lyr.classList.add("spot");
-        $$(".lr.line", lyr).forEach(function (l) {
+        lyrs.forEach(function (l) { l.classList.add("spot"); });
+        $$(".lr.line", lyrWrap).forEach(function (l) {
           l.classList.toggle("spot-on", (l.dataset.who || "").indexOf(who) >= 0);
         });
       });
     });
 
+  }
+
+  /* ---------------------------------------------------------- reveal on scroll */
+  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.04 });
+    $$(".card, .mg-item, .rk, .idx-row, .lyr-block, .faq-item, .panel, .ft").forEach(function (el, i) {
+      if (el.getBoundingClientRect().top > window.innerHeight * 0.92) {
+        el.classList.add("reveal");
+        el.style.transitionDelay = (i % 5) * 55 + "ms";
+        io.observe(el);
+      }
+    });
   }
 
   /* ---------------------------------------------------------- artist index filter */

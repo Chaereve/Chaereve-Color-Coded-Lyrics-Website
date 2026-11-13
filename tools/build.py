@@ -135,16 +135,20 @@ def header(prefix, page):
 def footer(prefix):
     return f'''<footer class="foot">
   <div class="w foot-in">
-    <p class="foot-brand">© 2026 {esc(SITE['name'])} <span class="mu">· Fan translations, credited to their authors</span></p>
+    <div class="foot-brand">
+      <b>{esc(SITE['name'])}</b>
+      <span class="mu">Fan translations, credited to their authors</span>
+    </div>
     <nav class="foot-links" aria-label="Footer">
       <a href="{prefix}index.html">Home</a>
       <a href="{prefix}artists.html">Index</a>
-      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests</a>
+      <a href="https://chaereve.pages.dev/" target="_blank" rel="noopener">Requests ↗</a>
       <a href="{prefix}faq.html">FAQ</a>
       <a href="{prefix}feed.xml">RSS</a>
-      <a href="{esc(SITE['github'])}" target="_blank" rel="noopener">GitHub</a>
+      <a href="{esc(SITE['github'])}" target="_blank" rel="noopener">GitHub ↗</a>
     </nav>
   </div>
+  <div class="w foot-legal">© 2026 {esc(SITE['name'])}. All rights reserved.</div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="{prefix}assets/js/search-index.js"></script>
@@ -197,47 +201,59 @@ def legend_html(artist, interactive):
 
 
 def lyrics_html(song):
-    """Mockup-faithful lyrics: 3 aligned type-columns, colored lines, no name column.
-    Section breaks are spacing only (.g), the way the mockup does it."""
+    """CCL-style lyrics: separate full sections per language (Romanization / Hangul /
+    Translation), each the complete song, colored per member, group breaks by spacing."""
     a = artist_of(song)
     lines = song["lyrics"]
-    has = {
-        "rom": any(l.get("rom") for l in lines if "part" not in l),
-        "orig": any(l.get("orig") for l in lines if "part" not in l),
-        "eng": any(l.get("eng") for l in lines if "part" not in l),
-    }
-    toggles = ""
+    orig_label = "Hangul" if song.get("language") == "Korean" else "Original"
+    sections = [("rom", "Romanization"), ("orig", orig_label), ("eng", "Translation")]
 
-    rows = []
-
-    pending_part = None
-    first = True
-    for l in lines:
-        if "part" in l:
-            pending_part = l["part"]
+    blocks = []
+    for key, label in sections:
+        if not any(l.get(key) for l in lines if "part" not in l):
             continue
-        style, _, is_all = member_style(a, l.get("who", "All"))
-        cls = "lr line" + (" all" if is_all else "")
-        if pending_part is not None:
-            if not first:
-                cls += " g"
-            part_attr = f' data-part="{esc(pending_part)}"'
-            pending_part = None
-        else:
-            part_attr = ""
-        first = False
-        rows.append(
-            f'<div class="{cls}" data-who="{esc(l.get("who", "All"))}"{part_attr}{style}>'
-            + (f'<span class="col col-rom">{esc(l.get("rom", ""))}</span>' if has["rom"] else "")
-            + (f'<span class="col col-orig">{esc(l.get("orig", ""))}</span>' if has["orig"] else "")
-            + (f'<span class="col col-eng">{esc(l.get("eng", ""))}</span>' if has["eng"] else "")
-            + "</div>")
+        rows = []
+        pending_part = None
+        first = True
+        for l in lines:
+            if "part" in l:
+                pending_part = l["part"]
+                continue
+            text = l.get(key, "")
+            if not text:
+                continue
+            style, _, is_all = member_style(a, l.get("who", "All"))
+            cls = "lr line" + (" all" if is_all else "")
+            if pending_part is not None:
+                if not first:
+                    cls += " g"
+                part_attr = f' data-part="{esc(pending_part)}"'
+                pending_part = None
+            else:
+                part_attr = ""
+            first = False
+            rows.append(
+                f'<div class="{cls}" data-who="{esc(l.get("who", "All"))}"{part_attr}{style}>'
+                f"{esc(text)}</div>")
+        blocks.append(
+            f'<div class="lyr-block"><h3 class="lyr-sec">{esc(label)}</h3>'
+            f'<div class="lyr" data-lang="{key}">{"".join(rows)}</div></div>')
+
+    c = song["credits"]
+    credits = (
+        '<div class="lyr-block"><h3 class="lyr-sec">Credits</h3>'
+        '<p class="credits">'
+        f'{esc(song["language"])}: {linkify(c["source"])}<br>'
+        f'Romanization: {esc(c["translation"])}<br>'
+        f'Translation: {esc(c["translation"])}'
+        '</p></div>')
 
     return f'''<div class="lyr-wrap" data-song="{song['slug']}">
 <div class="ctl">
   <div class="lg">{legend_html(a, True)}</div>
 </div>
-<div class="lyr-outer"><div class="lyr">{"".join(rows)}</div></div>
+{"".join(blocks)}
+{credits}
 </div>'''
 
 
@@ -380,7 +396,6 @@ def page_song(s):
 </div>
 <section class="sec" aria-label="Lyrics">
 {lyrics_html(s)}
-<p class="credits mu mono">Credits: {esc(s['language'])} {esc(c['source'])} · Romanization and translation by {esc(c['translation'])}</p>
 </section>
 {more_block}
 <div class="prevnext">{left}{right}</div>
