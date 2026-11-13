@@ -110,6 +110,7 @@ NAV = [("Home", "index.html", False), ("Index", "artists.html", False),
 def header(prefix, page):
     items = []
     for label, href, ext in NAV:
+        url = href if ext else f"{prefix}{href}"
         target = ' target="_blank" rel="noopener"' if ext else ""
         cur = ""
         if not ext and ((page == "home" and href == "index.html") or
@@ -117,7 +118,7 @@ def header(prefix, page):
                         (page == "faq" and href == "faq.html")):
             cur = ' aria-current="page"'
         arrow = " ↗" if ext else ""
-        items.append(f'<a href="{prefix}{href}"{target}{cur}>{label}{arrow}</a>')
+        items.append(f'<a href="{url}"{target}{cur}>{label}{arrow}</a>')
     return f'''<header class="bar">
   <div class="w bar-in">
     <a class="logo" href="{prefix}index.html">{esc(SITE['name'])}</a>
